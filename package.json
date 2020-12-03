@@ -1,0 +1,15 @@
+{
+  "name": "js-client-library",
+  "version": "0.0.1",
+  "description": "Client Library for use by JavaScript developers building against the smartworks api",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "altair",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
