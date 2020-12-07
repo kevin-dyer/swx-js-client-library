@@ -5,7 +5,6 @@ const RESTClient = require('./RESTClient')
 /**@class
  * @classdesc Manage Users, Accounts, and Invitations. 
  * @author pmehmandoost
- * @property {Array} _accounts - Array of accounts
  * @property {Function} _onSuccess - callback to be invoked on API request success
  * @property {Function} _onError - callback to be invoked on API request error
  * @property {String} _contentType - The default Content Type for the request headers. This can be overwritten on a per-request basis by passing a contentType into the request method.
@@ -27,7 +26,6 @@ class AccountManager {
         // this._onSuccess = onSuccess
         this._onSuccess = (resp) => { return resp }
         this._onError = (error) => { throw new Error(error) }
-        this._accounts = new Array()
     }
 
     /**
