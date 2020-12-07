@@ -7,7 +7,6 @@ const RESTClient = require('./RESTClient')
  * @author pmehmandoost
  * @property {Function} _onSuccess - callback to be invoked on API request success
  * @property {Function} _onError - callback to be invoked on API request error
- * @property {String} _contentType - The default Content Type for the request headers. This can be overwritten on a per-request basis by passing a contentType into the request method.
  * @property {RESTClient} _restClient
  */
 
