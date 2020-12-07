@@ -30,7 +30,7 @@ class AccountManager {
     /**
      * Creates an account
      * @createAccount
-     * @param {Object} data
+     * @param {Object} data - All desired and required account properties.
      */
     createAccount = (data) => {
         // this._validateStructure(data)
@@ -52,7 +52,7 @@ class AccountManager {
      * @public
      * @getAllAccounts
      * @summary Get an array of all accounts.
-     * @return {Array} - An array of objects with Account properties.
+     * @return {Array} - An array of objects with account properties.
      */
     getAllAccounts = () => {
         let accounts = []
@@ -78,7 +78,7 @@ class AccountManager {
      * @public
      * @getAccount
      * @summary Get a single account by ID.
-     * @return {Object} - An object with Account properties.
+     * @return {Object} - An object with account properties.
      */
     getAccount = (ID) => {
         return this._restClient.request(
@@ -100,7 +100,7 @@ class AccountManager {
      * @public
      * @updateAccount
      * @param {String} ID - the ID of the account to be deleted.
-     * @param {Object} data - body of UPDATE request
+     * @param {Object} data - body of PUT request
      * @summary Update a single account.
      */
     updateAccount = (ID, data) => {
@@ -108,7 +108,7 @@ class AccountManager {
         const endPoint = `/accounts/${ID}`
         return this._restClient.request(
             {
-                method: 'UPDATE',
+                method: 'PUT',
                 endpoint: endPoint,
                 body: data,
                 contentType: 'application/json'
@@ -303,7 +303,7 @@ class AccountManager {
      * @public
      * @updateInvitation
      * @param {String} ID - the ID of the account to be deleted.
-     * @param {Object} data - body of UPDATE request
+     * @param {Object} data - body of PUT request
      * @summary Update a single account.
      */
     updateInvitation = (accountID, invitationID, data) => {
