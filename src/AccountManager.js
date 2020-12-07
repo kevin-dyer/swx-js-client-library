@@ -441,7 +441,7 @@ class AccountManager {
     }
 
     // === PRIVATE METHODS ===
-  
+    
     /**
      * @method
      * @private
@@ -450,33 +450,6 @@ class AccountManager {
      * @return {Boolean} Returns false if format is unacceptable
      */
     _emailIsValid = (email) => { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) }
-
-    /**
-     * @method
-     * @private
-     * @summary validates structure of object to be utilized as body for request to Accounts Service and Invitations API
-     * @param {Object} data
-     * @throws Throws an error if data is not an object or structure is unacceptable 
-     */
-    _validateInvitationStructure = (data) => { console.log('Dont use yet. Work In Progress') }
-
-    /**
-     * @method
-     * @private
-     * @summary validates structure of object to be utilized as body for user related request to Accounts Service API
-     * @param {Object} data
-     * @throws Throws an error if data is not an object or structure is unacceptable 
-     */
-    _validateUserStructure = (data) => { console.log('Dont use yet. Work In Progress') }
-
-    /**
-     * @method
-     * @private
-     * @summary validates structure of object to be utilized as body for request to Accounts Service API
-     * @param {Object} data
-     * @throws Throws an error if data is not an object or structure is unacceptable 
-     */
-    _validateAccountStructure = (data) => { console.log('Dont use yet. Work In Progress') }
 
     /**
      * @method
