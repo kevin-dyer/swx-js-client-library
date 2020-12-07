@@ -10,87 +10,70 @@ const RESTClient = require('./RESTClient')
  * @property {Function} _onError - callback to be invoked on API request error
  * @property {String} _contentType - The default Content Type for the request headers. This can be overwritten on a per-request basis by passing a contentType into the request method.
  * @property {RESTClient} _restClient
- * @property {String} _redirectUri //maybe unnecessary
- * @property {Token} _token //maybe unnecessary
  */
 
- /**
-  * one option for my current issue with the error below 
-  *is to get the token and rest client and use to re-authenticate... 
-  * '{
-  *   "error": "invalid_grant",
-  *   "error_description":
-  *     "The provided authorization grant 
-  *     (e.g., authorization code, resource owner credentials) 
-  *     or refresh token is invalid, expired, revoked, 
-  *     does not match the redirection URI used in the 
-  *     authorization request, or was issued to another client",
-  *   "status_code": 400,
-  *   "error_debug": "token_expired"
-  * }'
-  * 
-  */
+class AccountManager {
 
-  class AccountManager { //see end of file, utilization a singleton design pattern export
-  /**
-   * @constructor
-   * @param {Function| Object} [onSuccess] - Callback to be fired when request returns successfully. 
-   * @param {Function| Object} [onError] - Callback to be fired when an error is caught during request.
-   * @param {RESTClient | Object} client
-  */
-  constructor(client, onSuccess, onError ) {
-    this._restClient = !!client && client instanceof RESTClient ? client : new RESTClient(client)
-    // this._onError = typeof onError === 'function'? onError : () => { throw new Error(`Default onError`) }
-    // this._onSuccess = onSuccess
-    this._onSuccess = (resp) => { return resp }
-    this._onError = (error) => { throw new Error(error) }
-    this._accounts = new Array()
-  }
+    // TODO: No references to callback args are not utilized. 
+    /**
+     * @constructor
+     * @param {Function| Object} [onSuccess] - Callback to be fired when request returns successfully. 
+     * @param {Function| Object} [onError] - Callback to be fired when an error is caught during request.
+     * @param {RESTClient | Object} client
+     */
+    constructor(client, onSuccess, onError ) {
+        this._restClient = !!client && client instanceof RESTClient ? client : new RESTClient(client)
+        // this._onError = typeof onError === 'function'? onError : () => { throw new Error(`Default onError`) }
+        // this._onSuccess = onSuccess
+        this._onSuccess = (resp) => { return resp }
+        this._onError = (error) => { throw new Error(error) }
+        this._accounts = new Array()
+    }
 
-  /**
-   * Creates an account
-   * @createAccount
-   * @param {Object} data
-   */
-  createAccount = (data) => {
-    // this._validateStructure(data)
-    return this._restClient.request({
-        method: 'POST',
-        endpoint: 'accounts/',
-        body: data,
-        contentType: 'application/json'
-      },
-      this._onSuccess,
-      this._onError
-    )
-    .then(resp => { 
-      return resp
-    })      
-  }
+    /**
+     * Creates an account
+     * @createAccount
+     * @param {Object} data
+     */
+    createAccount = (data) => {
+        // this._validateStructure(data)
+        return this._restClient.request(
+            {
+                method: 'POST',
+                endpoint: 'accounts/',
+                body: data,
+                contentType: 'application/json'
+            },
+            this._onSuccess,
+            this._onError
+        )
+        .then(resp => { return resp })      
+    }
   
-  /**
-  * @method
-  * @public
-  * @getAllAccounts
-  * @summary Get an array of all accounts.
-  * @return {Array} - An array of objects with Account properties.
-  */
+    /**
+     * @method
+     * @public
+     * @getAllAccounts
+     * @summary Get an array of all accounts.
+     * @return {Array} - An array of objects with Account properties.
+     */
     getAllAccounts = () => {
         let accounts = []
-        return this._restClient.request({
-            method: 'GET',
-            endpoint: `accounts/`,
-            contentType: 'application/x-www-form-urlencoded'
-        }, 
-        this._onSuccess, 
-        this._onError
-    )
-    .then(resp => { 
-        for (const [key, value] of Object.entries(resp?.collection)) {
-            accounts.push(value)
-        }
-        return accounts
-    }) 
+        return this._restClient.request(
+            {
+                method: 'GET',
+                endpoint: `accounts/`,
+                contentType: 'application/x-www-form-urlencoded'
+            }, 
+            this._onSuccess, 
+            this._onError
+        )
+        .then(resp => { 
+            for (const [key, value] of Object.entries(resp?.collection)) {
+                accounts.push(value)
+            }
+            return accounts
+        }) 
     }
 
     /**
@@ -101,13 +84,14 @@ const RESTClient = require('./RESTClient')
      * @return {Object} - An object with Account properties.
      */
     getAccount = (ID) => {
-        return this._restClient.request({
-            method: 'GET',
-            endpoint: `accounts/${ID}`,
-            contentType: 'application/x-www-form-urlencoded'
-        }, 
-        this._onSuccess, 
-        this._onError
+        return this._restClient.request(
+            {
+                method: 'GET',
+                endpoint: `accounts/${ID}`,
+                contentType: 'application/x-www-form-urlencoded'
+            }, 
+            this._onSuccess, 
+            this._onError
         )
         .then(resp => { 
             return resp
@@ -123,19 +107,20 @@ const RESTClient = require('./RESTClient')
      * @summary Update a single account.
      */
     updateAccount = (ID, data) => {
-    // this._validateStructure(data)
+        // this._validateStructure(data)
         const endPoint = `/accounts/${ID}`
-        return this._restClient.request({
-            method: 'UPDATE',
-            endpoint: endPoint,
-            body: data,
-            contentType: 'application/json'
-        },
-        this._onSuccess,
-        this._onError
-    )
-    .then(resp => { return resp })
-  }
+        return this._restClient.request(
+            {
+                method: 'UPDATE',
+                endpoint: endPoint,
+                body: data,
+                contentType: 'application/json'
+            },
+            this._onSuccess,
+            this._onError
+        )
+        .then(resp => { return resp })
+    }
   
     /**
      * @method
@@ -146,7 +131,8 @@ const RESTClient = require('./RESTClient')
      */
     deleteAccount = (ID) => {
         const endPoint = `/accounts/${ID}`
-        return this._restClient.request({
+        return this._restClient.request(
+            {
                 method: 'DELETE',
                 endpoint: endPoint,
                 contentType: 'application/x-www-form-urlencoded'
@@ -179,10 +165,10 @@ const RESTClient = require('./RESTClient')
             this._onSuccess, 
             this._onError
         )
-    .then(resp => { 
-        for (const [key, value] of Object.entries(resp?.collection)) {
-        users.push(value)
-        }
+        .then(resp => { 
+            for (const [key, value] of Object.entries(resp?.collection)) {
+                users.push(value)
+            }
             return users
         }) 
     }
@@ -239,7 +225,105 @@ const RESTClient = require('./RESTClient')
         .then(resp => resp.json()) 
     }
 
-  // === PRIVATE METHODS ===
+    /**
+     * Creates an account
+     * @createInvitation
+     * @param {String} accountID - the ID of the account to which a user will receive an invitation
+     * @param {Object} data - All invitation data
+     */
+    createInvitation = (accountID, data) => {
+
+        const { to_email='' } = data 
+
+        if (!this._emailIsValid(to_email)) {
+            throw new Error(`Error in creatInvitation, invalid email address: ${to_email}`)
+        }
+
+        return this._restClient.request(
+            {
+                method: 'POST',
+                endpoint: `accounts/${accountID}/invitations`,
+                body: data,
+                contentType: 'application/json'
+            },
+            this._onSuccess,
+            this._onError
+        )
+        .then(resp => { 
+            return resp
+        })      
+    }
+  
+    /**
+     * @method
+     * @public
+     * @getAllReceivedInvitations
+     * @summary Get an array of all accounts.
+     * @return {Array} - An array of objects with properties of each received invitation.
+     */
+    getAllReceivedInvitations = () => {
+        let invitations = []
+        return this._restClient.request(
+            {
+                method: 'GET',
+                endpoint: `invitations/`,
+                contentType: 'application/x-www-form-urlencoded'
+            }, 
+            this._onSuccess, 
+            this._onError
+        )
+        .then(resp => { 
+            for (const [key, value] of Object.entries(resp?.collection)) {
+                invitations.push(value)
+            }
+            return invitations
+        }) 
+    }
+
+    /**
+     * @method
+     * @public
+     * @getInvitationByID
+     * @summary Get a single invitation by invitation ID.
+     */
+    getInvitationByID = (invitationID) => {
+        return this._restClient.request(
+            {
+                method: 'GET',
+                endpoint: `invitations/${invitationID}`,
+                contentType: 'application/x-www-form-urlencoded'
+            }, 
+            this._onSuccess, 
+            this._onError
+        )
+        .then(resp => { 
+            return resp
+        })
+    }
+
+    /**
+     * @method
+     * @public
+     * @updateInvitation
+     * @param {String} ID - the ID of the account to be deleted.
+     * @param {Object} data - body of UPDATE request
+     * @summary Update a single account.
+     */
+    updateInvitation = (accountID, invitationID, data) => {
+        const endPoint = `/accounts/${accountID}/invitations/${invitationID}`
+        return this._restClient.request({
+            method: 'PUT',
+            endpoint: endPoint,
+            body: data,
+            contentType: 'application/json'
+        },
+        this._onSuccess,
+        this._onError
+        )
+        // .then(resp => { return resp })
+    }
+
+    // === PRIVATE METHODS ===
   
     /**
      * @method
@@ -253,16 +337,34 @@ const RESTClient = require('./RESTClient')
     /**
      * @method
      * @private
-     * @summary validates structure of object to be utilized as body for an API request
+     * @summary validates structure of object to be utilized as body for request to Accounts Service and Invitations API
      * @param {Object} data
      * @throws Throws an error if data is not an object or structure is unacceptable 
      */
-    _validateStructure = (data) => { throw new Error ('Work In Progress') }
+    _validateInvitationStructure = (data) => { console.log('Dont use yet. Work In Progress') }
 
     /**
      * @method
      * @private
-     * @summary Strictly for testing at the moment. Compares two stringified properties for absolute equality. 
+     * @summary validates structure of object to be utilized as body for user related request to Accounts Service API
+     * @param {Object} data
+     * @throws Throws an error if data is not an object or structure is unacceptable 
+     */
+    _validateUserStructure = (data) => { console.log('Dont use yet. Work In Progress') }
+
+    /**
+     * @method
+     * @private
+     * @summary validates structure of object to be utilized as body for request to Accounts Service API
+     * @param {Object} data
+     * @throws Throws an error if data is not an object or structure is unacceptable 
+     */
+    _validateAccountStructure = (data) => { console.log('Dont use yet. Work In Progress') }
+
+    /**
+     * @method
+     * @private
+     * @summary Strictly for testing at the moment. Inefficiently compares two stringified properties for absolute equality. 
      * @param {Object} property to compare
      * @param {Object}
      * @return {Boolean} Whether two stringified arguments are identical 
