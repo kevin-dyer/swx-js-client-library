@@ -131,10 +131,11 @@ class AccountManager {
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
     deleteAccount = (id) => {
+        const endPoint = `accounts/${id}`
         return this._restClient.request(
             {
                 method: 'DELETE',
-                endpoint: `/accounts/${id}`,
+                endpoint: endPoint.normalize(),
                 contentType: 'application/x-www-form-urlencoded'
             },
             this._onSuccess,

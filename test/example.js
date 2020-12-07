@@ -71,18 +71,17 @@ async function createAccount(acct, id, name) {
   let x = await acct.createAccount({
     'id': `${id}`,
     'name': `${name}`
-    }).then((response) => {
-    return response
-  })
+    }).then((response) => { return response })
+    console.log("createAccount: ", x)
 }
 
-
 async function getAllAccounts(acct) {
-let x = await acct.getAllAccounts().then((response) => { console.log(response) })
+let x = await acct.getAllAccounts().then((response) => { return response })
+console.log("getAllAccounts(): ",  x)
 }
 
 async function deleteAccount(acct,id) {
-  let x = await acct.deleteAccount(id).then((response)  => { return response.json()})
+  let x = await acct.deleteAccount(id).then((response)  => { return response })
 }
 
 const success = (resp) => { 
@@ -106,10 +105,8 @@ authenticationProcess().then((result) => {
       onFailure: error
     }
   )
-  
-  // createAccount(accountManager, 'userpirouz2', 'userpirouz2').then(response => console.log("\ncreated new account: ", response))
+  createAccount(accountManager, 'userpirouz8', 'userpirouz8')
   getAllAccounts(accountManager)
-
 })
 
 
