@@ -11,6 +11,8 @@ const rl = readline.createInterface({
 const RESTClient = require('../src/RESTClient')
 const Authenticator = require('../src/Authenticator')
 const Token = require('../src/Token')
+const AccountManager = require('../src/AccountManager')
+
 
 // === SCRIPT ===
 // Instantiation
@@ -24,6 +26,8 @@ const auth = new Authenticator({
   scope: 'openid offline offline_access account app cluster data invitation label mqtt policy role thing user',
   restClient
 })
+
+let accountManager = {}
 
 // Individual Processes
 function authenticationProcess() {
@@ -61,6 +65,37 @@ function authenticationProcess() {
   })
 }
 
+async function createAccount(acct, id, name) {
+  let x = await acct.createAccount({
+    'id': `${id}`,
+    'name': `${name}`
+  })
+  return new Promise((resolve, reject) => {
+    resolve(x)
+  })
+}
+
+
+async function getAllAccounts(acct) {
+  let x = await acct.getAllAccounts()
+  return new Promise((resolve, reject) => {
+    resolve(x)
+  })
+}
+
+async function getAccount(acct,id) {
+  let x = await acct.getAccount(id)
+  return new Promise((resolve, reject) => {
+    resolve(x)
+  })
+}
+
+const success = (resp) => { 
+  console.log(`${JSON.stringify(resp)}`)
+  return resp 
+}
+
+const error = (error) => { console.log(`Error handler! ${JSON.stringify(error)}` )}
 
 // Execution
 authenticationProcess().then((result) => {
@@ -68,4 +103,17 @@ authenticationProcess().then((result) => {
   console.log(`success!`)
   console.log(`client token:`, restClient.token)
   console.log(`auth client token: `, auth._restClient.token)
+
+  accountManager = new AccountManager(
+    restClient,
+    {
+      onSuccess: success, 
+      onFailure: error
+    }
+  )
+
+  createAccount(accountManager, 'userpirouz', 'userpirouz').then(response => console.log("\nget created account: ", getAccount(accountManager, response?.name)))
+  getAllAccounts(accountManager).then(ac => console.log("\ngetAllAccounts: ", ac))
+
 })
+
