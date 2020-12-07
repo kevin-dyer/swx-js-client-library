@@ -228,14 +228,14 @@ class AccountManager {
     /**
      * Creates an account
      * @createInvitation
-     * @param {Object} data - All invitation data
+     * @param {Object} data - All required invitation data
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
     createInvitation = (data) => {
         const {
             account_id='',
             to_email=''
-        } = data 
+        } = data
 
         if (!this._emailIsValid(to_email)) {
             throw new Error(`Error in creatInvitation, invalid email address: ${to_email}`)
@@ -250,24 +250,26 @@ class AccountManager {
             this._onSuccess,
             this._onError
         )
-        .then(resp => { 
+        .then(resp => {
+            // console.log(`createInvitation: ${JSON.stringify(resp)}`) //for testing
             return resp
         })      
     }
-  
+
     /**
      * @method
      * @public
-     * @getAllReceivedInvitationsToAllAccounts
-     * @summary Get an array of all invitations to all existing accounts.
+     * @getInvitationsSentFromAccount
+     * @summary Get an array of all invitions from a specific account.
+     * @param {String} accountId - The ID of the pertaining account.
      * @return {Array} - An array of objects with properties of each received invitation.
      */
-    getAllReceivedInvitationsToAllAccounts = () => {
+    getInvitationsSentFromAccount = (accountId) => {
         let invitations = []
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `invitations/`,
+                endpoint: `/accounts/${accountId}/invitations`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
@@ -284,11 +286,35 @@ class AccountManager {
     /**
      * @method
      * @public
-     * @getInvitationByID
+     * @getSingleInvitationSentFromAccount
+     * @param {String} accountId - The ID of the pertaining account.
+     * @param {String} invitationId - The ID of the account to be deleted.
+     * @summary Delete a single invitation sent from an Account by its unique id.
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
+     */
+    getSingleInvitationSentFromAccount = (accountId, invitationId)  => {
+        return this._restClient.request({
+            method: 'GET',
+            endpoint: accountId !=='' ? `/accounts/${accountId}/invitations/${invitationId}` : `/invitations/${invitationId}`,
+            contentType: 'application/x-www-form-urlencoded'
+        },
+        this._onSuccess,
+        this._onError
+        )
+        .then(resp => { 
+            // console.log(`updateInvitation: ${JSON.stringify(resp)}`) //for testing
+            return resp 
+        })
+    }
+
+    /**
+     * @method
+     * @public
+     * @getInvitationByInvitationId
      * @summary Get a single invitation by invitation ID.
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
-    getInvitationById = (invitationId) => {
+    getInvitationByInvitationId = (invitationId) => {
         return this._restClient.request(
             {
                 method: 'GET',
@@ -299,24 +325,24 @@ class AccountManager {
             this._onError
         )
         .then(resp => { 
-            return resp
+            // console.log(`getInvitationById: ${JSON.stringify(resp)}`) //for testing
+            return resp 
         })
     }
 
     /**
      * @method
      * @public
-     * @getReceivedInvitationsByAccountID
-     * @summary Get an array of all invitions to a specific account.
-     * @param {String} accountId - The ID of the pertaining account.
+     * @getInvitationsFromAllAccounts
+     * @summary Get an array of all invitations from all existing accounts.
      * @return {Array} - An array of objects with properties of each received invitation.
      */
-    getReceivedInvitationsByAccountID = (accountId) => {
+    getInvitationsFromAllAccounts = () => {
         let invitations = []
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `/accounts/${accountId}/invitations`,
+                endpoint: `invitations/`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
@@ -343,12 +369,12 @@ class AccountManager {
     updateInvitation = (data) => {
         const {
             account_id='', 
-            account_idd='' 
+            invitation_id='' 
         } = data 
 
         return this._restClient.request({
             method: 'PUT',
-            endpoint: `/accounts/${account_id}/invitations/${account_id}`,
+            endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
             body: data,
             contentType: 'application/json'
         },
@@ -356,7 +382,7 @@ class AccountManager {
         this._onError
         )
         .then(resp => { 
-            // console.log(`processInvitation: ${JSON.stringify(resp)}`) //for testing
+            // console.log(`updateInvitation: ${JSON.stringify(resp)}`) //for testing
             return resp 
         })
     }
@@ -371,14 +397,13 @@ class AccountManager {
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
      */
     processInvitation = (invitationId, accepted) => {
-        const isAccepted = {
-            'status:' : `${accepted? 'ACCEPTED' : 'REJECTED'}`
-        }
         return this._restClient.request(
             {
                 method: 'PATCH',
                 endpoint: `invitations/${invitationId}`,
-                body: isAccepted,
+                body: {
+                    'status:' : accepted ? 'ACCEPTED' : 'REJECTED'
+                },
                 contentType: 'application/x-www-form-urlencoded', 
             }, 
             this._onSuccess, 
@@ -410,7 +435,7 @@ class AccountManager {
             this._onError
         )
         .then(resp => { 
-        // console.log(`deleteInvitation: ${JSON.stringify(resp)}`) //for testing
+            // console.log(`deleteInvitation: ${JSON.stringify(resp)}`) //for testing
             return resp
         })
     }
