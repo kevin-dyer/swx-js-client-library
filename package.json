@@ -9,7 +9,7 @@
   "author": "altair",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.20"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
