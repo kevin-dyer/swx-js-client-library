@@ -1,5 +1,5 @@
 // === IMPORTS ===
-const Token = require('./Token')
+const _ = require('lodash');
 const RESTClient = require('./RESTClient')
 
 /**@class
@@ -33,7 +33,6 @@ class AccountManager {
      * @param {Object} data - All desired and required account properties.
      */
     createAccount = (data) => {
-        // this._validateStructure(data)
         return this._restClient.request(
             {
                 method: 'POST',
@@ -80,7 +79,7 @@ class AccountManager {
      * @summary Get a single account by ID.
      * @return {Object} - An object with account properties.
      */
-    getAccount = (ID) => {
+    getAccount = (id) => {
         return this._restClient.request(
             {
                 method: 'GET',
@@ -99,13 +98,17 @@ class AccountManager {
      * @method
      * @public
      * @updateAccount
-     * @param {String} ID - the ID of the account to be deleted.
-     * @param {Object} data - body of PUT request
      * @summary Update a single account.
+     * @param {String} id - The ID of the account to be deleted.
+     * @param {Object} data - body of PUT request
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
+
      */
-    updateAccount = (ID, data) => {
+    updateAccount = (data) => {
         // this._validateStructure(data)
-        const endPoint = `/accounts/${ID}`
+        const { account_id='' } = data 
+
+        const endPoint = `/accounts/${account_id}`
         return this._restClient.request(
             {
                 method: 'PUT',
@@ -123,15 +126,15 @@ class AccountManager {
      * @method
      * @public
      * @deleteAccounts
-     * @param {String} ID - the ID of the account to be deleted.
      * @summary Delete a single Account.
+     * @param {String} id - The ID of the account to be deleted.
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
-    deleteAccount = (ID) => {
-        const endPoint = `/accounts/${ID}`
+    deleteAccount = (id) => {
         return this._restClient.request(
             {
                 method: 'DELETE',
-                endpoint: endPoint,
+                endpoint: `/accounts/${id}`,
                 contentType: 'application/x-www-form-urlencoded'
             },
             this._onSuccess,
@@ -146,12 +149,12 @@ class AccountManager {
     /**
      * @method
      * @public
-     * @getAllUsers
+     * @getAllUsersOfAccount
      * @summary Get an array of users from a specific account.
-     * @param {String} accountId - the ID of the account.
+     * @param {String} accountId - The ID of the account.
      * @return {Array} - An array of objects with user properties.
      */
-    getAllUsers = (accountId) => {
+    getAllUsersOfAccount = (accountId) => {
         let users = []
         return this._restClient.request(
             {
@@ -175,9 +178,9 @@ class AccountManager {
      * @public
      * @getUser
      * @summary Get user from an accountby user ID
-     * @param {String} accountID - the ID of the account.  
-     * @param {String} userID - the ID of the user.
-     * @return {Object} - An array of objects with user properties.
+     * @param {String} accountId - The ID of the account the user belongs to.  
+     * @param {String} userId - The ID of the user.
+     * @return {Object} - An object with user properties.
      */
     getUser = (accountId, userId) => {
         let user = {}
@@ -193,7 +196,7 @@ class AccountManager {
         .then(resp => { 
             for (const [key, value] of Object.entries(resp?.collection)) {
                 if (JSON.stringify(value.id) === userId) {
-                    user.push(value)
+                    user = _.cloneDeep(value)
                 }
             }
             return user
@@ -205,9 +208,9 @@ class AccountManager {
      * @public
      * @getUser
      * @summary Delete a single user
-     * @param {String} accountID - the ID of the account.  
-     * @param {String} userID - the ID of the user.
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem.
+     * @param {String} accountId - The ID of the account the user belongs to.  
+     * @param {String} userId - The ID of the user.
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
     deleteUser = (accountId, userId) => {
         return this._restClient.request(
@@ -219,27 +222,28 @@ class AccountManager {
             this._onSuccess, 
             this._onError
         )
-        .then(resp => resp.json()) 
+        .then(resp => { return resp })
     }
 
     /**
      * Creates an account
      * @createInvitation
-     * @param {String} accountID - the ID of the account to which a user will receive an invitation
      * @param {Object} data - All invitation data
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
-    createInvitation = (accountID, data) => {
-
-        const { to_email='' } = data 
+    createInvitation = (data) => {
+        const {
+            account_id='',
+            to_email=''
+        } = data 
 
         if (!this._emailIsValid(to_email)) {
             throw new Error(`Error in creatInvitation, invalid email address: ${to_email}`)
         }
-
         return this._restClient.request(
             {
                 method: 'POST',
-                endpoint: `accounts/${accountID}/invitations`,
+                endpoint: `accounts/${account_id}/invitations`,
                 body: data,
                 contentType: 'application/json'
             },
@@ -254,11 +258,11 @@ class AccountManager {
     /**
      * @method
      * @public
-     * @getAllReceivedInvitations
-     * @summary Get an array of all accounts.
+     * @getAllReceivedInvitationsToAllAccounts
+     * @summary Get an array of all invitations to all existing accounts.
      * @return {Array} - An array of objects with properties of each received invitation.
      */
-    getAllReceivedInvitations = () => {
+    getAllReceivedInvitationsToAllAccounts = () => {
         let invitations = []
         return this._restClient.request(
             {
@@ -282,12 +286,13 @@ class AccountManager {
      * @public
      * @getInvitationByID
      * @summary Get a single invitation by invitation ID.
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
-    getInvitationByID = (invitationID) => {
+    getInvitationById = (invitationId) => {
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `invitations/${invitationID}`,
+                endpoint: `invitations/${invitationId}`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
@@ -301,23 +306,113 @@ class AccountManager {
     /**
      * @method
      * @public
-     * @updateInvitation
-     * @param {String} ID - the ID of the account to be deleted.
-     * @param {Object} data - body of PUT request
-     * @summary Update a single account.
+     * @getReceivedInvitationsByAccountID
+     * @summary Get an array of all invitions to a specific account.
+     * @param {String} accountId - The ID of the pertaining account.
+     * @return {Array} - An array of objects with properties of each received invitation.
      */
-    updateInvitation = (accountID, invitationID, data) => {
-        const endPoint = `/accounts/${accountID}/invitations/${invitationID}`
+    getReceivedInvitationsByAccountID = (accountId) => {
+        let invitations = []
+        return this._restClient.request(
+            {
+                method: 'GET',
+                endpoint: `/accounts/${accountId}/invitations`,
+                contentType: 'application/x-www-form-urlencoded'
+            }, 
+            this._onSuccess, 
+            this._onError
+        )
+        .then(resp => { 
+            for (const [key, value] of Object.entries(resp?.collection)) {
+                invitations.push(value)
+            }
+            return invitations
+        }) 
+    }
+
+    /**
+     * @method
+     * @public
+     * @updateInvitation
+     * @summary Update a single account.
+     * @param {String} accountId - The ID of the pertaining account.
+     * @param {String} invitationId - The ID of the invitation to be updated.
+     * @param {Object} data - body of PUT request
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
+     */
+    updateInvitation = (data) => {
+        const {
+            account_id='', 
+            account_idd='' 
+        } = data 
+
         return this._restClient.request({
             method: 'PUT',
-            endpoint: endPoint,
+            endpoint: `/accounts/${account_id}/invitations/${account_id}`,
             body: data,
             contentType: 'application/json'
         },
         this._onSuccess,
         this._onError
         )
-        // .then(resp => { return resp })
+        .then(resp => { 
+            // console.log(`processInvitation: ${JSON.stringify(resp)}`) //for testing
+            return resp 
+        })
+    }
+
+    /**
+     * @method
+     * @public
+     * @processInvitation
+     * @summary Accept or reject an invitation
+     * @param {String} invitationId - The ID of the invitation to be updated.
+     * @param {Boolean} accepted - The response to invitation. True for accepted, false for rejected.
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
+     */
+    processInvitation = (invitationId, accepted) => {
+        const isAccepted = {
+            'status:' : `${accepted? 'ACCEPTED' : 'REJECTED'}`
+        }
+        return this._restClient.request(
+            {
+                method: 'PATCH',
+                endpoint: `invitations/${invitationId}`,
+                body: isAccepted,
+                contentType: 'application/x-www-form-urlencoded', 
+            }, 
+            this._onSuccess, 
+            this._onError
+        )
+        .then(resp => { 
+            // console.log(`processInvitation: ${JSON.stringify(resp)}`) //for testing
+            return resp
+        })
+    }
+
+    /**
+     * @method
+     * @public
+     * @deleteInvitation
+     * @param {String} accountId - The ID of the pertaining account.
+     * @param {String} invitationId - The ID of the account to be deleted.
+     * @summary Delete a single invitation sent from an Account by its unique id.
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
+     */
+    deleteInvitation = (accountId, invitationId) => {
+        return this._restClient.request(
+            {
+                method: 'DELETE',
+                endpoint: `/accounts/${accountId}/invitations/${invitationId}`,
+                contentType: 'application/x-www-form-urlencoded'
+            },
+            this._onSuccess,
+            this._onError
+        )
+        .then(resp => { 
+        // console.log(`deleteInvitation: ${JSON.stringify(resp)}`) //for testing
+            return resp
+        })
     }
 
     // === PRIVATE METHODS ===
