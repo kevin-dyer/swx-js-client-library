@@ -82,9 +82,10 @@ class RESTClient {
     if (!method || !supportedMethods.includes(method)) {
       throw new Error(`Method "${method}" not supported. Supported methods are: `, supportedMethods.join(", "))
     }
-    if (!endpoint || !validUrl(endpoint)) {
-      throw new Error(`Invalid URL extension: "${endpoint}"`)
-    }
+    //needs refinement
+    // if (!endpoint || !validUrl(endpoint)) {
+    //   throw new Error(`Invalid URL extension: "${endpoint}"`)
+    // }
     if (!this._contentType && !contentType) {
       throw new Error('No contentType. Must either instantiate RESTClient with a contentType or pass contentType to request.')
     }
@@ -92,18 +93,38 @@ class RESTClient {
 
     const requestUrl = this.makeRequestUrl({ endpoint, uriParams })
     const headers = this._createHeaders({ contentType })
+
+    console.log(`
+
+    requestUrl: ${JSON.stringify(requestUrl)}
+
+    `)
+
     const onSuccess = onSuccessCallback || this._onSuccess
     const onError = onErrorCallback || this._onError
     
-    return fetch(requestUrl, {
-      method,
-      headers,
-      body: this._formatBody(body, contentType)
-    })
-      .then(response => response.json())
-      // TODO: Convert bad responses to errors (perhaps after axios integration)
-      .then(onSuccess)
-      .catch(onError)
+    //Needs refinement
+    if (method === 'GET') {
+      return fetch(requestUrl, {
+        method,
+        headers
+      })
+        .then(response => {return response.json()})
+        // TODO: Convert bad responses to errors (perhaps after axios integration)
+        .then(onSuccess)
+        .catch(onError)
+    } 
+    else {
+      return fetch(requestUrl, {
+        method,
+        headers,
+        body: this._formatBody(body, contentType)
+      })
+        .then(response => response.json())
+        // TODO: Convert bad responses to errors (perhaps after axios integration)
+        .then(onSuccess)
+        .catch(onError)
+    }
   }
 
   /**
@@ -155,20 +176,14 @@ class RESTClient {
   }
   
   // === PRIVATE METHODS ===
+
+  //removed 'credentials': 'omit'
   _createHeaders = ({ contentType, bearerToken }) => {
     const contentTypeToUse = contentType || this._contentType
-    const bearerTokenToUse = (!!this.token && this.token.bearerToken()) || bearerToken
-
-    if (!bearerToken) {
-      return {
-        'Content-Type': contentTypeToUse,
-        'credentials': 'omit'
-      }
-    }
+    const bearerTokenToUse = (!!this.token && this.token.getBearerToken()) || bearerToken
 
     return {
       'Content-Type': contentTypeToUse,
-      'credentials': 'omit',
       'Authorization': `Bearer ${bearerTokenToUse}`
     }
   }

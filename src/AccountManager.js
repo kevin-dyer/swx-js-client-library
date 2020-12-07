@@ -83,7 +83,7 @@ class AccountManager {
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `accounts/${ID}`,
+                endpoint: `accounts/${id}`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
@@ -441,7 +441,7 @@ class AccountManager {
     }
 
     // === PRIVATE METHODS ===
-    
+
     /**
      * @method
      * @private
