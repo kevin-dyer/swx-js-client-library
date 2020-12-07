@@ -4,7 +4,7 @@ const Token = require('./Token')
 const fetch = require('node-fetch')
 
 // === CONSTANTS ===
-const supportedMethods = [ 'GET', 'POST', 'PUT', 'DELETE' ]
+const supportedMethods = [ 'GET', 'POST', 'PUT', 'DELETE', 'PATCH' ]
 const validUrlRegex = /^[A-z0-9\/]+$/g
 
 // === UTILS ===
