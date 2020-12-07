@@ -6,12 +6,14 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 })
+const _ = require('lodash');
 
 // Client Library
 const RESTClient = require('../src/RESTClient')
 const Authenticator = require('../src/Authenticator')
 const Token = require('../src/Token')
-const AccountManager = require('../src/AccountManager')
+const AccountManager = require('../src/AccountManager');
+const { cloneDeep } = require('lodash');
 
 
 // === SCRIPT ===
@@ -69,25 +71,18 @@ async function createAccount(acct, id, name) {
   let x = await acct.createAccount({
     'id': `${id}`,
     'name': `${name}`
-  })
-  return new Promise((resolve, reject) => {
-    resolve(x)
+    }).then((response) => {
+    return response
   })
 }
 
 
 async function getAllAccounts(acct) {
-  let x = await acct.getAllAccounts()
-  return new Promise((resolve, reject) => {
-    resolve(x)
-  })
+let x = await acct.getAllAccounts().then((response) => { console.log(response) })
 }
 
-async function getAccount(acct,id) {
-  let x = await acct.getAccount(id)
-  return new Promise((resolve, reject) => {
-    resolve(x)
-  })
+async function deleteAccount(acct,id) {
+  let x = await acct.deleteAccount(id).then((response)  => { return response.json()})
 }
 
 const success = (resp) => { 
@@ -103,7 +98,7 @@ authenticationProcess().then((result) => {
   console.log(`success!`)
   console.log(`client token:`, restClient.token)
   console.log(`auth client token: `, auth._restClient.token)
-
+}).then(() => {
   accountManager = new AccountManager(
     restClient,
     {
@@ -111,9 +106,11 @@ authenticationProcess().then((result) => {
       onFailure: error
     }
   )
-
-  createAccount(accountManager, 'userpirouz', 'userpirouz').then(response => console.log("\nget created account: ", getAccount(accountManager, response?.name)))
-  getAllAccounts(accountManager).then(ac => console.log("\ngetAllAccounts: ", ac))
+  
+  // createAccount(accountManager, 'userpirouz2', 'userpirouz2').then(response => console.log("\ncreated new account: ", response))
+  getAllAccounts(accountManager)
 
 })
+
+
 
