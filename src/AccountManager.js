@@ -232,29 +232,27 @@ class AccountManager {
      * @param {Object} data - All required invitation data
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
-    createInvitation = (data) => {
-        const {
-            account_id='',
-            to_email=''
-        } = data
-
-        if (!this._emailIsValid(to_email)) {
-            throw new Error(`Error in creatInvitation, invalid email address: ${to_email}`)
+    createInvitation = (accountId, email, roles) => {
+        if (!roles){
+            throw new Error(`Error in creatInvitation, no role(s) provided: ${roles}`)
         }
+        if (!this._emailIsValid(email)){
+            throw new Error(`Error in creatInvitation, invalid email address: ${to_email}`)
+        }        
         return this._restClient.request(
             {
                 method: 'POST',
-                endpoint: `accounts/${account_id}/invitations`,
-                body: data,
+                endpoint: `accounts/${accountId}/invitations`,
+                body: {
+                    'to_email': `${email}`,
+                    'roles': "developer"
+                },
                 contentType: 'application/json'
             },
             this._onSuccess,
             this._onError
         )
-        .then(resp => {
-            // console.log(`createInvitation: ${JSON.stringify(resp)}`) //for testing
-            return resp
-        })      
+        .then(resp => { return resp })      
     }
 
     /**

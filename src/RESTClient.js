@@ -79,6 +79,12 @@ class RESTClient {
    */
   request = ({ method, endpoint, uriParams, body, contentType }, onSuccessCallback, onErrorCallback) => {
     // <---> Error Handling
+
+    console.log(`
+
+    requestUrl1: ${JSON.stringify(endpoint)}
+
+    `)
     if (!method || !supportedMethods.includes(method)) {
       throw new Error(`Method "${method}" not supported. Supported methods are: `, supportedMethods.join(", "))
     }
@@ -93,13 +99,6 @@ class RESTClient {
 
     const requestUrl = this.makeRequestUrl({ endpoint, uriParams })
     const headers = this._createHeaders({ contentType })
-
-    console.log(`
-
-    requestUrl: ${JSON.stringify(requestUrl)}
-
-    `)
-
     const onSuccess = onSuccessCallback || this._onSuccess
     const onError = onErrorCallback || this._onError
     

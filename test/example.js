@@ -75,6 +75,11 @@ async function createAccount(acct, id, name) {
     console.log("createAccount: ", x)
 }
 
+async function getAccount(acct, id) {
+  let x = await acct.getAccounts(id).then((response) => { return response })
+  console.log("getAccount(): ",  x)
+}
+
 async function getAllAccounts(acct) {
 let x = await acct.getAllAccounts().then((response) => { return response })
 console.log("getAllAccounts(): ",  x)
@@ -82,6 +87,12 @@ console.log("getAllAccounts(): ",  x)
 
 async function deleteAccount(acct,id) {
   let x = await acct.deleteAccount(id).then((response)  => { return response })
+  console.log("deleteAccount(): ",  x)
+}
+
+async function createInvitation(acct, accountId, email, roles) {
+  let x = await acct.createInvitation(accountId, email, roles).then((response) => { return response })
+    console.log("createInvitation(): ", x)
 }
 
 const success = (resp) => { 
@@ -105,8 +116,10 @@ authenticationProcess().then((result) => {
       onFailure: error
     }
   )
-  createAccount(accountManager, 'userpirouz8', 'userpirouz8')
+  createAccount(accountManager, 'userpirouz9', 'userpirouz9')
   getAllAccounts(accountManager)
+  createInvitation(accountManager, 'pirouz', 'pmehmandoost@altair.com', 'developer')
+    
 })
 
 
