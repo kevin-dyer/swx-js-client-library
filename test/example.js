@@ -6,15 +6,12 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 })
-const _ = require('lodash');
 
 // Client Library
 const RESTClient = require('../src/RESTClient')
 const Authenticator = require('../src/Authenticator')
 const Token = require('../src/Token')
-const AccountManager = require('../src/AccountManager');
-const { cloneDeep } = require('lodash');
-
+const AccountManager = require('../src/AccountManager')
 
 // === SCRIPT ===
 // Instantiation
@@ -28,8 +25,6 @@ const auth = new Authenticator({
   scope: 'openid offline offline_access account app cluster data invitation label mqtt policy role thing user',
   restClient
 })
-
-let accountManager = {}
 
 // Individual Processes
 function authenticationProcess() {
@@ -76,7 +71,17 @@ async function createAccount(acct, id, name) {
 }
 
 async function getAccount(acct, id) {
-  let x = await acct.getAccounts(id).then((response) => { return response })
+  let x = await acct.getAccount(id).then((response) => { return response })
+  console.log("getAccount(): ",  x)
+}
+
+async function getUsers(acct, account_id, user_id) {
+  let x = await acct.getUser(id).then((response) => { return response })
+  console.log("getAccount(): ",  x)
+}
+
+async function getUser(acct, account_id, user_id) {
+  let x = await acct.getUser(id).then((response) => { return response })
   console.log("getAccount(): ",  x)
 }
 
@@ -109,17 +114,17 @@ authenticationProcess().then((result) => {
   console.log(`client token:`, restClient.token)
   console.log(`auth client token: `, auth._restClient.token)
 }).then(() => {
-  accountManager = new AccountManager(
+  let accountManager = new AccountManager(
     restClient,
     {
       onSuccess: success, 
       onFailure: error
     }
   )
-  createAccount(accountManager, 'userpirouz9', 'userpirouz9')
+  // createAccount(accountManager, 'changemyname', 'changemyname')
   getAllAccounts(accountManager)
-  createInvitation(accountManager, 'pirouz', 'pmehmandoost@altair.com', 'developer')
-    
+  // createInvitation(accountManager, 'changethisaccount', 'changeme@mailinator.com', 'developer')
+  getAccount(accountManager, 'pirouz')
 })
 
 
