@@ -53,10 +53,21 @@ class RESTClient {
     this._baseUrl = baseUrlWithTrailingSlash
     this._contentType = contentType
     this.token = token
-
     this._onSuccess = (resp) => { return resp }
     this._onError = (error) => { throw new Error(error) }
   }
+
+  /**
+   * @method
+   * @public
+   * @summary Set a Token.
+   * @param {Token} token
+   * @throws Throws an error if the token is undefined 
+   */
+    setToken = (token) => {
+      if (!token) throw new Error((error) => {`Error: token is undefined. ${error}`}) 
+      this.token = token
+    }
 
   /**
    * @method
@@ -79,16 +90,10 @@ class RESTClient {
    */
   request = ({ method, endpoint, uriParams, body, contentType }, onSuccessCallback, onErrorCallback) => {
     // <---> Error Handling
-
-    console.log(`
-
-    requestUrl1: ${JSON.stringify(endpoint)}
-
-    `)
     if (!method || !supportedMethods.includes(method)) {
       throw new Error(`Method "${method}" not supported. Supported methods are: `, supportedMethods.join(", "))
     }
-    //needs refinement
+    // TODO: needs refinement
     // if (!endpoint || !validUrl(endpoint)) {
     //   throw new Error(`Invalid URL extension: "${endpoint}"`)
     // }
@@ -98,32 +103,19 @@ class RESTClient {
     // <--->
 
     const requestUrl = this.makeRequestUrl({ endpoint, uriParams })
-    const headers = this._createHeaders({ contentType })
+    const headers = this._createHeaders( contentType )
     const onSuccess = onSuccessCallback || this._onSuccess
     const onError = onErrorCallback || this._onError
     
-    //Needs refinement
-    if (method === 'GET') {
-      return fetch(requestUrl, {
-        method,
-        headers
-      })
-        .then(response => {return response.json()})
-        // TODO: Convert bad responses to errors (perhaps after axios integration)
-        .then(onSuccess)
-        .catch(onError)
-    } 
-    else {
-      return fetch(requestUrl, {
-        method,
-        headers,
-        body: this._formatBody(body, contentType)
-      })
-        .then(response => response.json())
-        // TODO: Convert bad responses to errors (perhaps after axios integration)
-        .then(onSuccess)
-        .catch(onError)
-    }
+    return fetch(requestUrl, {
+      method,
+      headers,
+      body: this._formatBody(body, contentType)
+    })
+    .then(response => response.json())
+    // TODO: Convert bad responses to errors (perhaps after axios integration)
+    .then(onSuccess)
+    .catch(onError)
   }
 
   /**
@@ -176,13 +168,20 @@ class RESTClient {
   
   // === PRIVATE METHODS ===
 
-  //removed 'credentials': 'omit'
-  _createHeaders = ({ contentType, bearerToken }) => {
+  _createHeaders = (contentType) => {
     const contentTypeToUse = contentType || this._contentType
-    const bearerTokenToUse = (!!this.token && this.token.getBearerToken()) || bearerToken
+    const bearerTokenToUse = (!!this.token && this.token.getBearerToken())
+
+    if (!bearerTokenToUse) {
+      return {
+        'Content-Type': contentTypeToUse,
+        'credentials': 'omit'
+      }
+    }
 
     return {
       'Content-Type': contentTypeToUse,
+      'credentials': 'omit',
       'Authorization': `Bearer ${bearerTokenToUse}`
     }
   }

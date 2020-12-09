@@ -15,25 +15,22 @@ class AccountManager {
     // TODO: No references to callback args are not utilized. 
     /**
      * @constructor
-     * @param {Function| Object} [onSuccess] - Callback to be fired when request returns successfully. 
-     * @param {Function| Object} [onError] - Callback to be fired when an error is caught during request.
+     * @param {Function| Object} [onSuccess] - Optional callback to be fired when request returns successfully. 
+     * @param {Function| Object} [onError] - Optional callback to be fired when an error is caught during request.
      * @param {RESTClient | Object} client
      */
     constructor(client, onSuccess, onError ) {
         this._restClient = !!client && client instanceof RESTClient ? client : new RESTClient(client)
-        // this._onError = typeof onError === 'function'? onError : () => { throw new Error(`Default onError`) }
-        // this._onSuccess = onSuccess
-        this._onSuccess = (resp) => { return resp }
-        this._onError = (error) => { throw new Error(error) }
+        this._onError = typeof onError === 'function'? onError : () => { throw new Error(`Default onError`) }
+        this._onSuccess = typeof onSuccess === 'function' ? onSuccess : resp => resp
     }
 
     /**
      * @method
      * @public
      * @summary Create a new account
-     * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
+     * @see - For review of schema, refer to Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
      * @param {Object} data - All desired and required account properties.
-     * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
      */
     createAccount = (data) => {
         return this._restClient.request(
