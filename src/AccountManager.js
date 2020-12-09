@@ -39,7 +39,7 @@ class AccountManager {
         return this._restClient.request(
             {
                 method: 'POST',
-                endpoint: 'accounts/',
+                endpoint: 'accounts',
                 body: data,
                 contentType: 'application/json'
             },
@@ -59,8 +59,8 @@ class AccountManager {
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `accounts/`,
-                contentType: 'application/x-www-form-urlencoded'
+                endpoint: `accounts`,
+                contentType: 'application/json'
             }, 
             this._onSuccess, 
             this._onError
@@ -84,7 +84,7 @@ class AccountManager {
             {
                 method: 'GET',
                 endpoint: `accounts/${account_id}`,
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/json'
             }, 
             this._onSuccess, 
             this._onError
@@ -127,7 +127,7 @@ class AccountManager {
             {
                 method: 'DELETE',
                 endpoint: `accounts/${account_id}`,
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/json'
             },
             this._onSuccess,
             this._onError
@@ -146,7 +146,7 @@ class AccountManager {
             {
                 method: 'GET',
                 endpoint: `accounts/${account_id}/users`,
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/json'
             }, 
             this._onSuccess, 
             this._onError
@@ -172,7 +172,7 @@ class AccountManager {
             {
                 method: 'GET',
                 endpoint: `accounts/${account_id}/users/${user_id}`,
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/json'
             }, 
             this._onSuccess, 
             this._onError
@@ -192,7 +192,7 @@ class AccountManager {
             {
                 method: 'DELETE',
                 endpoint: `accounts/${account_id}/users/${user_id}`,
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/json'
             }, 
             this._onSuccess, 
             this._onError
@@ -243,7 +243,7 @@ class AccountManager {
             {
                 method: 'GET',
                 endpoint: `/accounts/${account_id}/invitations`,
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/json'
             }, 
             this._onSuccess, 
             this._onError
@@ -268,7 +268,7 @@ class AccountManager {
         return this._restClient.request({
             method: 'GET',
             endpoint: !account_id ? `/invitations/${invitation_id}` : `/accounts/${account_id}/invitations/${invitation_id}`,
-            contentType: 'application/x-www-form-urlencoded'
+            contentType: 'application/json'
         },
         this._onSuccess,
         this._onError
@@ -286,7 +286,7 @@ class AccountManager {
             {
                 method: 'GET',
                 endpoint: `invitations/`,
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/json'
             }, 
             this._onSuccess, 
             this._onError
@@ -343,7 +343,7 @@ class AccountManager {
                 body: {
                     'status:' : accepted ? 'ACCEPTED' : 'REJECTED'
                 },
-                contentType: 'application/x-www-form-urlencoded', 
+                contentType: 'application/json', 
             }, 
             this._onSuccess, 
             this._onError
@@ -363,7 +363,7 @@ class AccountManager {
             {
                 method: 'DELETE',
                 endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/json'
             },
             this._onSuccess,
             this._onError
