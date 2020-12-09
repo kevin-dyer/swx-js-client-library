@@ -88,15 +88,19 @@ class RESTClient {
    * @throws Throws an error if contentType was not provided AND no contentType was provided on instantiation of the RESTClient
    * @throws Throws an error if the token has not been set ()
    */
+
+  /**
+   * @todo Add validation of endpoint
+   * if (!endpoint || !validUrl(endpoint)) {
+   *   throw new Error(`Invalid URL extension: "${endpoint}"`)
+   * }
+   * @todo Convert bad responses to errors (perhaps after axios integration)
+   */
   request = ({ method, endpoint, uriParams, body, contentType }, onSuccessCallback, onErrorCallback) => {
     // <---> Error Handling
     if (!method || !supportedMethods.includes(method)) {
       throw new Error(`Method "${method}" not supported. Supported methods are: `, supportedMethods.join(", "))
     }
-    // TODO: needs refinement
-    // if (!endpoint || !validUrl(endpoint)) {
-    //   throw new Error(`Invalid URL extension: "${endpoint}"`)
-    // }
     if (!this._contentType && !contentType) {
       throw new Error('No contentType. Must either instantiate RESTClient with a contentType or pass contentType to request.')
     }
@@ -113,7 +117,7 @@ class RESTClient {
       body: this._formatBody(body, contentType)
     })
     .then(response => response.json())
-    // TODO: Convert bad responses to errors (perhaps after axios integration)
+    // see todo
     .then(onSuccess)
     .catch(onError)
   }
@@ -186,11 +190,13 @@ class RESTClient {
     }
   }
 
+  /**
+   * @todo accomodate for other content types
+   */
   _formatBody = (body, contentType) => {
     const contentTypeToUse = contentType || this._contentType
     if (!contentTypeToUse || contentTypeToUse === 'application/json') return JSON.stringify(body)
     if (contentTypeToUse.includes('urlencoded')) return formatUriParams(body, false)
-    // TODO: Other content types
     console.warn(`WARNING: No body formatting for content type: "${contentTypeToUse}"`)
     return body
   }

@@ -11,8 +11,6 @@ const RESTClient = require('./RESTClient')
  */
 
 class AccountManager {
-
-    // TODO: No references to callback args are not utilized. 
     /**
      * @constructor
      * @param {Function| Object} [onSuccess] - Optional callback to be fired when request returns successfully. 

@@ -62,6 +62,10 @@ function authenticationProcess() {
   })
 }
 
+/**
+ * @todo Add new processes for demonstration.
+ * @todo Existing processes below need to be refined. Some use async/await.
+ */
 async function createAccount(acct, id, name) {
   let x = await acct.createAccount({
     'id': `${id}`,
