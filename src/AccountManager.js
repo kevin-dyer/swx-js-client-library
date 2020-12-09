@@ -1,9 +1,9 @@
 // === IMPORTS ===
-const _ = require('lodash');
 const RESTClient = require('./RESTClient')
 
 /**@class
  * @classdesc Manage Users, Accounts, and Invitations. 
+ * @see - http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
  * @author pmehmandoost
  * @property {Function} _onSuccess - callback to be invoked on API request success
  * @property {Function} _onError - callback to be invoked on API request error
@@ -28,9 +28,12 @@ class AccountManager {
     }
 
     /**
-     * Creates an account
-     * @createAccount
+     * @method
+     * @public
+     * @summary Create a new account
+     * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
      * @param {Object} data - All desired and required account properties.
+     * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
      */
     createAccount = (data) => {
         return this._restClient.request(
@@ -43,18 +46,16 @@ class AccountManager {
             this._onSuccess,
             this._onError
         )
-        .then(resp => { return resp })      
     }
   
     /**
      * @method
      * @public
-     * @getAllAccounts
      * @summary Get an array of all accounts.
      * @return {Array} - An array of objects with account properties.
      */
     getAllAccounts = () => {
-        let accounts = []
+        // let accounts = []
         return this._restClient.request(
             {
                 method: 'GET',
@@ -64,175 +65,151 @@ class AccountManager {
             this._onSuccess, 
             this._onError
         )
-        .then(resp => { 
-            for (const [key, value] of Object.entries(resp?.collection)) {
-                accounts.push(value)
+        .then(({ collection }) => {
+            if (!collection || !(collection instanceof Object)) {
+              // Error handling TBD
             }
-            return accounts
-        }) 
+            return Object.values(collection)
+          })
     }
 
     /**
      * @method
      * @public
-     * @getAccount
      * @summary Get a single account by ID.
      * @return {Object} - An object with account properties.
      */
-    getAccount = (id) => {
+    getAccount = (account_id) => {
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `accounts/${id}`,
+                endpoint: `accounts/${account_id}`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
             this._onError
         )
-        .then(resp => { 
-            return resp
-        })
     }
 
     /**
      * @method
      * @public
-     * @updateAccount
      * @summary Update a single account.
+     * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
      * @param {String} id - The ID of the account to be deleted.
      * @param {Object} data - body of PUT request
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
-
      */
     updateAccount = (data) => {
-        // this._validateStructure(data)
         const { account_id='' } = data 
 
-        const endPoint = `/accounts/${account_id}`
         return this._restClient.request(
             {
                 method: 'PUT',
-                endpoint: endPoint,
+                endpoint: `/accounts/${account_id}`,
                 body: data,
                 contentType: 'application/json'
             },
             this._onSuccess,
             this._onError
         )
-        .then(resp => { return resp })
     }
   
     /**
      * @method
      * @public
-     * @deleteAccounts
      * @summary Delete a single Account.
      * @param {String} id - The ID of the account to be deleted.
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
-    deleteAccount = (id) => {
-        const endPoint = `accounts/${id}`
+    deleteAccount = (account_id) => {
         return this._restClient.request(
             {
                 method: 'DELETE',
-                endpoint: endPoint.normalize(),
+                endpoint: `accounts/${account_id}`,
                 contentType: 'application/x-www-form-urlencoded'
             },
             this._onSuccess,
             this._onError
         )
-        .then(resp => { 
-        // console.log(`deleteAccount: ${JSON.stringify(resp)}`) //for testing
-            return resp
-        })
     }
 
     /**
      * @method
      * @public
-     * @getAllUsersOfAccount
      * @summary Get an array of users from a specific account.
-     * @param {String} accountId - The ID of the account.
+     * @param {String} account_id - The ID of the account.
      * @return {Array} - An array of objects with user properties.
      */
-    getAllUsersOfAccount = (accountId) => {
-        let users = []
+    getUsersByAccountId = (account_id) => {
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `accounts/${accountId}/users`,
+                endpoint: `accounts/${account_id}/users`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
             this._onError
         )
-        .then(resp => { 
-            for (const [key, value] of Object.entries(resp?.collection)) {
-                users.push(value)
+        .then(({ collection }) => {
+            if (!collection || !(collection instanceof Object)) {
+              // Error handling TBD
             }
-            return users
-        }) 
+            return Object.values(collection)
+          })
     }
 
     /**
      * @method
      * @public
-     * @getUser
      * @summary Get user from an accountby user ID
-     * @param {String} accountId - The ID of the account the user belongs to.  
-     * @param {String} userId - The ID of the user.
+     * @param {String} account_id - The ID of the account the user belongs to.  
+     * @param {String} user_id - The ID of the user.
      * @return {Object} - An object with user properties.
      */
-    getUser = (accountId, userId) => {
-        let user = {}
+    getUser = (account_id, user_id) => {
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `accounts/${accountId}/users/${userId}`,
+                endpoint: `accounts/${account_id}/users/${user_id}`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
             this._onError
         )
-        .then(resp => { 
-            for (const [key, value] of Object.entries(resp?.collection)) {
-                if (JSON.stringify(value.id) === userId) {
-                    user = _.cloneDeep(value)
-                }
-            }
-            return user
-        }) 
     }
 
     /**
      * @method
      * @public
-     * @getUser
      * @summary Delete a single user
-     * @param {String} accountId - The ID of the account the user belongs to.  
-     * @param {String} userId - The ID of the user.
+     * @param {String} account_id - The ID of the account the user belongs to.  
+     * @param {String} user_id - The ID of the user.
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
-    deleteUser = (accountId, userId) => {
+    deleteUser = (account_id, user_id) => {
         return this._restClient.request(
             {
                 method: 'DELETE',
-                endpoint: `accounts/${accountId}/users/${userId}`,
+                endpoint: `accounts/${account_id}/users/${user_id}`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
             this._onError
         )
-        .then(resp => { return resp })
     }
 
     /**
-     * Creates an account
-     * @createInvitation
+     * @method
+     * @public
+     * @summary Create an invitation
+     * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
      * @param {Object} data - All required invitation data
+     * @param {String} account_id - The ID of the pertaining account.
+     * @param {String} email - The email address of the pertaining account.
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
-    createInvitation = (accountId, email, roles) => {
+    createInvitation = (account_id, email, roles) => {
         if (!roles){
             throw new Error(`Error in creatInvitation, no role(s) provided: ${roles}`)
         }
@@ -242,7 +219,7 @@ class AccountManager {
         return this._restClient.request(
             {
                 method: 'POST',
-                endpoint: `accounts/${accountId}/invitations`,
+                endpoint: `accounts/${account_id}/invitations`,
                 body: {
                     'to_email': `${email}`,
                     'roles': "developer"
@@ -252,92 +229,59 @@ class AccountManager {
             this._onSuccess,
             this._onError
         )
-        .then(resp => { return resp })      
     }
 
     /**
      * @method
      * @public
-     * @getInvitationsSentFromAccount
      * @summary Get an array of all invitions from a specific account.
-     * @param {String} accountId - The ID of the pertaining account.
+     * @param {String} account_id - The ID of the pertaining account.
      * @return {Array} - An array of objects with properties of each received invitation.
      */
-    getInvitationsSentFromAccount = (accountId) => {
-        let invitations = []
+    getInvitationsSentFromAccount = (account_id) => {
         return this._restClient.request(
             {
                 method: 'GET',
-                endpoint: `/accounts/${accountId}/invitations`,
+                endpoint: `/accounts/${account_id}/invitations`,
                 contentType: 'application/x-www-form-urlencoded'
             }, 
             this._onSuccess, 
             this._onError
         )
-        .then(resp => { 
-            for (const [key, value] of Object.entries(resp?.collection)) {
-                invitations.push(value)
+        .then(({ collection }) => {
+            if (!collection || !(collection instanceof Object)) {
+              // Error handling TBD
             }
-            return invitations
-        }) 
+            return Object.values(collection)
+        })
     }
 
     /**
      * @method
      * @public
-     * @getSingleInvitationSentFromAccount
-     * @param {String} accountId - The ID of the pertaining account.
-     * @param {String} invitationId - The ID of the account to be deleted.
-     * @summary Delete a single invitation sent from an Account by its unique id.
+     * @param {String} [account_id] - Optional. The ID of the pertaining account.
+     * @param {String} invitation_id - The ID of the account to be deleted.
+     * @summary Get a single invitation sent from an Account by its unique id or the pertaining account id.
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
      */
-    getSingleInvitationSentFromAccount = (accountId, invitationId)  => {
+    getInvitation = (account_id, invitation_id)  => {
         return this._restClient.request({
             method: 'GET',
-            endpoint: accountId !=='' ? `/accounts/${accountId}/invitations/${invitationId}` : `/invitations/${invitationId}`,
+            endpoint: !account_id ? `/invitations/${invitation_id}` : `/accounts/${account_id}/invitations/${invitation_id}`,
             contentType: 'application/x-www-form-urlencoded'
         },
         this._onSuccess,
         this._onError
         )
-        .then(resp => { 
-            // console.log(`updateInvitation: ${JSON.stringify(resp)}`) //for testing
-            return resp 
-        })
     }
 
     /**
      * @method
      * @public
-     * @getInvitationByInvitationId
-     * @summary Get a single invitation by invitation ID.
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
-     */
-    getInvitationByInvitationId = (invitationId) => {
-        return this._restClient.request(
-            {
-                method: 'GET',
-                endpoint: `invitations/${invitationId}`,
-                contentType: 'application/x-www-form-urlencoded'
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
-        .then(resp => { 
-            // console.log(`getInvitationById: ${JSON.stringify(resp)}`) //for testing
-            return resp 
-        })
-    }
-
-    /**
-     * @method
-     * @public
-     * @getInvitationsFromAllAccounts
      * @summary Get an array of all invitations from all existing accounts.
      * @return {Array} - An array of objects with properties of each received invitation.
      */
     getInvitationsFromAllAccounts = () => {
-        let invitations = []
         return this._restClient.request(
             {
                 method: 'GET',
@@ -347,21 +291,21 @@ class AccountManager {
             this._onSuccess, 
             this._onError
         )
-        .then(resp => { 
-            for (const [key, value] of Object.entries(resp?.collection)) {
-                invitations.push(value)
+        .then(({ collection }) => {
+            if (!collection || !(collection instanceof Object)) {
+              // Error handling TBD
             }
-            return invitations
-        }) 
+            return Object.values(collection)
+        })
     }
 
     /**
      * @method
      * @public
-     * @updateInvitation
      * @summary Update a single account.
-     * @param {String} accountId - The ID of the pertaining account.
-     * @param {String} invitationId - The ID of the invitation to be updated.
+     * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
+     * @param {String} account_id - The ID of the pertaining account.
+     * @param {String} invitation_id - The ID of the invitation to be updated.
      * @param {Object} data - body of PUT request
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
      */
@@ -372,34 +316,30 @@ class AccountManager {
         } = data 
 
         return this._restClient.request({
-            method: 'PUT',
-            endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
-            body: data,
-            contentType: 'application/json'
-        },
-        this._onSuccess,
-        this._onError
+                method: 'PUT',
+                endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
+                body: data,
+                contentType: 'application/json'
+            },
+            this._onSuccess,
+            this._onError
         )
-        .then(resp => { 
-            // console.log(`updateInvitation: ${JSON.stringify(resp)}`) //for testing
-            return resp 
-        })
     }
 
     /**
      * @method
      * @public
-     * @processInvitation
      * @summary Accept or reject an invitation
-     * @param {String} invitationId - The ID of the invitation to be updated.
+     * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
+     * @param {String} invitation_id - The ID of the invitation to be updated.
      * @param {Boolean} accepted - The response to invitation. True for accepted, false for rejected.
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
      */
-    processInvitation = (invitationId, accepted) => {
+    processInvitation = (invitation_id, accepted) => {
         return this._restClient.request(
             {
                 method: 'PATCH',
-                endpoint: `invitations/${invitationId}`,
+                endpoint: `invitations/${invitation_id}`,
                 body: {
                     'status:' : accepted ? 'ACCEPTED' : 'REJECTED'
                 },
@@ -408,35 +348,26 @@ class AccountManager {
             this._onSuccess, 
             this._onError
         )
-        .then(resp => { 
-            // console.log(`processInvitation: ${JSON.stringify(resp)}`) //for testing
-            return resp
-        })
     }
 
     /**
      * @method
      * @public
-     * @deleteInvitation
-     * @param {String} accountId - The ID of the pertaining account.
-     * @param {String} invitationId - The ID of the account to be deleted.
+     * @param {String} account_id - The ID of the pertaining account.
+     * @param {String} invitation_id - The ID of the account to be deleted.
      * @summary Delete a single invitation sent from an Account by its unique id.
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
      */
-    deleteInvitation = (accountId, invitationId) => {
+    deleteInvitation = (account_id, invitation_id) => {
         return this._restClient.request(
             {
                 method: 'DELETE',
-                endpoint: `/accounts/${accountId}/invitations/${invitationId}`,
+                endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
                 contentType: 'application/x-www-form-urlencoded'
             },
             this._onSuccess,
             this._onError
         )
-        .then(resp => { 
-            // console.log(`deleteInvitation: ${JSON.stringify(resp)}`) //for testing
-            return resp
-        })
     }
 
     // === PRIVATE METHODS ===
@@ -449,20 +380,6 @@ class AccountManager {
      * @return {Boolean} Returns false if format is unacceptable
      */
     _emailIsValid = (email) => { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) }
-
-    /**
-     * @method
-     * @private
-     * @summary Strictly for testing at the moment. Inefficiently compares two stringified properties for absolute equality. 
-     * @param {Object} property to compare
-     * @param {Object}
-     * @return {Boolean} Whether two stringified arguments are identical 
-     */
-    _compare = (prop1, prop2) => {
-        const stringifiedProp1 = JSON.stringify(prop1)
-        const stringifiedProp2 = JSON.stringify(prop2)
-        return stringifiedProp1.normalize() !== stringifiedProp2.normalize()
-    }
 }
 
 module.exports = AccountManager
