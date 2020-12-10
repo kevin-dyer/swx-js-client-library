@@ -51,7 +51,7 @@ class RESTClient {
     const baseUrlWithTrailingSlash = baseUrl.slice(-1) === '/' ? baseUrl : baseUrl + '/'
     this._baseUrl = baseUrlWithTrailingSlash
     this._contentType = contentType
-    this.token = token
+    if (!!token) this._token = token
     this._onSuccess = (resp) => { return resp }
     this._onError = (error) => { throw new Error(error) }
   }
@@ -65,7 +65,7 @@ class RESTClient {
    */
     setToken = (token) => {
       if (!token) throw new Error((error) => {`Error: token is undefined. ${error}`}) 
-      this.token = token
+      this._token = token
     }
 
   /**
@@ -177,7 +177,7 @@ class RESTClient {
 
   _createHeaders = (contentType) => {
     const contentTypeToUse = contentType || this._contentType
-    const bearerTokenToUse = (!!this.token && this.token.getBearerToken())
+    const bearerTokenToUse = (!!this._token && this._token.getBearerToken())
 
     if (!bearerTokenToUse) {
       return {

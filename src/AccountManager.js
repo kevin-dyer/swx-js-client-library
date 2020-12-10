@@ -195,6 +195,10 @@ class AccountManager {
     }
 
     /**
+     * @todo Add validation for roles parameter
+     */
+    
+    /**
      * @method
      * @public
      * @summary Create an invitation
@@ -202,11 +206,12 @@ class AccountManager {
      * @param {Object} data - All required invitation data
      * @param {String} account_id - The ID of the pertaining account.
      * @param {String} email - The email address of the pertaining account.
+     * @param {streinf}
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
      */
     createInvitation = (account_id, email, roles) => {
-        if (!roles){
-            throw new Error(`Error in creatInvitation, no role(s) provided: ${roles}`)
+        if (!roles  || typeof roles !== 'string'){
+            throw new Error(`Error in creatInvitation, invalid roles: ${roles}`)
         }
         if (!this._emailIsValid(email)){
             throw new Error(`Error in creatInvitation, invalid email address: ${to_email}`)
@@ -217,7 +222,7 @@ class AccountManager {
                 endpoint: `accounts/${account_id}/invitations`,
                 body: {
                     'to_email': `${email}`,
-                    'roles': "developer"
+                    'roles': roles
                 },
                 contentType: 'application/json'
             },
@@ -375,6 +380,15 @@ class AccountManager {
      * @return {Boolean} Returns false if format is unacceptable
      */
     _emailIsValid = (email) => { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) }
+
+    /**
+     * @method
+     * @private
+     * @summary validates email address format
+     * @param {String} email
+     * @return {Boolean} Returns false if format is unacceptable
+     */
+    _formatRoles = (roles) => { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) }
 }
 
 module.exports = AccountManager
