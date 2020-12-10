@@ -136,7 +136,7 @@ class AccountManager {
      * @param {String} account_id - The ID of the account.
      * @return {Array} - An array of objects with user properties.
      */
-    getUsersByAccountId = (account_id) => {
+    getAllUsers = (account_id) => {
         return this._restClient.request(
             {
                 method: 'GET',
@@ -233,7 +233,7 @@ class AccountManager {
      * @param {String} account_id - The ID of the pertaining account.
      * @return {Array} - An array of objects with properties of each received invitation.
      */
-    getInvitationsSentFromAccount = (account_id) => {
+    getAllInvitations = (account_id) => {
         return this._restClient.request(
             {
                 method: 'GET',
