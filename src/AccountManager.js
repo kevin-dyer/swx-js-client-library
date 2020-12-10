@@ -5,22 +5,15 @@ const RESTClient = require('./RESTClient')
  * @classdesc Manage Users, Accounts, and Invitations. 
  * @see - http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
  * @author pmehmandoost
- * @property {Function} _onSuccess - callback to be invoked on API request success
- * @property {Function} _onError - callback to be invoked on API request error
- * @property {RESTClient} _restClient
  */
 
 class AccountManager {
     /**
      * @constructor
-     * @param {Function| Object} [onSuccess] - Optional callback to be fired when request returns successfully. 
-     * @param {Function| Object} [onError] - Optional callback to be fired when an error is caught during request.
      * @param {RESTClient | Object} client
      */
-    constructor(client, onSuccess, onError ) {
+    constructor(client) {
         this._restClient = !!client && client instanceof RESTClient ? client : new RESTClient(client)
-        this._onError = typeof onError === 'function'? onError : () => { throw new Error(`Default onError`) }
-        this._onSuccess = typeof onSuccess === 'function' ? onSuccess : resp => resp
     }
 
     /**
@@ -31,16 +24,12 @@ class AccountManager {
      * @param {Object} data - All desired and required account properties.
      */
     createAccount = (data) => {
-        return this._restClient.request(
-            {
-                method: 'POST',
-                endpoint: 'accounts',
-                body: data,
-                contentType: 'application/json'
-            },
-            this._onSuccess,
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'POST',
+            endpoint: 'accounts',
+            body: data,
+            contentType: 'application/json'
+        })
     }
   
     /**
@@ -51,15 +40,11 @@ class AccountManager {
      */
     getAllAccounts = () => {
         // let accounts = []
-        return this._restClient.request(
-            {
-                method: 'GET',
-                endpoint: `accounts`,
-                contentType: 'application/json'
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'GET',
+            endpoint: `accounts`,
+            contentType: 'application/json'
+        })
         .then(({ collection }) => {
             if (!collection || !(collection instanceof Object)) {
               // Error handling TBD
@@ -75,15 +60,11 @@ class AccountManager {
      * @return {Object} - An object with account properties.
      */
     getAccount = (account_id) => {
-        return this._restClient.request(
-            {
-                method: 'GET',
-                endpoint: `accounts/${account_id}`,
-                contentType: 'application/json'
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'GET',
+            endpoint: `accounts/${account_id}`,
+            contentType: 'application/json'
+        })
     }
 
     /**
@@ -93,21 +74,17 @@ class AccountManager {
      * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
      * @param {String} id - The ID of the account to be deleted.
      * @param {Object} data - body of PUT request
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body.
      */
     updateAccount = (data) => {
         const { account_id='' } = data 
 
-        return this._restClient.request(
-            {
-                method: 'PUT',
-                endpoint: `/accounts/${account_id}`,
-                body: data,
-                contentType: 'application/json'
-            },
-            this._onSuccess,
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'PUT',
+            endpoint: `/accounts/${account_id}`,
+            body: data,
+            contentType: 'application/json'
+        })
     }
   
     /**
@@ -115,18 +92,14 @@ class AccountManager {
      * @public
      * @summary Delete a single Account.
      * @param {String} id - The ID of the account to be deleted.
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
+     * @return {Promise} -  Returns a Promise that, when fulfilled, will http response body
      */
     deleteAccount = (account_id) => {
-        return this._restClient.request(
-            {
-                method: 'DELETE',
-                endpoint: `accounts/${account_id}`,
-                contentType: 'application/json'
-            },
-            this._onSuccess,
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'DELETE',
+            endpoint: `accounts/${account_id}`,
+            contentType: 'application/json'
+        })
     }
 
     /**
@@ -137,21 +110,17 @@ class AccountManager {
      * @return {Array} - An array of objects with user properties.
      */
     getAllUsers = (account_id) => {
-        return this._restClient.request(
-            {
-                method: 'GET',
-                endpoint: `accounts/${account_id}/users`,
-                contentType: 'application/json'
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'GET',
+            endpoint: `accounts/${account_id}/users`,
+            contentType: 'application/json'
+        })
         .then(({ collection }) => {
             if (!collection || !(collection instanceof Object)) {
               // Error handling TBD
             }
             return Object.values(collection)
-          })
+        })
     }
 
     /**
@@ -163,15 +132,11 @@ class AccountManager {
      * @return {Object} - An object with user properties.
      */
     getUser = (account_id, user_id) => {
-        return this._restClient.request(
-            {
-                method: 'GET',
-                endpoint: `accounts/${account_id}/users/${user_id}`,
-                contentType: 'application/json'
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'GET',
+            endpoint: `accounts/${account_id}/users/${user_id}`,
+            contentType: 'application/json'
+        })
     }
 
     /**
@@ -180,24 +145,19 @@ class AccountManager {
      * @summary Delete a single user
      * @param {String} account_id - The ID of the account the user belongs to.  
      * @param {String} user_id - The ID of the user.
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
+     * @return {Promise} - Returns a Promise that, when fulfilled, will http response body
      */
     deleteUser = (account_id, user_id) => {
-        return this._restClient.request(
-            {
-                method: 'DELETE',
-                endpoint: `accounts/${account_id}/users/${user_id}`,
-                contentType: 'application/json'
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'DELETE',
+            endpoint: `accounts/${account_id}/users/${user_id}`,
+            contentType: 'application/json'
+        })
     }
 
-    /**
-     * @todo Add validation for roles parameter
-     */
     
+    //TODO: Add validation for roles parameter
+
     /**
      * @method
      * @public
@@ -206,8 +166,8 @@ class AccountManager {
      * @param {Object} data - All required invitation data
      * @param {String} account_id - The ID of the pertaining account.
      * @param {String} email - The email address of the pertaining account.
-     * @param {streinf}
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http response body and success code or an Error with the problem..
+     * @param {String} roles - a string of comma separated roles
+     * @return {Promise} -  Returns a Promise that, when fulfilled, will http response body
      */
     createInvitation = (account_id, email, roles) => {
         if (!roles  || typeof roles !== 'string'){
@@ -216,19 +176,15 @@ class AccountManager {
         if (!this._emailIsValid(email)){
             throw new Error(`Error in creatInvitation, invalid email address: ${to_email}`)
         }        
-        return this._restClient.request(
-            {
-                method: 'POST',
-                endpoint: `accounts/${account_id}/invitations`,
-                body: {
-                    'to_email': `${email}`,
-                    'roles': roles
-                },
-                contentType: 'application/json'
+        return this._restClient.request({
+            method: 'POST',
+            endpoint: `accounts/${account_id}/invitations`,
+            body: {
+                'to_email': `${email}`,
+                'roles': roles
             },
-            this._onSuccess,
-            this._onError
-        )
+            contentType: 'application/json'
+        })
     }
 
     /**
@@ -239,15 +195,11 @@ class AccountManager {
      * @return {Array} - An array of objects with properties of each received invitation.
      */
     getAllInvitations = (account_id) => {
-        return this._restClient.request(
-            {
-                method: 'GET',
-                endpoint: `/accounts/${account_id}/invitations`,
-                contentType: 'application/json'
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'GET',
+            endpoint: `/accounts/${account_id}/invitations`,
+            contentType: 'application/json'
+        })
         .then(({ collection }) => {
             if (!collection || !(collection instanceof Object)) {
               // Error handling TBD
@@ -262,17 +214,14 @@ class AccountManager {
      * @param {String} [account_id] - Optional. The ID of the pertaining account.
      * @param {String} invitation_id - The ID of the account to be deleted.
      * @summary Get a single invitation sent from an Account by its unique id or the pertaining account id.
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
+     * @return {Promise} -  Returns a Promise that, when fulfilled, will http response body
      */
-    getInvitation = (account_id, invitation_id)  => {
+    getInvitation = ({invitation_id, account_id})  => {
         return this._restClient.request({
             method: 'GET',
             endpoint: !account_id ? `/invitations/${invitation_id}` : `/accounts/${account_id}/invitations/${invitation_id}`,
             contentType: 'application/json'
-        },
-        this._onSuccess,
-        this._onError
-        )
+        })
     }
 
     /**
@@ -282,15 +231,11 @@ class AccountManager {
      * @return {Array} - An array of objects with properties of each received invitation.
      */
     getInvitationsFromAllAccounts = () => {
-        return this._restClient.request(
-            {
-                method: 'GET',
-                endpoint: `invitations/`,
-                contentType: 'application/json'
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'GET',
+            endpoint: `invitations`,
+            contentType: 'application/json'
+        })
         .then(({ collection }) => {
             if (!collection || !(collection instanceof Object)) {
               // Error handling TBD
@@ -307,7 +252,7 @@ class AccountManager {
      * @param {String} account_id - The ID of the pertaining account.
      * @param {String} invitation_id - The ID of the invitation to be updated.
      * @param {Object} data - body of PUT request
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
+     * @return {Promise} - Returns a Promise that, when fulfilled, will http response body
      */
     updateInvitation = (data) => {
         const {
@@ -316,14 +261,11 @@ class AccountManager {
         } = data 
 
         return this._restClient.request({
-                method: 'PUT',
-                endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
-                body: data,
-                contentType: 'application/json'
-            },
-            this._onSuccess,
-            this._onError
-        )
+            method: 'PUT',
+            endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
+            body: data,
+            contentType: 'application/json'
+        })
     }
 
     /**
@@ -333,21 +275,17 @@ class AccountManager {
      * @see - for schema, refer to the Account Service API docs: http://smartworks.gitlab.pclm.altair.com/doc/user-manual/docs/8_account-management/account-service-api/
      * @param {String} invitation_id - The ID of the invitation to be updated.
      * @param {Boolean} accepted - The response to invitation. True for accepted, false for rejected.
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
+     * @return {Promise} -  Returns a Promise that, when fulfilled, will http response body
      */
     processInvitation = (invitation_id, accepted) => {
-        return this._restClient.request(
-            {
-                method: 'PATCH',
-                endpoint: `invitations/${invitation_id}`,
-                body: {
-                    'status:' : accepted ? 'ACCEPTED' : 'REJECTED'
-                },
-                contentType: 'application/json', 
-            }, 
-            this._onSuccess, 
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'PATCH',
+            endpoint: `invitations/${invitation_id}`,
+            body: {
+                'status:' : accepted ? 'ACCEPTED' : 'REJECTED'
+            },
+            contentType: 'application/json', 
+        })
     }
 
     /**
@@ -356,18 +294,14 @@ class AccountManager {
      * @param {String} account_id - The ID of the pertaining account.
      * @param {String} invitation_id - The ID of the account to be deleted.
      * @summary Delete a single invitation sent from an Account by its unique id.
-     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with an http success code or an Error with the problem
+     * @return {Promise} - Returns a Promise that, when fulfilled, will http response body
      */
     deleteInvitation = (account_id, invitation_id) => {
-        return this._restClient.request(
-            {
-                method: 'DELETE',
-                endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
-                contentType: 'application/json'
-            },
-            this._onSuccess,
-            this._onError
-        )
+        return this._restClient.request({
+            method: 'DELETE',
+            endpoint: `/accounts/${account_id}/invitations/${invitation_id}`,
+            contentType: 'application/json'
+        })
     }
 
     // === PRIVATE METHODS ===
@@ -380,15 +314,6 @@ class AccountManager {
      * @return {Boolean} Returns false if format is unacceptable
      */
     _emailIsValid = (email) => { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) }
-
-    /**
-     * @method
-     * @private
-     * @summary validates email address format
-     * @param {String} email
-     * @return {Boolean} Returns false if format is unacceptable
-     */
-    _formatRoles = (roles) => { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) }
 }
 
 module.exports = AccountManager

@@ -52,8 +52,6 @@ class RESTClient {
     this._baseUrl = baseUrlWithTrailingSlash
     this._contentType = contentType
     if (!!token) this._token = token
-    this._onSuccess = (resp) => { return resp }
-    this._onError = (error) => { throw new Error(error) }
   }
 
   /**
@@ -68,6 +66,8 @@ class RESTClient {
       this._token = token
     }
 
+  // TODO:  Add validation of endpoint
+  // TODO:  Convert bad responses to errors (perhaps after axios integration)
   /**
    * @method
    * @public
@@ -79,8 +79,6 @@ class RESTClient {
    * @param {String} [options.contentType] - The Content Type for the header. If ommitted, the contentType passed into the constructor will be used.
    * @param {Object} [options.data] - Body data for a POST or PUT request
    * @param {Object} [options.uriParams] - URL Paramaters to append to the end of the url
-   * @param {Function} [onSuccessCallback] - Callback to be fired when request returns successfully. This supercedes any callback set using the onSuccess method.
-   * @param {Function} [onErrorCallback] - Callback to be fired when an error is caught during request. This supercedes any callback set using the onError method.
    * @return {Promise} - Returns a Promise that, when fulfilled, will either return an JSON Object with the requested data or an Error with the problem.
    * @throws Throws an error if the provided method is not supported
    * @throws Throws an error is the provided url is not a valid url extension
@@ -88,18 +86,14 @@ class RESTClient {
    * @throws Throws an error if the token has not been set ()
    */
 
-  /**
-   * @todo Add validation of endpoint
-   * if (!endpoint || !validUrl(endpoint)) {
-   *   throw new Error(`Invalid URL extension: "${endpoint}"`)
-   * }
-   * @todo Convert bad responses to errors (perhaps after axios integration)
-   */
-  request = ({ method, endpoint, uriParams, body, contentType }, onSuccessCallback, onErrorCallback) => {
+  request = ({ method, endpoint, uriParams, body, contentType }) => {
     // <---> Error Handling
     if (!method || !supportedMethods.includes(method)) {
       throw new Error(`Method "${method}" not supported. Supported methods are: `, supportedMethods.join(", "))
     }
+    // if (!endpoint || !validUrl(endpoint)) {
+    //   throw new Error(`Invalid URL extension: "${endpoint}"`)
+    // }
     if (!this._contentType && !contentType) {
       throw new Error('No contentType. Must either instantiate RESTClient with a contentType or pass contentType to request.')
     }
@@ -107,8 +101,6 @@ class RESTClient {
 
     const requestUrl = this.makeRequestUrl({ endpoint, uriParams })
     const headers = this._createHeaders( contentType )
-    const onSuccess = onSuccessCallback || this._onSuccess
-    const onError = onErrorCallback || this._onError
     
     return fetch(requestUrl, {
       method,
@@ -116,40 +108,6 @@ class RESTClient {
       body: this._formatBody(body, contentType)
     })
     .then(response => response.json())
-    // see todo
-    .then(onSuccess)
-    .catch(onError)
-  }
-
-  /**
-   * @method
-   * @public
-   * @summary Set a callback function to be called when a successful request is made (using request).
-   * @param {Function} onSuccessCallback - The callback function to be called upon receipt of a successful request.
-   * @throws Throws an error if onSuccessCallback is not a function.
-   */
-  onSuccess = (onSuccessCallback) => {
-    if (!!onSuccessCallback && typeof onSuccessCallback === 'function') {
-      this._onSuccess = onSuccessCallback
-      return
-    }
-    // Fall-through 
-    throw new Error(`onSuccess callback provided is invalid: `, onSuccessCallback) // NOTE: We will not need this once we convert to TypeScript
-  }
-
-  /**
-   * @method
-   * @public
-   * @summary Set a callback function to be called when an error is caught during a request (using request).
-   * @param {Function} onErrorCallback - The callback function to be called when an error is caught.
-   * @throws Throws an error is onErrorCallback is not a function.
-   */
-  onError = (onErrorCallback) => {
-    if (!!onErrorCallback && typeof onErrorCallback === 'function') {
-      this._onError = onErrorCallback
-    }
-    // Fall-through
-    throw new Error(`onSuccess callback provided is invalid: `, onErrorCallback) // NOTE: We will not need this once we convert to TypeScript
   }
 
   /**
@@ -193,9 +151,8 @@ class RESTClient {
     }
   }
 
-  /**
-   * @todo accomodate for other content types
-   */
+  // TODO: accomodate for other content types
+
   _formatBody = (body, contentType) => {
     const contentTypeToUse = contentType || this._contentType
     if (!contentTypeToUse || contentTypeToUse === 'application/json') return JSON.stringify(body)

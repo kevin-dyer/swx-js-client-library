@@ -79,6 +79,11 @@ async function getAccount(acct, id) {
   console.log("getAccount(): ",  x)
 }
 
+async function getInvitationFromAccount(acct, id) {
+  let x = await acct.getInvitationsSentFromAccount(id).then((response) => { return response })
+  console.log("getInvitationsSentFromAccount(): ",  x)
+}
+
 async function getAllUsers(acct, account_id, user_id) {
   let x = await acct.getUser(id).then((response) => { 
     Promise.resolve({ 
@@ -116,13 +121,6 @@ async function createInvitation(acct, accountId, email, roles) {
     console.log("createInvitation(): ", x)
 }
 
-const success = (resp) => { 
-  console.log(`${JSON.stringify(resp)}`)
-  return resp 
-}
-
-const error = (error) => { console.log(`Error handler! ${JSON.stringify(error)}` )}
-
 // Execution
 authenticationProcess().then((result) => {
   console.log("🚀 ~ file: example.js ~ line 52 ~ authenticationProcess ~ result", result)
@@ -130,17 +128,12 @@ authenticationProcess().then((result) => {
   console.log(`client token:`, restClient.token)
   console.log(`auth client token: `, auth._restClient.token)
 
-  let accountManager = new AccountManager(
-    restClient,
-    {
-      onSuccess: success, 
-      onFailure: error
-    }
-  )
+  let accountManager = new AccountManager(restClient)
 
-  createAccount(accountManager, 'anothertest', 'anothertest')
+  // createAccount(accountManager, 'anothertest', 'anothertest')
   getAllAccounts(accountManager).then(res => {console.log(res)})
-  deleteAccount(accountManager, 'changemyname').then(res => {console.log(res)})
-  createInvitation(accountManager, 'changethisaccount', 'changeme@mailinator.com', 'developer')
-  getAccount(accountManager, 'pirouz')
+  // deleteAccount(accountManager, 'pirouz').then(res => {console.log(res)})
+  // createInvitation(accountManager, 'amirtest', 'pirouz1@mailinator.com', 'developer')
+  getAccount(accountManager, 'amirtest')
+  getInvitationFromAccount(accountManager, 'amirtest')
 })
