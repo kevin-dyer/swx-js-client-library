@@ -19,7 +19,6 @@ function formatUriParams(uriParams, leadingQuestionMark=true) {
     paramsArray.push(`${param}=${uriParams[param]}`)
   }
 
-
   if (paramsArray.length > 0) {
     const paramsString = `${paramsArray.join('&')}`
     if (leadingQuestionMark) return `?${paramsString}`
@@ -165,7 +164,11 @@ class RESTClient {
   makeRequestUrl = ({ endpoint, uriParams }) => {
     const urlWithoutLeadingSlash = endpoint[0] === '/' ? endpoint.substring(1) : endpoint
     let fullUrl = this._baseUrl + urlWithoutLeadingSlash
-    if (uriParams) fullUrl = fullUrl + formatUriParams(uriParams)
+
+    if (uriParams) {
+      fullUrl = fullUrl.slice(-1) === '/' ? fullUrl.slice(0, -1) + formatUriParams(uriParams) : fullUrl + formatUriParams(uriParams)
+    }
+    
     const encodedFullUrl = encodeURI(fullUrl)
     return encodedFullUrl
   }
