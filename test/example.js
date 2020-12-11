@@ -11,6 +11,7 @@ const rl = readline.createInterface({
 const RESTClient = require('../src/RESTClient')
 const Authenticator = require('../src/Authenticator')
 const Token = require('../src/Token')
+const AccountManager = require('../src/AccountManager')
 
 // === SCRIPT ===
 // Instantiation
@@ -50,7 +51,7 @@ function authenticationProcess() {
         .then(token => {
           if (token.token_type && token.token_type === 'bearer') {
             console.log("🚀 ~ file: example.js ~ line 44 ~ returnnewPromise ~ token", token)
-            restClient.token = new Token(token)
+            restClient.setToken(new Token(token))
             resolve(true)
           } else {
             console.warn(`Bad token: `, token)
@@ -61,6 +62,64 @@ function authenticationProcess() {
   })
 }
 
+/**
+ * @todo Add new processes for demonstration.
+ * @todo Existing processes below need to be refined. Some use async/await.
+ */
+async function createAccount(acct, id, name) {
+  let x = await acct.createAccount({
+    'id': `${id}`,
+    'name': `${name}`
+    }).then((response) => { return response })
+    console.log("createAccount: ", x)
+}
+
+async function getAccount(acct, id) {
+  let x = await acct.getAccount(id).then((response) => { return response })
+  console.log("getAccount(): ",  x)
+}
+
+async function getInvitationFromAccount(acct, id) {
+  let x = await acct.getInvitationsSentFromAccount(id).then((response) => { return response })
+  console.log("getInvitationsSentFromAccount(): ",  x)
+}
+
+async function getAllUsers(acct, account_id, user_id) {
+  let x = await acct.getUser(id).then((response) => { 
+    Promise.resolve({ 
+      data: response.json(),
+      status: response.status
+    }).then(res => {res.data; return res})
+  })
+  console.log("getUsers(): ",  x)
+  return x
+}
+
+function getUser(acct, account_id, user_id) {
+  return new Promise((resolve, reject) => {
+    const authUrl = acct.getUser(account_id, user_id)
+    .then(accounts => { resolve(accounts) })
+   }) 
+}
+
+function getAllAccounts(acct) {
+  return new Promise((resolve, reject) => {
+    const authUrl = acct.getAllAccounts()
+    .then(accounts => { resolve(accounts) })
+   }) 
+}
+
+function deleteAccount(acct, id) {
+  return new Promise((resolve, reject) => {
+    const authUrl = acct.deleteAccount(id)
+    .then(response => { resolve(response) })
+   }) 
+}
+
+async function createInvitation(acct, accountId, email, roles) {
+  let x = await acct.createInvitation(accountId, email, roles).then((response) => { return response })
+    console.log("createInvitation(): ", x)
+}
 
 // Execution
 authenticationProcess().then((result) => {
@@ -68,4 +127,13 @@ authenticationProcess().then((result) => {
   console.log(`success!`)
   console.log(`client token:`, restClient.token)
   console.log(`auth client token: `, auth._restClient.token)
+
+  let accountManager = new AccountManager(restClient)
+
+  // createAccount(accountManager, 'anothertest', 'anothertest')
+  getAllAccounts(accountManager).then(res => {console.log(res)})
+  // deleteAccount(accountManager, 'pirouz').then(res => {console.log(res)})
+  // createInvitation(accountManager, 'amirtest', 'pirouz1@mailinator.com', 'developer')
+  getAccount(accountManager, 'amirtest')
+  getInvitationFromAccount(accountManager, 'amirtest')
 })
