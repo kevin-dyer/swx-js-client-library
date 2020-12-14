@@ -79,9 +79,9 @@ async function getAccount(acct, id) {
   console.log("getAccount(): ",  x)
 }
 
-async function getInvitationFromAccount(acct, id) {
-  let x = await acct.getInvitationsSentFromAccount(id).then((response) => { return response })
-  console.log("getInvitationsSentFromAccount(): ",  x)
+async function getAllInvitations(acct, id) {
+  let x = await acct.getAllInvitations(id).then((response) => { return response })
+  console.log("getAllInvitations(): ",  x)
 }
 
 async function getAllUsers(acct, account_id, user_id) {
@@ -125,8 +125,8 @@ async function createInvitation(acct, accountId, email, roles) {
 authenticationProcess().then((result) => {
   console.log("🚀 ~ file: example.js ~ line 52 ~ authenticationProcess ~ result", result)
   console.log(`success!`)
-  console.log(`client token:`, restClient.token)
-  console.log(`auth client token: `, auth._restClient.token)
+  console.log(`client token:`, restClient._token)
+  console.log(`auth client token: `, auth._restClient._token)
 
   let accountManager = new AccountManager(restClient)
 
@@ -135,5 +135,5 @@ authenticationProcess().then((result) => {
   // deleteAccount(accountManager, 'pirouz').then(res => {console.log(res)})
   // createInvitation(accountManager, 'amirtest', 'pirouz1@mailinator.com', 'developer')
   getAccount(accountManager, 'amirtest')
-  getInvitationFromAccount(accountManager, 'amirtest')
+  getAllInvitations(accountManager, 'amirtest')
 })
