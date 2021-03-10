@@ -1,18 +1,15 @@
 {
-  "name": "js-client-library",
-  "version": "0.0.1",
-  "description": "Client Library for use by JavaScript developers building against the smartworks api",
-  "main": "src/index.js",
+  "name": "swx-js-sdk",
+  "version": "0.1.0",
+  "description": "SmartWorks JS SDK",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "altair",
-  "license": "ISC",
-  "dependencies": {
-    "child_process": "^1.0.2",
-    "crypto": "^1.0.1",
-    "node-fetch": "^2.6.1",
-    "readline": "^1.3.0"
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.pclm.altair.com:SmartWorks/smartworks-sdk/js-client-library.git"
   },
-  "devDependencies": {}
+  "author": "",
+  "license": "ISC"
 }

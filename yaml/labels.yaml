@@ -1,0 +1,476 @@
+openapi: 3.0.3
+info:
+  description: Label rest API reference
+  version: 1.0.0
+  title: Label OpenAPI endpoints - OpenAPI 3.0
+servers:
+  - url: http://api.dev.altairsc.com
+tags:
+  - name: Label
+    description: Operations with label
+security:
+  - bearerAuth: []
+paths:
+  /spaces/{space}/labels:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+    post:
+      tags:
+        - Label
+      summary: Create label
+      description: Send a new label to the platform
+      operationId: createLabel
+      requestBody:
+        required: true
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/createLabel'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createLabelResponse'
+    get:
+      tags:
+        - Label
+      summary: List Labels
+      description: List of all the labels for an space
+      operationId: listLabel
+      parameters:
+        - in: query
+          name: mqtt
+          schema:
+            type: boolean
+          description: filter by labels with mqtt enabled
+          example: true
+        - in: query
+          name: entity_id
+          schema:
+            type: string
+          description: filter that shows labels of a certain entity
+          example: 01EDVJEMFD24360JT7434A6GS8
+        - in: query
+          name: entity_type
+          schema:
+            type: string
+          description: filter that shows labels of a certain entity type
+          example: thing
+        - in: query
+          name: collection_name
+          schema:
+            type: string
+          description: filter that shows labels of a certain collection. **Only available for thing entities**
+          example: my-collection
+        - in: query
+          name: label_name
+          schema:
+            type: string
+          description: filter that shows labels by label_name
+          example: some-label
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelListResponse'
+
+  /spaces/{space}/labels/{label-id}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: label-id
+        required: true
+        schema:
+          type: string
+          example: 01EDVJEMFD24360JT7434A6GS8
+    get:
+      tags:
+        - Label
+      summary: Show Label
+      description: Show an existing label by id
+      operationId: showLabel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelListElement1'
+    put:
+      tags:
+        - Label
+      summary: Update label
+      description: Update an existing label
+      operationId: updateLabel
+      requestBody:
+        required: true
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/createLabel'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createLabelResponse'
+    delete:
+      tags:
+        - Label
+      summary: Delete Label
+      description: Deletes an existing label by id
+      operationId: deleteLabel
+      responses:
+        '204':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelDeleteResponse'
+
+  /spaces/{space}/labels/{label-id}/relations:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: label-id
+        required: true
+        schema:
+          type: string
+          example: 01EDVJEMFD24360JT7434A6GS8
+    get:
+      parameters:
+      - in: query
+        name: entity_type
+        schema:
+          type: string
+          enum: [thing, function, build_config, resource]
+        description: filter that shows only entities of a certain type
+        example: thing
+      - in: query
+        name: collection_name
+        schema:
+          type: string
+        description: filter that shows only entities from a certain collection. **Only available for thing entities**
+        example: 01EDVJEMFD24360JT7434A6GS8
+      - in: query
+        name: entity_id
+        schema:
+          type: string
+        description: filter that shows only the entities that have this label
+        example: 01EDVJEMFD24360JT7434A6GS8
+      tags:
+        - Label
+      summary: Show Label Items
+      description: Show an existing label by name and entities associated to it
+      operationId: showLabelItems
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelListElementRelations'
+    post:
+      tags:
+        - Label
+      summary: Create label relation
+      description: Assign an existing label to an existing entity by id
+      operationId: createLabelRelation
+      requestBody:
+        required: true
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/createLabelRelation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelRelationElement1'
+    delete:
+      parameters:
+      - in: query
+        name: entity_id
+        required: true
+        schema:
+          type: string
+        description: Removes label assigned to this entity_id
+        example: 01EDVJEMFD24360JT7434A6GS8
+      tags:
+        - Label
+      summary: Delete Label relation
+      description: Delete a Label assignation for an specific entity
+      operationId: delete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelDeleteResponse'
+                
+
+  /spaces/{space}/labeled-entities:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+    get:
+      tags:
+      - Labeled Entities
+      description: Show entity_ids and their labels. At least one of the following parameters must be present **entity_id, entity_type, label_id, label_name**
+      parameters:
+      - in: query
+        name: entity_id
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+        example: 
+          - 01EDVJEMFD24360JT7434A6GS8
+          - 01EDVJEMFD24360JT7434A6GS8
+      - in: query
+        name: label_id
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+        example: 
+          - 01EDVJEMFD24360JT7434A6GS8
+          - 01EDVJEMFD24360JT7434A6GS8
+      - in: query
+        name: label_name
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+        example: 
+          - color:red
+          - my-label
+      - in: query
+        name: entity_type
+        required: true
+        schema:
+          type: string
+          enum: [thing, function, build_config, resource]
+        description: filter that shows only a certain type of entity
+        example: thing
+      - in: query
+        name: collection_name
+        schema:
+          type: string
+        description: filter that shows entities and their labels of a certain collection. **Only available for thing entity type**
+        example: my-collection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabeledListResponse'
+
+#externalDocs:
+#  description: Find out more about Swagger
+#  url: 'http://swagger.io'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Opaque JWT
+  schemas:
+    createLabel:
+      title: Create Label Request
+      type: object
+      properties:
+        label_name:
+          type: string
+          example: my-label
+        label_description:
+          type: string
+          example: this is a label description
+        color:
+          type: string
+          example: '#ffffff'
+
+    createLabelResponse:
+      properties:
+        id:
+          type: string
+          format: ulid
+          example: 01EDVJEMFD24360JT7434A6GS8
+        space:
+          type: string
+          example: altair
+        color:
+          type: string
+          example: '#ffffff'
+        label_description:
+          type: string
+          example: this is a label description
+        label_name:
+          type: string
+          example: my-label
+        mqtt:
+          type: boolean
+          example: false
+
+    LabelListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/LabelListElement1'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    LabelListElement1:
+      properties:
+        id:
+          type: string
+          example: 01EDVJEMFD24360JT7434A6GS8
+        space:
+          type: string
+          example: altair
+        color:
+          type: string
+          example: '#ffffff'
+        label_name:
+          type: string
+          example: my-label
+        label_description:
+          type: string
+          example: this is a label description
+        mqtt:
+          type: boolean
+          example: true
+
+    LabelDeleteResponse:
+      title: Response - Delete Label
+      properties:
+        error_label_backend:
+          type: object
+          properties:
+            http_status_code:
+              type: integer
+              example: 204
+
+    LabelListElementRelations:
+      title: Response - List Relations
+      properties:
+        data:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/LabelRelationElement1'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+  
+    createLabelRelation:
+      title: Create Label Request
+      type: object
+      properties:
+        entity_type:
+          type: string
+          example: thing
+        entity_id:
+          type: string
+          example: 01EDVJEMFD24360JT7434A6GS8
+
+    LabelRelationElement1:
+      properties:
+        collection_name:
+          type: string
+          example: my-collection
+        entity_id:
+          type: string
+          example: 6HRQCEA5F2BL97KUNNKT1230R8
+        entity_name:
+          type: string
+          example: my-thing
+        entity_type:
+          type: string
+          example: thing
+        label_id:
+          type: string
+          example: 01EDVJEMFD24360JT7434A6GS8
+        space:
+          type: string
+          example: altair
+    
+    LabeledListResponse:
+      properties:
+        data:
+            type: array
+            items:
+              anyOf:
+                - $ref: '#/components/schemas/LabeledListItem1'
+                - $ref: '#/components/schemas/LabeledListItem1'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+    
+    LabeledListItem1:
+      properties:
+        entity_id:
+          type: string
+          example: 6HRQCEA5F2BL97KUNNKT1230R8
+        labels:
+          type: array
+          items:
+            anyOf:
+                - $ref: '#/components/schemas/LabelListElement1'
+                - $ref: '#/components/schemas/LabelListElement1'
+        
