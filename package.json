@@ -11,5 +11,9 @@
     "url": "git@gitlab.pclm.altair.com:SmartWorks/smartworks-sdk/js-client-library.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.0.0",
+    "superagent": "^5.3.0"
+  }
 }

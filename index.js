@@ -1,3 +1,3 @@
-import digitalModelSdk from './sdk/dist/index';
+import * as sdk from './sdk/dist/index';
 
-export default digitalModelSdk;
+export default sdk;
