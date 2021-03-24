@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingCreateResponseCredentialsHttp
+# SmartWorksSdk.ThingCreateResponseCredentialsHttp
 
 ## Properties
 

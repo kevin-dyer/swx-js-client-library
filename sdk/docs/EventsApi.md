@@ -1,6 +1,6 @@
-# DigitalModelApiWip.EventsApi
+# SmartWorksSdk.EventsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.swx.altairsc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,18 +22,18 @@ Add a new event to the event history of a thing
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.EventsApi();
+let apiInstance = new SmartWorksSdk.EventsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let event = highCPU; // String | 
-let eventRequest = new DigitalModelApiWip.EventRequest(); // EventRequest | Create a new action
+let eventRequest = new SmartWorksSdk.EventRequest(); // EventRequest | Create a new action
 apiInstance.addEvent(space, collectionName, thingId, event, eventRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -78,13 +78,13 @@ List all history of all the events of a thing
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.EventsApi();
+let apiInstance = new SmartWorksSdk.EventsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
@@ -130,13 +130,13 @@ List all history of one concrete event inside a thing
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.EventsApi();
+let apiInstance = new SmartWorksSdk.EventsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
@@ -184,13 +184,13 @@ Show one specific event form a thing by Id
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.EventsApi();
+let apiInstance = new SmartWorksSdk.EventsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 

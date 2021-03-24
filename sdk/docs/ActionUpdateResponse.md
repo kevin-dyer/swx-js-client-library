@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ActionUpdateResponse
+# SmartWorksSdk.ActionUpdateResponse
 
 ## Properties
 

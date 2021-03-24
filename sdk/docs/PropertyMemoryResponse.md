@@ -1,4 +1,4 @@
-# DigitalModelApiWip.PropertyMemoryResponse
+# SmartWorksSdk.PropertyMemoryResponse
 
 ## Properties
 

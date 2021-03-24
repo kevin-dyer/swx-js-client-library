@@ -1,4 +1,4 @@
-# DigitalModelApiWip.PropertyDisk
+# SmartWorksSdk.PropertyDisk
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# DigitalModelApiWip.EventRequest
+# SmartWorksSdk.EventRequest
 
 ## Properties
 

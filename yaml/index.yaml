@@ -1,0 +1,3309 @@
+openapi: 3.0.3
+info:
+  title: SmartWorks SDK
+  version: '1.0.0'
+security:
+  - bearerAuth: []
+servers:
+  - url: https://api.swx.altairsc.com
+    description: Production server
+tags:
+  - name: collections
+    description: Operations on collections
+  - name: things
+    description: Operations on thing descriptions
+  - name: properties
+    description: Operations on properties
+  - name: actions
+    description: Operations on actions
+  - name: events
+    description: Operations on events
+  - name: models
+    description: Operations on models
+  - name: model-versions
+    description: Operations on model-versions
+  - name: items
+    description: Operations on items
+  - name: Functions
+    description: Operations about functions
+
+
+
+##### 
+##### !PATHS
+#####
+
+paths:
+  /spaces/{space}/collections:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+    post:
+      tags:
+        - collections
+      summary: Create collection
+      operationId: addCollection
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+      requestBody:
+        description: Create a new collection in the platform
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionRequest'
+    get:
+      tags:
+        - collections
+      summary: List collections
+      operationId: listCollections
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionListResponse'
+
+  /spaces/{space}/collections/{collection-name}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+    get:
+      tags:
+        - collections
+      summary: Show collection
+      operationId: showCollection
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+    put:
+      tags:
+        - collections
+      summary: Update collection
+      operationId: updateCollection
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionUpdateResponse'
+      requestBody:
+        description: Update an existent collection by name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionUpdateRequest'
+    delete:
+      tags:
+        - collections
+      summary: Delete collection
+      operationId: deleteCollection
+      responses:
+        204:
+          description: No content
+
+  /spaces/{space}/collections/{collection-name}/things:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+    post:
+      tags:
+        - things
+      summary: Add a thing description
+      description: Add a new thing description to the platform according to WoT specification
+      operationId: addThing
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingCreateResponse'
+      requestBody:
+        description: Create a new thing description in the platform
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThingRequest'
+    get:
+      tags:
+        - things
+      summary: List thing descriptions
+      description: List all thing descriptions in an array
+      operationId: listThings
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingListResponse'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+    get:
+      tags:
+        - things
+      summary: Show thing
+      description: Show the thing description from a thing
+      operationId: showThing
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingResponse'
+    put:
+      tags:
+        - things
+      summary: Update thing description
+      description: Update the thing description from a thing by Id. You need to include the whole thing description with the modifications to update it.
+      operationId: updateThing
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingUpdateResponse'
+      requestBody:
+        description: Update an existent thing description by Id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThingUpdateRequest'
+    delete:
+      tags:
+        - things
+      summary: Delete thing
+      description: Deletes all the existing information from a thing by Id. It deletes the thing description and the data.
+      operationId: deleteThing
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingDeleteResponse'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/reset-secret:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+    post:
+      tags:
+        - things
+      summary: Reset Client Secret
+      description: Reset the Client Secret for a specific thing
+      operationId: ResetClientSecret
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Secret'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        413:
+          description: "Payload Too Large"
+      deprecated: false
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+    get:
+      tags:
+        - properties
+      summary: List properties
+      description: List all the properties from one thing in array
+      operationId: listProperties
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+      - in: path
+        name: property
+        required: true
+        schema:
+          type: string
+          example: memory
+    get:
+      tags:
+        - properties
+      summary: Show property
+      description: Show a property from one thing
+      operationId: showProperty
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+    put:
+      tags:
+        - properties
+      summary: Update property
+      description: Update the value of a property
+      operationId: updateProperty
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+      requestBody:
+        description: Update an existent thing by Id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Property'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/actions/{action}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+      - in: path
+        name: action
+        required: true
+        schema:
+          type: string
+          example: delay
+    post:
+      tags:
+        - actions
+      summary: Request action
+      description: Request action and add it to the action queue from a thing
+      operationId: addAction
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionResponseElement1'
+      requestBody:
+        description: Create a new action
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionRequest'
+    get:
+      tags:
+        - actions
+      summary: List the queue of actions from a thing
+      description: Lists the current queue of a specific action from a Thing
+      operationId: listActionsByName
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionDelayListResponse'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/actions:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: integer
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+    get:
+      tags:
+        - actions
+      summary: Lists all the action queues for a thing
+      description: Lists all the queues for the different actions within a thing.
+      operationId: listActions
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionListResponse'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/actions/{action}/{action-id}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+      - in: path
+        name: action
+        required: true
+        schema:
+          type: string
+          example: delay
+      - in: path
+        name: action-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01EDCAQE78A7CP6REXV5J8BAKR
+    get:
+      tags:
+        - actions
+      summary: Show action requested
+      description: Shows a requested action from the action queues of a thing.
+      operationId: showAction
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionResponseElement1'
+    put:
+      tags:
+        - actions
+      summary: Update action inside a queue
+      description: Update the status of an existing action by Id inside of the action queue from a thing
+      operationId: updateAction
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionUpdateResponse'
+      requestBody:
+        description: Update an existent thing by Id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionUpdateRequest'
+    delete:
+      tags:
+        - actions
+      summary: Delete Action
+      description: Deletes an existing action by Id
+      operationId: deleteAction
+      responses:
+        '204':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionDeleteResponse'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/events/{event}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+      - in: path
+        name: event
+        required: true
+        schema:
+          type: string
+          example: highCPU
+    post:
+      tags:
+        - events
+      summary: Add event
+      description: Add a new event to the event history of a thing
+      operationId: addEvent
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+      requestBody:
+        description: Create a new action
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRequest'
+    get:
+      tags:
+        - events
+      summary: List history of one type of event
+      description: List all history of one concrete event inside a thing
+      operationId: listEventsByName
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventHighCPUListResponse'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/events:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01edb9j75vymj8p7qppm19h8nx
+    get:
+      tags:
+        - events
+      summary: List history of all events
+      description: List all history of all the events of a thing
+      operationId: listEvents
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventHighCPUListResponse'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/events/{event}/{event-id}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example:  01edb9j75vymj8p7qppm19h8nx
+      - in: path
+        name: event
+        required: true
+        schema:
+          type: string
+          example: highCPU
+      - in: path
+        name: event-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 01EDCEZDTJX50SQTCJST5EW5NX
+    get:
+      tags:
+        - events
+      summary: Show event
+      description: Show one specific event form a thing by Id
+      operationId: showEvent
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+
+  /spaces/{space}/collections/{collection-name}/models:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+    post:
+      tags:
+        - models
+      summary: Create model
+      operationId: addModel
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelResponse'
+      requestBody:
+        description: Create a new collection in the platform
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelRequest'
+    get:
+      tags:
+        - models
+      summary: List models
+      operationId: listModels
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelListResponse'
+
+  /spaces/{space}/collections/{collection-name}/models/{model-name}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: model-name
+        required: true
+        schema:
+          type: string
+          example: RaspberryPiModel
+    get:
+      tags:
+        - models
+      summary: Show model
+      operationId: showModel
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelResponse'
+    put:
+      tags:
+        - models
+      summary: Update model
+      operationId: updateModel
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelUpdateResponse'
+      requestBody:
+        description: Update an existent model by name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelUpdateRequest'
+    delete:
+      tags:
+        - models
+      summary: Delete model
+      operationId: deleteModel
+      responses:
+        204:
+          description: No content
+
+  /spaces/{space}/collections/{collection-name}/models/{model-name}/versions:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: model-name
+        required: true
+        schema:
+          type: string
+          example: RaspberryPiModel
+    post:
+      tags:
+        - model-versions
+      summary: Create version
+      operationId: addVersion
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersionResponse'
+      requestBody:
+        description: Create a new collection in the platform
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelVersionRequest'
+    get:
+      tags:
+        - model-versions
+      summary: List version
+      operationId: listVersion
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersionListResponse'
+
+  /spaces/{space}/collections/{collection-name}/models/{model-name}/versions/{version-name}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: model-name
+        required: true
+        schema:
+          type: string
+          example: RaspberryPiModel
+      - in: path
+        name: version-name
+        required: true
+        schema:
+          type: string
+          example: RasPiv1
+    get:
+      tags:
+        - model-versions
+      summary: Show version
+      operationId: showVersion
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersionResponse'
+    put:
+      tags:
+        - model-versions
+      summary: Update version
+      operationId: updateVersion
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersionResponse'
+      requestBody:
+        description: Update an existent model by name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelVersionResponse'
+    delete:
+      tags:
+        - model-versions
+      summary: Delete version
+      operationId: deleteVersion
+      responses:
+        204:
+          description: No content
+
+  /spaces/{space}/collections/{collection-name}/things-status:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+    get:
+      tags:
+        - items
+      summary: List items
+      operationId: listItems
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingStatusListResponse'
+        400:
+          description: Bad Request
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: body
+
+  /spaces/{space}/collections/{collection-name}/things-status/{thing-id}:
+    parameters:
+      - in: path
+        name: space
+        required: true
+        schema:
+          type: string
+          example: altair
+      - in: path
+        name: collection-name
+        required: true
+        schema:
+          type: string
+          example: ElectronicBoards
+      - in: path
+        name: thing-id
+        required: true
+        schema:
+          type: string
+          format: ulid
+          example: 87f87df8dfjhjdsksdsdk8fkff
+    get:
+      tags:
+        - items
+      summary: Show item
+      operationId: showItem
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingStatusResponse'
+        400:
+          description: Bad Request
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: body
+  /spaces/{space}/functions:
+    post:
+      tags:
+        - Functions
+      summary: Create and deploy a function
+      operationId: CreateFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Body of a new function'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Function'
+            example:
+              name: motion-detected
+              description: This function will be invoked when motion is detected.
+              template: python3-http
+              env:
+                MIN_DETECTION_EVENTS: "2"
+                RESET_AFTER_SECONDS: "15"
+              options:
+                topics: 'living-room/motion,floor1/bathroom/light'
+                schedule: "*/5 * * * *"
+              source:
+                code: ZGVmIGhhbmRsZShyZXEpOgogICAgcmV0dXJuIHsKICAgICAgICAic3RhdHVzQ29kZSI6IDIwMSwKICAgICAgICAiYm9keSI6IHJlcS5ib2R5LmRlY29kZSgidXRmLTgiKQogICAgfQo=
+        required: true
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        409:
+          description: "Conflict"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 409
+                  message: This function already exists
+        413:
+          description: "Payload Too Large"
+      deprecated: false
+    get:
+      tags:
+        - Functions
+      summary: List Functions
+      operationId: ListFunctions
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Functions'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+      deprecated: false
+  /spaces/{space}/functions/{function_name}:
+    get:
+      tags:
+        - Functions
+      summary: Get a function
+      operationId: GetFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+      deprecated: false
+    put:
+      tags:
+        - Functions
+      summary: Update a function
+      operationId: UpdateFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Body of the updated function'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Function'
+            example:
+              id: 01EPEF6NB562TTT0C3XQ8VTXVG
+              name: motion-detected
+              description: This function will be invoked when motion is detected.
+              template: python3-http
+              env:
+                MIN_DETECTION_EVENTS: "2"
+                RESET_AFTER_SECONDS: "15"
+              options:
+                topics: 'living-room/motion,floor1/bathroom/light'
+                schedule: "*/5 * * * *"
+              source:
+                code: ZGVmIGhhbmRsZShyZXEpOgogICAgcmV0dXJuIHsKICAgICAgICAic3RhdHVzQ29kZSI6IDIwMSwKICAgICAgICAiYm9keSI6IHJlcS5ib2R5LmRlY29kZSgidXRmLTgiKQogICAgfQo=
+        required: true
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+      deprecated: false
+    delete:
+      tags:
+        - Functions
+      summary: Delete a function
+      operationId: DeleteFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: "No Content"
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+      deprecated: false
+
+  /spaces/{space}/functions/{function_name}/invoke:
+    post:
+      tags:
+        - Functions
+      summary: Invoke a function
+      operationId: InvokeFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Optional data to pass to the function
+        content:
+          '*/*':
+            schema:
+              type: string
+              format: binary
+              example: '{"hello": "world"}'
+        required: false
+      responses:
+        200:
+          description: Value returned from the function
+          content:
+            application/json:
+              example:
+                info: "My function worked!"
+        202:
+          description: The function is not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+        413:
+          description: "Payload Too Large"
+        500:
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 500
+                  message: "ZeroDivisionError at line 9: division by zero"
+                  details:
+                    exception_info: "division by zero"
+                    exception_line_code: "value = 100 / 0"
+                    exception_line_number: 9
+                    exception_type: "ZeroDivisionError"
+      deprecated: false
+  /spaces/{space}/functions/{function_name}/async-invoke:
+    post:
+      tags:
+        - Functions
+      summary: Invoke a function asynchronously
+      operationId: InvokeFunctionAsync
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: X-Callback-Url
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Optional data to pass to the function
+        content:
+          '*/*':
+            schema:
+              type: string
+              format: binary
+              example: '{"hello": "world"}'
+        required: false
+      responses:
+        202:
+          description: Request accepted and queued or function not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+              examples:
+                invoked:
+                  summary: Function invoked successfully (success)
+                  value:
+                not_ready:
+                  summary: The function is not ready
+                  value:
+                    details: function not ready
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+        413:
+          description: "Payload Too Large"
+      deprecated: false
+  /spaces/{space}/functions/{function_name}/logs:
+    get:
+      tags:
+        - Functions
+      summary: Get a list of the logs for a specific function
+      operationId: GetFunctionLogs
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+        - name: since
+          in: query
+          description: Only return logs after a specific date (RFC3339)
+          schema:
+            type: string
+        - name: tail
+          in: query
+          description: Sets the maximum number of log messages to return, <=0 means
+            unlimited
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Newline delimited stream of log messages
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/LogEntryList'
+        202:
+          description: The function is not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+        500:
+          description: Internal Server Error
+          content: {}
+
+  /spaces/{space}/functions/{function_name}/code:
+    get:
+      tags:
+        - Functions
+      summary: Get the last version of the function code
+      operationId: GetFunctionCode
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Function code encoded in Base64.
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/SourceCode'
+        202:
+          description: The function is not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+
+  /spaces/{space}/triggers:
+    post:
+      tags:
+        - Triggers
+      summary: Create and deploy a trigger
+      operationId: CreateTrigger
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Body of a new trigger'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trigger'
+            example:
+              description: 'This trigger will subscribe to "https://mqtt-broker.com" broker.'
+              type: mqtt
+              config:
+                host: "mqtt-broker.com"
+                port: 1883
+                topics: "room1/temperature,room2/humidity"
+                username: admin
+                password: secret
+                qos: 1
+              callback_url: https://my-website.com/trigger-callback
+        required: true
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        409:
+          description: "Conflict"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 409
+                  message: This trigger already exists (REVIEW!!!)
+        413:
+          description: "Payload Too Large"
+      deprecated: false
+    get:
+      tags:
+        - Triggers
+      summary: List Triggers
+      operationId: ListTriggers
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: type
+          required: false
+          schema:
+            type: string
+            enum:
+              - mqtt
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Triggers'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+      deprecated: false
+  /spaces/{space}/triggers/{trigger_id}:
+    get:
+      tags:
+        - Triggers
+      summary: Get a trigger
+      operationId: GetTrigger
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: trigger not found
+      deprecated: false
+    put:
+      tags:
+        - Triggers
+      summary: Update a trigger
+      operationId: UpdateTrigger
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Body of the updated trigger'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trigger'
+            example:
+              id: '01ESGG55SK6861Y9B6HFVBQK54'
+              description: 'This trigger will subscribe to "https://mqtt-broker.com" broker.'
+              type: mqtt
+              config:
+                host: "mqtt-broker.com"
+                port: 1883
+                topics: "room1/temperature,room2/humidity"
+                username: admin
+                password: secret
+                qos: 1
+              callback_url: https://my-website.com/trigger-callback
+        required: true
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: trigger not found
+      deprecated: false
+    delete:
+      tags:
+        - Triggers
+      summary: Delete a trigger
+      operationId: DeleteTrigger
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: "No Content"
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: trigger not found
+      deprecated: false
+
+#####
+##### !COMPONENTS
+#####
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  #####
+  ##### !SCHEMAS
+  #####
+  schemas:
+    CollectionRequest:
+      properties:
+        name:
+          type: string
+          example: ElectronicBoards
+        description:
+          type: string
+          example: My collection
+
+    CollectionResponse:
+      properties:
+        name:
+          type: string
+          example: ElectronicBoards
+        description:
+          type: string
+          example: My collection
+
+    CollectionListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionResponse'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    CollectionUpdateRequest:
+      properties:
+        title:
+          type: string
+          example: ElectronicBoards
+        description:
+          type: string
+          example: My electronic boards collection
+
+    CollectionUpdateResponse:
+      properties:
+        title:
+          type: string
+          example: ElectronicBoards
+        description:
+          type: string
+          example: My electronic boards collection
+
+    ThingRequest:
+      properties:
+        title:
+          type: string
+          example: SmartWorks Device
+        description:
+          type: string
+          example: My connected SmartWorks device
+        properties:
+          type: object
+          properties:
+            cpu: {$ref: '#/components/schemas/PropertyCPU'}
+            disk: {$ref: '#/components/schemas/PropertyDisk'}
+            memory: {$ref: '#/components/schemas/PropertyMemory'}
+        actions:
+          type: object
+          properties:
+            delay: {$ref: '#/components/schemas/ActionDelay'}
+            reboot: {$ref: '#/components/schemas/ActionReboot'}
+        events:
+          type: object
+          properties:
+            highCPU: {$ref: '#/components/schemas/EventHighCPU'}
+
+    ThingUpdateRequest:
+      properties:
+        title:
+          type: string
+          example: SmartWorks Device updated
+        description:
+          type: string
+          example: My connected SmartWorks device updated
+        properties:
+          type: object
+          properties:
+            cpu: {$ref: '#/components/schemas/PropertyCPU'}
+            disk: {$ref: '#/components/schemas/PropertyDisk'}
+            memory: {$ref: '#/components/schemas/PropertyMemory'}
+        actions:
+          type: object
+          properties:
+            delay: {$ref: '#/components/schemas/ActionDelay'}
+            reboot: {$ref: '#/components/schemas/ActionReboot'}
+        events:
+          type: object
+          properties:
+            highCPU: {$ref: '#/components/schemas/EventHighCPU'}
+
+    ThingCreateResponse:
+      properties:
+        id:
+          type: string
+          example: https://api.dev.altairsc.com/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+        uid:
+          type: string
+          example: 01edb9j75vymj8p7qppm19h8nx
+        title:
+          type: string
+          example: SmartWorks Device
+        description:
+          type: string
+          example: My connected SmartWorks device
+        space:
+          type: string
+          example: altair
+        collection:
+          type: string
+          example: ElectronicBoards
+        model:
+          type: string
+          example: ""
+        version:
+          type: string
+          example: ""
+        credentials:
+          type: object
+          properties:
+            http:
+              type: object
+              properties:
+                client_id:
+                  type: string
+                  example: altair::01edb9j75vymj8p7qppm19h8nx
+                client_secret:
+                  type: string
+                  example: SIZ2.izCuTf_PwbOsbnQekaJNz
+            mqtt:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      example: RxAg@altair
+                    pwd:
+                      type: string
+                      example: B4NQRtm2lvku2sTv
+                thing:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      example: GTdn@altair
+                    pwd:
+                      type: string
+                      example: CwPEX4QRcP7JQTAu
+        properties:
+          type: object
+          properties:
+            cpu: {$ref: '#/components/schemas/PropertyCPUResponse'}
+            disk: {$ref: '#/components/schemas/PropertyDiskResponse'}
+            memory: {$ref: '#/components/schemas/PropertyMemoryResponse'}
+        actions:
+          type: object
+          properties:
+            delay: {$ref: '#/components/schemas/ActionDelayResponse'}
+            reboot: {$ref: '#/components/schemas/ActionRebootResponse'}
+        events:
+          type: object
+          properties:
+            highCPU: {$ref: '#/components/schemas/EventHighCPUResponse'}
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+              rel:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties
+              rel: properties
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions
+              rel: actions
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events
+              rel: events
+        href:
+          type: string
+          example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+
+    ThingResponse:
+      properties:
+        id:
+          type: string
+          example: api.dev.altairsc.com/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+        uid:
+          type: string
+          example: 01edb9j75vymj8p7qppm19h8nx
+        title:
+          type: string
+          example: SmartWorks Device
+        description:
+          type: string
+          example: My connected SmartWorks device
+        space:
+          type: string
+          example: altair
+        collection:
+          type: string
+          example: ElectronicBoards
+        model:
+          type: string
+          example: ""
+        version:
+          type: string
+          example: ""
+        properties:
+          type: object
+          properties:
+            cpu: {$ref: '#/components/schemas/PropertyCPUResponse'}
+            disk: {$ref: '#/components/schemas/PropertyDiskResponse'}
+            memory: {$ref: '#/components/schemas/PropertyMemoryResponse'}
+        actions:
+          type: object
+          properties:
+            delay: {$ref: '#/components/schemas/ActionDelayResponse'}
+            reboot: {$ref: '#/components/schemas/ActionRebootResponse'}
+        events:
+          type: object
+          properties:
+            highCPU: {$ref: '#/components/schemas/EventHighCPUResponse'}
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+              rel:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties
+              rel: properties
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions
+              rel: actions
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events
+              rel: events
+        href:
+          type: string
+          example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+
+    ThingUpdateResponse:
+      properties:
+        id:
+          type: string
+          example: api.dev.altairsc.com/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+        uid:
+          type: string
+          example: 01edb9j75vymj8p7qppm19h8nx
+        title:
+          type: string
+          example: SmartWorks Device updated
+        description:
+          type: string
+          example: My connected SmartWorks device updated
+        space:
+          type: string
+          example: altair
+        collection:
+          type: string
+          example: ElectronicBoards
+        model:
+          type: string
+          example: ""
+        version:
+          type: string
+          example: ""
+        properties:
+          type: object
+          properties:
+            cpu: {$ref: '#/components/schemas/PropertyCPUResponse'}
+            disk: {$ref: '#/components/schemas/PropertyDiskResponse'}
+            memory: {$ref: '#/components/schemas/PropertyMemoryResponse'}
+        actions:
+          type: object
+          properties:
+            delay: {$ref: '#/components/schemas/ActionDelayResponse'}
+            reboot: {$ref: '#/components/schemas/ActionRebootResponse'}
+        events:
+          type: object
+          properties:
+            highCPU: {$ref: '#/components/schemas/EventHighCPUResponse'}
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+              rel:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties
+              rel: properties
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions
+              rel: actions
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events
+              rel: events
+        href:
+          type: string
+          example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+
+    ThingListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThingResponse'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ThingDeleteResponse:
+      title: Response - Delete Cluster
+      properties:
+        error_cluster_backend:
+          type: object
+          properties:
+            http_status_code:
+              type: integer
+              example: 204
+
+    PropertyCPU:
+      properties:
+        title:
+          type: string
+          example: CPU %
+        description:
+          type: string
+          example: Device CPU usage in percent
+        type:
+          type: string
+          example: number
+        unit:
+          type: string
+          example: percent
+        readOnly:
+          type: boolean
+          example: false
+    PropertyCPUResponse:
+      properties:
+        title:
+          type: string
+          example: CPU %
+        description:
+          type: string
+          example: Device CPU usage in percent
+        type:
+          type: string
+          example: number
+        unit:
+          type: string
+          example: percent
+        readOnly:
+          type: boolean
+          example: false
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/cpu
+
+    PropertyDisk:
+      properties:
+        title:
+          type: string
+          example: Disk %
+        description:
+          type: string
+          example: Device Disk usage in percent
+        type:
+          type: string
+          example: number
+        unit:
+          type: string
+          example: percent
+        readOnly:
+          type: boolean
+          example: false
+    PropertyDiskResponse:
+      properties:
+        title:
+          type: string
+          example: Disk %
+        description:
+          type: string
+          example: Device Disk usage in percent
+        type:
+          type: string
+          example: number
+        unit:
+          type: string
+          example: percent
+        readOnly:
+          type: boolean
+          example: false
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/disk
+
+    PropertyMemory:
+      properties:
+        title:
+          type: string
+          example: Memory %
+        description:
+          type: string
+          example: Device Memory usage in percent
+        type:
+          type: string
+          example: number
+        unit:
+          type: string
+          example: percent
+        readOnly:
+          type: boolean
+          example: false
+    PropertyMemoryResponse:
+      properties:
+        title:
+          type: string
+          example: Memory %
+        description:
+          type: string
+          example: Device Memory usage in percent
+        type:
+          type: string
+          example: number
+        unit:
+          type: string
+          example: percent
+        readOnly:
+          type: boolean
+          example: false
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/memory
+
+    ActionDelay:
+      properties:
+        title:
+          type: string
+          example: Delay
+        description:
+          type: string
+          example: Change sending frequency
+        input:
+          type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                input:
+                  type: object
+                  properties:
+                    maximum:
+                      type: number
+                      example: 100
+                    minimum:
+                      type: number
+                      example: 3
+                    type:
+                      type: string
+                      example: number
+
+    ActionDelayResponse:
+      properties:
+        title:
+          type: string
+          example: Delay
+        description:
+          type: string
+          example: Change sending frequency
+        input:
+          type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                input:
+                  type: object
+                  properties:
+                    maximum:
+                      type: number
+                      example: 100
+                    minimum:
+                      type: number
+                      example: 3
+                    type:
+                      type: string
+                      example: number
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay
+
+    ActionReboot:
+      properties:
+        title:
+          type: string
+          example: Reboot
+        description:
+          type: string
+          example: Reboot device
+
+    ActionRebootResponse:
+      properties:
+        title:
+          type: string
+          example: Reboot
+        description:
+          type: string
+          example: Reboot device
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/reboot
+
+    EventHighCPU:
+      properties:
+        title:
+          type: string
+          example: High CPU
+        description:
+          type: string
+          example: The CPU usage is over 50%
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: number
+            unit:
+              type: string
+              example: percent
+
+    EventHighCPUResponse:
+      properties:
+        title:
+          type: string
+          example: High CPU
+        description:
+          type: string
+          example: The CPU usage is over 50%
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: number
+            unit:
+              type: string
+              example: percent
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU
+
+    Secret:
+      title: Secret
+      type: object
+      required:
+        - secret
+      properties:
+        client_secret:
+          type: string
+          example: "nuS7y1iQ2MmXVoBS8ivZIB6IFoNLGtgz"
+      example:
+        client_secret: "nuS7y1iQ2MmXVoBS8ivZIB6IFoNLGtgz"
+
+    Properties:
+      properties:
+        cpu:
+          type: number
+          example: 22
+        disk:
+          type: number
+          example: 18
+        memory:
+          type: number
+          example: 67
+
+    Property:
+      properties:
+        memory:
+          type: number
+          example: 67
+
+    ActionRequest:
+      properties:
+        delay:
+          type: object
+          properties:
+            input:
+              type: object
+              properties:
+                delay:
+                  type: integer
+                  example: 5
+
+    ActionResponseElement1:
+      properties:
+        delay:
+          type: object
+          properties:
+            input:
+              type: object
+              properties:
+                delay:
+                  type: integer
+                  example: 5
+            status:
+              type: string
+              example: pending
+            timeRequested:
+              type: string
+              format: date-time
+              example: "2020-04-02 15:37:46+0000"
+            href:
+              type: string
+              example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCAQE78A7CP6REXV5J8BAKR
+
+    # ActionResponseElement2:
+    #   properties:
+    #     delay:
+    #       type: object
+    #       properties:
+    #         input:
+    #           type: object
+    #           properties:
+    #             delay:
+    #               type: integer
+    #               example: 7
+    #         status:
+    #           type: string
+    #           example: pending
+    #         timeRequested:
+    #           type: string
+    #           format: date-time
+    #           example: "2020-04-02 15:39:54+0000"
+    #         href:
+    #           type: string
+    #           example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCB9FMD0Q3QR0YV4TWY4S3E
+
+    # ActionResponseElement3:
+    #   properties:
+    #     reboot:
+    #       type: object
+    #       properties:
+    #         status:
+    #           type: string
+    #           example: pending
+    #         timeRequested:
+    #           type: string
+    #           format: date-time
+    #           example: "2020-04-02 15:56:12+0000"
+    #         href:
+    #           type: string
+    #           example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCCZYATJW1Z3D4T4BA4S2QH
+
+    ActionDelayListResponse:
+      properties:
+        data:
+          type: array
+          items:
+             $ref: '#/components/schemas/ActionResponseElement1'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ActionListResponse:
+      properties:
+        data:
+          type: array
+          items:
+              $ref: '#/components/schemas/ActionResponseElement1'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ActionUpdateRequest:
+      properties:
+        delay:
+          type: object
+          properties:
+            status:
+              type: string
+              example: completed
+
+    ActionUpdateResponse:
+      properties:
+        delay:
+          type: object
+          properties:
+            input:
+              type: object
+              properties:
+                delay:
+                  type: integer
+                  example: 5
+            status:
+              type: string
+              example: completed
+            timeRequested:
+              type: string
+              format: date-time
+              example: "2020-04-02 15:37:46+0000"
+            timeCompleted:
+              type: string
+              format: date-time
+              example: "2020-04-02 15:39:25+0000"
+            href:
+              type: string
+              example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCAQE78A7CP6REXV5J8BAKR
+
+    ActionDeleteResponse:
+      title: Response - Delete Cluster
+      properties:
+        error_cluster_backend:
+          type: object
+          properties:
+            http_status_code:
+              type: integer
+              example: 204
+
+    EventRequest:
+      properties:
+        highCPU:
+          type: object
+          properties:
+            data:
+              type: number
+              example: 61
+
+    EventResponse:
+      properties:
+        highCPU:
+          type: object
+          properties:
+            data:
+              type: number
+              example: 61
+            href:
+              type: string
+              example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU/01EDCEZDTJX50SQTCJST5EW5NX
+            timestamp:
+              type: string
+              format: date-time
+              example: "2020-04-02 15:22:37+0000"
+
+    # EventResponse2:
+    #   properties:
+    #     highCPU:
+    #       type: object
+    #       properties:
+    #         data:
+    #           type: number
+    #           example: 85
+    #         href:
+    #           type: string
+    #           example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU/01EDCGYKV4YQ1CY3QHHSX8J843
+    #         timestamp:
+    #           type: string
+    #           format: date-time
+    #           example: "2020-04-02 15:26:42+0000"
+
+    EventHighCPUListResponse:
+      properties:
+        data:
+          type: array
+          items:
+              $ref: '#/components/schemas/EventResponse'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ModelRequest:
+      properties:
+        name:
+          type: string
+          example: RaspberryPiModel
+        description:
+          type: string
+          example: My Raspberry Pi model
+
+    ModelResponse:
+      properties:
+        name:
+          type: string
+          example: RaspberryPiModel
+        description:
+          type: string
+          example: My Raspberry Pi model
+
+    ModelListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelResponse'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ModelUpdateRequest:
+      properties:
+        title:
+          type: string
+          example: RaspberryPiModel
+        description:
+          type: string
+          example: My Raspberry Pi 4 model
+
+    ModelUpdateResponse:
+      properties:
+        title:
+          type: string
+          example: RaspberryPiModel
+        description:
+          type: string
+          example: My Raspberry Pi 4 model
+
+    ModelVersionRequest:
+      properties:
+        title:
+          type: string
+          example: SmartWorks Device
+        description:
+          type: string
+          example: My connected SmartWorks device
+        properties:
+          type: object
+          properties:
+            cpu: {$ref: '#/components/schemas/PropertyCPU'}
+            disk: {$ref: '#/components/schemas/PropertyDisk'}
+            memory: {$ref: '#/components/schemas/PropertyMemory'}
+        actions:
+          type: object
+          properties: {}
+        events:
+          type: object
+          properties: {}
+
+    ModelVersionResponse:
+      properties:
+        version:
+          type: number
+          example: 1
+        template: {$ref: '#/components/schemas/ModelVersionRequest'}
+
+    ModelVersionListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelVersionResponse'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ThingStatusResponse:
+      properties:
+        uid:
+          type: string
+          example: 01edb9j75vymj8p7qppm19h8nx
+        title:
+          type: string
+          example: SmartWorks Device
+        space:
+          type: string
+          example: altair
+        collection:
+          type: string
+          example: ElectronicBoards
+        properties: {$ref: '#/components/schemas/Properties'}
+
+    ThingStatusListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThingStatusResponse'
+        paging:
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    FunctionStatusEnum:
+      type: string
+      enum:
+        - Pending
+        - Building
+        - Running
+        - Failed
+      example: Building
+
+    FunctionMetrics:
+      title: FunctionMetrics
+      type: object
+      description: Function metrics. Only present in responses.
+      properties:
+        invocations:
+          type: integer
+          example: 123
+        replicas:
+          type: integer
+          example: 1
+        available_replicas:
+          type: integer
+          example: 3
+        # deployed_at:
+        #  type: string
+        #  example: '2020-11-06T11:05:40'
+        # last_deployment_attempt:
+        #  $ref: '#/components/schemas/DeploymentAttempt'
+      example:
+        invocations: 123
+        replicas: 1
+        available_replicas: 3
+
+    SourceCode:
+      title: SourceCode
+      type: object
+      description: Function source code information.
+      properties:
+        code:
+          type: string
+          description: Function's code encoded in Base64.
+          example: ZGVmIGhhbmRsZShyZXEpOgogICAgcmV0dXJuIHsKICAgICAgICAic3RhdHVzQ29kZSI6IDIwMSwKICAgICAgICAiYm9keSI6IHJlcS5ib2R5LmRlY29kZSgidXRmLTgiKQogICAgfQo=
+
+    FunctionOptions:
+      title: FunctionOptions
+      type: object
+      properties:
+        topics:
+          type: string
+          description: Comma-separated list of topics (see Triggers).
+          example: 'living-room/motion,floor1/bathroom/light'
+        schedule:
+          type: string
+          description: Cron format string to schedule function invocations (see cron trigger).
+          example: "*/5 * * * *"
+      example:
+        topics: 'living-room/motion,floor1/bathroom/light'
+        schedule: "*/5 * * * *"
+
+    Function:
+      title: Function
+      type: object
+      properties:
+        id:
+          type: string
+          example: 01E95N08FCES3HASVT4KC3WZ21
+        space:
+          type: string
+          example: myspace
+        name:
+          type: string
+          description: Function name. Must be unique and can only contain lowercase letters, numbers and hyphens.
+          example: motion-detected
+        description:
+          type: string
+          example: This function will be invoked when motion is detected.
+        template:
+          type: string
+          example: python3-http
+#        dependencies:
+#          type: array
+#          items:
+#            type: string
+#          example:
+#            - 'pandas'
+#            - 'paho-mqtt'
+        env:
+          type: object
+          description: Environment variables used by the function. All values must be strings.
+          example:
+            MIN_DETECTION_EVENTS: "2"
+            RESET_AFTER_SECONDS: "15"
+        options:
+          $ref: '#/components/schemas/FunctionOptions'
+        source:
+          $ref: '#/components/schemas/SourceCode'
+        status:
+          $ref: '#/components/schemas/FunctionStatusEnum'
+        metrics:
+          $ref: '#/components/schemas/FunctionMetrics'
+        created_at:
+          type: string
+          example: '2020-08-11T15:29:51'
+        updated_at:
+          type: string
+          example: '2020-08-11T15:29:51'
+      example:
+        id: 01EPEF6NB562TTT0C3XQ8VTXVG
+        space: myspace
+        name: motion-detected
+        description: This function will be invoked when motion is detected.
+        template: python3-http
+#        dependencies:
+#          - 'pandas'
+#          - 'paho-mqtt'
+        env:
+          MIN_DETECTION_EVENTS: "2"
+          RESET_AFTER_SECONDS: "15"
+        options:
+          topics: 'living-room/motion,floor1/bathroom/light'
+          schedule: "*/5 * * * *"
+        status: Running
+        metrics:
+          invocations: 123
+          replicas: 1
+          available_replicas: 3
+        created_at: '2020-11-06T11:04:51'
+        updated_at: '2020-11-06T11:04:51'
+
+    Functions:
+      title: Functions
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Function'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+            previous_cursor:
+              type: string
+      example:
+        data:
+          - id: 01EPEF6NB562TTT0C3XQ8VTXVG
+            space: myspace
+            name: motion-detected
+            description: This function will be invoked when motion is detected.
+            template: python3-http
+            env:
+              MIN_DETECTION_EVENTS: "2"
+              RESET_AFTER_SECONDS: "15"
+            options:
+              topics: 'living-room/motion,floor1/bathroom/light'
+              schedule: "*/5 * * * *"
+            status: Running
+            metrics:
+              invocations: 123
+              replicas: 1
+              available_replicas: 3
+            created_at: '2020-11-06T11:04:51'
+            updated_at: '2020-11-06T11:04:51'
+          - id: 01E95N08FCES3HASVT4KC3WZ31
+            space: myspace
+            name: alarm-armed
+            description: This function will be invoked when the alarm is armed.
+            template: go
+            env:
+              MQTT_BROKER: 'broker.hivemq.com'
+              MQTT_USER: 'my_user'
+              MQTT_PASSWORD: 'my_password'
+            status: Running
+            metrics:
+              invocations: 123
+              replicas: 1
+              available_replicas: 3
+            created_at: '2020-11-06T08:04:51'
+            updated_at: '2020-11-06T10:18:37'
+        paging:
+          next_cursor: ''
+          previous_cursor: ''
+
+    LogEntry:
+      type: object
+      properties:
+        name:
+          type: string
+          description: the function name
+        instance:
+          type: string
+          description: the name/id of the specific function instance
+        timestamp:
+          type: string
+          description: the timestamp of when the log message was recorded
+          format: date-time
+        text:
+          type: string
+          description: raw log message content
+
+    LogEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogEntry'
+      example:
+        - name: my-function
+          instance: 'my-function-685d8b8d68-qd94p'
+          timestamp: '2020-11-10T08:41:41.899987829Z'
+          text: Hello World!
+        - name: my-function
+          instance: 'my-function-685d8b8d68-qd94p'
+          timestamp: '2020-11-10T08:41:57.345145845Z'
+          text: Hello again!
+
+    TriggerStatusEnum:
+      type: string
+      enum:
+        - Pending
+        - Running
+        - Failed
+      example: Running
+
+    TriggerTypeEnum:
+      type: string
+      enum:
+        - cron
+        - mqtt
+        - rabbitmq
+      example: mqtt
+
+    TriggerMqttConfig:
+      title: TriggerMqttConfig
+      type: object
+      properties:
+        host:
+          type: string
+          description: Host of the MQTT broker. Do not set any scheme.
+          example: "mqtt-broker.com:1883"
+        port:
+          type: integer
+          description: Port of the MQTT broker. If not set, defaults to 1883.
+          example: 1883
+        topics:
+          type: string
+          example: "room1/temperature,room2/humidity"
+        username:
+          type: string
+          description: MQTT broker username.
+          example: admin
+        password:
+          type: string
+          description: MQTT broker password.
+          example: secret
+        qos:
+          type: integer
+          example: 1
+      example:
+        host: "mqtt-broker.com"
+        port: 1883
+        topics: "room1/temperature,room2/humidity"
+        username: admin
+        password: secret
+        qos: 1
+
+    TriggerRabbitMQConfig:
+      title: TriggerRabbitMQConfig
+      type: object
+      properties:
+        host:
+          type: string
+          example: "https://rabbitmq-broker.com"
+        port:
+          type: integer
+          example: 5672
+        username:
+          type: string
+          description: RabbitMQ username.
+          example: guest
+        password:
+          type: string
+          description: RabbitMQ password.
+          example: guest
+        exchange:
+          type: string
+          example: my-exchange
+        queue:
+          type: string
+          example: my-queue
+        topics:
+          type: string
+          description: Comma-separated routing keys of the messages this trigger will listen to.
+          example: "room1.temperature,room2.humidity"
+      example:
+        host: "https://rabbitmq-broker.com"
+        port: 5672
+        username: guest
+        password: guest
+        exchange: my-exchange
+        queue: my-queue
+        topics: "room1.temperature,room2.humidity"
+
+    Trigger:
+      title: Trigger
+      type: object
+      properties:
+        id:
+          type: string
+          example: '01ESGG55SK6861Y9B6HFVBQK54'
+        description:
+          type: string
+          example: 'This trigger will subscribe to "https://mqtt-broker.com" broker.'
+        type:
+          $ref: '#/components/schemas/TriggerTypeEnum'
+        config:
+          oneOf:
+            - $ref: '#/components/schemas/TriggerMqttConfig'
+            - $ref: '#/components/schemas/TriggerRabbitMQConfig'
+        status:
+          $ref: '#/components/schemas/TriggerStatusEnum'
+        error_message:
+          type: string
+          description: If the Trigger failed (status = `Failed`), this attribute will contain the error message.
+          example: 'Not Authorized'
+        callback_url:
+          type: string
+          description: Optional callback URL to send the function response to.
+          example: secret
+      example:
+        id: '01ESGG55SK6861Y9B6HFVBQK54'
+        description: 'This trigger will subscribe to "https://mqtt-broker.com" broker.'
+        type: mqtt
+        config:
+          host: "mqtt-broker.com"
+          port: 1883
+          topics: "room1/temperature,room2/humidity"
+          username: admin
+          password: secret
+          qos: 1
+        status: Pending
+        callback_url: https://my-website.com/trigger-callback
+
+    Triggers:
+      title: Triggers
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+            previous_cursor:
+              type: string
+      example:
+        data:
+          - id: '01ESGG55SK6861Y9B6HFVBQK54'
+            description: 'This trigger will subscribe to "https://mqtt-broker.com" MQTT broker.'
+            type: mqtt
+            config:
+              host: "mqtt-broker.com"
+              port: 1883
+              topics: "room1/temperature,room2/humidity"
+              username: admin
+              password: secret
+              qos: 1
+            status: Pending
+            callback_url: https://my-website.com/trigger-callback
+          - id: '01ESJRYAH2XZ9SHZS0H5ZJX1DM'
+            description: 'This trigger will consume messages from "https://rabbitmq-broker.com".'
+            type: rabbitmq
+            config:
+              host: "https://rabbitmq-broker.com"
+              port: 5672
+              username: guest
+              password: guest
+              exchange: my-exchange
+              queue: my-queue
+              topics: "room1.temperature,room2.humidity"
+            status: Failed
+            error_message: Not Authorized
+          - id: '01ESJSCJMW01FJ4DC90Q9Y058Z'
+            description: 'This trigger will invoke functions based in its cron schedule.'
+            type: cron
+            status: Running
+        paging:
+          next_cursor: ''
+          previous_cursor: ''
+
+    InfoResponse:
+      title: InfoResponse
+      type: object
+      properties:
+        details:
+          type: string
+          example: function not ready
+      example:
+        details: function not ready
+
+    ErrorResponse:
+      title: Error Response
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              format: int64
+              example: 400
+            message:
+              type: string
+              example: invalid id
+            details:
+              type: object
+              description: Additional details about the error.

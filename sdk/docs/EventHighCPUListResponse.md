@@ -1,4 +1,4 @@
-# DigitalModelApiWip.EventHighCPUListResponse
+# SmartWorksSdk.EventHighCPUListResponse
 
 ## Properties
 

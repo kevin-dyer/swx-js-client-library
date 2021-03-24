@@ -1,6 +1,6 @@
-# DigitalModelApiWip.ActionsApi
+# SmartWorksSdk.ActionsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.swx.altairsc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -24,18 +24,18 @@ Request action and add it to the action queue from a thing
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ActionsApi();
+let apiInstance = new SmartWorksSdk.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let action = delay; // String | 
-let actionRequest = new DigitalModelApiWip.ActionRequest(); // ActionRequest | Create a new action
+let actionRequest = new SmartWorksSdk.ActionRequest(); // ActionRequest | Create a new action
 apiInstance.addAction(space, collectionName, thingId, action, actionRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -80,13 +80,13 @@ Deletes an existing action by Id
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ActionsApi();
+let apiInstance = new SmartWorksSdk.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
@@ -136,13 +136,13 @@ Lists all the queues for the different actions within a thing.
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ActionsApi();
+let apiInstance = new SmartWorksSdk.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 56; // Number | 
@@ -188,13 +188,13 @@ Lists the current queue of a specific action from a Thing
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ActionsApi();
+let apiInstance = new SmartWorksSdk.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
@@ -242,13 +242,13 @@ Shows a requested action from the action queues of a thing.
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ActionsApi();
+let apiInstance = new SmartWorksSdk.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
@@ -298,19 +298,19 @@ Update the status of an existing action by Id inside of the action queue from a 
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ActionsApi();
+let apiInstance = new SmartWorksSdk.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let action = delay; // String | 
 let actionId = 01EDCAQE78A7CP6REXV5J8BAKR; // String | 
-let actionUpdateRequest = new DigitalModelApiWip.ActionUpdateRequest(); // ActionUpdateRequest | Update an existent thing by Id
+let actionUpdateRequest = new SmartWorksSdk.ActionUpdateRequest(); // ActionUpdateRequest | Update an existent thing by Id
 apiInstance.updateAction(space, collectionName, thingId, action, actionId, actionUpdateRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {

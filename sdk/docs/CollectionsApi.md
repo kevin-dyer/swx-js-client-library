@@ -1,6 +1,6 @@
-# DigitalModelApiWip.CollectionsApi
+# SmartWorksSdk.CollectionsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.swx.altairsc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,15 +21,15 @@ Create collection
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.CollectionsApi();
+let apiInstance = new SmartWorksSdk.CollectionsApi();
 let space = altair; // String | 
-let collectionRequest = new DigitalModelApiWip.CollectionRequest(); // CollectionRequest | Create a new collection in the platform
+let collectionRequest = new SmartWorksSdk.CollectionRequest(); // CollectionRequest | Create a new collection in the platform
 apiInstance.addCollection(space, collectionRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -69,13 +69,13 @@ Delete collection
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.CollectionsApi();
+let apiInstance = new SmartWorksSdk.CollectionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 apiInstance.deleteCollection(space, collectionName).then(() => {
@@ -117,13 +117,13 @@ List collections
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.CollectionsApi();
+let apiInstance = new SmartWorksSdk.CollectionsApi();
 let space = altair; // String | 
 apiInstance.listCollections(space).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -163,13 +163,13 @@ Show collection
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.CollectionsApi();
+let apiInstance = new SmartWorksSdk.CollectionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 apiInstance.showCollection(space, collectionName).then((data) => {
@@ -211,16 +211,16 @@ Update collection
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.CollectionsApi();
+let apiInstance = new SmartWorksSdk.CollectionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let collectionUpdateRequest = new DigitalModelApiWip.CollectionUpdateRequest(); // CollectionUpdateRequest | Update an existent collection by name
+let collectionUpdateRequest = new SmartWorksSdk.CollectionUpdateRequest(); // CollectionUpdateRequest | Update an existent collection by name
 apiInstance.updateCollection(space, collectionName, collectionUpdateRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {

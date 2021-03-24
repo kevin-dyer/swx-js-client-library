@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingCreateResponseLinks
+# SmartWorksSdk.ThingCreateResponseLinks
 
 ## Properties
 

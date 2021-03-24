@@ -1,4 +1,4 @@
-# DigitalModelApiWip.Secret
+# SmartWorksSdk.Secret
 
 ## Properties
 

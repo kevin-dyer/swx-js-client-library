@@ -1,4 +1,4 @@
-# DigitalModelApiWip.PropertyMemory
+# SmartWorksSdk.PropertyMemory
 
 ## Properties
 

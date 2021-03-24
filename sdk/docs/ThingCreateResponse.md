@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingCreateResponse
+# SmartWorksSdk.ThingCreateResponse
 
 ## Properties
 

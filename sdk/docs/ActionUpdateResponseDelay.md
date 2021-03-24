@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ActionUpdateResponseDelay
+# SmartWorksSdk.ActionUpdateResponseDelay
 
 ## Properties
 

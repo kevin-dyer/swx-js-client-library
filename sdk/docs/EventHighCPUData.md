@@ -1,4 +1,4 @@
-# DigitalModelApiWip.EventHighCPUData
+# SmartWorksSdk.EventHighCPUData
 
 ## Properties
 

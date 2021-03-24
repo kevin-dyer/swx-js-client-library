@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ActionDelayInputPropertiesInput
+# SmartWorksSdk.ActionDelayInputPropertiesInput
 
 ## Properties
 

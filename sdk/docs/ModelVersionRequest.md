@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ModelVersionRequest
+# SmartWorksSdk.ModelVersionRequest
 
 ## Properties
 

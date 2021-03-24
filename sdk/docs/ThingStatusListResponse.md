@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingStatusListResponse
+# SmartWorksSdk.ThingStatusListResponse
 
 ## Properties
 

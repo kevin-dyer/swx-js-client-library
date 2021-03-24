@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingRequestEvents
+# SmartWorksSdk.ThingRequestEvents
 
 ## Properties
 

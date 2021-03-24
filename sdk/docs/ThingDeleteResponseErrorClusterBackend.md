@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingDeleteResponseErrorClusterBackend
+# SmartWorksSdk.ThingDeleteResponseErrorClusterBackend
 
 ## Properties
 

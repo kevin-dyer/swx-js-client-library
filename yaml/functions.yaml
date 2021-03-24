@@ -1,0 +1,1342 @@
+# 564d16d2-106b-4f00-a412-54e1e0383599
+openapi: 3.0.3
+info:
+  title: Function Service component External API
+  version: '1.0.0'
+servers:
+  - url: https://api.dev.altairsc.com
+    description: Development Server
+security:
+  - OAuth2Security:
+      - openid
+      - offline
+tags:
+  - name: Functions
+    description: Operations about functions
+paths:
+  /spaces/{space}/functions:
+    post:
+      tags:
+        - Functions
+      summary: Create and deploy a function
+      operationId: CreateFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Body of a new function'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Function'
+            example:
+              name: motion-detected
+              description: This function will be invoked when motion is detected.
+              template: python3-http
+              env:
+                MIN_DETECTION_EVENTS: "2"
+                RESET_AFTER_SECONDS: "15"
+              options:
+                topics: 'living-room/motion,floor1/bathroom/light'
+                schedule: "*/5 * * * *"
+              source:
+                code: ZGVmIGhhbmRsZShyZXEpOgogICAgcmV0dXJuIHsKICAgICAgICAic3RhdHVzQ29kZSI6IDIwMSwKICAgICAgICAiYm9keSI6IHJlcS5ib2R5LmRlY29kZSgidXRmLTgiKQogICAgfQo=
+        required: true
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        409:
+          description: "Conflict"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 409
+                  message: This function already exists
+        413:
+          description: "Payload Too Large"
+      deprecated: false
+    get:
+      tags:
+        - Functions
+      summary: List Functions
+      operationId: ListFunctions
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Functions'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+      deprecated: false
+  /spaces/{space}/functions/{function_name}:
+    get:
+      tags:
+        - Functions
+      summary: Get a function
+      operationId: GetFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+      deprecated: false
+    put:
+      tags:
+        - Functions
+      summary: Update a function
+      operationId: UpdateFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Body of the updated function'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Function'
+            example:
+              id: 01EPEF6NB562TTT0C3XQ8VTXVG
+              name: motion-detected
+              description: This function will be invoked when motion is detected.
+              template: python3-http
+              env:
+                MIN_DETECTION_EVENTS: "2"
+                RESET_AFTER_SECONDS: "15"
+              options:
+                topics: 'living-room/motion,floor1/bathroom/light'
+                schedule: "*/5 * * * *"
+              source:
+                code: ZGVmIGhhbmRsZShyZXEpOgogICAgcmV0dXJuIHsKICAgICAgICAic3RhdHVzQ29kZSI6IDIwMSwKICAgICAgICAiYm9keSI6IHJlcS5ib2R5LmRlY29kZSgidXRmLTgiKQogICAgfQo=
+        required: true
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+      deprecated: false
+    delete:
+      tags:
+        - Functions
+      summary: Delete a function
+      operationId: DeleteFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: "No Content"
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+      deprecated: false
+
+  /spaces/{space}/functions/{function_name}/invoke:
+    post:
+      tags:
+        - Functions
+      summary: Invoke a function
+      operationId: InvokeFunction
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Optional data to pass to the function
+        content:
+          '*/*':
+            schema:
+              type: string
+              format: binary
+              example: '{"hello": "world"}'
+        required: false
+      responses:
+        200:
+          description: Value returned from the function
+          content:
+            application/json:
+              example:
+                info: "My function worked!"
+        202:
+          description: The function is not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+        413:
+          description: "Payload Too Large"
+        500:
+          description: "Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 500
+                  message: "ZeroDivisionError at line 9: division by zero"
+                  details:
+                    exception_info: "division by zero"
+                    exception_line_code: "value = 100 / 0"
+                    exception_line_number: 9
+                    exception_type: "ZeroDivisionError"
+      deprecated: false
+  /spaces/{space}/functions/{function_name}/async-invoke:
+    post:
+      tags:
+        - Functions
+      summary: Invoke a function asynchronously
+      operationId: InvokeFunctionAsync
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: X-Callback-Url
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Optional data to pass to the function
+        content:
+          '*/*':
+            schema:
+              type: string
+              format: binary
+              example: '{"hello": "world"}'
+        required: false
+      responses:
+        202:
+          description: Request accepted and queued or function not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+              examples:
+                invoked:
+                  summary: Function invoked successfully (success)
+                  value:
+                not_ready:
+                  summary: The function is not ready
+                  value:
+                    details: function not ready
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+        413:
+          description: "Payload Too Large"
+      deprecated: false
+  /spaces/{space}/functions/{function_name}/logs:
+    get:
+      tags:
+        - Functions
+      summary: Get a list of the logs for a specific function
+      operationId: GetFunctionLogs
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+        - name: since
+          in: query
+          description: Only return logs after a specific date (RFC3339)
+          schema:
+            type: string
+        - name: tail
+          in: query
+          description: Sets the maximum number of log messages to return, <=0 means
+            unlimited
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Newline delimited stream of log messages
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/LogEntryList'
+        202:
+          description: The function is not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+        500:
+          description: Internal Server Error
+          content: {}
+
+  /spaces/{space}/functions/{function_name}/code:
+    get:
+      tags:
+        - Functions
+      summary: Get the last version of the function code
+      operationId: GetFunctionCode
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: function_name
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Function code encoded in Base64.
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/SourceCode'
+        202:
+          description: The function is not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: function not found
+
+  /spaces/{space}/triggers:
+    post:
+      tags:
+        - Triggers
+      summary: Create and deploy a trigger
+      operationId: CreateTrigger
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Body of a new trigger'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trigger'
+            example:
+              description: 'This trigger will subscribe to "https://mqtt-broker.com" broker.'
+              type: mqtt
+              config:
+                host: "mqtt-broker.com"
+                port: 1883
+                topics: "room1/temperature,room2/humidity"
+                username: admin
+                password: secret
+                qos: 1
+              callback_url: https://my-website.com/trigger-callback
+        required: true
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        409:
+          description: "Conflict"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 409
+                  message: This trigger already exists (REVIEW!!!)
+        413:
+          description: "Payload Too Large"
+      deprecated: false
+    get:
+      tags:
+        - Triggers
+      summary: List Triggers
+      operationId: ListTriggers
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: type
+          required: false
+          schema:
+            type: string
+            enum:
+              - mqtt
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Triggers'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+      deprecated: false
+  /spaces/{space}/triggers/{trigger_id}:
+    get:
+      tags:
+        - Triggers
+      summary: Get a trigger
+      operationId: GetTrigger
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: trigger not found
+      deprecated: false
+    put:
+      tags:
+        - Triggers
+      summary: Update a trigger
+      operationId: UpdateTrigger
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Body of the updated trigger'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trigger'
+            example:
+              id: '01ESGG55SK6861Y9B6HFVBQK54'
+              description: 'This trigger will subscribe to "https://mqtt-broker.com" broker.'
+              type: mqtt
+              config:
+                host: "mqtt-broker.com"
+                port: 1883
+                topics: "room1/temperature,room2/humidity"
+                username: admin
+                password: secret
+                qos: 1
+              callback_url: https://my-website.com/trigger-callback
+        required: true
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: trigger not found
+      deprecated: false
+    delete:
+      tags:
+        - Triggers
+      summary: Delete a trigger
+      operationId: DeleteTrigger
+      parameters:
+        - in: path
+          name: space
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: "No Content"
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 401
+                  message: Unauthenticated
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 403
+                  message: Unauthorized
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  status: 404
+                  message: trigger not found
+      deprecated: false
+
+components:
+  securitySchemes:
+    OAuth2Security:
+      type: oauth2
+      description: "OAuth2 Flows Setup"
+      flows:
+        authorizationCode:
+          authorizationUrl: http://127.0.0.1:4444/oauth2/auth
+          tokenUrl: http://127.0.0.1:4444/oauth2/token
+          refreshUrl: http://127.0.0.1:4444/oauth2/token
+          scopes:
+            openid: OpenID Connect scope
+            offline: Offline scope
+        clientCredentials:
+          tokenUrl: http://127.0.0.1:4444/oauth2/token
+          refreshUrl: http://127.0.0.1:4444/oauth2/token
+          scopes:
+            openid: OpenID Connect scope
+            offline: Offline scope
+  schemas:
+    FunctionStatusEnum:
+      type: string
+      enum:
+        - Pending
+        - Building
+        - Running
+        - Failed
+      example: Building
+
+    FunctionMetrics:
+      title: FunctionMetrics
+      type: object
+      description: Function metrics. Only present in responses.
+      properties:
+        invocations:
+          type: integer
+          example: 123
+        replicas:
+          type: integer
+          example: 1
+        available_replicas:
+          type: integer
+          example: 3
+        # deployed_at:
+        #  type: string
+        #  example: '2020-11-06T11:05:40'
+        # last_deployment_attempt:
+        #  $ref: '#/components/schemas/DeploymentAttempt'
+      example:
+        invocations: 123
+        replicas: 1
+        available_replicas: 3
+
+    SourceCode:
+      title: SourceCode
+      type: object
+      description: Function source code information.
+      properties:
+        code:
+          type: string
+          description: Function's code encoded in Base64.
+          example: ZGVmIGhhbmRsZShyZXEpOgogICAgcmV0dXJuIHsKICAgICAgICAic3RhdHVzQ29kZSI6IDIwMSwKICAgICAgICAiYm9keSI6IHJlcS5ib2R5LmRlY29kZSgidXRmLTgiKQogICAgfQo=
+
+    FunctionOptions:
+      title: FunctionOptions
+      type: object
+      properties:
+        topics:
+          type: string
+          description: Comma-separated list of topics (see Triggers).
+          example: 'living-room/motion,floor1/bathroom/light'
+        schedule:
+          type: string
+          description: Cron format string to schedule function invocations (see cron trigger).
+          example: "*/5 * * * *"
+      example:
+        topics: 'living-room/motion,floor1/bathroom/light'
+        schedule: "*/5 * * * *"
+
+    Function:
+      title: Function
+      type: object
+      properties:
+        id:
+          type: string
+          example: 01E95N08FCES3HASVT4KC3WZ21
+        space:
+          type: string
+          example: myspace
+        name:
+          type: string
+          description: Function name. Must be unique and can only contain lowercase letters, numbers and hyphens.
+          example: motion-detected
+        description:
+          type: string
+          example: This function will be invoked when motion is detected.
+        template:
+          type: string
+          example: python3-http
+#        dependencies:
+#          type: array
+#          items:
+#            type: string
+#          example:
+#            - 'pandas'
+#            - 'paho-mqtt'
+        env:
+          type: object
+          description: Environment variables used by the function. All values must be strings.
+          example:
+            MIN_DETECTION_EVENTS: "2"
+            RESET_AFTER_SECONDS: "15"
+        options:
+          $ref: '#/components/schemas/FunctionOptions'
+        source:
+          $ref: '#/components/schemas/SourceCode'
+        status:
+          $ref: '#/components/schemas/FunctionStatusEnum'
+        metrics:
+          $ref: '#/components/schemas/FunctionMetrics'
+        created_at:
+          type: string
+          example: '2020-08-11T15:29:51'
+        updated_at:
+          type: string
+          example: '2020-08-11T15:29:51'
+      example:
+        id: 01EPEF6NB562TTT0C3XQ8VTXVG
+        space: myspace
+        name: motion-detected
+        description: This function will be invoked when motion is detected.
+        template: python3-http
+#        dependencies:
+#          - 'pandas'
+#          - 'paho-mqtt'
+        env:
+          MIN_DETECTION_EVENTS: "2"
+          RESET_AFTER_SECONDS: "15"
+        options:
+          topics: 'living-room/motion,floor1/bathroom/light'
+          schedule: "*/5 * * * *"
+        status: Running
+        metrics:
+          invocations: 123
+          replicas: 1
+          available_replicas: 3
+        created_at: '2020-11-06T11:04:51'
+        updated_at: '2020-11-06T11:04:51'
+
+    Functions:
+      title: Functions
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Function'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+            previous_cursor:
+              type: string
+      example:
+        data:
+          - id: 01EPEF6NB562TTT0C3XQ8VTXVG
+            space: myspace
+            name: motion-detected
+            description: This function will be invoked when motion is detected.
+            template: python3-http
+            env:
+              MIN_DETECTION_EVENTS: "2"
+              RESET_AFTER_SECONDS: "15"
+            options:
+              topics: 'living-room/motion,floor1/bathroom/light'
+              schedule: "*/5 * * * *"
+            status: Running
+            metrics:
+              invocations: 123
+              replicas: 1
+              available_replicas: 3
+            created_at: '2020-11-06T11:04:51'
+            updated_at: '2020-11-06T11:04:51'
+          - id: 01E95N08FCES3HASVT4KC3WZ31
+            space: myspace
+            name: alarm-armed
+            description: This function will be invoked when the alarm is armed.
+            template: go
+            env:
+              MQTT_BROKER: 'broker.hivemq.com'
+              MQTT_USER: 'my_user'
+              MQTT_PASSWORD: 'my_password'
+            status: Running
+            metrics:
+              invocations: 123
+              replicas: 1
+              available_replicas: 3
+            created_at: '2020-11-06T08:04:51'
+            updated_at: '2020-11-06T10:18:37'
+        paging:
+          next_cursor: ''
+          previous_cursor: ''
+
+    LogEntry:
+      type: object
+      properties:
+        name:
+          type: string
+          description: the function name
+        instance:
+          type: string
+          description: the name/id of the specific function instance
+        timestamp:
+          type: string
+          description: the timestamp of when the log message was recorded
+          format: date-time
+        text:
+          type: string
+          description: raw log message content
+
+    LogEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogEntry'
+      example:
+        - name: my-function
+          instance: 'my-function-685d8b8d68-qd94p'
+          timestamp: '2020-11-10T08:41:41.899987829Z'
+          text: Hello World!
+        - name: my-function
+          instance: 'my-function-685d8b8d68-qd94p'
+          timestamp: '2020-11-10T08:41:57.345145845Z'
+          text: Hello again!
+
+    TriggerStatusEnum:
+      type: string
+      enum:
+        - Pending
+        - Running
+        - Failed
+      example: Running
+
+    TriggerTypeEnum:
+      type: string
+      enum:
+        - cron
+        - mqtt
+        - rabbitmq
+      example: mqtt
+
+    TriggerMqttConfig:
+      title: TriggerMqttConfig
+      type: object
+      properties:
+        host:
+          type: string
+          description: Host of the MQTT broker. Do not set any scheme.
+          example: "mqtt-broker.com:1883"
+        port:
+          type: integer
+          description: Port of the MQTT broker. If not set, defaults to 1883.
+          example: 1883
+        topics:
+          type: string
+          example: "room1/temperature,room2/humidity"
+        username:
+          type: string
+          description: MQTT broker username.
+          example: admin
+        password:
+          type: string
+          description: MQTT broker password.
+          example: secret
+        qos:
+          type: integer
+          example: 1
+      example:
+        host: "mqtt-broker.com"
+        port: 1883
+        topics: "room1/temperature,room2/humidity"
+        username: admin
+        password: secret
+        qos: 1
+
+    TriggerRabbitMQConfig:
+      title: TriggerRabbitMQConfig
+      type: object
+      properties:
+        host:
+          type: string
+          example: "https://rabbitmq-broker.com"
+        port:
+          type: integer
+          example: 5672
+        username:
+          type: string
+          description: RabbitMQ username.
+          example: guest
+        password:
+          type: string
+          description: RabbitMQ password.
+          example: guest
+        exchange:
+          type: string
+          example: my-exchange
+        queue:
+          type: string
+          example: my-queue
+        topics:
+          type: string
+          description: Comma-separated routing keys of the messages this trigger will listen to.
+          example: "room1.temperature,room2.humidity"
+      example:
+        host: "https://rabbitmq-broker.com"
+        port: 5672
+        username: guest
+        password: guest
+        exchange: my-exchange
+        queue: my-queue
+        topics: "room1.temperature,room2.humidity"
+
+    Trigger:
+      title: Trigger
+      type: object
+      properties:
+        id:
+          type: string
+          example: '01ESGG55SK6861Y9B6HFVBQK54'
+        description:
+          type: string
+          example: 'This trigger will subscribe to "https://mqtt-broker.com" broker.'
+        type:
+          $ref: '#/components/schemas/TriggerTypeEnum'
+        config:
+          oneOf:
+            - $ref: '#/components/schemas/TriggerMqttConfig'
+            - $ref: '#/components/schemas/TriggerRabbitMQConfig'
+        status:
+          $ref: '#/components/schemas/TriggerStatusEnum'
+        error_message:
+          type: string
+          description: If the Trigger failed (status = `Failed`), this attribute will contain the error message.
+          example: 'Not Authorized'
+        callback_url:
+          type: string
+          description: Optional callback URL to send the function response to.
+          example: secret
+      example:
+        id: '01ESGG55SK6861Y9B6HFVBQK54'
+        description: 'This trigger will subscribe to "https://mqtt-broker.com" broker.'
+        type: mqtt
+        config:
+          host: "mqtt-broker.com"
+          port: 1883
+          topics: "room1/temperature,room2/humidity"
+          username: admin
+          password: secret
+          qos: 1
+        status: Pending
+        callback_url: https://my-website.com/trigger-callback
+
+    Triggers:
+      title: Triggers
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+            previous_cursor:
+              type: string
+      example:
+        data:
+          - id: '01ESGG55SK6861Y9B6HFVBQK54'
+            description: 'This trigger will subscribe to "https://mqtt-broker.com" MQTT broker.'
+            type: mqtt
+            config:
+              host: "mqtt-broker.com"
+              port: 1883
+              topics: "room1/temperature,room2/humidity"
+              username: admin
+              password: secret
+              qos: 1
+            status: Pending
+            callback_url: https://my-website.com/trigger-callback
+          - id: '01ESJRYAH2XZ9SHZS0H5ZJX1DM'
+            description: 'This trigger will consume messages from "https://rabbitmq-broker.com".'
+            type: rabbitmq
+            config:
+              host: "https://rabbitmq-broker.com"
+              port: 5672
+              username: guest
+              password: guest
+              exchange: my-exchange
+              queue: my-queue
+              topics: "room1.temperature,room2.humidity"
+            status: Failed
+            error_message: Not Authorized
+          - id: '01ESJSCJMW01FJ4DC90Q9Y058Z'
+            description: 'This trigger will invoke functions based in its cron schedule.'
+            type: cron
+            status: Running
+        paging:
+          next_cursor: ''
+          previous_cursor: ''
+
+    InfoResponse:
+      title: InfoResponse
+      type: object
+      properties:
+        details:
+          type: string
+          example: function not ready
+      example:
+        details: function not ready
+
+    ErrorResponse:
+      title: Error Response
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              format: int64
+              example: 400
+            message:
+              type: string
+              example: invalid id
+            details:
+              type: object
+              description: Additional details about the error.

@@ -1,6 +1,6 @@
-# DigitalModelApiWip.ThingsApi
+# SmartWorksSdk.ThingsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.swx.altairsc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -24,16 +24,16 @@ Add a new thing description to the platform according to WoT specification
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ThingsApi();
+let apiInstance = new SmartWorksSdk.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingRequest = new DigitalModelApiWip.ThingRequest(); // ThingRequest | Create a new thing description in the platform
+let thingRequest = new SmartWorksSdk.ThingRequest(); // ThingRequest | Create a new thing description in the platform
 apiInstance.addThing(space, collectionName, thingRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -76,13 +76,13 @@ Deletes all the existing information from a thing by Id. It deletes the thing de
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ThingsApi();
+let apiInstance = new SmartWorksSdk.ThingsApi();
 let space = altair; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let collectionName = ElectronicBoards; // String | 
@@ -128,13 +128,13 @@ List all thing descriptions in an array
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ThingsApi();
+let apiInstance = new SmartWorksSdk.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 apiInstance.listThings(space, collectionName).then((data) => {
@@ -178,13 +178,13 @@ Reset the Client Secret for a specific thing
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ThingsApi();
+let apiInstance = new SmartWorksSdk.ThingsApi();
 let space = altair; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let collectionName = ElectronicBoards; // String | 
@@ -230,13 +230,13 @@ Show the thing description from a thing
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ThingsApi();
+let apiInstance = new SmartWorksSdk.ThingsApi();
 let space = altair; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let collectionName = ElectronicBoards; // String | 
@@ -282,17 +282,17 @@ Update the thing description from a thing by Id. You need to include the whole t
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ThingsApi();
+let apiInstance = new SmartWorksSdk.ThingsApi();
 let space = altair; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingUpdateRequest = new DigitalModelApiWip.ThingUpdateRequest(); // ThingUpdateRequest | Update an existent thing description by Id
+let thingUpdateRequest = new SmartWorksSdk.ThingUpdateRequest(); // ThingUpdateRequest | Update an existent thing description by Id
 apiInstance.updateThing(space, thingId, collectionName, thingUpdateRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {

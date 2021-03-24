@@ -1,4 +1,4 @@
-# DigitalModelApiWip.EventHighCPU
+# SmartWorksSdk.EventHighCPU
 
 ## Properties
 

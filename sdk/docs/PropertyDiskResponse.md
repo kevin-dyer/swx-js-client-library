@@ -1,4 +1,4 @@
-# DigitalModelApiWip.PropertyDiskResponse
+# SmartWorksSdk.PropertyDiskResponse
 
 ## Properties
 

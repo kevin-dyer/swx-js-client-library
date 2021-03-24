@@ -1,6 +1,6 @@
-# DigitalModelApiWip.ItemsApi
+# SmartWorksSdk.ItemsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.swx.altairsc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -18,13 +18,13 @@ List items
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ItemsApi();
+let apiInstance = new SmartWorksSdk.ItemsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 apiInstance.listItems(space, collectionName).then((data) => {
@@ -66,13 +66,13 @@ Show item
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ItemsApi();
+let apiInstance = new SmartWorksSdk.ItemsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 87f87df8dfjhjdsksdsdk8fkff; // String | 

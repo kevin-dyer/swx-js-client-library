@@ -1,4 +1,4 @@
-# DigitalModelApiWip.CollectionUpdateResponse
+# SmartWorksSdk.CollectionUpdateResponse
 
 ## Properties
 

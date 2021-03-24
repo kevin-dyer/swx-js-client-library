@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingCreateResponseCredentialsMqttThing
+# SmartWorksSdk.ThingCreateResponseCredentialsMqttThing
 
 ## Properties
 

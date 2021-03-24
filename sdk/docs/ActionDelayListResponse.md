@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ActionDelayListResponse
+# SmartWorksSdk.ActionDelayListResponse
 
 ## Properties
 

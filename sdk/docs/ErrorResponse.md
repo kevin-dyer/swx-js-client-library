@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ErrorResponse
+# SmartWorksSdk.ErrorResponse
 
 ## Properties
 

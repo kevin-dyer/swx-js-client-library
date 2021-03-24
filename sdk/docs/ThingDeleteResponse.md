@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingDeleteResponse
+# SmartWorksSdk.ThingDeleteResponse
 
 ## Properties
 

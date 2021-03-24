@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ActionReboot
+# SmartWorksSdk.ActionReboot
 
 ## Properties
 

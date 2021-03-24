@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ThingUpdateRequest
+# SmartWorksSdk.ThingUpdateRequest
 
 ## Properties
 

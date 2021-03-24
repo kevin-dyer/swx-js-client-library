@@ -1,4 +1,4 @@
-# DigitalModelApiWip.ActionResponseElement1
+# SmartWorksSdk.ActionResponseElement1
 
 ## Properties
 

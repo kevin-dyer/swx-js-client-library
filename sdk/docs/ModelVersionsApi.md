@@ -1,6 +1,6 @@
-# DigitalModelApiWip.ModelVersionsApi
+# SmartWorksSdk.ModelVersionsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.swx.altairsc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,17 +21,17 @@ Create version
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ModelVersionsApi();
+let apiInstance = new SmartWorksSdk.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let modelName = RaspberryPiModel; // String | 
-let modelVersionRequest = new DigitalModelApiWip.ModelVersionRequest(); // ModelVersionRequest | Create a new collection in the platform
+let modelVersionRequest = new SmartWorksSdk.ModelVersionRequest(); // ModelVersionRequest | Create a new collection in the platform
 apiInstance.addVersion(space, collectionName, modelName, modelVersionRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -73,13 +73,13 @@ Delete version
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ModelVersionsApi();
+let apiInstance = new SmartWorksSdk.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let modelName = RaspberryPiModel; // String | 
@@ -125,13 +125,13 @@ List version
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ModelVersionsApi();
+let apiInstance = new SmartWorksSdk.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let modelName = RaspberryPiModel; // String | 
@@ -175,13 +175,13 @@ Show version
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ModelVersionsApi();
+let apiInstance = new SmartWorksSdk.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let modelName = RaspberryPiModel; // String | 
@@ -227,18 +227,18 @@ Update version
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.ModelVersionsApi();
+let apiInstance = new SmartWorksSdk.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let modelName = RaspberryPiModel; // String | 
 let versionName = RasPiv1; // String | 
-let modelVersionResponse = new DigitalModelApiWip.ModelVersionResponse(); // ModelVersionResponse | Update an existent model by name
+let modelVersionResponse = new SmartWorksSdk.ModelVersionResponse(); // ModelVersionResponse | Update an existent model by name
 apiInstance.updateVersion(space, collectionName, modelName, versionName, modelVersionResponse).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {

@@ -13,7 +13,7 @@ The yaml files located in this repo are slightly modified. Open API generator do
 1. To generate the code, simply run the following command in the root directory of this project:
 
     ```
-    openapi-generator-cli generate -i yaml/digital-model.yaml -g javascript -o sdk/ --additional-properties=usePromises=true
+    openapi-generator-cli generate -i yaml/index.yaml -g javascript -o sdk/ --additional-properties=usePromises=true
     ```
 
 1. After generating the code, the modules must be built by navigating to the sdk directory and running `npm install` and `npm run build`

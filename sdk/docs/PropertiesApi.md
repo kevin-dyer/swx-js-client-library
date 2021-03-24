@@ -1,6 +1,6 @@
-# DigitalModelApiWip.PropertiesApi
+# SmartWorksSdk.PropertiesApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.swx.altairsc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,13 +21,13 @@ List all the properties from one thing in array
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.PropertiesApi();
+let apiInstance = new SmartWorksSdk.PropertiesApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
@@ -73,13 +73,13 @@ Show a property from one thing
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.PropertiesApi();
+let apiInstance = new SmartWorksSdk.PropertiesApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
@@ -127,18 +127,18 @@ Update the value of a property
 ### Example
 
 ```javascript
-import DigitalModelApiWip from 'digital_model_api__wip';
-let defaultClient = DigitalModelApiWip.ApiClient.instance;
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
 // Configure Bearer access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new DigitalModelApiWip.PropertiesApi();
+let apiInstance = new SmartWorksSdk.PropertiesApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let property = memory; // String | 
-let property2 = new DigitalModelApiWip.Property(); // Property | Update an existent thing by Id
+let property2 = new SmartWorksSdk.Property(); // Property | Update an existent thing by Id
 apiInstance.updateProperty(space, collectionName, thingId, property, property2).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
