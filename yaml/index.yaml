@@ -3203,9 +3203,11 @@ components:
         type:
           $ref: '#/components/schemas/TriggerTypeEnum'
         config:
-          oneOf:
-            - $ref: '#/components/schemas/TriggerMqttConfig'
-            - $ref: '#/components/schemas/TriggerRabbitMQConfig'
+          # oneOf:
+          #   - $ref: '#/components/schemas/TriggerMqttConfig'
+          #   - $ref: '#/components/schemas/TriggerRabbitMQConfig'
+          $ref: '#/components/schemas/TriggerMqttConfig'
+          
         status:
           $ref: '#/components/schemas/TriggerStatusEnum'
         error_message:

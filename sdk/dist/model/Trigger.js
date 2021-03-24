@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _OneOfTriggerMqttConfigTriggerRabbitMQConfig = _interopRequireDefault(require("./OneOfTriggerMqttConfigTriggerRabbitMQConfig"));
+var _TriggerMqttConfig = _interopRequireDefault(require("./TriggerMqttConfig"));
 
 var _TriggerStatusEnum = _interopRequireDefault(require("./TriggerStatusEnum"));
 
@@ -73,7 +73,7 @@ var Trigger = /*#__PURE__*/function () {
         }
 
         if (data.hasOwnProperty('config')) {
-          obj['config'] = _ApiClient["default"].convertToType(data['config'], _OneOfTriggerMqttConfigTriggerRabbitMQConfig["default"]);
+          obj['config'] = _TriggerMqttConfig["default"].constructFromObject(data['config']);
         }
 
         if (data.hasOwnProperty('status')) {
@@ -112,7 +112,7 @@ Trigger.prototype['description'] = undefined;
 
 Trigger.prototype['type'] = undefined;
 /**
- * @member {module:model/OneOfTriggerMqttConfigTriggerRabbitMQConfig} config
+ * @member {module:model/TriggerMqttConfig} config
  */
 
 Trigger.prototype['config'] = undefined;

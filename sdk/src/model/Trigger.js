@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import OneOfTriggerMqttConfigTriggerRabbitMQConfig from './OneOfTriggerMqttConfigTriggerRabbitMQConfig';
+import TriggerMqttConfig from './TriggerMqttConfig';
 import TriggerStatusEnum from './TriggerStatusEnum';
 import TriggerTypeEnum from './TriggerTypeEnum';
 
@@ -60,7 +60,7 @@ class Trigger {
                 obj['type'] = TriggerTypeEnum.constructFromObject(data['type']);
             }
             if (data.hasOwnProperty('config')) {
-                obj['config'] = ApiClient.convertToType(data['config'], OneOfTriggerMqttConfigTriggerRabbitMQConfig);
+                obj['config'] = TriggerMqttConfig.constructFromObject(data['config']);
             }
             if (data.hasOwnProperty('status')) {
                 obj['status'] = TriggerStatusEnum.constructFromObject(data['status']);
@@ -94,7 +94,7 @@ Trigger.prototype['description'] = undefined;
 Trigger.prototype['type'] = undefined;
 
 /**
- * @member {module:model/OneOfTriggerMqttConfigTriggerRabbitMQConfig} config
+ * @member {module:model/TriggerMqttConfig} config
  */
 Trigger.prototype['config'] = undefined;
 
