@@ -1,6 +1,6 @@
 # SmartWorksSdk.ItemsApi
 
-All URIs are relative to *https://api.swx.altairsc.com*
+All URIs are relative to *https://api.swx.altairone.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

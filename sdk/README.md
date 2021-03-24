@@ -122,7 +122,7 @@ api.addAction(space, collectionName, thingId, action, actionRequest).then(functi
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.swx.altairsc.com*
+All URIs are relative to *https://api.swx.altairone.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

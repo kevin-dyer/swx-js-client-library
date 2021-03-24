@@ -5,7 +5,7 @@ info:
 security:
   - bearerAuth: []
 servers:
-  - url: https://api.swx.altairsc.com
+  - url: https://api.swx.altairone.com
     description: Production server
 tags:
   - name: collections

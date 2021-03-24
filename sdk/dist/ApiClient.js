@@ -38,9 +38,9 @@ var ApiClient = /*#__PURE__*/function () {
     /**
      * The base URL against which to resolve every API call's (relative) path.
      * @type {String}
-     * @default https://api.swx.altairsc.com
+     * @default https://api.swx.altairone.com
      */
-    this.basePath = 'https://api.swx.altairsc.com'.replace(/\/+$/, '');
+    this.basePath = 'https://api.swx.altairone.com'.replace(/\/+$/, '');
     /**
      * The authentication methods to be included for all API calls.
      * @type {Array.<String>}
@@ -563,7 +563,7 @@ var ApiClient = /*#__PURE__*/function () {
       */
     function hostSettings() {
       return [{
-        'url': "https://api.swx.altairsc.com",
+        'url': "https://api.swx.altairone.com",
         'description': "Production server"
       }];
     }
