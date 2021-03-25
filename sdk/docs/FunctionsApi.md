@@ -281,6 +281,7 @@ let apiInstance = new SmartWorksSdk.FunctionsApi();
 let space = "space_example"; // String | 
 let functionName = "functionName_example"; // String | 
 let opts = {
+  'params': null, // Object | 
   'body': "/path/to/file" // File | Optional data to pass to the function
 };
 apiInstance.invokeFunction(space, functionName, opts).then(() => {
@@ -298,6 +299,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
  **functionName** | **String**|  | 
+ **params** | [**Object**](.md)|  | [optional] 
  **body** | **File**| Optional data to pass to the function | [optional] 
 
 ### Return type

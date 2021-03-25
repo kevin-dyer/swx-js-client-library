@@ -300,6 +300,7 @@ var FunctionsApi = /*#__PURE__*/function () {
      * @param {String} space 
      * @param {String} functionName 
      * @param {Object} opts Optional parameters
+     * @param {Object} opts.params 
      * @param {File} opts.body Optional data to pass to the function
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -323,7 +324,9 @@ var FunctionsApi = /*#__PURE__*/function () {
         'space': space,
         'function_name': functionName
       };
-      var queryParams = {};
+      var queryParams = {
+        'params': opts['params']
+      };
       var headerParams = {};
       var formParams = {};
       var authNames = ['bearerAuth'];
@@ -337,6 +340,7 @@ var FunctionsApi = /*#__PURE__*/function () {
      * @param {String} space 
      * @param {String} functionName 
      * @param {Object} opts Optional parameters
+     * @param {Object} opts.params 
      * @param {File} opts.body Optional data to pass to the function
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */

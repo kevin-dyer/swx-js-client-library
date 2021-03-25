@@ -1320,6 +1320,11 @@ paths:
       summary: Invoke a function
       operationId: InvokeFunction
       parameters:
+      # added this param to allow optional query parameters while invoking a function
+        - in: query
+          name: params
+          schema:
+            type: object
         - in: path
           name: space
           required: true
