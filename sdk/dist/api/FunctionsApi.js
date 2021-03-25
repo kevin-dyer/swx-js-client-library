@@ -300,7 +300,7 @@ var FunctionsApi = /*#__PURE__*/function () {
      * @param {String} space 
      * @param {String} functionName 
      * @param {Object} opts Optional parameters
-     * @param {Object} opts.params 
+     * @param {Object.<String, {String: String}>} opts.params 
      * @param {File} opts.body Optional data to pass to the function
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -340,7 +340,7 @@ var FunctionsApi = /*#__PURE__*/function () {
      * @param {String} space 
      * @param {String} functionName 
      * @param {Object} opts Optional parameters
-     * @param {Object} opts.params 
+     * @param {Object.<String, {String: String}>} opts.params 
      * @param {File} opts.body Optional data to pass to the function
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
