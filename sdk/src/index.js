@@ -32,11 +32,23 @@ import ActionUpdateRequest from './model/ActionUpdateRequest';
 import ActionUpdateRequestDelay from './model/ActionUpdateRequestDelay';
 import ActionUpdateResponse from './model/ActionUpdateResponse';
 import ActionUpdateResponseDelay from './model/ActionUpdateResponseDelay';
+import AuthZError from './model/AuthZError';
+import AuthZErrorError from './model/AuthZErrorError';
+import BadFormedError from './model/BadFormedError';
+import BadFormedErrorError from './model/BadFormedErrorError';
+import BaseError from './model/BaseError';
+import BaseErrorError from './model/BaseErrorError';
 import CollectionListResponse from './model/CollectionListResponse';
 import CollectionRequest from './model/CollectionRequest';
 import CollectionResponse from './model/CollectionResponse';
 import CollectionUpdateRequest from './model/CollectionUpdateRequest';
 import CollectionUpdateResponse from './model/CollectionUpdateResponse';
+import CreateMQTTLabelCredentials from './model/CreateMQTTLabelCredentials';
+import CreateMQTTLabelCredentialsResponse from './model/CreateMQTTLabelCredentialsResponse';
+import CredentialsError from './model/CredentialsError';
+import CredentialsErrorError from './model/CredentialsErrorError';
+import CredentialsStudio from './model/CredentialsStudio';
+import CredentialsThing from './model/CredentialsThing';
 import ErrorResponse from './model/ErrorResponse';
 import ErrorResponseError from './model/ErrorResponseError';
 import EventHighCPU from './model/EventHighCPU';
@@ -54,7 +66,16 @@ import FunctionStatusEnum from './model/FunctionStatusEnum';
 import Functions from './model/Functions';
 import FunctionsPaging from './model/FunctionsPaging';
 import InfoResponse from './model/InfoResponse';
+import ListCredentialsResponse from './model/ListCredentialsResponse';
 import LogEntry from './model/LogEntry';
+import MQTTAccountActions from './model/MQTTAccountActions';
+import MQTTAccountData from './model/MQTTAccountData';
+import MQTTAccountEvents from './model/MQTTAccountEvents';
+import MQTTAccountPattern1 from './model/MQTTAccountPattern1';
+import MQTTAccountPattern2 from './model/MQTTAccountPattern2';
+import MQTTAccountPattern3 from './model/MQTTAccountPattern3';
+import MQTTAccountProperties from './model/MQTTAccountProperties';
+import MQTTLabel from './model/MQTTLabel';
 import ModelListResponse from './model/ModelListResponse';
 import ModelRequest from './model/ModelRequest';
 import ModelResponse from './model/ModelResponse';
@@ -72,7 +93,11 @@ import PropertyDisk from './model/PropertyDisk';
 import PropertyDiskResponse from './model/PropertyDiskResponse';
 import PropertyMemory from './model/PropertyMemory';
 import PropertyMemoryResponse from './model/PropertyMemoryResponse';
+import RelationError from './model/RelationError';
+import RelationErrorError from './model/RelationErrorError';
 import Secret from './model/Secret';
+import ShowCredentialsThingResponse from './model/ShowCredentialsThingResponse';
+import ShowMQTTLabelResponse from './model/ShowMQTTLabelResponse';
 import SourceCode from './model/SourceCode';
 import ThingCreateResponse from './model/ThingCreateResponse';
 import ThingCreateResponseActions from './model/ThingCreateResponseActions';
@@ -102,11 +127,19 @@ import TriggerRabbitMQConfig from './model/TriggerRabbitMQConfig';
 import TriggerStatusEnum from './model/TriggerStatusEnum';
 import TriggerTypeEnum from './model/TriggerTypeEnum';
 import Triggers from './model/Triggers';
+import UpdateMQTTCredentials from './model/UpdateMQTTCredentials';
+import UpdateMQTTCredentialsResponse from './model/UpdateMQTTCredentialsResponse';
+import UpdateMQTTLabelCredentials from './model/UpdateMQTTLabelCredentials';
+import UpdateMQTTPassword from './model/UpdateMQTTPassword';
 import ActionsApi from './api/ActionsApi';
 import CollectionsApi from './api/CollectionsApi';
 import EventsApi from './api/EventsApi';
 import FunctionsApi from './api/FunctionsApi';
 import ItemsApi from './api/ItemsApi';
+import MQTTCredentialsApi from './api/MQTTCredentialsApi';
+import MQTTLabelsApi from './api/MQTTLabelsApi';
+import MQTTThingsApi from './api/MQTTThingsApi';
+import MQTTUsernameApi from './api/MQTTUsernameApi';
 import ModelVersionsApi from './api/ModelVersionsApi';
 import ModelsApi from './api/ModelsApi';
 import PropertiesApi from './api/PropertiesApi';
@@ -267,6 +300,42 @@ export {
     ActionUpdateResponseDelay,
 
     /**
+     * The AuthZError model constructor.
+     * @property {module:model/AuthZError}
+     */
+    AuthZError,
+
+    /**
+     * The AuthZErrorError model constructor.
+     * @property {module:model/AuthZErrorError}
+     */
+    AuthZErrorError,
+
+    /**
+     * The BadFormedError model constructor.
+     * @property {module:model/BadFormedError}
+     */
+    BadFormedError,
+
+    /**
+     * The BadFormedErrorError model constructor.
+     * @property {module:model/BadFormedErrorError}
+     */
+    BadFormedErrorError,
+
+    /**
+     * The BaseError model constructor.
+     * @property {module:model/BaseError}
+     */
+    BaseError,
+
+    /**
+     * The BaseErrorError model constructor.
+     * @property {module:model/BaseErrorError}
+     */
+    BaseErrorError,
+
+    /**
      * The CollectionListResponse model constructor.
      * @property {module:model/CollectionListResponse}
      */
@@ -295,6 +364,42 @@ export {
      * @property {module:model/CollectionUpdateResponse}
      */
     CollectionUpdateResponse,
+
+    /**
+     * The CreateMQTTLabelCredentials model constructor.
+     * @property {module:model/CreateMQTTLabelCredentials}
+     */
+    CreateMQTTLabelCredentials,
+
+    /**
+     * The CreateMQTTLabelCredentialsResponse model constructor.
+     * @property {module:model/CreateMQTTLabelCredentialsResponse}
+     */
+    CreateMQTTLabelCredentialsResponse,
+
+    /**
+     * The CredentialsError model constructor.
+     * @property {module:model/CredentialsError}
+     */
+    CredentialsError,
+
+    /**
+     * The CredentialsErrorError model constructor.
+     * @property {module:model/CredentialsErrorError}
+     */
+    CredentialsErrorError,
+
+    /**
+     * The CredentialsStudio model constructor.
+     * @property {module:model/CredentialsStudio}
+     */
+    CredentialsStudio,
+
+    /**
+     * The CredentialsThing model constructor.
+     * @property {module:model/CredentialsThing}
+     */
+    CredentialsThing,
 
     /**
      * The ErrorResponse model constructor.
@@ -399,10 +504,64 @@ export {
     InfoResponse,
 
     /**
+     * The ListCredentialsResponse model constructor.
+     * @property {module:model/ListCredentialsResponse}
+     */
+    ListCredentialsResponse,
+
+    /**
      * The LogEntry model constructor.
      * @property {module:model/LogEntry}
      */
     LogEntry,
+
+    /**
+     * The MQTTAccountActions model constructor.
+     * @property {module:model/MQTTAccountActions}
+     */
+    MQTTAccountActions,
+
+    /**
+     * The MQTTAccountData model constructor.
+     * @property {module:model/MQTTAccountData}
+     */
+    MQTTAccountData,
+
+    /**
+     * The MQTTAccountEvents model constructor.
+     * @property {module:model/MQTTAccountEvents}
+     */
+    MQTTAccountEvents,
+
+    /**
+     * The MQTTAccountPattern1 model constructor.
+     * @property {module:model/MQTTAccountPattern1}
+     */
+    MQTTAccountPattern1,
+
+    /**
+     * The MQTTAccountPattern2 model constructor.
+     * @property {module:model/MQTTAccountPattern2}
+     */
+    MQTTAccountPattern2,
+
+    /**
+     * The MQTTAccountPattern3 model constructor.
+     * @property {module:model/MQTTAccountPattern3}
+     */
+    MQTTAccountPattern3,
+
+    /**
+     * The MQTTAccountProperties model constructor.
+     * @property {module:model/MQTTAccountProperties}
+     */
+    MQTTAccountProperties,
+
+    /**
+     * The MQTTLabel model constructor.
+     * @property {module:model/MQTTLabel}
+     */
+    MQTTLabel,
 
     /**
      * The ModelListResponse model constructor.
@@ -507,10 +666,34 @@ export {
     PropertyMemoryResponse,
 
     /**
+     * The RelationError model constructor.
+     * @property {module:model/RelationError}
+     */
+    RelationError,
+
+    /**
+     * The RelationErrorError model constructor.
+     * @property {module:model/RelationErrorError}
+     */
+    RelationErrorError,
+
+    /**
      * The Secret model constructor.
      * @property {module:model/Secret}
      */
     Secret,
+
+    /**
+     * The ShowCredentialsThingResponse model constructor.
+     * @property {module:model/ShowCredentialsThingResponse}
+     */
+    ShowCredentialsThingResponse,
+
+    /**
+     * The ShowMQTTLabelResponse model constructor.
+     * @property {module:model/ShowMQTTLabelResponse}
+     */
+    ShowMQTTLabelResponse,
 
     /**
      * The SourceCode model constructor.
@@ -687,6 +870,30 @@ export {
     Triggers,
 
     /**
+     * The UpdateMQTTCredentials model constructor.
+     * @property {module:model/UpdateMQTTCredentials}
+     */
+    UpdateMQTTCredentials,
+
+    /**
+     * The UpdateMQTTCredentialsResponse model constructor.
+     * @property {module:model/UpdateMQTTCredentialsResponse}
+     */
+    UpdateMQTTCredentialsResponse,
+
+    /**
+     * The UpdateMQTTLabelCredentials model constructor.
+     * @property {module:model/UpdateMQTTLabelCredentials}
+     */
+    UpdateMQTTLabelCredentials,
+
+    /**
+     * The UpdateMQTTPassword model constructor.
+     * @property {module:model/UpdateMQTTPassword}
+     */
+    UpdateMQTTPassword,
+
+    /**
     * The ActionsApi service constructor.
     * @property {module:api/ActionsApi}
     */
@@ -715,6 +922,30 @@ export {
     * @property {module:api/ItemsApi}
     */
     ItemsApi,
+
+    /**
+    * The MQTTCredentialsApi service constructor.
+    * @property {module:api/MQTTCredentialsApi}
+    */
+    MQTTCredentialsApi,
+
+    /**
+    * The MQTTLabelsApi service constructor.
+    * @property {module:api/MQTTLabelsApi}
+    */
+    MQTTLabelsApi,
+
+    /**
+    * The MQTTThingsApi service constructor.
+    * @property {module:api/MQTTThingsApi}
+    */
+    MQTTThingsApi,
+
+    /**
+    * The MQTTUsernameApi service constructor.
+    * @property {module:api/MQTTUsernameApi}
+    */
+    MQTTUsernameApi,
 
     /**
     * The ModelVersionsApi service constructor.
