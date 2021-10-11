@@ -26,6 +26,14 @@ tags:
     description: Operations on items
   - name: Functions
     description: Operations about functions
+  - name: MQTT Credentials
+    description: Operations with MQTT credentials
+  - name: MQTT things
+    description: Operations with thing MQTT credentials
+  - name: MQTT labels
+    description: Operations with label MQTT credentials
+  - name: MQTT username
+    description: Update MQTT password for a specific username 
 
 
 
@@ -1910,6 +1918,230 @@ paths:
                   message: trigger not found
       deprecated: false
 
+  /spaces/{space}/mqtt/credentials:
+    parameters:
+      - $ref: '#/components/parameters/space'    
+    get:
+      tags:
+        - MQTT Credentials
+      summary: List MQTT credentials
+      description: List of all MQTT credentials for an space
+      operationId: ListMQTTcredentials
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCredentialsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /spaces/{space}/mqtt/credentials/{credentials-id}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/credentials-id'
+    get:
+      tags:
+        - MQTT Credentials
+      summary: Show MQTT credentials
+      description: Show an specific MQTT credentials by id
+      operationId: showMQTTcredentials
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowCredentialsThingResponse'
+        '400':
+          $ref: '#/components/responses/CredentialsError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      tags:
+        - MQTT Credentials
+      summary: Update MQTT credentials
+      description: Update an existing MQTT credentials. If you send an empty body, a random password will be generated
+      operationId: updateMQTTcredentials
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMQTTCredentials'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMQTTCredentialsResponse'
+        '400':
+          $ref: '#/components/responses/BadFormedError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /spaces/{space}/mqtt/things/{thing-id}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/thing-id'
+    get:
+      tags:
+        - MQTT things
+      summary: List Thing MQTT credentials
+      description: Shiw an specific MQTT credentials for a specific thing
+      operationId: listThingMQTTcredentials
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowCredentialsThingResponse'
+        '400':
+          $ref: '#/components/responses/RelationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /spaces/{space}/mqtt/labels:
+    parameters:
+      - $ref: '#/components/parameters/space'
+    post:
+      tags:
+        - MQTT labels
+      summary: Create MQTT credentials for label
+      description: Create MQTT credentials for a specific label
+      operationId: createMQTTLabelCredentials
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMQTTLabelCredentials'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMQTTLabelCredentialsResponse'
+        '400':
+          $ref: '#/components/responses/BadFormedError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /spaces/{space}/mqtt/labels/{label-id}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/label-id'
+    get:
+      tags:
+        - MQTT labels
+      summary: Show MQTT label details
+      description: Show MQTT label details for a specific label
+      operationId: showMQTTLabelInfo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowMQTTLabelResponse'
+                
+        '400':
+          $ref: '#/components/responses/CredentialsError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      tags:
+        -  MQTT labels
+      summary: Update MQTT Label
+      description: Update the MQTT Label credentials and / or state
+      operationId: updateMQTTLabel
+      requestBody:
+        description: This is the field that you can update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMQTTLabelCredentials'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMQTTLabelCredentialsResponse'
+        '400':
+          $ref: '#/components/responses/BadFormedError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    delete:
+      tags:
+        - MQTT labels
+      summary: Delete MQTT label 
+      description: Delete MQTT capabilities for a label
+      operationId: DeleteMQTTLabel
+      responses:
+        '204':
+          description: The resource was deleted successfully
+        '400':
+          $ref: '#/components/responses/CredentialsError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /spaces/{space}/mqtt/credentials-username/{mqtt-username}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/mqtt-username'
+
+      - in: path
+        name: mqtt-username
+        required: true
+        schema:
+          type: string
+          example: newUsername@altair
+    patch:
+      tags:
+        - MQTT username
+      summary: Update MQTT password
+      description: Update the MQTT password for a specific mqtt-username.  If you send an empty body, a random password will be generated
+      operationId: updateMQTTpassword
+      requestBody:
+        description: This is the field that you can update
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMQTTPassword'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMQTTCredentialsResponse'
+        '400':
+          $ref: '#/components/responses/BadFormedError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
 #####
 ##### !COMPONENTS
 #####
@@ -1919,6 +2151,82 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+
+  parameters:
+    space:
+      in: path
+      name: space
+      required: true
+      schema:
+        type: string
+        example: altair
+    credentials-id:  
+      in: path
+      name: credentials-id
+      required: true
+      schema:
+        type: string
+        format: ulid
+        example: 01EDRMFZXHPEBGGHZBYVV1W0Y9
+    thing-id:
+      in: path
+      name: thing-id
+      required: true
+      schema:
+        type: string
+        format: ulid
+        example: 01ed9jencjshpv374k15k1w2gr
+    label-id:
+      in: path
+      name: label-id
+      required: true
+      schema:
+        type: string
+        example: "01EDRHEF2Y4ZB7C0EGTAT8RQQS"
+    mqtt-username:
+      in: path
+      name: mqtt-username
+      required: true
+      schema:
+        type: string
+        example: newUsername@altair
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthZError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseError'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseError'
+    BadFormedError:
+      description: Payload format error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadFormedError'
+    CredentialsError:
+      description: Credentials error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CredentialsError'
+    RelationError:
+      description: Relation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RelationError'
   #####
   ##### !SCHEMAS
   #####
@@ -3309,3 +3617,348 @@ components:
             details:
               type: object
               description: Additional details about the error.
+
+    BadFormedError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Payload bad formed
+            status:
+              type: integer
+              example: 400
+    BaseError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 403
+            message:
+              type: string
+              example: Access credentials are not sufficient to access this resource
+            status:
+              type: string
+              example: Forbidden
+    AuthZError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: Access credentials are invalid
+            reason:
+              type: string
+              example: Access token i says token is not active
+            status:
+              type: string
+              example: Unauthorized
+    CredentialsError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Credentials get error
+            status:
+              type: integer
+              example: 400
+    RelationError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Relation get error
+            status:
+              type: integer
+              example: 400
+    ListCredentialsResponse:
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredentialsStudio'
+    CredentialsStudio:
+      title: Studio MQTT info
+      properties:
+          id:
+            type: string
+            format: ulid
+            example: 01EDRHJB4Y4ZB7C0VAABT8RQQS
+          username:
+            type: string
+            example: studio@altair
+          description:
+            type: string
+            example: Automatic Register Credentials Account Studio
+          enabled:
+            type: boolean
+            example: true
+          type:
+            type: string
+            example: studio
+          expired_at:
+            type: integer
+            example: 0
+          created_at:
+            type: string
+            format: date-time
+            example: "2020-06-26T06:45:04Z"
+          topics:
+            type: array
+            items:
+              $ref: '#/components/schemas/MQTTAccountPattern1'
+    CredentialsThing:
+      title: Thing MQTT info
+      properties:
+          id:
+            type: string
+            format: ulid
+            example: 01EDRMFZXHPEBGGHZBYVV1W0Y9
+          username:
+            type: string
+            example: UTB7@altair
+          description:
+            type: string
+            example: Automatic Register Credentials Things
+          enabled:
+            type: boolean
+            example: true
+          type:
+            type: string
+            example: things
+          expired_at:
+            type: integer
+            example: 0
+          created_at:
+            type: string
+            format: date-time
+            example: "2020-06-26T06:45:04Z"
+          topics:
+            type: array
+            items:
+              $ref: '#/components/schemas/MQTTAccountProperties'
+    ShowCredentialsThingResponse:
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredentialsThing'
+    UpdateMQTTCredentialsResponse:
+      title: Thing MQTT info after update
+      properties:
+          id:
+            type: string
+            format: ulid
+            example: 01EDRMFZXHPEBGGHZBYVV1W0Y9
+          username:
+            type: string
+            example: newUsername@altair
+          password:
+            type: string
+            example: newPassword
+          description:
+            type: string
+            example: My personal description
+          enabled:
+            type: boolean
+            example: true
+          type:
+            type: string
+            example: things
+          expired_at:
+            type: integer
+            example: 1626189483
+          created_at:
+            type: string
+            format: date-time
+            example: "2020-06-26T06:45:04Z"
+          topics:
+            type: array
+            items:
+              $ref: '#/components/schemas/MQTTAccountProperties'
+    UpdateMQTTCredentials:
+      properties:
+        username:
+          type: string
+          example: newUsername
+        password:
+          type: string
+          example: newPassword
+        enabled:
+          type: boolean
+          example: true
+        expired_at:
+          type: integer
+          example: 1626189483
+        description:
+          type: string
+          example: My personal description
+    CreateMQTTLabelCredentials:
+      properties:
+        label:
+          type: string
+          format: ulid
+          example: "01EDRHEF2Y4ZB7C0EGTAT8RQQS"
+        username:
+          type: string
+          example: "myusername"
+        password:
+          type: string
+          example: "mypassword"
+    CreateMQTTLabelCredentialsResponse:
+      properties:
+          id:
+            type: string
+            format: ulid
+            example: 01EZ4G3JHGH3K7AG1W57GJN0Y9
+          description:
+            type: string
+            example: "Label Credential"
+          type:
+            type: string
+            example: "label"
+          username:
+            type: string
+            example: myusername@altair
+          password:
+            type: string
+            example: "mypassword"
+          enabled:
+            type: boolean
+            example: true
+          created_at:
+            type: string
+            format: date-time
+            example: "2021-02-22T06:45:04Z"
+          expired_at:
+            type: integer
+            example: 0
+          topics:
+            type: array
+            items:
+              $ref: '#/components/schemas/MQTTLabel'
+    ShowMQTTLabelResponse:
+      properties:
+          id:
+            type: string
+            format: ulid
+            example: 01EZ4G3JHGH3K7AG1W57GJN0Y9
+          description:
+            type: string
+            example: "Label Credential"
+          type:
+            type: string
+            example: "label"
+          username:
+            type: string
+            example: myusername@altair
+          enabled:
+            type: boolean
+            example: true
+          created_at:
+            type: string
+            format: date-time
+            example: "2021-02-22T06:45:04Z"
+          expired_at:
+            type: integer
+            example: 0
+          topics:
+            type: array
+            items:
+              $ref: '#/components/schemas/MQTTLabel'
+    UpdateMQTTPassword:
+      properties:
+        password:
+          type: string
+          example: newPassword
+    UpdateMQTTLabelCredentials:
+      properties:
+        username:
+          type: string
+          example: "myusername"
+        password:
+          type: string
+          example: "mypassword"
+        enabled:
+          type: boolean
+          example: true
+    MQTTAccountPattern1:
+      properties:
+        pattern_pub:
+          type: string
+          example: ""
+        pattern_sub:
+          type: string
+          example: altair/#
+    MQTTAccountPattern2:
+      properties:
+        pattern_pub:
+          type: string
+          example: ""
+        pattern_sub:
+          type: string
+          example: set/altair/#
+    MQTTAccountPattern3:
+      properties:
+        pattern_pub:
+          type: string
+          example: ""
+        pattern_sub:
+          type: string
+          example: status/altair/#
+    MQTTAccountProperties:
+      properties:
+        pattern_pub:
+          type: string
+          example: set/altair/collections/mycollection/things/01ed9jencjshpv374k15k1w2gr/properties/#
+        pattern_sub:
+          type: string
+          example: status/altair/collections/mycollection/things/01ed9jencjshpv374k15k1w2gr/properties/#
+    MQTTAccountActions:
+      properties:
+        pattern_pub:
+          type: string
+          example: set/altair/collections/mycollection/things/01ed9jencjshpv374k15k1w2gr/actions/#
+        pattern_sub:
+          type: string
+          example: status/altair/collections/mycollection/things/01ed9jencjshpv374k15k1w2gr/actions/#
+    MQTTAccountEvents:
+      properties:
+        pattern_pub:
+          type: string
+          example: set/altair/collections/mycollection/things/01ed9jencjshpv374k15k1w2gr/events/#
+        pattern_sub:
+          type: string
+          example: status/altair/collections/mycollection/things/01ed9jencjshpv374k15k1w2gr/events/#
+    MQTTAccountData:
+      properties:
+        pattern_pub:
+          type: string
+          example: set/altair/collections/mycollection/things/01ed9jencjshpv374k15k1w2gr/data
+        pattern_sub:
+          type: string
+          example: set/altair/collections/mycollection/things/01ed9jencjshpv374k15k1w2gr/data
+    MQTTLabel:
+      properties:
+        pattern_pub:
+          type: string
+          example: ""
+        pattern_sub:
+          type: string
+          example: "status/altair/label/01EDRHEF2Y4ZB7C0EGTAT8RQQS/#"
