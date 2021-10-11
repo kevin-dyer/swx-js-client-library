@@ -152,6 +152,15 @@ Class | Method | HTTP request | Description
 *SmartWorksSdk.FunctionsApi* | [**updateFunction**](docs/FunctionsApi.md#updateFunction) | **PUT** /spaces/{space}/functions/{function_name} | Update a function
 *SmartWorksSdk.ItemsApi* | [**listItems**](docs/ItemsApi.md#listItems) | **GET** /spaces/{space}/collections/{collection-name}/things-status | List items
 *SmartWorksSdk.ItemsApi* | [**showItem**](docs/ItemsApi.md#showItem) | **GET** /spaces/{space}/collections/{collection-name}/things-status/{thing-id} | Show item
+*SmartWorksSdk.MQTTCredentialsApi* | [**listMQTTcredentials**](docs/MQTTCredentialsApi.md#listMQTTcredentials) | **GET** /spaces/{space}/mqtt/credentials | List MQTT credentials
+*SmartWorksSdk.MQTTCredentialsApi* | [**showMQTTcredentials**](docs/MQTTCredentialsApi.md#showMQTTcredentials) | **GET** /spaces/{space}/mqtt/credentials/{credentials-id} | Show MQTT credentials
+*SmartWorksSdk.MQTTCredentialsApi* | [**updateMQTTcredentials**](docs/MQTTCredentialsApi.md#updateMQTTcredentials) | **PUT** /spaces/{space}/mqtt/credentials/{credentials-id} | Update MQTT credentials
+*SmartWorksSdk.MQTTLabelsApi* | [**createMQTTLabelCredentials**](docs/MQTTLabelsApi.md#createMQTTLabelCredentials) | **POST** /spaces/{space}/mqtt/labels | Create MQTT credentials for label
+*SmartWorksSdk.MQTTLabelsApi* | [**deleteMQTTLabel**](docs/MQTTLabelsApi.md#deleteMQTTLabel) | **DELETE** /spaces/{space}/mqtt/labels/{label-id} | Delete MQTT label
+*SmartWorksSdk.MQTTLabelsApi* | [**showMQTTLabelInfo**](docs/MQTTLabelsApi.md#showMQTTLabelInfo) | **GET** /spaces/{space}/mqtt/labels/{label-id} | Show MQTT label details
+*SmartWorksSdk.MQTTLabelsApi* | [**updateMQTTLabel**](docs/MQTTLabelsApi.md#updateMQTTLabel) | **PUT** /spaces/{space}/mqtt/labels/{label-id} | Update MQTT Label
+*SmartWorksSdk.MQTTThingsApi* | [**listThingMQTTcredentials**](docs/MQTTThingsApi.md#listThingMQTTcredentials) | **GET** /spaces/{space}/mqtt/things/{thing-id} | List Thing MQTT credentials
+*SmartWorksSdk.MQTTUsernameApi* | [**updateMQTTpassword**](docs/MQTTUsernameApi.md#updateMQTTpassword) | **PATCH** /spaces/{space}/mqtt/credentials-username/{mqtt-username} | Update MQTT password
 *SmartWorksSdk.ModelVersionsApi* | [**addVersion**](docs/ModelVersionsApi.md#addVersion) | **POST** /spaces/{space}/collections/{collection-name}/models/{model-name}/versions | Create version
 *SmartWorksSdk.ModelVersionsApi* | [**deleteVersion**](docs/ModelVersionsApi.md#deleteVersion) | **DELETE** /spaces/{space}/collections/{collection-name}/models/{model-name}/versions/{version-name} | Delete version
 *SmartWorksSdk.ModelVersionsApi* | [**listVersion**](docs/ModelVersionsApi.md#listVersion) | **GET** /spaces/{space}/collections/{collection-name}/models/{model-name}/versions | List version
@@ -199,11 +208,23 @@ Class | Method | HTTP request | Description
  - [SmartWorksSdk.ActionUpdateRequestDelay](docs/ActionUpdateRequestDelay.md)
  - [SmartWorksSdk.ActionUpdateResponse](docs/ActionUpdateResponse.md)
  - [SmartWorksSdk.ActionUpdateResponseDelay](docs/ActionUpdateResponseDelay.md)
+ - [SmartWorksSdk.AuthZError](docs/AuthZError.md)
+ - [SmartWorksSdk.AuthZErrorError](docs/AuthZErrorError.md)
+ - [SmartWorksSdk.BadFormedError](docs/BadFormedError.md)
+ - [SmartWorksSdk.BadFormedErrorError](docs/BadFormedErrorError.md)
+ - [SmartWorksSdk.BaseError](docs/BaseError.md)
+ - [SmartWorksSdk.BaseErrorError](docs/BaseErrorError.md)
  - [SmartWorksSdk.CollectionListResponse](docs/CollectionListResponse.md)
  - [SmartWorksSdk.CollectionRequest](docs/CollectionRequest.md)
  - [SmartWorksSdk.CollectionResponse](docs/CollectionResponse.md)
  - [SmartWorksSdk.CollectionUpdateRequest](docs/CollectionUpdateRequest.md)
  - [SmartWorksSdk.CollectionUpdateResponse](docs/CollectionUpdateResponse.md)
+ - [SmartWorksSdk.CreateMQTTLabelCredentials](docs/CreateMQTTLabelCredentials.md)
+ - [SmartWorksSdk.CreateMQTTLabelCredentialsResponse](docs/CreateMQTTLabelCredentialsResponse.md)
+ - [SmartWorksSdk.CredentialsError](docs/CredentialsError.md)
+ - [SmartWorksSdk.CredentialsErrorError](docs/CredentialsErrorError.md)
+ - [SmartWorksSdk.CredentialsStudio](docs/CredentialsStudio.md)
+ - [SmartWorksSdk.CredentialsThing](docs/CredentialsThing.md)
  - [SmartWorksSdk.ErrorResponse](docs/ErrorResponse.md)
  - [SmartWorksSdk.ErrorResponseError](docs/ErrorResponseError.md)
  - [SmartWorksSdk.EventHighCPU](docs/EventHighCPU.md)
@@ -221,7 +242,16 @@ Class | Method | HTTP request | Description
  - [SmartWorksSdk.Functions](docs/Functions.md)
  - [SmartWorksSdk.FunctionsPaging](docs/FunctionsPaging.md)
  - [SmartWorksSdk.InfoResponse](docs/InfoResponse.md)
+ - [SmartWorksSdk.ListCredentialsResponse](docs/ListCredentialsResponse.md)
  - [SmartWorksSdk.LogEntry](docs/LogEntry.md)
+ - [SmartWorksSdk.MQTTAccountActions](docs/MQTTAccountActions.md)
+ - [SmartWorksSdk.MQTTAccountData](docs/MQTTAccountData.md)
+ - [SmartWorksSdk.MQTTAccountEvents](docs/MQTTAccountEvents.md)
+ - [SmartWorksSdk.MQTTAccountPattern1](docs/MQTTAccountPattern1.md)
+ - [SmartWorksSdk.MQTTAccountPattern2](docs/MQTTAccountPattern2.md)
+ - [SmartWorksSdk.MQTTAccountPattern3](docs/MQTTAccountPattern3.md)
+ - [SmartWorksSdk.MQTTAccountProperties](docs/MQTTAccountProperties.md)
+ - [SmartWorksSdk.MQTTLabel](docs/MQTTLabel.md)
  - [SmartWorksSdk.ModelListResponse](docs/ModelListResponse.md)
  - [SmartWorksSdk.ModelRequest](docs/ModelRequest.md)
  - [SmartWorksSdk.ModelResponse](docs/ModelResponse.md)
@@ -239,7 +269,11 @@ Class | Method | HTTP request | Description
  - [SmartWorksSdk.PropertyDiskResponse](docs/PropertyDiskResponse.md)
  - [SmartWorksSdk.PropertyMemory](docs/PropertyMemory.md)
  - [SmartWorksSdk.PropertyMemoryResponse](docs/PropertyMemoryResponse.md)
+ - [SmartWorksSdk.RelationError](docs/RelationError.md)
+ - [SmartWorksSdk.RelationErrorError](docs/RelationErrorError.md)
  - [SmartWorksSdk.Secret](docs/Secret.md)
+ - [SmartWorksSdk.ShowCredentialsThingResponse](docs/ShowCredentialsThingResponse.md)
+ - [SmartWorksSdk.ShowMQTTLabelResponse](docs/ShowMQTTLabelResponse.md)
  - [SmartWorksSdk.SourceCode](docs/SourceCode.md)
  - [SmartWorksSdk.ThingCreateResponse](docs/ThingCreateResponse.md)
  - [SmartWorksSdk.ThingCreateResponseActions](docs/ThingCreateResponseActions.md)
@@ -269,6 +303,10 @@ Class | Method | HTTP request | Description
  - [SmartWorksSdk.TriggerStatusEnum](docs/TriggerStatusEnum.md)
  - [SmartWorksSdk.TriggerTypeEnum](docs/TriggerTypeEnum.md)
  - [SmartWorksSdk.Triggers](docs/Triggers.md)
+ - [SmartWorksSdk.UpdateMQTTCredentials](docs/UpdateMQTTCredentials.md)
+ - [SmartWorksSdk.UpdateMQTTCredentialsResponse](docs/UpdateMQTTCredentialsResponse.md)
+ - [SmartWorksSdk.UpdateMQTTLabelCredentials](docs/UpdateMQTTLabelCredentials.md)
+ - [SmartWorksSdk.UpdateMQTTPassword](docs/UpdateMQTTPassword.md)
 
 
 ## Documentation for Authorization

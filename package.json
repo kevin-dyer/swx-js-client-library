@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.pclm.altair.com:SmartWorks/smartworks-sdk/js-client-library.git"
+    "url": "git@github.com:kevin-dyer/swx-js-client-library.git"
   },
   "author": "",
   "license": "ISC",
