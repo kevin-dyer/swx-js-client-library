@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
+var _BaseError = _interopRequireDefault(require("../model/BaseError"));
+
 var _Properties = _interopRequireDefault(require("../model/Properties"));
 
 var _Property = _interopRequireDefault(require("../model/Property"));
@@ -159,6 +161,71 @@ var PropertiesApi = /*#__PURE__*/function () {
     key: "showProperty",
     value: function showProperty(space, collectionName, thingId, property) {
       return this.showPropertyWithHttpInfo(space, collectionName, thingId, property).then(function (response_and_data) {
+        return response_and_data.data;
+      });
+    }
+    /**
+     * Update properties
+     * Update the value of one or more properties of a thing
+     * @param {String} space 
+     * @param {String} collectionName 
+     * @param {String} thingId 
+     * @param {module:model/Properties} properties Property values by property key
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Properties} and HTTP response
+     */
+
+  }, {
+    key: "updatePropertiesWithHttpInfo",
+    value: function updatePropertiesWithHttpInfo(space, collectionName, thingId, properties) {
+      var postBody = properties; // verify the required parameter 'space' is set
+
+      if (space === undefined || space === null) {
+        throw new Error("Missing the required parameter 'space' when calling updateProperties");
+      } // verify the required parameter 'collectionName' is set
+
+
+      if (collectionName === undefined || collectionName === null) {
+        throw new Error("Missing the required parameter 'collectionName' when calling updateProperties");
+      } // verify the required parameter 'thingId' is set
+
+
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling updateProperties");
+      } // verify the required parameter 'properties' is set
+
+
+      if (properties === undefined || properties === null) {
+        throw new Error("Missing the required parameter 'properties' when calling updateProperties");
+      }
+
+      var pathParams = {
+        'space': space,
+        'collection-name': collectionName,
+        'thing-id': thingId
+      };
+      var queryParams = {};
+      var headerParams = {};
+      var formParams = {};
+      var authNames = ['bearerAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = _Properties["default"];
+      return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/properties', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
+    }
+    /**
+     * Update properties
+     * Update the value of one or more properties of a thing
+     * @param {String} space 
+     * @param {String} collectionName 
+     * @param {String} thingId 
+     * @param {module:model/Properties} properties Property values by property key
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Properties}
+     */
+
+  }, {
+    key: "updateProperties",
+    value: function updateProperties(space, collectionName, thingId, properties) {
+      return this.updatePropertiesWithHttpInfo(space, collectionName, thingId, properties).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
