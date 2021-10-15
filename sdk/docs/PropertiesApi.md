@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**listProperties**](PropertiesApi.md#listProperties) | **GET** /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties | List properties
 [**showProperty**](PropertiesApi.md#showProperty) | **GET** /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property} | Show property
+[**updateProperties**](PropertiesApi.md#updateProperties) | **PUT** /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties | Update properties
 [**updateProperty**](PropertiesApi.md#updateProperty) | **PUT** /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property} | Update property
 
 
@@ -113,6 +114,60 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## updateProperties
+
+> Properties updateProperties(space, collectionName, thingId, properties)
+
+Update properties
+
+Update the value of one or more properties of a thing
+
+### Example
+
+```javascript
+import SmartWorksSdk from 'smart_works_sdk';
+let defaultClient = SmartWorksSdk.ApiClient.instance;
+// Configure Bearer access token for authorization: bearerAuth
+let bearerAuth = defaultClient.authentications['bearerAuth'];
+bearerAuth.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new SmartWorksSdk.PropertiesApi();
+let space = altair; // String | 
+let collectionName = ElectronicBoards; // String | 
+let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let properties = new SmartWorksSdk.Properties(); // Properties | Property values by property key
+apiInstance.updateProperties(space, collectionName, thingId, properties).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **space** | **String**|  | 
+ **collectionName** | **String**|  | 
+ **thingId** | **String**|  | 
+ **properties** | [**Properties**](Properties.md)| Property values by property key | 
+
+### Return type
+
+[**Properties**](Properties.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

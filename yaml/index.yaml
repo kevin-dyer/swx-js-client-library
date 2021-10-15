@@ -345,6 +345,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/Properties'
 
+    put:
+      tags:
+        - Properties
+      summary: Update properties
+      description: Update the value of one or more properties of a thing
+      operationId: updateProperties
+      requestBody:
+        description: Property values by property key
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Properties'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
   /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property}:
     parameters:
       - in: path
@@ -2109,12 +2138,6 @@ paths:
       - $ref: '#/components/parameters/space'
       - $ref: '#/components/parameters/mqtt-username'
 
-      - in: path
-        name: mqtt-username
-        required: true
-        schema:
-          type: string
-          example: newUsername@altair
     patch:
       tags:
         - MQTT username

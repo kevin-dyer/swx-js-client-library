@@ -13,6 +13,7 @@
 
 
 import ApiClient from "../ApiClient";
+import BaseError from '../model/BaseError';
 import Properties from '../model/Properties';
 import Property from '../model/Property';
 
@@ -161,6 +162,74 @@ export default class PropertiesApi {
      */
     showProperty(space, collectionName, thingId, property) {
       return this.showPropertyWithHttpInfo(space, collectionName, thingId, property)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Update properties
+     * Update the value of one or more properties of a thing
+     * @param {String} space 
+     * @param {String} collectionName 
+     * @param {String} thingId 
+     * @param {module:model/Properties} properties Property values by property key
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Properties} and HTTP response
+     */
+    updatePropertiesWithHttpInfo(space, collectionName, thingId, properties) {
+      let postBody = properties;
+      // verify the required parameter 'space' is set
+      if (space === undefined || space === null) {
+        throw new Error("Missing the required parameter 'space' when calling updateProperties");
+      }
+      // verify the required parameter 'collectionName' is set
+      if (collectionName === undefined || collectionName === null) {
+        throw new Error("Missing the required parameter 'collectionName' when calling updateProperties");
+      }
+      // verify the required parameter 'thingId' is set
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling updateProperties");
+      }
+      // verify the required parameter 'properties' is set
+      if (properties === undefined || properties === null) {
+        throw new Error("Missing the required parameter 'properties' when calling updateProperties");
+      }
+
+      let pathParams = {
+        'space': space,
+        'collection-name': collectionName,
+        'thing-id': thingId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = Properties;
+      return this.apiClient.callApi(
+        '/spaces/{space}/collections/{collection-name}/things/{thing-id}/properties', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Update properties
+     * Update the value of one or more properties of a thing
+     * @param {String} space 
+     * @param {String} collectionName 
+     * @param {String} thingId 
+     * @param {module:model/Properties} properties Property values by property key
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Properties}
+     */
+    updateProperties(space, collectionName, thingId, properties) {
+      return this.updatePropertiesWithHttpInfo(space, collectionName, thingId, properties)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

@@ -1,0 +1,2304 @@
+openapi: 3.0.3
+info:
+  title: AnythingDB API reference
+  description: AnythingDB OpenAPI endpoints - OpenAPI 3.0
+  version: 1.0.0
+servers:
+  - url: 'https://api.swx.altairone.com'
+    description: SmartWorks
+tags:
+  - name: Collections
+    description: Operations on collections
+  - name: Things
+    description: Operations on thing descriptions
+  - name: Properties
+    description: Operations on properties
+  - name: Actions
+    description: Operations on actions
+  - name: Events
+    description: Operations on events
+  - name: Models
+    description: Operations on models
+  - name: Model-versions
+    description: Operations on model-versions
+  - name: Things-status
+    description: Operations on things-status
+security:
+  - bearerAuth: [ ]
+paths:
+  /spaces/{space}/collections:
+    parameters:
+      - $ref: '#/components/parameters/space'
+    post:
+      tags:
+        - Collections
+      summary: Create collection
+      operationId: addCollection
+      requestBody:
+        description: Create a new collection in the platform
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionRequest'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    get:
+      tags:
+        - Collections
+      summary: List collections
+      operationId: listCollections
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionListResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+
+    get:
+      tags:
+        - Collections
+      summary: Show collection
+      operationId: showCollection
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    put:
+      tags:
+        - Collections
+      summary: Update collection
+      operationId: updateCollection
+      requestBody:
+        description: Update an existent collection by name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionUpdateRequest'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionUpdateResponse'
+
+    delete:
+      tags:
+        - Collections
+      summary: Delete collection
+      operationId: deleteCollection
+      responses:
+        204:
+          description: The resource was deleted successfully.
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+
+    post:
+      tags:
+        - Things
+      summary: Add a thing description
+      description: Add a new thing description to the platform according to WoT specification
+      operationId: addThing
+      requestBody:
+        description: Create a new thing description in the platform
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThingRequest'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingCreateResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    get:
+      parameters:
+        - $ref: '#/components/parameters/title'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/thing-ids'
+        - $ref: '#/components/parameters/next_cursor'
+        - $ref: '#/components/parameters/previous_cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/properties'
+        - $ref: '#/components/parameters/links-rel'
+        - $ref: '#/components/parameters/links-href'
+      tags:
+        - Things
+      summary: List thing descriptions
+      description: List all thing descriptions in an array
+      operationId: listThings
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingListResponse'
+          links:
+            pagingNextPage:
+              operationId: listThings
+              parameters:
+                next_cursor: '$response.body#/paging/next_cursor'
+            pagingPreviousPage:
+              operationId: listThings
+              parameters:
+                previous_cursor: '$response.body#/paging/previous_cursor'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+
+    get:
+      tags:
+        - Things
+      summary: Show thing
+      description: Show the thing description from a thing
+      operationId: showThing
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    put:
+      tags:
+        - Things
+      summary: Update thing description
+      description: Update the thing description from a thing by Id. You need to include the whole thing description with the modifications to update it.
+      operationId: updateThing
+      requestBody:
+        description: Update an existent thing description by Id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThingUpdateRequest'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingUpdateResponse'
+    delete:
+      tags:
+        - Things
+      summary: Delete thing
+      description: Deletes all the existing information from a thing by Id. It deletes the thing description and the data.
+      operationId: deleteThing
+      responses:
+        204:
+          description: The resource was deleted successfully.
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/reset-secret:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+
+    post:
+      tags:
+        - Things
+      summary: Reset Client Secret
+      description: Reset the Client Secret for a specific thing
+      operationId: ResetThingClientSecret
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Secret'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        413:
+          description: "Payload Too Large"
+      deprecated: false
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+
+    get:
+      tags:
+        - Properties
+      summary: List properties
+      description: List all the properties from one thing in array
+      operationId: listProperties
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+    put:
+      tags:
+        - Properties
+      summary: Update properties
+      description: Update the value of one or more properties of a thing
+      operationId: updateProperties
+      requestBody:
+        description: Property values by property key
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Properties'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Properties'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+      - $ref: '#/components/parameters/property'
+
+    get:
+      tags:
+        - Properties
+      summary: Show property
+      description: Show a property from one thing
+      operationId: showProperty
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    put:
+      tags:
+        - Properties
+      summary: Update property
+      description: Update the value of a property
+      operationId: updateProperty
+      requestBody:
+        description: Update an existent thing by Id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Property'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/actions/{action}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+      - $ref: '#/components/parameters/action'
+
+    post:
+      tags:
+        - Actions
+      summary: Request action
+      description: Request action and add it to the action queue from a thing
+      operationId: addAction
+      requestBody:
+        description: Create a new action
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionRequest'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionResponse'
+              examples:
+                ActionResponseElement:
+                  $ref: '#/components/examples/ActionResponseElement1'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    get:
+      tags:
+        - Actions
+      summary: List the queue of actions from a thing
+      description: Lists the current queue of a specific action from a Thing
+      operationId: listActionsByName
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionDelayListResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/actions:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+
+    get:
+      tags:
+        - Actions
+      summary: Lists all the action queues for a thing
+      description: Lists all the queues for the different actions within a thing.
+      operationId: listActions
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionListResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/actions/{action}/{action-id}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+      - $ref: '#/components/parameters/action'
+      - $ref: '#/components/parameters/action-id'
+
+    get:
+      tags:
+        - Actions
+      summary: Show action requested
+      description: Shows a requested action from the action queues of a thing.
+      operationId: showAction
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionResponse'
+              examples:
+                ActionResponseElement1:
+                  $ref: '#/components/examples/ActionResponseElement1'
+                ActionResponseElement2:
+                  $ref: '#/components/examples/ActionResponseElement2'
+                ActionResponseElement3:
+                  $ref: '#/components/examples/ActionResponseElement3'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    put:
+      tags:
+        - Actions
+      summary: Update action inside a queue
+      description: Update the status of an existing action by Id inside of the action queue from a thing
+      operationId: updateAction
+      requestBody:
+        description: Update an existent thing by Id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionUpdateRequest'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionUpdateResponse'
+    delete:
+      tags:
+        - Actions
+      summary: Delete Action
+      description: Deletes an existing action by Id
+      operationId: deleteAction
+      responses:
+        204:
+          description: The resource was deleted successfully.
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/events/{event}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+      - $ref: '#/components/parameters/event'
+
+    post:
+      tags:
+        - Events
+      summary: Add event
+      description: Add a new event to the event history of a thing
+      operationId: addEvent
+      requestBody:
+        description: Create a new action
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRequest'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+              examples:
+                EventResponse:
+                  $ref: '#/components/examples/EventResponse1'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    get:
+      tags:
+        - Events
+      summary: List history of one type of event
+      description: List all history of one concrete event inside a thing
+      operationId: listEventsByName
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventListResponse'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/events:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+
+    get:
+      tags:
+        - Events
+      summary: List history of all events
+      description: List all history of all the events of a thing
+      operationId: listEvents
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventListResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things/{thing-id}/events/{event}/{event-id}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+      - $ref: '#/components/parameters/event'
+      - $ref: '#/components/parameters/event-id'
+
+    get:
+      tags:
+        - Events
+      summary: Show event
+      description: Show one specific event form a thing by Id
+      operationId: showEvent
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+              examples:
+                EventResponse1:
+                  $ref: '#/components/examples/EventResponse1'
+                EventResponse2:
+                  $ref: '#/components/examples/EventResponse2'
+
+  /spaces/{space}/collections/{collection-name}/models:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+
+    post:
+      tags:
+        - Models
+      summary: Create model
+      operationId: addModel
+      requestBody:
+        description: Create a new collection in the platform
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelRequest'
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    get:
+      tags:
+        - Models
+      summary: List models
+      operationId: listModels
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelListResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/models/{model-name}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/model-name'
+
+    get:
+      tags:
+        - Models
+      summary: Show model
+      operationId: showModel
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    put:
+      tags:
+        - Models
+      summary: Update model
+      operationId: updateModel
+      requestBody:
+        description: Update an existent model by name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelUpdateRequest'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelUpdateResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    delete:
+      tags:
+        - Models
+      summary: Delete model
+      operationId: deleteModel
+      responses:
+        204:
+          description: The resource was deleted successfully.
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/models/{model-name}/versions:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/model-name'
+
+    post:
+      tags:
+        - Model-versions
+      summary: Create version
+      operationId: addVersion
+      requestBody:
+        description: Create a new model version in the platform
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelVersionRequest'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersionResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    get:
+      tags:
+        - Model-versions
+      summary: List version
+      operationId: listVersion
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersionListResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/models/{model-name}/versions/{version-name}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+      - $ref: '#/components/parameters/model-name'
+      - $ref: '#/components/parameters/version-name'
+
+    get:
+      tags:
+        - Model-versions
+      summary: Show version
+      operationId: showVersion
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersionResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    put:
+      tags:
+        - Model-versions
+      summary: Update version
+      operationId: updateVersion
+      requestBody:
+        description: Update an existent model by name
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelVersionResponse'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersionResponse'
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+    delete:
+      tags:
+        - Model-versions
+      summary: Delete version
+      operationId: deleteVersion
+      responses:
+        204:
+          description: The resource was deleted successfully.
+        400:
+          $ref: '#/components/responses/AlreadyExists'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+
+  /spaces/{space}/collections/{collection-name}/things-status:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+
+    get:
+      parameters:
+        - $ref: '#/components/parameters/title'
+        - $ref: '#/components/parameters/thing-ids'
+        - $ref: '#/components/parameters/next_cursor'
+        - $ref: '#/components/parameters/previous_cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/properties'
+      tags:
+        - Things-status
+      summary: List items
+      operationId: listItems
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingStatusListResponse'
+          links:
+            pagingNextPage:
+              operationId: listItems
+              parameters:
+                next_cursor: '$response.body#/paging/next_cursor'
+            pagingPreviousPage:
+              operationId: listItems
+              parameters:
+                previous_cursor: '$response.body#/paging/previous_cursor'
+        400:
+          description: Bad Request
+          content: { }
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+          content: { }
+      x-codegen-request-body-name: body
+
+  /spaces/{space}/collections/{collection-name}/things-status/{thing-id}:
+    parameters:
+      - $ref: '#/components/parameters/space'
+      - $ref: '#/components/parameters/collection-name'
+      - $ref: '#/components/parameters/thing-id'
+
+    get:
+      tags:
+        - Things-status
+      summary: Show item
+      operationId: showItem
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThingStatusResponse'
+        400:
+          description: Bad Request
+          content: { }
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Unexpected'
+      x-codegen-request-body-name: body
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Opaque JWT
+  parameters:
+    space:
+      in: path
+      name: space
+      required: true
+      schema:
+        type: string
+        example: altair
+
+    collection-name:
+      in: path
+      name: collection-name
+      required: true
+      schema:
+        type: string
+        example: ElectronicBoards
+
+    thing-id:
+      in: path
+      name: thing-id
+      required: true
+      schema:
+        type: string
+        format: ulid
+        example: 01edb9j75vymj8p7qppm19h8nx
+
+    property:
+      in: path
+      name: property
+      required: true
+      schema:
+        type: string
+        example: memory
+
+    event:
+      in: path
+      name: event
+      required: true
+      schema:
+        type: string
+        example: highCPU
+
+    event-id:
+      in: path
+      name: event-id
+      required: true
+      schema:
+        type: string
+        format: ulid
+        example: 01EDCEZDTJX50SQTCJST5EW5NX
+
+    action:
+      in: path
+      name: action
+      required: true
+      schema:
+        type: string
+        example: delay
+
+    action-id:
+      in: path
+      name: action-id
+      required: true
+      schema:
+        type: string
+        format: ulid
+        example: 01EDCAQE78A7CP6REXV5J8BAKR
+
+    model-name:
+      in: path
+      name: model-name
+      required: true
+      schema:
+        type: string
+        example: RaspberryPiModel
+
+    version-name:
+      in: path
+      name: version-name
+      required: true
+      schema:
+        type: string
+        example: RasPiv1
+
+    title:
+      in: query
+      name: title
+      schema:
+        type: string
+      description: Filter by title
+      example: MainThing
+
+    "type":
+      in: query
+      name: "@type"
+      schema:
+        type: string
+      description: Filter by @type
+      example: cluster
+
+    thing-ids:
+      in: query
+      name: "thingID[]"
+      schema:
+        type: array
+        items:
+          type: string
+      description: Filter by multiple thing ids
+      examples:
+        oneId:
+          summary: Example of a single thingID
+          value: [ "01EDVJEMFD24360JT7434A6GS8" ] # ?thingID=01EDVJEMFD24360JT7434A6GS8
+        multipleIds:
+          summary: Example of multiple thingIDs
+          value: [ "01EDVJEMFD24360JT7434A6GS8", "01F53PMHJGCPSZX95QFJJEADS4" ] # ?thingID=01EDVJEMFD24360JT7434A6GS8&thingID=01F53PMHJGCPSZX95QFJJEADS4
+
+    next_cursor:
+      in: query
+      name: "next_cursor"
+      schema:
+        type: string
+      description: next cursor used to go to the next page of results
+      example: WyIwMUY1M1BNSEpHQ1BTWlg5NVFGSkpFQURTNCJd
+
+    previous_cursor:
+      in: query
+      name: "previous_cursor"
+      schema:
+        type: string
+      description: previous cursor used to go to the previous page of results
+      example: WyIwMUY1M1BNSEpHQ1BTWlg5NVFGSkpFQURTNCJd
+
+    limit:
+      in: query
+      name: "limit"
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 50
+      description: The numbers of items to return
+      example: 50
+
+    sort:
+      in: query
+      name: "sort"
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      style: form
+      description: sort items by field asc or desc
+      examples:
+        oneId:
+          summary: Example of a single sort field
+          value: [ "+title" ]   # ?sort=+title
+        multipleIds:
+          summary: Example of multiple sort fields
+          value: [ "+title", "+uid" ]   # ?sort=+title,+uid
+
+    properties: # see https://github.com/OAI/OpenAPI-Specification/issues/1706
+      in: query
+      name: property
+      schema:
+        type: object
+      explode: true
+      example: '{"property:temp":"gt:20", "property:dim": 80}'
+      description: |
+        Schema:
+
+            {"property:<property_name>":"<operator>:<value>"}
+
+        Supported value operators:
+          * eq  == (operator by default)
+          * neq !=
+          * gt  >
+          * gte >=
+          * lt  <
+          * lte <=
+
+    links-rel:
+      in: query
+      name: links.rel
+      schema:
+        type: string
+      description: Filter by type of link relationship
+      example: controlledBy
+
+    links-href:
+      in: query
+      name: links.href
+      schema:
+        type: string
+      description: Filter by link href
+      example: https://www.w3.org/TR/wot-thing-description/
+
+  schemas:
+    AnyValue:
+      nullable: true
+      description: Can be any value, including `null`
+      example: "Can be any value, including `null`"
+
+    BaseError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 403
+            message:
+              type: string
+              example: Access credentials are not sufficient to access this resource
+            status:
+              type: string
+              example: Forbidden
+
+    AuthZError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: Access credentials are invalid
+            reason:
+              type: string
+              example: Access token i says token is not active
+            status:
+              type: string
+              example: Unauthorized
+
+    CollectionRequest:
+      properties:
+        name:
+          type: string
+          example: ElectronicBoards
+        description:
+          type: string
+          example: My collection
+
+    CollectionResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: ElectronicBoards
+        description:
+          type: string
+          example: My collection
+      example:
+        name: ElectronicBoards
+        description: My collection
+
+    CollectionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionResponse'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+      example:
+        data:
+          - name: ElectronicBoards
+            description: My collection
+        paging:
+          next_cursor: ''
+          previous_cursor: ''
+
+    CollectionUpdateRequest:
+      properties:
+        title:
+          type: string
+          example: ElectronicBoards
+        description:
+          type: string
+          example: My electronic boards collection
+
+    CollectionUpdateResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: ElectronicBoards
+        description:
+          type: string
+          example: My electronic boards collection
+      example:
+        name: ElectronicBoards
+        description: My electronic boards collection
+
+    ThingRequest:
+      properties:
+        title:
+          type: string
+          example: SmartWorks Device
+        description:
+          type: string
+          example: My connected SmartWorks device
+        properties:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            cpu:
+              title: "CPU %"
+              description: "Device CPU usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+            disk:
+              title: "Disk %"
+              description: "Device Disk usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+            memory:
+              title: "Memory %"
+              description: "Device Memory usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+        actions:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            delay:
+              title: "Delay"
+              description: "Change sending frequency"
+              input:
+                properties:
+                  input:
+                    maximum: 100
+                    minimum: 3
+                    type: "number"
+            reboot:
+              title: "Reboot"
+              description: "Reboot device"
+        events:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            highCPU:
+              title: "High CPU"
+              description: "The CPU usage is over 50%"
+              data:
+                type: "number"
+                unit: "percent"
+
+    ThingUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          example: SmartWorks Device updated
+        description:
+          type: string
+          example: My connected SmartWorks device updated
+        properties:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            cpu:
+              title: "CPU %"
+              description: "Device CPU usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+            disk:
+              title: "Disk %"
+              description: "Device Disk usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+            memory:
+              title: "Memory %"
+              description: "Device Memory usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+        actions:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            delay:
+              title: "Delay"
+              description: "Change sending frequency"
+              input:
+                properties:
+                  input:
+                    maximum: 100
+                    minimum: 3
+                    type: "number"
+            reboot:
+              title: "Reboot"
+              description: "Reboot device"
+        events:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            highCPU:
+              title: High CPU
+              description: The CPU usage is over 50%
+              data:
+                type: number
+                unit: percent
+
+    ThingCreateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: https://api.dev.altairsc.com/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+        uid:
+          type: string
+          example: 01edb9j75vymj8p7qppm19h8nx
+        title:
+          type: string
+          example: SmartWorks Device
+        description:
+          type: string
+          example: My connected SmartWorks device
+        space:
+          type: string
+          example: altair
+        collection:
+          type: string
+          example: ElectronicBoards
+        model:
+          type: object
+          properties:
+            name:
+              type: string
+              example: ""
+            version:
+              type: number
+              example: 0
+        credentials:
+          type: object
+          properties:
+            http:
+              type: object
+              properties:
+                client_id:
+                  type: string
+                  example: altair::01edb9j75vymj8p7qppm19h8nx
+                client_secret:
+                  type: string
+                  example: SIZ2.izCuTf_PwbOsbnQekaJNz
+            mqtt:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      example: RxAg@altair
+                    pwd:
+                      type: string
+                      example: B4NQRtm2lvku2sTv
+                thing:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      example: GTdn@altair
+                    pwd:
+                      type: string
+                      example: CwPEX4QRcP7JQTAu
+        properties:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            cpu:
+              title: "CPU %"
+              description: "Device CPU usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/cpu
+            disk:
+              title: "Disk %"
+              description: "Device Disk usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/disk
+            memory:
+              title: "Memory %"
+              description: "Device Memory usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/memory
+        actions:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            delay:
+              title: "Delay"
+              description: "Change sending frequency"
+              input:
+                properties:
+                  input:
+                    maximum: 100
+                    minimum: 3
+                    type: "number"
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay
+            reboot:
+              title: "Reboot"
+              description: "Reboot device"
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/reboot
+        events:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            highCPU:
+              title: "High CPU"
+              description: "The CPU usage is over 50%"
+              data:
+                type: "number"
+                unit: "percent"
+              links:
+                - href: "/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU"
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+              rel:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties
+              rel: properties
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions
+              rel: actions
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events
+              rel: events
+        href:
+          type: string
+          example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+
+    ThingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: api.dev.altairsc.com/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+        uid:
+          type: string
+          example: 01edb9j75vymj8p7qppm19h8nx
+        title:
+          type: string
+          example: SmartWorks Device
+        description:
+          type: string
+          example: My connected SmartWorks device
+        space:
+          type: string
+          example: altair
+        collection:
+          type: string
+          example: ElectronicBoards
+        model:
+          type: object
+          properties:
+            name:
+              type: string
+              example: ""
+            version:
+              type: number
+              example: 0
+          additionalProperties: { }
+          example:
+            name: ""
+            version: 0
+        properties:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            cpu:
+              title: "CPU %"
+              description: "Device CPU usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/cpu
+            disk:
+              title: "Disk %"
+              description: "Device Disk usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/disk
+            memory:
+              title: "Memory %"
+              description: "Device Memory usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/memory
+        actions:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            delay:
+              title: "Delay"
+              description: "Change sending frequency"
+              input:
+                properties:
+                  input:
+                    maximum: 100
+                    minimum: 3
+                    type: "number"
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay
+            reboot:
+              title: "Reboot"
+              description: "Reboot device"
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/reboot
+        events:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            highCPU:
+              title: "High CPU"
+              description: "The CPU usage is over 50%"
+              data:
+                type: "number"
+                unit: "percent"
+              links:
+                - href: "/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU"
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+              rel:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties
+              rel: properties
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions
+              rel: actions
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events
+              rel: events
+        href:
+          type: string
+          example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+
+    ThingUpdateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: api.dev.altairsc.com/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+        uid:
+          type: string
+          example: 01edb9j75vymj8p7qppm19h8nx
+        title:
+          type: string
+          example: SmartWorks Device updated
+        description:
+          type: string
+          example: My connected SmartWorks device updated
+        space:
+          type: string
+          example: altair
+        collection:
+          type: string
+          example: ElectronicBoards
+        model:
+          type: object
+          properties:
+            name:
+              type: string
+              example: ""
+            version:
+              type: number
+              example: 0
+          additionalProperties: { }
+          example:
+            name: ""
+            version: 0
+        properties:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            cpu:
+              title: "CPU %"
+              description: "Device CPU usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/cpu
+            disk:
+              title: "Disk %"
+              description: "Device Disk usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/disk
+            memory:
+              title: "Memory %"
+              description: "Device Memory usage in percent"
+              type: "number"
+              unit: "percent"
+              readOnly: false
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties/memory
+        actions:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            delay:
+              title: "Delay"
+              description: "Change sending frequency"
+              input:
+                properties:
+                  input:
+                    maximum: 100
+                    minimum: 3
+                    type: "number"
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay
+            reboot:
+              title: "Reboot"
+              description: "Reboot device"
+              links:
+                - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/reboot
+        events:
+          type: object
+          properties: { }
+          additionalProperties: { }
+          example:
+            highCPU:
+              title: "High CPU"
+              description: "The CPU usage is over 50%"
+              data:
+                type: "number"
+                unit: "percent"
+              links:
+                - href: "/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU"
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+              rel:
+                type: string
+          example:
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/properties
+              rel: properties
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions
+              rel: actions
+            - href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events
+              rel: events
+        href:
+          type: string
+          example: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx
+
+    ThingListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThingResponse'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    Secret:
+      title: Secret
+      type: object
+      required:
+        - secret
+      properties:
+        client_secret:
+          type: string
+          example: "nuS7y1iQ2MmXVoBS8ivZIB6IFoNLGtgz"
+      example:
+        client_secret: "nuS7y1iQ2MmXVoBS8ivZIB6IFoNLGtgz"
+
+    Properties:
+      type: object
+      properties: { }
+      additionalProperties: { }
+      example:
+        cpu: 22
+        disk: 18
+        memory: 67
+
+    Property:
+      type: object
+      properties: { }
+      additionalProperties: { }
+      example:
+        memory: 67
+
+    ActionRequest:
+      type: object
+      properties: { }
+      additionalProperties: { }
+      example:
+        delay:
+          input:
+            delay: 5
+
+    ActionResponse:
+      type: object
+      properties: { }
+      additionalProperties: { }
+      example:
+        delay:
+          input:
+            delay: 5
+          status: pending
+          timeRequested: "2020-04-02 15:37:46+0000"
+          href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCAQE78A7CP6REXV5J8BAKR
+
+    ActionDelayListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionResponse'
+          example:
+            - delay:
+                input:
+                  delay: 5
+                status: pending
+                timeRequested: "2020-04-02 15:37:46+0000"
+                href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCAQE78A7CP6REXV5J8BAKR
+            - delay:
+                input:
+                  delay: 7
+                status: pending
+                timeRequested: "2020-04-02 15:39:54+0000"
+                href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCB9FMD0Q3QR0YV4TWY4S3E
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ActionListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionResponse'
+          example:
+            - delay:
+                input:
+                  delay: 5
+                status: pending
+                timeRequested: "2020-04-02 15:37:46+0000"
+                href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCAQE78A7CP6REXV5J8BAKR
+            - delay:
+                input:
+                  delay: 7
+                status: pending
+                timeRequested: "2020-04-02 15:39:54+0000"
+                href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCB9FMD0Q3QR0YV4TWY4S3E
+            - reboot:
+                status: pending
+                timeRequested: "2020-04-02 15:56:12+0000"
+                href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCCZYATJW1Z3D4T4BA4S2QH
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ActionUpdateRequest:
+      type: object
+      properties: { }
+      additionalProperties: { }
+      example:
+        delay:
+          status: "completed"
+
+    ActionUpdateResponse:
+      type: object
+      properties: { }
+      additionalProperties: { }
+      example:
+        delay:
+          input:
+            delay: 5
+          status: completed
+          timeRequested: "2020-04-02 15:37:46+0000"
+          timeCompleted: "2020-04-02 15:39:25+0000"
+          href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCAQE78A7CP6REXV5J8BAKR
+
+    EventRequest:
+      type: object
+      properties: { }
+      additionalProperties: { }
+      example:
+        highCPU:
+          data: 61
+
+    EventResponse:
+      type: object
+      properties: { }
+      additionalProperties: { }
+      example:
+        highCPU:
+          data: 61
+          href: "/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU/01EDCEZDTJX50SQTCJST5EW5NX"
+          timestamp: "2020-04-02 15:22:37+0000"
+
+    EventListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventResponse'
+          example:
+            - highCPU:
+                data: 61
+                href: "/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU/01EDCEZDTJX50SQTCJST5EW5NX"
+                timestamp: "2020-04-02 15:22:37+0000"
+            - highCPU:
+                data: 85
+                href: "/spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU/01EDCGYKV4YQ1CY3QHHSX8J843"
+                timestamp: "2020-04-02 15:26:42+0000"
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ModelRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: RaspberryPiModel
+        description:
+          type: string
+          example: My Raspberry Pi model
+      additionalProperties: { }
+      example:
+        name: RaspberryPiModel
+        description: My Raspberry Pi model
+
+    ModelResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: RaspberryPiModel
+        description:
+          type: string
+          example: My Raspberry Pi model
+        collection:
+          type: string
+          example: ElectronicBoards
+      additionalProperties: { }
+      example:
+        name: RaspberryPiModel
+        description: My Raspberry Pi model
+        collection: ElectronicBoards
+
+    ModelListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelResponse'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ModelUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          example: RaspberryPiModel
+        description:
+          type: string
+          example: My Raspberry Pi 4 model
+      additionalProperties: { }
+      example:
+        title: RaspberryPiModel
+        description: My Raspberry Pi 4 model
+
+    ModelUpdateResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: RaspberryPiModel
+        description:
+          type: string
+          example: My Raspberry Pi 4 model
+        collection:
+          type: string
+          example: ElectronicBoards
+      additionalProperties: { }
+      example:
+        name: RaspberryPiModel
+        description: My Raspberry Pi 4 model
+        collection: ElectronicBoards
+
+    ModelVersionRequest:
+      type: object
+      properties:
+        template:
+          properties:
+            title:
+              type: string
+              example: SmartWorks Device
+            description:
+              type: string
+              example: My connected SmartWorks device
+            properties:
+              type: object
+              properties: { }
+              additionalProperties: { }
+              example:
+                cpu:
+                  title: "CPU %"
+                  description: "Device CPU usage in percent"
+                  type: "number"
+                  unit: "percent"
+                  readOnly: false
+                disk:
+                  title: "Disk %"
+                  description: "Device Disk usage in percent"
+                  type: "number"
+                  unit: "percent"
+                  readOnly: false
+                memory:
+                  title: "Memory %"
+                  description: "Device Memory usage in percent"
+                  type: "number"
+                  unit: "percent"
+                  readOnly: false
+            actions:
+              type: object
+              properties: { }
+              additionalProperties: { }
+              example: { }
+            events:
+              type: object
+              properties: { }
+              additionalProperties: { }
+              example: { }
+
+    ModelVersionResponse:
+      allOf:
+        - type: object
+          properties:
+            version:
+              type: number
+              example: 1
+        - $ref: '#/components/schemas/ModelVersionRequest'
+
+    ModelVersionListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelVersionResponse'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+    ThingStatusResponse:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: 01edb9j75vymj8p7qppm19h8nx
+        title:
+          type: string
+          example: SmartWorks Device
+        space:
+          type: string
+          example: altair
+        collection:
+          type: string
+          example: ElectronicBoards
+        properties: { $ref: '#/components/schemas/Properties' }
+      additionalProperties: { }
+      example:
+        uid: 01edb9j75vymj8p7qppm19h8nx
+        title: SmartWorks Device
+        space: altair
+        collection: ElectronicBoards
+        properties:
+          cpu: 22
+          disk: 18
+          memory: 67
+
+    ThingStatusListResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThingStatusResponse'
+        paging:
+          type: object
+          properties:
+            next_cursor:
+              type: string
+              example: ''
+            previous_cursor:
+              type: string
+              example: ''
+
+  responses:
+    AlreadyExists:
+      description: Already Exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseError'
+          example:
+            error:
+              code: 400
+              message: Collection already exists
+              status: Already Exists
+
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseError'
+          example:
+            error:
+              code: 403
+              message: Access credentials are not sufficient to access this resource
+              status: Forbidden
+
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BaseError'
+          example:
+            error:
+              code: 404
+              message: Requested url does not match any rules
+              status: Not Found
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthZError'
+
+    Unexpected:
+      description: Unexpected error
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/AnyValue'
+
+  examples:
+    ActionResponseElement1:
+      value:
+        delay:
+          input:
+            delay: 5
+          status: pending
+          timeRequested: "2020-04-02 15:37:46+0000"
+          href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCAQE78A7CP6REXV5J8BAKR
+
+    ActionResponseElement2:
+      value:
+        delay:
+          input:
+            delay: 7
+          status: pending
+          timeRequested: "2020-04-02 15:39:54+0000"
+          href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCB9FMD0Q3QR0YV4TWY4S3E
+
+    ActionResponseElement3:
+      value:
+        reboot:
+          status: pending
+          timeRequested: "2020-04-02 15:56:12+0000"
+          href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/actions/delay/01EDCCZYATJW1Z3D4T4BA4S2QH
+
+    EventResponse1:
+      value:
+        highCPU:
+          data: 61
+          href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU/01EDCEZDTJX50SQTCJST5EW5NX
+          timestamp: "2020-04-02 15:22:37+0000"
+
+    EventResponse2:
+      value:
+        highCPU:
+          data: 85
+          href: /spaces/altair/things/01edb9j75vymj8p7qppm19h8nx/events/highCPU/01EDCGYKV4YQ1CY3QHHSX8J843
+          timestamp: "2020-04-02 15:26:42+0000"
+

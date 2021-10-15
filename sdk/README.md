@@ -173,6 +173,7 @@ Class | Method | HTTP request | Description
 *SmartWorksSdk.ModelsApi* | [**updateModel**](docs/ModelsApi.md#updateModel) | **PUT** /spaces/{space}/collections/{collection-name}/models/{model-name} | Update model
 *SmartWorksSdk.PropertiesApi* | [**listProperties**](docs/PropertiesApi.md#listProperties) | **GET** /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties | List properties
 *SmartWorksSdk.PropertiesApi* | [**showProperty**](docs/PropertiesApi.md#showProperty) | **GET** /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property} | Show property
+*SmartWorksSdk.PropertiesApi* | [**updateProperties**](docs/PropertiesApi.md#updateProperties) | **PUT** /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties | Update properties
 *SmartWorksSdk.PropertiesApi* | [**updateProperty**](docs/PropertiesApi.md#updateProperty) | **PUT** /spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property} | Update property
 *SmartWorksSdk.ThingsApi* | [**addThing**](docs/ThingsApi.md#addThing) | **POST** /spaces/{space}/collections/{collection-name}/things | Add a thing description
 *SmartWorksSdk.ThingsApi* | [**deleteThing**](docs/ThingsApi.md#deleteThing) | **DELETE** /spaces/{space}/collections/{collection-name}/things/{thing-id} | Delete thing
