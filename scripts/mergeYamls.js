@@ -10,23 +10,28 @@ fs.readdir(yamlDirectoryPath, function (err, files) {
     //handling error
     if (err) {
         return console.log('Unable to scan directory: ' + err);
-    } 
+    }
+
+    //Get list of yaml files in yaml folder
+    // Exclude index.yaml from list
     const fileList = files.filter(file =>
-        file !== 'index.yaml' &&
-        file !== 'index_test.yaml'
+        file !== 'index.yaml'
     ).map(file => `${yamlDirectoryPath}/${file}`)
 
     console.log("fileList: ", fileList)
 
+    //Merge all yaml files together
     const content = mergeYaml(fileList);
 
-    console.log("typeof content: ", typeof content)
+    //Convert yaml object to string
+    const yamlString = YAML.stringify(content)
 
+    //Write to index yaml file
     try {
-      fs.writeFileSync('yaml/index_test.yaml', YAML.stringify(content))
+      fs.writeFileSync('yaml/index.yaml', yamlString);
+      console.log("yaml/index.yaml was created successfully!")
       //file written successfully
     } catch (err) {
       console.error(err)
     }
-
 });
