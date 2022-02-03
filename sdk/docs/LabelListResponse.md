@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**[AnyOfLabelListElement1]**](AnyOfLabelListElement1.md) |  | [optional] 
+**data** | **Array** |  | [optional] 
 **paging** | **Object** |  | [optional] 
 
 

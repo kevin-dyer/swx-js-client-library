@@ -5273,8 +5273,7 @@ components:
         data:
           type: array
           items:
-            anyOf:
-              - $ref: "#/components/schemas/LabelListElement1"
+            - $ref: "#/components/schemas/LabelListElement1"
         paging:
           properties:
             next_cursor:
@@ -5318,8 +5317,7 @@ components:
         data:
           type: array
           items:
-            anyOf:
-              - $ref: "#/components/schemas/LabelRelationElement1"
+            - $ref: "#/components/schemas/LabelRelationElement1"
         paging:
           properties:
             next_cursor:
@@ -5363,9 +5361,7 @@ components:
         data:
           type: array
           items:
-            anyOf:
-              - $ref: "#/components/schemas/LabeledListItem1"
-              - $ref: "#/components/schemas/LabeledListItem1"
+            - $ref: "#/components/schemas/LabeledListItem1"
         paging:
           properties:
             next_cursor:
@@ -5382,9 +5378,7 @@ components:
         labels:
           type: array
           items:
-            anyOf:
-              - $ref: "#/components/schemas/LabelListElement1"
-              - $ref: "#/components/schemas/LabelListElement1"
+            - $ref: "#/components/schemas/LabelListElement1"
     TokenRequest:
       description: Token Body
       title: Token Request

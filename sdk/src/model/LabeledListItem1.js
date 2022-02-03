@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import AnyOfLabelListElement1LabelListElement1 from './AnyOfLabelListElement1LabelListElement1';
 
 /**
  * The LabeledListItem1 model module.
@@ -52,7 +51,7 @@ class LabeledListItem1 {
                 obj['entity_id'] = ApiClient.convertToType(data['entity_id'], 'String');
             }
             if (data.hasOwnProperty('labels')) {
-                obj['labels'] = ApiClient.convertToType(data['labels'], [AnyOfLabelListElement1LabelListElement1]);
+                obj['labels'] = ApiClient.convertToType(data['labels'], Array);
             }
         }
         return obj;
@@ -67,7 +66,7 @@ class LabeledListItem1 {
 LabeledListItem1.prototype['entity_id'] = undefined;
 
 /**
- * @member {Array.<module:model/AnyOfLabelListElement1LabelListElement1>} labels
+ * @member {Array} labels
  */
 LabeledListItem1.prototype['labels'] = undefined;
 

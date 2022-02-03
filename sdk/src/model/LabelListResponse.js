@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import AnyOfLabelListElement1 from './AnyOfLabelListElement1';
 
 /**
  * The LabelListResponse model module.
@@ -49,7 +48,7 @@ class LabelListResponse {
             obj = obj || new LabelListResponse();
 
             if (data.hasOwnProperty('data')) {
-                obj['data'] = ApiClient.convertToType(data['data'], [AnyOfLabelListElement1]);
+                obj['data'] = ApiClient.convertToType(data['data'], Array);
             }
             if (data.hasOwnProperty('paging')) {
                 obj['paging'] = ApiClient.convertToType(data['paging'], Object);
@@ -62,7 +61,7 @@ class LabelListResponse {
 }
 
 /**
- * @member {Array.<module:model/AnyOfLabelListElement1>} data
+ * @member {Array} data
  */
 LabelListResponse.prototype['data'] = undefined;
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**[AnyOfLabelRelationElement1]**](AnyOfLabelRelationElement1.md) |  | [optional] 
+**data** | **Array** |  | [optional] 
 **paging** | **Object** |  | [optional] 
 
 

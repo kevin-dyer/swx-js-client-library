@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _AnyOfLabelRelationElement = _interopRequireDefault(require("./AnyOfLabelRelationElement1"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57,7 +55,7 @@ var LabelListElementRelations = /*#__PURE__*/function () {
         obj = obj || new LabelListElementRelations();
 
         if (data.hasOwnProperty('data')) {
-          obj['data'] = _ApiClient["default"].convertToType(data['data'], [_AnyOfLabelRelationElement["default"]]);
+          obj['data'] = _ApiClient["default"].convertToType(data['data'], Array);
         }
 
         if (data.hasOwnProperty('paging')) {
@@ -72,7 +70,7 @@ var LabelListElementRelations = /*#__PURE__*/function () {
   return LabelListElementRelations;
 }();
 /**
- * @member {Array.<module:model/AnyOfLabelRelationElement1>} data
+ * @member {Array} data
  */
 
 

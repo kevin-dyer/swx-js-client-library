@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import AnyOfLabelRelationElement1 from './AnyOfLabelRelationElement1';
 
 /**
  * The LabelListElementRelations model module.
@@ -49,7 +48,7 @@ class LabelListElementRelations {
             obj = obj || new LabelListElementRelations();
 
             if (data.hasOwnProperty('data')) {
-                obj['data'] = ApiClient.convertToType(data['data'], [AnyOfLabelRelationElement1]);
+                obj['data'] = ApiClient.convertToType(data['data'], Array);
             }
             if (data.hasOwnProperty('paging')) {
                 obj['paging'] = ApiClient.convertToType(data['paging'], Object);
@@ -62,7 +61,7 @@ class LabelListElementRelations {
 }
 
 /**
- * @member {Array.<module:model/AnyOfLabelRelationElement1>} data
+ * @member {Array} data
  */
 LabelListElementRelations.prototype['data'] = undefined;
 

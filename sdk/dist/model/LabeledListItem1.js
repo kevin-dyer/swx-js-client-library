@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _AnyOfLabelListElement1LabelListElement = _interopRequireDefault(require("./AnyOfLabelListElement1LabelListElement1"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61,7 +59,7 @@ var LabeledListItem1 = /*#__PURE__*/function () {
         }
 
         if (data.hasOwnProperty('labels')) {
-          obj['labels'] = _ApiClient["default"].convertToType(data['labels'], [_AnyOfLabelListElement1LabelListElement["default"]]);
+          obj['labels'] = _ApiClient["default"].convertToType(data['labels'], Array);
         }
       }
 
@@ -78,7 +76,7 @@ var LabeledListItem1 = /*#__PURE__*/function () {
 
 LabeledListItem1.prototype['entity_id'] = undefined;
 /**
- * @member {Array.<module:model/AnyOfLabelListElement1LabelListElement1>} labels
+ * @member {Array} labels
  */
 
 LabeledListItem1.prototype['labels'] = undefined;

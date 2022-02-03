@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**[AnyOfLabeledListItem1LabeledListItem1]**](AnyOfLabeledListItem1LabeledListItem1.md) |  | [optional] 
+**data** | **Array** |  | [optional] 
 **paging** | **Object** |  | [optional] 
 
 
