@@ -12,8 +12,8 @@ The yaml files located in this repo are slightly modified. Open API generator do
 #### Merge yaml files locally
 To merge all yaml files in yaml/ (excluding index.yaml) and write to yaml/index.yaml
 ```
-    node scrips/mergeYamls.js
-`
+    node run merge-yaml
+```
 
 #### Generating code locally
 1. To generate the code, simply run the following command in the root directory of this project:
@@ -22,6 +22,16 @@ To merge all yaml files in yaml/ (excluding index.yaml) and write to yaml/index.
     openapi-generator-cli generate -i yaml/index.yaml -g javascript -o sdk/ --additional-properties=usePromises=true
     ```
 
+    or run generate-sdk script
+    ```
+    node run generate-sdk
+    ```
+
 1. After generating the code, the modules must be built by navigating to the sdk directory and running `npm install` and `npm run build`
 
 Additional details are located in the generated readme of the SDK.
+
+### Merge yaml files, Generate SDK, and install & build sdk directory
+```
+    node run build
+```
