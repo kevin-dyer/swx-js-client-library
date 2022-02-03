@@ -1,6 +1,6 @@
 {
   "name": "swx-js-sdk",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "SmartWorks JS SDK",
   "main": "index.js",
   "scripts": {
