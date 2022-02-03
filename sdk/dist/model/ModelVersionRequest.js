@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _ThingRequestProperties = _interopRequireDefault(require("./ThingRequestProperties"));
+var _ModelVersionRequestProperties = _interopRequireDefault(require("./ModelVersionRequestProperties"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -15,7 +15,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
  * The ModelVersionRequest model module.
@@ -56,6 +56,10 @@ var ModelVersionRequest = /*#__PURE__*/function () {
       if (data) {
         obj = obj || new ModelVersionRequest();
 
+        if (data.hasOwnProperty('template')) {
+          obj['template'] = _ApiClient["default"].convertToType(data['template'], Object);
+        }
+
         if (data.hasOwnProperty('title')) {
           obj['title'] = _ApiClient["default"].convertToType(data['title'], 'String');
         }
@@ -65,7 +69,7 @@ var ModelVersionRequest = /*#__PURE__*/function () {
         }
 
         if (data.hasOwnProperty('properties')) {
-          obj['properties'] = _ThingRequestProperties["default"].constructFromObject(data['properties']);
+          obj['properties'] = _ModelVersionRequestProperties["default"].constructFromObject(data['properties']);
         }
 
         if (data.hasOwnProperty('actions')) {
@@ -84,9 +88,14 @@ var ModelVersionRequest = /*#__PURE__*/function () {
   return ModelVersionRequest;
 }();
 /**
- * @member {String} title
+ * @member {Object} template
  */
 
+
+ModelVersionRequest.prototype['template'] = undefined;
+/**
+ * @member {String} title
+ */
 
 ModelVersionRequest.prototype['title'] = undefined;
 /**
@@ -95,7 +104,7 @@ ModelVersionRequest.prototype['title'] = undefined;
 
 ModelVersionRequest.prototype['description'] = undefined;
 /**
- * @member {module:model/ThingRequestProperties} properties
+ * @member {module:model/ModelVersionRequestProperties} properties
  */
 
 ModelVersionRequest.prototype['properties'] = undefined;

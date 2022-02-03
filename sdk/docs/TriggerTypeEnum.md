@@ -1,4 +1,4 @@
-# SmartWorksSdk.TriggerTypeEnum
+# MqttApiReference.TriggerTypeEnum
 
 ## Enum
 

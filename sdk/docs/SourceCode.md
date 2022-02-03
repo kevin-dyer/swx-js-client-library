@@ -1,4 +1,4 @@
-# SmartWorksSdk.SourceCode
+# MqttApiReference.SourceCode
 
 ## Properties
 

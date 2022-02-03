@@ -1,4 +1,4 @@
-# SmartWorksSdk.ThingsApi
+# MqttApiReference.ThingsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -24,16 +24,22 @@ Add a new thing description to the platform according to WoT specification
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ThingsApi();
+let apiInstance = new MqttApiReference.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingRequest = new SmartWorksSdk.ThingRequest(); // ThingRequest | Create a new thing description in the platform
+let thingRequest = new MqttApiReference.ThingRequest(); // ThingRequest | Create a new thing description in the platform
 apiInstance.addThing(space, collectionName, thingRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -57,17 +63,17 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## deleteThing
 
-> ThingDeleteResponse deleteThing(space, thingId, collectionName)
+> ThingDeleteResponse deleteThing(space, collectionName, thingId)
 
 Delete thing
 
@@ -76,17 +82,23 @@ Deletes all the existing information from a thing by Id. It deletes the thing de
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ThingsApi();
+let apiInstance = new MqttApiReference.ThingsApi();
 let space = altair; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let collectionName = ElectronicBoards; // String | 
-apiInstance.deleteThing(space, thingId, collectionName).then((data) => {
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
+apiInstance.deleteThing(space, collectionName, thingId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -100,8 +112,8 @@ apiInstance.deleteThing(space, thingId, collectionName).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
- **thingId** | **String**|  | 
  **collectionName** | **String**|  | 
+ **thingId** | **String**|  | 
 
 ### Return type
 
@@ -109,17 +121,17 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## listThings
 
-> ThingListResponse listThings(space, collectionName)
+> ThingListResponse listThings(space, collectionName, opts)
 
 List thing descriptions
 
@@ -128,16 +140,34 @@ List all thing descriptions in an array
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ThingsApi();
+let apiInstance = new MqttApiReference.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-apiInstance.listThings(space, collectionName).then((data) => {
+let opts = {
+  'title': MainThing, // String | Filter by title
+  'type': cluster, // String | Filter by @type
+  'thingID': ["01EDVJEMFD24360JT7434A6GS8"], // [String] | Filter by multiple thing ids
+  'nextCursor': WyIwMUY1M1BNSEpHQ1BTWlg5NVFGSkpFQURTNCJd, // String | next cursor used to go to the next page of results
+  'previousCursor': WyIwMUY1M1BNSEpHQ1BTWlg5NVFGSkpFQURTNCJd, // String | previous cursor used to go to the previous page of results
+  'limit': 50, // Number | The numbers of items to return
+  'sort': ["+title"], // [String] | sort items by field asc or desc
+  'property': {"property:temp":"gt:20", "property:dim": 80}, // Object | Schema:      {\"property:<property_name>\":\"<operator>:<value>\"}  Supported value operators:   * eq  == (operator by default)   * neq !=   * gt  >   * gte >=   * lt  <   * lte <= 
+  'linksRel': controlledBy, // String | Filter by type of link relationship
+  'linksHref': https://www.w3.org/TR/wot-thing-description/ // String | Filter by link href
+};
+apiInstance.listThings(space, collectionName, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -152,6 +182,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
  **collectionName** | **String**|  | 
+ **title** | **String**| Filter by title | [optional] 
+ **type** | **String**| Filter by @type | [optional] 
+ **thingID** | [**[String]**](String.md)| Filter by multiple thing ids | [optional] 
+ **nextCursor** | **String**| next cursor used to go to the next page of results | [optional] 
+ **previousCursor** | **String**| previous cursor used to go to the previous page of results | [optional] 
+ **limit** | **Number**| The numbers of items to return | [optional] [default to 50]
+ **sort** | [**[String]**](String.md)| sort items by field asc or desc | [optional] 
+ **property** | [**Object**](.md)| Schema:      {\&quot;property:&lt;property_name&gt;\&quot;:\&quot;&lt;operator&gt;:&lt;value&gt;\&quot;}  Supported value operators:   * eq  &#x3D;&#x3D; (operator by default)   * neq !&#x3D;   * gt  &gt;   * gte &gt;&#x3D;   * lt  &lt;   * lte &lt;&#x3D;  | [optional] 
+ **linksRel** | **String**| Filter by type of link relationship | [optional] 
+ **linksHref** | **String**| Filter by link href | [optional] 
 
 ### Return type
 
@@ -159,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -169,7 +209,7 @@ Name | Type | Description  | Notes
 
 ## resetClientSecret
 
-> Secret resetClientSecret(space, thingId, collectionName)
+> Secret resetClientSecret(space, collectionName, thingId)
 
 Reset Client Secret
 
@@ -178,17 +218,23 @@ Reset the Client Secret for a specific thing
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ThingsApi();
+let apiInstance = new MqttApiReference.ThingsApi();
 let space = altair; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let collectionName = ElectronicBoards; // String | 
-apiInstance.resetClientSecret(space, thingId, collectionName).then((data) => {
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
+apiInstance.resetClientSecret(space, collectionName, thingId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -202,8 +248,8 @@ apiInstance.resetClientSecret(space, thingId, collectionName).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
- **thingId** | **String**|  | 
  **collectionName** | **String**|  | 
+ **thingId** | **String**|  | 
 
 ### Return type
 
@@ -211,7 +257,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -221,7 +267,7 @@ Name | Type | Description  | Notes
 
 ## showThing
 
-> ThingResponse showThing(space, thingId, collectionName)
+> ThingResponse showThing(space, collectionName, thingId)
 
 Show thing
 
@@ -230,17 +276,23 @@ Show the thing description from a thing
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ThingsApi();
+let apiInstance = new MqttApiReference.ThingsApi();
 let space = altair; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let collectionName = ElectronicBoards; // String | 
-apiInstance.showThing(space, thingId, collectionName).then((data) => {
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
+apiInstance.showThing(space, collectionName, thingId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -254,8 +306,8 @@ apiInstance.showThing(space, thingId, collectionName).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
- **thingId** | **String**|  | 
  **collectionName** | **String**|  | 
+ **thingId** | **String**|  | 
 
 ### Return type
 
@@ -263,17 +315,17 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## updateThing
 
-> ThingUpdateResponse updateThing(space, thingId, collectionName, thingUpdateRequest)
+> ThingUpdateResponse updateThing(space, collectionName, thingId, thingUpdateRequest)
 
 Update thing description
 
@@ -282,18 +334,24 @@ Update the thing description from a thing by Id. You need to include the whole t
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ThingsApi();
+let apiInstance = new MqttApiReference.ThingsApi();
 let space = altair; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingUpdateRequest = new SmartWorksSdk.ThingUpdateRequest(); // ThingUpdateRequest | Update an existent thing description by Id
-apiInstance.updateThing(space, thingId, collectionName, thingUpdateRequest).then((data) => {
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
+let thingUpdateRequest = new MqttApiReference.ThingUpdateRequest(); // ThingUpdateRequest | Update an existent thing description by Id
+apiInstance.updateThing(space, collectionName, thingId, thingUpdateRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -307,8 +365,8 @@ apiInstance.updateThing(space, thingId, collectionName, thingUpdateRequest).then
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
- **thingId** | **String**|  | 
  **collectionName** | **String**|  | 
+ **thingId** | **String**|  | 
  **thingUpdateRequest** | [**ThingUpdateRequest**](ThingUpdateRequest.md)| Update an existent thing description by Id | 
 
 ### Return type
@@ -317,7 +375,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

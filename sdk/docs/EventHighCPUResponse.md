@@ -1,4 +1,4 @@
-# SmartWorksSdk.EventHighCPUResponse
+# MqttApiReference.EventHighCPUResponse
 
 ## Properties
 

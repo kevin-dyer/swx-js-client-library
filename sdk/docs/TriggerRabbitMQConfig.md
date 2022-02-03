@@ -1,4 +1,4 @@
-# SmartWorksSdk.TriggerRabbitMQConfig
+# MqttApiReference.TriggerRabbitMQConfig
 
 ## Properties
 

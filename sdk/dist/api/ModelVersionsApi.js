@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
+var _BaseError = _interopRequireDefault(require("../model/BaseError"));
+
 var _ModelVersionListResponse = _interopRequireDefault(require("../model/ModelVersionListResponse"));
 
 var _ModelVersionRequest = _interopRequireDefault(require("../model/ModelVersionRequest"));
@@ -19,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
 * ModelVersions service.
@@ -81,9 +83,9 @@ var ModelVersionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ModelVersionResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models/{model-name}/versions', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -107,6 +109,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
      * Delete version
      * @param {String} space 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @param {String} modelName 
      * @param {String} versionName 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -114,7 +117,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
   }, {
     key: "deleteVersionWithHttpInfo",
-    value: function deleteVersionWithHttpInfo(space, collectionName, modelName, versionName) {
+    value: function deleteVersionWithHttpInfo(space, collectionName, thingId, modelName, versionName) {
       var postBody = null; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
@@ -124,6 +127,11 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
       if (collectionName === undefined || collectionName === null) {
         throw new Error("Missing the required parameter 'collectionName' when calling deleteVersion");
+      } // verify the required parameter 'thingId' is set
+
+
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling deleteVersion");
       } // verify the required parameter 'modelName' is set
 
 
@@ -139,15 +147,16 @@ var ModelVersionsApi = /*#__PURE__*/function () {
       var pathParams = {
         'space': space,
         'collection-name': collectionName,
+        'thing-id': thingId,
         'model-name': modelName,
         'version-name': versionName
       };
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = [];
+      var accepts = ['application/json', '*/*'];
       var returnType = null;
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models/{model-name}/versions/{version-name}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -155,6 +164,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
      * Delete version
      * @param {String} space 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @param {String} modelName 
      * @param {String} versionName 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
@@ -162,8 +172,8 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
   }, {
     key: "deleteVersion",
-    value: function deleteVersion(space, collectionName, modelName, versionName) {
-      return this.deleteVersionWithHttpInfo(space, collectionName, modelName, versionName).then(function (response_and_data) {
+    value: function deleteVersion(space, collectionName, thingId, modelName, versionName) {
+      return this.deleteVersionWithHttpInfo(space, collectionName, thingId, modelName, versionName).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -202,9 +212,9 @@ var ModelVersionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ModelVersionListResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models/{model-name}/versions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -227,6 +237,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
      * Show version
      * @param {String} space 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @param {String} modelName 
      * @param {String} versionName 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ModelVersionResponse} and HTTP response
@@ -234,7 +245,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
   }, {
     key: "showVersionWithHttpInfo",
-    value: function showVersionWithHttpInfo(space, collectionName, modelName, versionName) {
+    value: function showVersionWithHttpInfo(space, collectionName, thingId, modelName, versionName) {
       var postBody = null; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
@@ -244,6 +255,11 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
       if (collectionName === undefined || collectionName === null) {
         throw new Error("Missing the required parameter 'collectionName' when calling showVersion");
+      } // verify the required parameter 'thingId' is set
+
+
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling showVersion");
       } // verify the required parameter 'modelName' is set
 
 
@@ -259,15 +275,16 @@ var ModelVersionsApi = /*#__PURE__*/function () {
       var pathParams = {
         'space': space,
         'collection-name': collectionName,
+        'thing-id': thingId,
         'model-name': modelName,
         'version-name': versionName
       };
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ModelVersionResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models/{model-name}/versions/{version-name}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -275,6 +292,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
      * Show version
      * @param {String} space 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @param {String} modelName 
      * @param {String} versionName 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ModelVersionResponse}
@@ -282,8 +300,8 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
   }, {
     key: "showVersion",
-    value: function showVersion(space, collectionName, modelName, versionName) {
-      return this.showVersionWithHttpInfo(space, collectionName, modelName, versionName).then(function (response_and_data) {
+    value: function showVersion(space, collectionName, thingId, modelName, versionName) {
+      return this.showVersionWithHttpInfo(space, collectionName, thingId, modelName, versionName).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -291,6 +309,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
      * Update version
      * @param {String} space 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @param {String} modelName 
      * @param {String} versionName 
      * @param {module:model/ModelVersionResponse} modelVersionResponse Update an existent model by name
@@ -299,7 +318,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
   }, {
     key: "updateVersionWithHttpInfo",
-    value: function updateVersionWithHttpInfo(space, collectionName, modelName, versionName, modelVersionResponse) {
+    value: function updateVersionWithHttpInfo(space, collectionName, thingId, modelName, versionName, modelVersionResponse) {
       var postBody = modelVersionResponse; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
@@ -309,6 +328,11 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
       if (collectionName === undefined || collectionName === null) {
         throw new Error("Missing the required parameter 'collectionName' when calling updateVersion");
+      } // verify the required parameter 'thingId' is set
+
+
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling updateVersion");
       } // verify the required parameter 'modelName' is set
 
 
@@ -329,15 +353,16 @@ var ModelVersionsApi = /*#__PURE__*/function () {
       var pathParams = {
         'space': space,
         'collection-name': collectionName,
+        'thing-id': thingId,
         'model-name': modelName,
         'version-name': versionName
       };
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ModelVersionResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models/{model-name}/versions/{version-name}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -345,6 +370,7 @@ var ModelVersionsApi = /*#__PURE__*/function () {
      * Update version
      * @param {String} space 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @param {String} modelName 
      * @param {String} versionName 
      * @param {module:model/ModelVersionResponse} modelVersionResponse Update an existent model by name
@@ -353,8 +379,8 @@ var ModelVersionsApi = /*#__PURE__*/function () {
 
   }, {
     key: "updateVersion",
-    value: function updateVersion(space, collectionName, modelName, versionName, modelVersionResponse) {
-      return this.updateVersionWithHttpInfo(space, collectionName, modelName, versionName, modelVersionResponse).then(function (response_and_data) {
+    value: function updateVersion(space, collectionName, thingId, modelName, versionName, modelVersionResponse) {
+      return this.updateVersionWithHttpInfo(space, collectionName, thingId, modelName, versionName, modelVersionResponse).then(function (response_and_data) {
         return response_and_data.data;
       });
     }

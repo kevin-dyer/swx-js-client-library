@@ -1,4 +1,4 @@
-# SmartWorksSdk.EventsApi
+# MqttApiReference.EventsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## addEvent
 
-> EventResponse addEvent(space, collectionName, thingId, event, eventRequest)
+> EventResponse addEvent(space, collectionName, thingId, event, requestBody)
 
 Add event
 
@@ -22,19 +22,25 @@ Add a new event to the event history of a thing
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.EventsApi();
+let apiInstance = new MqttApiReference.EventsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let event = highCPU; // String | 
-let eventRequest = new SmartWorksSdk.EventRequest(); // EventRequest | Create a new action
-apiInstance.addEvent(space, collectionName, thingId, event, eventRequest).then((data) => {
+let requestBody = {key: null}; // {String: Object} | Create a new action
+apiInstance.addEvent(space, collectionName, thingId, event, requestBody).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -51,7 +57,7 @@ Name | Type | Description  | Notes
  **collectionName** | **String**|  | 
  **thingId** | **String**|  | 
  **event** | **String**|  | 
- **eventRequest** | [**EventRequest**](EventRequest.md)| Create a new action | 
+ **requestBody** | [**{String: Object}**](Object.md)| Create a new action | 
 
 ### Return type
 
@@ -59,12 +65,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## listEvents
@@ -78,16 +84,22 @@ List all history of all the events of a thing
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.EventsApi();
+let apiInstance = new MqttApiReference.EventsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 apiInstance.listEvents(space, collectionName, thingId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -111,12 +123,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## listEventsByName
@@ -130,16 +142,22 @@ List all history of one concrete event inside a thing
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.EventsApi();
+let apiInstance = new MqttApiReference.EventsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let event = highCPU; // String | 
 apiInstance.listEventsByName(space, collectionName, thingId, event).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -165,7 +183,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -184,16 +202,22 @@ Show one specific event form a thing by Id
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.EventsApi();
+let apiInstance = new MqttApiReference.EventsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let event = highCPU; // String | 
 let eventId = 01EDCEZDTJX50SQTCJST5EW5NX; // String | 
 apiInstance.showEvent(space, collectionName, thingId, event, eventId).then((data) => {
@@ -221,7 +245,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

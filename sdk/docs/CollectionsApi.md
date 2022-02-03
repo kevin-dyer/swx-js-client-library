@@ -1,4 +1,4 @@
-# SmartWorksSdk.CollectionsApi
+# MqttApiReference.CollectionsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -21,15 +21,21 @@ Create collection
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.CollectionsApi();
+let apiInstance = new MqttApiReference.CollectionsApi();
 let space = altair; // String | 
-let collectionRequest = new SmartWorksSdk.CollectionRequest(); // CollectionRequest | Create a new collection in the platform
+let collectionRequest = new MqttApiReference.CollectionRequest(); // CollectionRequest | Create a new collection in the platform
 apiInstance.addCollection(space, collectionRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -52,12 +58,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## deleteCollection
@@ -69,13 +75,19 @@ Delete collection
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.CollectionsApi();
+let apiInstance = new MqttApiReference.CollectionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 apiInstance.deleteCollection(space, collectionName).then(() => {
@@ -100,12 +112,12 @@ null (empty response body)
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json, */*
 
 
 ## listCollections
@@ -117,13 +129,19 @@ List collections
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.CollectionsApi();
+let apiInstance = new MqttApiReference.CollectionsApi();
 let space = altair; // String | 
 apiInstance.listCollections(space).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -146,12 +164,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## showCollection
@@ -163,13 +181,19 @@ Show collection
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.CollectionsApi();
+let apiInstance = new MqttApiReference.CollectionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 apiInstance.showCollection(space, collectionName).then((data) => {
@@ -194,12 +218,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## updateCollection
@@ -211,16 +235,22 @@ Update collection
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.CollectionsApi();
+let apiInstance = new MqttApiReference.CollectionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let collectionUpdateRequest = new SmartWorksSdk.CollectionUpdateRequest(); // CollectionUpdateRequest | Update an existent collection by name
+let collectionUpdateRequest = new MqttApiReference.CollectionUpdateRequest(); // CollectionUpdateRequest | Update an existent collection by name
 apiInstance.updateCollection(space, collectionName, collectionUpdateRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -244,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

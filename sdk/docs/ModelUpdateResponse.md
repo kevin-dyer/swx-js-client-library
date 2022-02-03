@@ -1,10 +1,12 @@
-# SmartWorksSdk.ModelUpdateResponse
+# MqttApiReference.ModelUpdateResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **String** |  | [optional] 
+**name** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
+**collection** | **String** |  | [optional] 
+**title** | **String** |  | [optional] 
 
 

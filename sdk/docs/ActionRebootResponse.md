@@ -1,4 +1,4 @@
-# SmartWorksSdk.ActionRebootResponse
+# MqttApiReference.ActionRebootResponse
 
 ## Properties
 

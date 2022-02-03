@@ -1,4 +1,4 @@
-# SmartWorksSdk.ThingStatusResponse
+# MqttApiReference.ThingStatusResponse
 
 ## Properties
 

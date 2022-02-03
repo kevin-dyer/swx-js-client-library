@@ -3,12 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "ApiClient", {
-  enumerable: true,
-  get: function get() {
-    return _ApiClient["default"];
-  }
-});
 Object.defineProperty(exports, "ActionDelay", {
   enumerable: true,
   get: function get() {
@@ -123,6 +117,18 @@ Object.defineProperty(exports, "ActionUpdateResponseDelay", {
     return _ActionUpdateResponseDelay["default"];
   }
 });
+Object.defineProperty(exports, "ActionsApi", {
+  enumerable: true,
+  get: function get() {
+    return _ActionsApi["default"];
+  }
+});
+Object.defineProperty(exports, "ApiClient", {
+  enumerable: true,
+  get: function get() {
+    return _ApiClient["default"];
+  }
+});
 Object.defineProperty(exports, "AuthZError", {
   enumerable: true,
   get: function get() {
@@ -165,6 +171,12 @@ Object.defineProperty(exports, "CollectionListResponse", {
     return _CollectionListResponse["default"];
   }
 });
+Object.defineProperty(exports, "CollectionListResponsePaging", {
+  enumerable: true,
+  get: function get() {
+    return _CollectionListResponsePaging["default"];
+  }
+});
 Object.defineProperty(exports, "CollectionRequest", {
   enumerable: true,
   get: function get() {
@@ -187,6 +199,30 @@ Object.defineProperty(exports, "CollectionUpdateResponse", {
   enumerable: true,
   get: function get() {
     return _CollectionUpdateResponse["default"];
+  }
+});
+Object.defineProperty(exports, "CollectionsApi", {
+  enumerable: true,
+  get: function get() {
+    return _CollectionsApi["default"];
+  }
+});
+Object.defineProperty(exports, "CreateLabel", {
+  enumerable: true,
+  get: function get() {
+    return _CreateLabel["default"];
+  }
+});
+Object.defineProperty(exports, "CreateLabelRelation", {
+  enumerable: true,
+  get: function get() {
+    return _CreateLabelRelation["default"];
+  }
+});
+Object.defineProperty(exports, "CreateLabelResponse", {
+  enumerable: true,
+  get: function get() {
+    return _CreateLabelResponse["default"];
   }
 });
 Object.defineProperty(exports, "CreateMQTTLabelCredentials", {
@@ -261,6 +297,12 @@ Object.defineProperty(exports, "EventHighCPUResponse", {
     return _EventHighCPUResponse["default"];
   }
 });
+Object.defineProperty(exports, "EventListResponse", {
+  enumerable: true,
+  get: function get() {
+    return _EventListResponse["default"];
+  }
+});
 Object.defineProperty(exports, "EventRequest", {
   enumerable: true,
   get: function get() {
@@ -283,6 +325,12 @@ Object.defineProperty(exports, "EventResponseHighCPU", {
   enumerable: true,
   get: function get() {
     return _EventResponseHighCPU["default"];
+  }
+});
+Object.defineProperty(exports, "EventsApi", {
+  enumerable: true,
+  get: function get() {
+    return _EventsApi["default"];
   }
 });
 Object.defineProperty(exports, "Function", {
@@ -315,6 +363,12 @@ Object.defineProperty(exports, "Functions", {
     return _Functions["default"];
   }
 });
+Object.defineProperty(exports, "FunctionsApi", {
+  enumerable: true,
+  get: function get() {
+    return _FunctionsApi["default"];
+  }
+});
 Object.defineProperty(exports, "FunctionsPaging", {
   enumerable: true,
   get: function get() {
@@ -325,6 +379,66 @@ Object.defineProperty(exports, "InfoResponse", {
   enumerable: true,
   get: function get() {
     return _InfoResponse["default"];
+  }
+});
+Object.defineProperty(exports, "ItemsApi", {
+  enumerable: true,
+  get: function get() {
+    return _ItemsApi["default"];
+  }
+});
+Object.defineProperty(exports, "LabelApi", {
+  enumerable: true,
+  get: function get() {
+    return _LabelApi["default"];
+  }
+});
+Object.defineProperty(exports, "LabelDeleteResponse", {
+  enumerable: true,
+  get: function get() {
+    return _LabelDeleteResponse["default"];
+  }
+});
+Object.defineProperty(exports, "LabelListElement1", {
+  enumerable: true,
+  get: function get() {
+    return _LabelListElement["default"];
+  }
+});
+Object.defineProperty(exports, "LabelListElementRelations", {
+  enumerable: true,
+  get: function get() {
+    return _LabelListElementRelations["default"];
+  }
+});
+Object.defineProperty(exports, "LabelListResponse", {
+  enumerable: true,
+  get: function get() {
+    return _LabelListResponse["default"];
+  }
+});
+Object.defineProperty(exports, "LabelRelationElement1", {
+  enumerable: true,
+  get: function get() {
+    return _LabelRelationElement["default"];
+  }
+});
+Object.defineProperty(exports, "LabeledEntitiesApi", {
+  enumerable: true,
+  get: function get() {
+    return _LabeledEntitiesApi["default"];
+  }
+});
+Object.defineProperty(exports, "LabeledListItem1", {
+  enumerable: true,
+  get: function get() {
+    return _LabeledListItem["default"];
+  }
+});
+Object.defineProperty(exports, "LabeledListResponse", {
+  enumerable: true,
+  get: function get() {
+    return _LabeledListResponse["default"];
   }
 });
 Object.defineProperty(exports, "ListCredentialsResponse", {
@@ -381,10 +495,34 @@ Object.defineProperty(exports, "MQTTAccountProperties", {
     return _MQTTAccountProperties["default"];
   }
 });
+Object.defineProperty(exports, "MQTTCredentialsApi", {
+  enumerable: true,
+  get: function get() {
+    return _MQTTCredentialsApi["default"];
+  }
+});
 Object.defineProperty(exports, "MQTTLabel", {
   enumerable: true,
   get: function get() {
     return _MQTTLabel["default"];
+  }
+});
+Object.defineProperty(exports, "MQTTLabelsApi", {
+  enumerable: true,
+  get: function get() {
+    return _MQTTLabelsApi["default"];
+  }
+});
+Object.defineProperty(exports, "MQTTThingsApi", {
+  enumerable: true,
+  get: function get() {
+    return _MQTTThingsApi["default"];
+  }
+});
+Object.defineProperty(exports, "MQTTUsernameApi", {
+  enumerable: true,
+  get: function get() {
+    return _MQTTUsernameApi["default"];
   }
 });
 Object.defineProperty(exports, "ModelListResponse", {
@@ -429,16 +567,52 @@ Object.defineProperty(exports, "ModelVersionRequest", {
     return _ModelVersionRequest["default"];
   }
 });
+Object.defineProperty(exports, "ModelVersionRequestProperties", {
+  enumerable: true,
+  get: function get() {
+    return _ModelVersionRequestProperties["default"];
+  }
+});
 Object.defineProperty(exports, "ModelVersionResponse", {
   enumerable: true,
   get: function get() {
     return _ModelVersionResponse["default"];
   }
 });
+Object.defineProperty(exports, "ModelVersionResponseAllOf", {
+  enumerable: true,
+  get: function get() {
+    return _ModelVersionResponseAllOf["default"];
+  }
+});
+Object.defineProperty(exports, "ModelVersionsApi", {
+  enumerable: true,
+  get: function get() {
+    return _ModelVersionsApi["default"];
+  }
+});
+Object.defineProperty(exports, "ModelsApi", {
+  enumerable: true,
+  get: function get() {
+    return _ModelsApi["default"];
+  }
+});
+Object.defineProperty(exports, "OAuthApi", {
+  enumerable: true,
+  get: function get() {
+    return _OAuthApi["default"];
+  }
+});
 Object.defineProperty(exports, "Properties", {
   enumerable: true,
   get: function get() {
     return _Properties["default"];
+  }
+});
+Object.defineProperty(exports, "PropertiesApi", {
+  enumerable: true,
+  get: function get() {
+    return _PropertiesApi["default"];
   }
 });
 Object.defineProperty(exports, "Property", {
@@ -531,12 +705,6 @@ Object.defineProperty(exports, "ThingCreateResponse", {
     return _ThingCreateResponse["default"];
   }
 });
-Object.defineProperty(exports, "ThingCreateResponseActions", {
-  enumerable: true,
-  get: function get() {
-    return _ThingCreateResponseActions["default"];
-  }
-});
 Object.defineProperty(exports, "ThingCreateResponseCredentials", {
   enumerable: true,
   get: function get() {
@@ -567,22 +735,10 @@ Object.defineProperty(exports, "ThingCreateResponseCredentialsMqttThing", {
     return _ThingCreateResponseCredentialsMqttThing["default"];
   }
 });
-Object.defineProperty(exports, "ThingCreateResponseEvents", {
-  enumerable: true,
-  get: function get() {
-    return _ThingCreateResponseEvents["default"];
-  }
-});
 Object.defineProperty(exports, "ThingCreateResponseLinks", {
   enumerable: true,
   get: function get() {
     return _ThingCreateResponseLinks["default"];
-  }
-});
-Object.defineProperty(exports, "ThingCreateResponseProperties", {
-  enumerable: true,
-  get: function get() {
-    return _ThingCreateResponseProperties["default"];
   }
 });
 Object.defineProperty(exports, "ThingDeleteResponse", {
@@ -607,24 +763,6 @@ Object.defineProperty(exports, "ThingRequest", {
   enumerable: true,
   get: function get() {
     return _ThingRequest["default"];
-  }
-});
-Object.defineProperty(exports, "ThingRequestActions", {
-  enumerable: true,
-  get: function get() {
-    return _ThingRequestActions["default"];
-  }
-});
-Object.defineProperty(exports, "ThingRequestEvents", {
-  enumerable: true,
-  get: function get() {
-    return _ThingRequestEvents["default"];
-  }
-});
-Object.defineProperty(exports, "ThingRequestProperties", {
-  enumerable: true,
-  get: function get() {
-    return _ThingRequestProperties["default"];
   }
 });
 Object.defineProperty(exports, "ThingResponse", {
@@ -655,6 +793,18 @@ Object.defineProperty(exports, "ThingUpdateResponse", {
   enumerable: true,
   get: function get() {
     return _ThingUpdateResponse["default"];
+  }
+});
+Object.defineProperty(exports, "ThingsApi", {
+  enumerable: true,
+  get: function get() {
+    return _ThingsApi["default"];
+  }
+});
+Object.defineProperty(exports, "TokenResponse", {
+  enumerable: true,
+  get: function get() {
+    return _TokenResponse["default"];
   }
 });
 Object.defineProperty(exports, "Trigger", {
@@ -693,6 +843,12 @@ Object.defineProperty(exports, "Triggers", {
     return _Triggers["default"];
   }
 });
+Object.defineProperty(exports, "TriggersApi", {
+  enumerable: true,
+  get: function get() {
+    return _TriggersApi["default"];
+  }
+});
 Object.defineProperty(exports, "UpdateMQTTCredentials", {
   enumerable: true,
   get: function get() {
@@ -715,90 +871,6 @@ Object.defineProperty(exports, "UpdateMQTTPassword", {
   enumerable: true,
   get: function get() {
     return _UpdateMQTTPassword["default"];
-  }
-});
-Object.defineProperty(exports, "ActionsApi", {
-  enumerable: true,
-  get: function get() {
-    return _ActionsApi["default"];
-  }
-});
-Object.defineProperty(exports, "CollectionsApi", {
-  enumerable: true,
-  get: function get() {
-    return _CollectionsApi["default"];
-  }
-});
-Object.defineProperty(exports, "EventsApi", {
-  enumerable: true,
-  get: function get() {
-    return _EventsApi["default"];
-  }
-});
-Object.defineProperty(exports, "FunctionsApi", {
-  enumerable: true,
-  get: function get() {
-    return _FunctionsApi["default"];
-  }
-});
-Object.defineProperty(exports, "ItemsApi", {
-  enumerable: true,
-  get: function get() {
-    return _ItemsApi["default"];
-  }
-});
-Object.defineProperty(exports, "MQTTCredentialsApi", {
-  enumerable: true,
-  get: function get() {
-    return _MQTTCredentialsApi["default"];
-  }
-});
-Object.defineProperty(exports, "MQTTLabelsApi", {
-  enumerable: true,
-  get: function get() {
-    return _MQTTLabelsApi["default"];
-  }
-});
-Object.defineProperty(exports, "MQTTThingsApi", {
-  enumerable: true,
-  get: function get() {
-    return _MQTTThingsApi["default"];
-  }
-});
-Object.defineProperty(exports, "MQTTUsernameApi", {
-  enumerable: true,
-  get: function get() {
-    return _MQTTUsernameApi["default"];
-  }
-});
-Object.defineProperty(exports, "ModelVersionsApi", {
-  enumerable: true,
-  get: function get() {
-    return _ModelVersionsApi["default"];
-  }
-});
-Object.defineProperty(exports, "ModelsApi", {
-  enumerable: true,
-  get: function get() {
-    return _ModelsApi["default"];
-  }
-});
-Object.defineProperty(exports, "PropertiesApi", {
-  enumerable: true,
-  get: function get() {
-    return _PropertiesApi["default"];
-  }
-});
-Object.defineProperty(exports, "ThingsApi", {
-  enumerable: true,
-  get: function get() {
-    return _ThingsApi["default"];
-  }
-});
-Object.defineProperty(exports, "TriggersApi", {
-  enumerable: true,
-  get: function get() {
-    return _TriggersApi["default"];
   }
 });
 
@@ -856,6 +928,8 @@ var _BaseErrorError = _interopRequireDefault(require("./model/BaseErrorError"));
 
 var _CollectionListResponse = _interopRequireDefault(require("./model/CollectionListResponse"));
 
+var _CollectionListResponsePaging = _interopRequireDefault(require("./model/CollectionListResponsePaging"));
+
 var _CollectionRequest = _interopRequireDefault(require("./model/CollectionRequest"));
 
 var _CollectionResponse = _interopRequireDefault(require("./model/CollectionResponse"));
@@ -863,6 +937,12 @@ var _CollectionResponse = _interopRequireDefault(require("./model/CollectionResp
 var _CollectionUpdateRequest = _interopRequireDefault(require("./model/CollectionUpdateRequest"));
 
 var _CollectionUpdateResponse = _interopRequireDefault(require("./model/CollectionUpdateResponse"));
+
+var _CreateLabel = _interopRequireDefault(require("./model/CreateLabel"));
+
+var _CreateLabelRelation = _interopRequireDefault(require("./model/CreateLabelRelation"));
+
+var _CreateLabelResponse = _interopRequireDefault(require("./model/CreateLabelResponse"));
 
 var _CreateMQTTLabelCredentials = _interopRequireDefault(require("./model/CreateMQTTLabelCredentials"));
 
@@ -888,6 +968,8 @@ var _EventHighCPUListResponse = _interopRequireDefault(require("./model/EventHig
 
 var _EventHighCPUResponse = _interopRequireDefault(require("./model/EventHighCPUResponse"));
 
+var _EventListResponse = _interopRequireDefault(require("./model/EventListResponse"));
+
 var _EventRequest = _interopRequireDefault(require("./model/EventRequest"));
 
 var _EventRequestHighCPU = _interopRequireDefault(require("./model/EventRequestHighCPU"));
@@ -909,6 +991,20 @@ var _Functions = _interopRequireDefault(require("./model/Functions"));
 var _FunctionsPaging = _interopRequireDefault(require("./model/FunctionsPaging"));
 
 var _InfoResponse = _interopRequireDefault(require("./model/InfoResponse"));
+
+var _LabelDeleteResponse = _interopRequireDefault(require("./model/LabelDeleteResponse"));
+
+var _LabelListElement = _interopRequireDefault(require("./model/LabelListElement1"));
+
+var _LabelListElementRelations = _interopRequireDefault(require("./model/LabelListElementRelations"));
+
+var _LabelListResponse = _interopRequireDefault(require("./model/LabelListResponse"));
+
+var _LabelRelationElement = _interopRequireDefault(require("./model/LabelRelationElement1"));
+
+var _LabeledListItem = _interopRequireDefault(require("./model/LabeledListItem1"));
+
+var _LabeledListResponse = _interopRequireDefault(require("./model/LabeledListResponse"));
 
 var _ListCredentialsResponse = _interopRequireDefault(require("./model/ListCredentialsResponse"));
 
@@ -944,7 +1040,11 @@ var _ModelVersionListResponse = _interopRequireDefault(require("./model/ModelVer
 
 var _ModelVersionRequest = _interopRequireDefault(require("./model/ModelVersionRequest"));
 
+var _ModelVersionRequestProperties = _interopRequireDefault(require("./model/ModelVersionRequestProperties"));
+
 var _ModelVersionResponse = _interopRequireDefault(require("./model/ModelVersionResponse"));
+
+var _ModelVersionResponseAllOf = _interopRequireDefault(require("./model/ModelVersionResponseAllOf"));
 
 var _Properties = _interopRequireDefault(require("./model/Properties"));
 
@@ -978,8 +1078,6 @@ var _SourceCode = _interopRequireDefault(require("./model/SourceCode"));
 
 var _ThingCreateResponse = _interopRequireDefault(require("./model/ThingCreateResponse"));
 
-var _ThingCreateResponseActions = _interopRequireDefault(require("./model/ThingCreateResponseActions"));
-
 var _ThingCreateResponseCredentials = _interopRequireDefault(require("./model/ThingCreateResponseCredentials"));
 
 var _ThingCreateResponseCredentialsHttp = _interopRequireDefault(require("./model/ThingCreateResponseCredentialsHttp"));
@@ -990,11 +1088,7 @@ var _ThingCreateResponseCredentialsMqttData = _interopRequireDefault(require("./
 
 var _ThingCreateResponseCredentialsMqttThing = _interopRequireDefault(require("./model/ThingCreateResponseCredentialsMqttThing"));
 
-var _ThingCreateResponseEvents = _interopRequireDefault(require("./model/ThingCreateResponseEvents"));
-
 var _ThingCreateResponseLinks = _interopRequireDefault(require("./model/ThingCreateResponseLinks"));
-
-var _ThingCreateResponseProperties = _interopRequireDefault(require("./model/ThingCreateResponseProperties"));
 
 var _ThingDeleteResponse = _interopRequireDefault(require("./model/ThingDeleteResponse"));
 
@@ -1003,12 +1097,6 @@ var _ThingDeleteResponseErrorClusterBackend = _interopRequireDefault(require("./
 var _ThingListResponse = _interopRequireDefault(require("./model/ThingListResponse"));
 
 var _ThingRequest = _interopRequireDefault(require("./model/ThingRequest"));
-
-var _ThingRequestActions = _interopRequireDefault(require("./model/ThingRequestActions"));
-
-var _ThingRequestEvents = _interopRequireDefault(require("./model/ThingRequestEvents"));
-
-var _ThingRequestProperties = _interopRequireDefault(require("./model/ThingRequestProperties"));
 
 var _ThingResponse = _interopRequireDefault(require("./model/ThingResponse"));
 
@@ -1019,6 +1107,8 @@ var _ThingStatusResponse = _interopRequireDefault(require("./model/ThingStatusRe
 var _ThingUpdateRequest = _interopRequireDefault(require("./model/ThingUpdateRequest"));
 
 var _ThingUpdateResponse = _interopRequireDefault(require("./model/ThingUpdateResponse"));
+
+var _TokenResponse = _interopRequireDefault(require("./model/TokenResponse"));
 
 var _Trigger = _interopRequireDefault(require("./model/Trigger"));
 
@@ -1050,6 +1140,10 @@ var _FunctionsApi = _interopRequireDefault(require("./api/FunctionsApi"));
 
 var _ItemsApi = _interopRequireDefault(require("./api/ItemsApi"));
 
+var _LabelApi = _interopRequireDefault(require("./api/LabelApi"));
+
+var _LabeledEntitiesApi = _interopRequireDefault(require("./api/LabeledEntitiesApi"));
+
 var _MQTTCredentialsApi = _interopRequireDefault(require("./api/MQTTCredentialsApi"));
 
 var _MQTTLabelsApi = _interopRequireDefault(require("./api/MQTTLabelsApi"));
@@ -1061,6 +1155,8 @@ var _MQTTUsernameApi = _interopRequireDefault(require("./api/MQTTUsernameApi"));
 var _ModelVersionsApi = _interopRequireDefault(require("./api/ModelVersionsApi"));
 
 var _ModelsApi = _interopRequireDefault(require("./api/ModelsApi"));
+
+var _OAuthApi = _interopRequireDefault(require("./api/OAuthApi"));
 
 var _PropertiesApi = _interopRequireDefault(require("./api/PropertiesApi"));
 

@@ -1,4 +1,4 @@
-# SmartWorksSdk.FunctionStatusEnum
+# MqttApiReference.FunctionStatusEnum
 
 ## Enum
 

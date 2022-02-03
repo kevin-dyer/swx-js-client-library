@@ -7,13 +7,11 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
+var _BaseError = _interopRequireDefault(require("../model/BaseError"));
+
 var _ModelListResponse = _interopRequireDefault(require("../model/ModelListResponse"));
 
-var _ModelRequest = _interopRequireDefault(require("../model/ModelRequest"));
-
 var _ModelResponse = _interopRequireDefault(require("../model/ModelResponse"));
-
-var _ModelUpdateRequest = _interopRequireDefault(require("../model/ModelUpdateRequest"));
 
 var _ModelUpdateResponse = _interopRequireDefault(require("../model/ModelUpdateResponse"));
 
@@ -23,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
 * Models service.
@@ -47,15 +45,15 @@ var ModelsApi = /*#__PURE__*/function () {
    * Create model
    * @param {String} space 
    * @param {String} collectionName 
-   * @param {module:model/ModelRequest} modelRequest Create a new collection in the platform
+   * @param {Object.<String, {String: Object}>} requestBody Create a new collection in the platform
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ModelResponse} and HTTP response
    */
 
 
   _createClass(ModelsApi, [{
     key: "addModelWithHttpInfo",
-    value: function addModelWithHttpInfo(space, collectionName, modelRequest) {
-      var postBody = modelRequest; // verify the required parameter 'space' is set
+    value: function addModelWithHttpInfo(space, collectionName, requestBody) {
+      var postBody = requestBody; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling addModel");
@@ -64,11 +62,11 @@ var ModelsApi = /*#__PURE__*/function () {
 
       if (collectionName === undefined || collectionName === null) {
         throw new Error("Missing the required parameter 'collectionName' when calling addModel");
-      } // verify the required parameter 'modelRequest' is set
+      } // verify the required parameter 'requestBody' is set
 
 
-      if (modelRequest === undefined || modelRequest === null) {
-        throw new Error("Missing the required parameter 'modelRequest' when calling addModel");
+      if (requestBody === undefined || requestBody === null) {
+        throw new Error("Missing the required parameter 'requestBody' when calling addModel");
       }
 
       var pathParams = {
@@ -78,9 +76,9 @@ var ModelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ModelResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -88,14 +86,14 @@ var ModelsApi = /*#__PURE__*/function () {
      * Create model
      * @param {String} space 
      * @param {String} collectionName 
-     * @param {module:model/ModelRequest} modelRequest Create a new collection in the platform
+     * @param {Object.<String, {String: Object}>} requestBody Create a new collection in the platform
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ModelResponse}
      */
 
   }, {
     key: "addModel",
-    value: function addModel(space, collectionName, modelRequest) {
-      return this.addModelWithHttpInfo(space, collectionName, modelRequest).then(function (response_and_data) {
+    value: function addModel(space, collectionName, requestBody) {
+      return this.addModelWithHttpInfo(space, collectionName, requestBody).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -134,9 +132,9 @@ var ModelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = [];
+      var accepts = ['application/json', '*/*'];
       var returnType = null;
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models/{model-name}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -183,9 +181,9 @@ var ModelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ModelListResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -238,9 +236,9 @@ var ModelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ModelResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models/{model-name}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -264,14 +262,14 @@ var ModelsApi = /*#__PURE__*/function () {
      * @param {String} space 
      * @param {String} collectionName 
      * @param {String} modelName 
-     * @param {module:model/ModelUpdateRequest} modelUpdateRequest Update an existent model by name
+     * @param {Object.<String, {String: Object}>} requestBody Update an existent model by name
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ModelUpdateResponse} and HTTP response
      */
 
   }, {
     key: "updateModelWithHttpInfo",
-    value: function updateModelWithHttpInfo(space, collectionName, modelName, modelUpdateRequest) {
-      var postBody = modelUpdateRequest; // verify the required parameter 'space' is set
+    value: function updateModelWithHttpInfo(space, collectionName, modelName, requestBody) {
+      var postBody = requestBody; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling updateModel");
@@ -285,11 +283,11 @@ var ModelsApi = /*#__PURE__*/function () {
 
       if (modelName === undefined || modelName === null) {
         throw new Error("Missing the required parameter 'modelName' when calling updateModel");
-      } // verify the required parameter 'modelUpdateRequest' is set
+      } // verify the required parameter 'requestBody' is set
 
 
-      if (modelUpdateRequest === undefined || modelUpdateRequest === null) {
-        throw new Error("Missing the required parameter 'modelUpdateRequest' when calling updateModel");
+      if (requestBody === undefined || requestBody === null) {
+        throw new Error("Missing the required parameter 'requestBody' when calling updateModel");
       }
 
       var pathParams = {
@@ -300,9 +298,9 @@ var ModelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ModelUpdateResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/models/{model-name}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -311,14 +309,14 @@ var ModelsApi = /*#__PURE__*/function () {
      * @param {String} space 
      * @param {String} collectionName 
      * @param {String} modelName 
-     * @param {module:model/ModelUpdateRequest} modelUpdateRequest Update an existent model by name
+     * @param {Object.<String, {String: Object}>} requestBody Update an existent model by name
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ModelUpdateResponse}
      */
 
   }, {
     key: "updateModel",
-    value: function updateModel(space, collectionName, modelName, modelUpdateRequest) {
-      return this.updateModelWithHttpInfo(space, collectionName, modelName, modelUpdateRequest).then(function (response_and_data) {
+    value: function updateModel(space, collectionName, modelName, requestBody) {
+      return this.updateModelWithHttpInfo(space, collectionName, modelName, requestBody).then(function (response_and_data) {
         return response_and_data.data;
       });
     }

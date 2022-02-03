@@ -1,4 +1,4 @@
-# SmartWorksSdk.ThingDeleteResponse
+# MqttApiReference.ThingDeleteResponse
 
 ## Properties
 

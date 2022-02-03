@@ -1,4 +1,4 @@
-# SmartWorksSdk.ActionDeleteResponse
+# MqttApiReference.ActionDeleteResponse
 
 ## Properties
 

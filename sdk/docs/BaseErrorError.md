@@ -1,4 +1,4 @@
-# SmartWorksSdk.BaseErrorError
+# MqttApiReference.BaseErrorError
 
 ## Properties
 

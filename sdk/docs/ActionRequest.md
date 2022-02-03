@@ -1,4 +1,4 @@
-# SmartWorksSdk.ActionRequest
+# MqttApiReference.ActionRequest
 
 ## Properties
 

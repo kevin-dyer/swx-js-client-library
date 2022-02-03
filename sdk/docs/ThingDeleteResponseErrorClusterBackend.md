@@ -1,4 +1,4 @@
-# SmartWorksSdk.ThingDeleteResponseErrorClusterBackend
+# MqttApiReference.ThingDeleteResponseErrorClusterBackend
 
 ## Properties
 

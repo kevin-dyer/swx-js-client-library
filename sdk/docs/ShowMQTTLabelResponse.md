@@ -1,4 +1,4 @@
-# SmartWorksSdk.ShowMQTTLabelResponse
+# MqttApiReference.ShowMQTTLabelResponse
 
 ## Properties
 

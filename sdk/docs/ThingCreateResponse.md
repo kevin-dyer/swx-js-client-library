@@ -1,4 +1,4 @@
-# SmartWorksSdk.ThingCreateResponse
+# MqttApiReference.ThingCreateResponse
 
 ## Properties
 
@@ -11,12 +11,12 @@ Name | Type | Description | Notes
 **space** | **String** |  | [optional] 
 **collection** | **String** |  | [optional] 
 **model** | **String** |  | [optional] 
-**version** | **String** |  | [optional] 
 **credentials** | [**ThingCreateResponseCredentials**](ThingCreateResponseCredentials.md) |  | [optional] 
-**properties** | [**ThingCreateResponseProperties**](ThingCreateResponseProperties.md) |  | [optional] 
-**actions** | [**ThingCreateResponseActions**](ThingCreateResponseActions.md) |  | [optional] 
-**events** | [**ThingCreateResponseEvents**](ThingCreateResponseEvents.md) |  | [optional] 
+**properties** | **{String: Object}** |  | [optional] 
+**actions** | **{String: Object}** |  | [optional] 
+**events** | **{String: Object}** |  | [optional] 
 **links** | [**[ThingCreateResponseLinks]**](ThingCreateResponseLinks.md) |  | [optional] 
 **href** | **String** |  | [optional] 
+**version** | **String** |  | [optional] 
 
 

@@ -1,4 +1,4 @@
-# SmartWorksSdk.Secret
+# MqttApiReference.Secret
 
 ## Properties
 

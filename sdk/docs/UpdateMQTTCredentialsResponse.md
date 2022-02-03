@@ -1,4 +1,4 @@
-# SmartWorksSdk.UpdateMQTTCredentialsResponse
+# MqttApiReference.UpdateMQTTCredentialsResponse
 
 ## Properties
 

@@ -7,9 +7,9 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _EventHighCPUListResponse = _interopRequireDefault(require("../model/EventHighCPUListResponse"));
+var _BaseError = _interopRequireDefault(require("../model/BaseError"));
 
-var _EventRequest = _interopRequireDefault(require("../model/EventRequest"));
+var _EventHighCPUListResponse = _interopRequireDefault(require("../model/EventHighCPUListResponse"));
 
 var _EventResponse = _interopRequireDefault(require("../model/EventResponse"));
 
@@ -19,7 +19,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
 * Events service.
@@ -46,15 +46,15 @@ var EventsApi = /*#__PURE__*/function () {
    * @param {String} collectionName 
    * @param {String} thingId 
    * @param {String} event 
-   * @param {module:model/EventRequest} eventRequest Create a new action
+   * @param {Object.<String, {String: Object}>} requestBody Create a new action
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/EventResponse} and HTTP response
    */
 
 
   _createClass(EventsApi, [{
     key: "addEventWithHttpInfo",
-    value: function addEventWithHttpInfo(space, collectionName, thingId, event, eventRequest) {
-      var postBody = eventRequest; // verify the required parameter 'space' is set
+    value: function addEventWithHttpInfo(space, collectionName, thingId, event, requestBody) {
+      var postBody = requestBody; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling addEvent");
@@ -73,11 +73,11 @@ var EventsApi = /*#__PURE__*/function () {
 
       if (event === undefined || event === null) {
         throw new Error("Missing the required parameter 'event' when calling addEvent");
-      } // verify the required parameter 'eventRequest' is set
+      } // verify the required parameter 'requestBody' is set
 
 
-      if (eventRequest === undefined || eventRequest === null) {
-        throw new Error("Missing the required parameter 'eventRequest' when calling addEvent");
+      if (requestBody === undefined || requestBody === null) {
+        throw new Error("Missing the required parameter 'requestBody' when calling addEvent");
       }
 
       var pathParams = {
@@ -89,9 +89,9 @@ var EventsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _EventResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/events/{event}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -102,14 +102,14 @@ var EventsApi = /*#__PURE__*/function () {
      * @param {String} collectionName 
      * @param {String} thingId 
      * @param {String} event 
-     * @param {module:model/EventRequest} eventRequest Create a new action
+     * @param {Object.<String, {String: Object}>} requestBody Create a new action
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/EventResponse}
      */
 
   }, {
     key: "addEvent",
-    value: function addEvent(space, collectionName, thingId, event, eventRequest) {
-      return this.addEventWithHttpInfo(space, collectionName, thingId, event, eventRequest).then(function (response_and_data) {
+    value: function addEvent(space, collectionName, thingId, event, requestBody) {
+      return this.addEventWithHttpInfo(space, collectionName, thingId, event, requestBody).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -149,9 +149,9 @@ var EventsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _EventHighCPUListResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/events', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -214,7 +214,7 @@ var EventsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json'];
       var returnType = _EventHighCPUListResponse["default"];
@@ -287,7 +287,7 @@ var EventsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json'];
       var returnType = _EventResponse["default"];

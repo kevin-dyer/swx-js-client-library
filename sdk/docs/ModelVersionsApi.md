@@ -1,4 +1,4 @@
-# SmartWorksSdk.ModelVersionsApi
+# MqttApiReference.ModelVersionsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -21,17 +21,23 @@ Create version
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ModelVersionsApi();
+let apiInstance = new MqttApiReference.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let modelName = RaspberryPiModel; // String | 
-let modelVersionRequest = new SmartWorksSdk.ModelVersionRequest(); // ModelVersionRequest | Create a new collection in the platform
+let modelVersionRequest = new MqttApiReference.ModelVersionRequest(); // ModelVersionRequest | Create a new collection in the platform
 apiInstance.addVersion(space, collectionName, modelName, modelVersionRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -56,35 +62,42 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## deleteVersion
 
-> deleteVersion(space, collectionName, modelName, versionName)
+> deleteVersion(space, collectionName, thingId, modelName, versionName)
 
 Delete version
 
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ModelVersionsApi();
+let apiInstance = new MqttApiReference.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let modelName = RaspberryPiModel; // String | 
 let versionName = RasPiv1; // String | 
-apiInstance.deleteVersion(space, collectionName, modelName, versionName).then(() => {
+apiInstance.deleteVersion(space, collectionName, thingId, modelName, versionName).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -99,6 +112,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
  **collectionName** | **String**|  | 
+ **thingId** | **String**|  | 
  **modelName** | **String**|  | 
  **versionName** | **String**|  | 
 
@@ -108,12 +122,12 @@ null (empty response body)
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json, */*
 
 
 ## listVersion
@@ -125,13 +139,19 @@ List version
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ModelVersionsApi();
+let apiInstance = new MqttApiReference.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let modelName = RaspberryPiModel; // String | 
@@ -158,35 +178,42 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## showVersion
 
-> ModelVersionResponse showVersion(space, collectionName, modelName, versionName)
+> ModelVersionResponse showVersion(space, collectionName, thingId, modelName, versionName)
 
 Show version
 
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ModelVersionsApi();
+let apiInstance = new MqttApiReference.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let modelName = RaspberryPiModel; // String | 
 let versionName = RasPiv1; // String | 
-apiInstance.showVersion(space, collectionName, modelName, versionName).then((data) => {
+apiInstance.showVersion(space, collectionName, thingId, modelName, versionName).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -201,6 +228,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
  **collectionName** | **String**|  | 
+ **thingId** | **String**|  | 
  **modelName** | **String**|  | 
  **versionName** | **String**|  | 
 
@@ -210,36 +238,43 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## updateVersion
 
-> ModelVersionResponse updateVersion(space, collectionName, modelName, versionName, modelVersionResponse)
+> ModelVersionResponse updateVersion(space, collectionName, thingId, modelName, versionName, modelVersionResponse)
 
 Update version
 
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ModelVersionsApi();
+let apiInstance = new MqttApiReference.ModelVersionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let modelName = RaspberryPiModel; // String | 
 let versionName = RasPiv1; // String | 
-let modelVersionResponse = new SmartWorksSdk.ModelVersionResponse(); // ModelVersionResponse | Update an existent model by name
-apiInstance.updateVersion(space, collectionName, modelName, versionName, modelVersionResponse).then((data) => {
+let modelVersionResponse = new MqttApiReference.ModelVersionResponse(); // ModelVersionResponse | Update an existent model by name
+apiInstance.updateVersion(space, collectionName, thingId, modelName, versionName, modelVersionResponse).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -254,6 +289,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
  **collectionName** | **String**|  | 
+ **thingId** | **String**|  | 
  **modelName** | **String**|  | 
  **versionName** | **String**|  | 
  **modelVersionResponse** | [**ModelVersionResponse**](ModelVersionResponse.md)| Update an existent model by name | 
@@ -264,10 +300,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, */*
 

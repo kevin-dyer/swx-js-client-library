@@ -1,4 +1,4 @@
-# SmartWorksSdk.MQTTAccountActions
+# MqttApiReference.MQTTAccountActions
 
 ## Properties
 

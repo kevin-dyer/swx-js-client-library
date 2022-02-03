@@ -7,7 +7,9 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _ErrorResponse = _interopRequireDefault(require("../model/ErrorResponse"));
+var _AuthZError = _interopRequireDefault(require("../model/AuthZError"));
+
+var _BaseError = _interopRequireDefault(require("../model/BaseError"));
 
 var _Secret = _interopRequireDefault(require("../model/Secret"));
 
@@ -31,7 +33,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
 * Things service.
@@ -87,9 +89,9 @@ var ThingsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ThingCreateResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -113,41 +115,41 @@ var ThingsApi = /*#__PURE__*/function () {
      * Delete thing
      * Deletes all the existing information from a thing by Id. It deletes the thing description and the data.
      * @param {String} space 
-     * @param {String} thingId 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ThingDeleteResponse} and HTTP response
      */
 
   }, {
     key: "deleteThingWithHttpInfo",
-    value: function deleteThingWithHttpInfo(space, thingId, collectionName) {
+    value: function deleteThingWithHttpInfo(space, collectionName, thingId) {
       var postBody = null; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling deleteThing");
-      } // verify the required parameter 'thingId' is set
-
-
-      if (thingId === undefined || thingId === null) {
-        throw new Error("Missing the required parameter 'thingId' when calling deleteThing");
       } // verify the required parameter 'collectionName' is set
 
 
       if (collectionName === undefined || collectionName === null) {
         throw new Error("Missing the required parameter 'collectionName' when calling deleteThing");
+      } // verify the required parameter 'thingId' is set
+
+
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling deleteThing");
       }
 
       var pathParams = {
         'space': space,
-        'thing-id': thingId,
-        'collection-name': collectionName
+        'collection-name': collectionName,
+        'thing-id': thingId
       };
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ThingDeleteResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -155,15 +157,15 @@ var ThingsApi = /*#__PURE__*/function () {
      * Delete thing
      * Deletes all the existing information from a thing by Id. It deletes the thing description and the data.
      * @param {String} space 
-     * @param {String} thingId 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ThingDeleteResponse}
      */
 
   }, {
     key: "deleteThing",
-    value: function deleteThing(space, thingId, collectionName) {
-      return this.deleteThingWithHttpInfo(space, thingId, collectionName).then(function (response_and_data) {
+    value: function deleteThing(space, collectionName, thingId) {
+      return this.deleteThingWithHttpInfo(space, collectionName, thingId).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -172,12 +174,24 @@ var ThingsApi = /*#__PURE__*/function () {
      * List all thing descriptions in an array
      * @param {String} space 
      * @param {String} collectionName 
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.title Filter by title
+     * @param {String} opts.type Filter by @type
+     * @param {Array.<String>} opts.thingID Filter by multiple thing ids
+     * @param {String} opts.nextCursor next cursor used to go to the next page of results
+     * @param {String} opts.previousCursor previous cursor used to go to the previous page of results
+     * @param {Number} opts.limit The numbers of items to return (default to 50)
+     * @param {Array.<String>} opts.sort sort items by field asc or desc
+     * @param {Object} opts.property Schema:      {\"property:<property_name>\":\"<operator>:<value>\"}  Supported value operators:   * eq  == (operator by default)   * neq !=   * gt  >   * gte >=   * lt  <   * lte <= 
+     * @param {String} opts.linksRel Filter by type of link relationship
+     * @param {String} opts.linksHref Filter by link href
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ThingListResponse} and HTTP response
      */
 
   }, {
     key: "listThingsWithHttpInfo",
-    value: function listThingsWithHttpInfo(space, collectionName) {
+    value: function listThingsWithHttpInfo(space, collectionName, opts) {
+      opts = opts || {};
       var postBody = null; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
@@ -193,10 +207,21 @@ var ThingsApi = /*#__PURE__*/function () {
         'space': space,
         'collection-name': collectionName
       };
-      var queryParams = {};
+      var queryParams = {
+        'title': opts['title'],
+        '@type': opts['type'],
+        'thingID[]': this.apiClient.buildCollectionParam(opts['thingID'], 'multi'),
+        'next_cursor': opts['nextCursor'],
+        'previous_cursor': opts['previousCursor'],
+        'limit': opts['limit'],
+        'sort': this.apiClient.buildCollectionParam(opts['sort'], 'csv'),
+        'property': opts['property'],
+        'links.rel': opts['linksRel'],
+        'links.href': opts['linksHref']
+      };
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json'];
       var returnType = _ThingListResponse["default"];
@@ -207,13 +232,24 @@ var ThingsApi = /*#__PURE__*/function () {
      * List all thing descriptions in an array
      * @param {String} space 
      * @param {String} collectionName 
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.title Filter by title
+     * @param {String} opts.type Filter by @type
+     * @param {Array.<String>} opts.thingID Filter by multiple thing ids
+     * @param {String} opts.nextCursor next cursor used to go to the next page of results
+     * @param {String} opts.previousCursor previous cursor used to go to the previous page of results
+     * @param {Number} opts.limit The numbers of items to return (default to 50)
+     * @param {Array.<String>} opts.sort sort items by field asc or desc
+     * @param {Object} opts.property Schema:      {\"property:<property_name>\":\"<operator>:<value>\"}  Supported value operators:   * eq  == (operator by default)   * neq !=   * gt  >   * gte >=   * lt  <   * lte <= 
+     * @param {String} opts.linksRel Filter by type of link relationship
+     * @param {String} opts.linksHref Filter by link href
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ThingListResponse}
      */
 
   }, {
     key: "listThings",
-    value: function listThings(space, collectionName) {
-      return this.listThingsWithHttpInfo(space, collectionName).then(function (response_and_data) {
+    value: function listThings(space, collectionName, opts) {
+      return this.listThingsWithHttpInfo(space, collectionName, opts).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -221,39 +257,39 @@ var ThingsApi = /*#__PURE__*/function () {
      * Reset Client Secret
      * Reset the Client Secret for a specific thing
      * @param {String} space 
-     * @param {String} thingId 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Secret} and HTTP response
      */
 
   }, {
     key: "resetClientSecretWithHttpInfo",
-    value: function resetClientSecretWithHttpInfo(space, thingId, collectionName) {
+    value: function resetClientSecretWithHttpInfo(space, collectionName, thingId) {
       var postBody = null; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling resetClientSecret");
-      } // verify the required parameter 'thingId' is set
-
-
-      if (thingId === undefined || thingId === null) {
-        throw new Error("Missing the required parameter 'thingId' when calling resetClientSecret");
       } // verify the required parameter 'collectionName' is set
 
 
       if (collectionName === undefined || collectionName === null) {
         throw new Error("Missing the required parameter 'collectionName' when calling resetClientSecret");
+      } // verify the required parameter 'thingId' is set
+
+
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling resetClientSecret");
       }
 
       var pathParams = {
         'space': space,
-        'thing-id': thingId,
-        'collection-name': collectionName
+        'collection-name': collectionName,
+        'thing-id': thingId
       };
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json'];
       var returnType = _Secret["default"];
@@ -263,15 +299,15 @@ var ThingsApi = /*#__PURE__*/function () {
      * Reset Client Secret
      * Reset the Client Secret for a specific thing
      * @param {String} space 
-     * @param {String} thingId 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Secret}
      */
 
   }, {
     key: "resetClientSecret",
-    value: function resetClientSecret(space, thingId, collectionName) {
-      return this.resetClientSecretWithHttpInfo(space, thingId, collectionName).then(function (response_and_data) {
+    value: function resetClientSecret(space, collectionName, thingId) {
+      return this.resetClientSecretWithHttpInfo(space, collectionName, thingId).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -279,41 +315,41 @@ var ThingsApi = /*#__PURE__*/function () {
      * Show thing
      * Show the thing description from a thing
      * @param {String} space 
-     * @param {String} thingId 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ThingResponse} and HTTP response
      */
 
   }, {
     key: "showThingWithHttpInfo",
-    value: function showThingWithHttpInfo(space, thingId, collectionName) {
+    value: function showThingWithHttpInfo(space, collectionName, thingId) {
       var postBody = null; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling showThing");
-      } // verify the required parameter 'thingId' is set
-
-
-      if (thingId === undefined || thingId === null) {
-        throw new Error("Missing the required parameter 'thingId' when calling showThing");
       } // verify the required parameter 'collectionName' is set
 
 
       if (collectionName === undefined || collectionName === null) {
         throw new Error("Missing the required parameter 'collectionName' when calling showThing");
+      } // verify the required parameter 'thingId' is set
+
+
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling showThing");
       }
 
       var pathParams = {
         'space': space,
-        'thing-id': thingId,
-        'collection-name': collectionName
+        'collection-name': collectionName,
+        'thing-id': thingId
       };
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ThingResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -321,15 +357,15 @@ var ThingsApi = /*#__PURE__*/function () {
      * Show thing
      * Show the thing description from a thing
      * @param {String} space 
-     * @param {String} thingId 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ThingResponse}
      */
 
   }, {
     key: "showThing",
-    value: function showThing(space, thingId, collectionName) {
-      return this.showThingWithHttpInfo(space, thingId, collectionName).then(function (response_and_data) {
+    value: function showThing(space, collectionName, thingId) {
+      return this.showThingWithHttpInfo(space, collectionName, thingId).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -337,29 +373,29 @@ var ThingsApi = /*#__PURE__*/function () {
      * Update thing description
      * Update the thing description from a thing by Id. You need to include the whole thing description with the modifications to update it.
      * @param {String} space 
-     * @param {String} thingId 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @param {module:model/ThingUpdateRequest} thingUpdateRequest Update an existent thing description by Id
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ThingUpdateResponse} and HTTP response
      */
 
   }, {
     key: "updateThingWithHttpInfo",
-    value: function updateThingWithHttpInfo(space, thingId, collectionName, thingUpdateRequest) {
+    value: function updateThingWithHttpInfo(space, collectionName, thingId, thingUpdateRequest) {
       var postBody = thingUpdateRequest; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling updateThing");
-      } // verify the required parameter 'thingId' is set
-
-
-      if (thingId === undefined || thingId === null) {
-        throw new Error("Missing the required parameter 'thingId' when calling updateThing");
       } // verify the required parameter 'collectionName' is set
 
 
       if (collectionName === undefined || collectionName === null) {
         throw new Error("Missing the required parameter 'collectionName' when calling updateThing");
+      } // verify the required parameter 'thingId' is set
+
+
+      if (thingId === undefined || thingId === null) {
+        throw new Error("Missing the required parameter 'thingId' when calling updateThing");
       } // verify the required parameter 'thingUpdateRequest' is set
 
 
@@ -369,13 +405,13 @@ var ThingsApi = /*#__PURE__*/function () {
 
       var pathParams = {
         'space': space,
-        'thing-id': thingId,
-        'collection-name': collectionName
+        'collection-name': collectionName,
+        'thing-id': thingId
       };
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = _ThingUpdateResponse["default"];
@@ -385,16 +421,16 @@ var ThingsApi = /*#__PURE__*/function () {
      * Update thing description
      * Update the thing description from a thing by Id. You need to include the whole thing description with the modifications to update it.
      * @param {String} space 
-     * @param {String} thingId 
      * @param {String} collectionName 
+     * @param {String} thingId 
      * @param {module:model/ThingUpdateRequest} thingUpdateRequest Update an existent thing description by Id
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ThingUpdateResponse}
      */
 
   }, {
     key: "updateThing",
-    value: function updateThing(space, thingId, collectionName, thingUpdateRequest) {
-      return this.updateThingWithHttpInfo(space, thingId, collectionName, thingUpdateRequest).then(function (response_and_data) {
+    value: function updateThing(space, collectionName, thingId, thingUpdateRequest) {
+      return this.updateThingWithHttpInfo(space, collectionName, thingId, thingUpdateRequest).then(function (response_and_data) {
         return response_and_data.data;
       });
     }

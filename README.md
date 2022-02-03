@@ -9,6 +9,12 @@ The yaml files located in this repo are slightly modified. Open API generator do
 * Java Development Kit ([JDK](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html))
 
 
+#### Merge yaml files locally
+To merge all yaml files in yaml/ (excluding index.yaml) and write to yaml/index.yaml
+```
+    node scrips/mergeYamls.js
+`
+
 #### Generating code locally
 1. To generate the code, simply run the following command in the root directory of this project:
 

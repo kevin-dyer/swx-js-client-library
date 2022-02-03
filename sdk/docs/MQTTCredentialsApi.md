@@ -1,4 +1,4 @@
-# SmartWorksSdk.MQTTCredentialsApi
+# MqttApiReference.MQTTCredentialsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -21,13 +21,19 @@ List of all MQTT credentials for an space
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.MQTTCredentialsApi();
+let apiInstance = new MqttApiReference.MQTTCredentialsApi();
 let space = altair; // String | 
 apiInstance.listMQTTcredentials(space).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -50,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -69,13 +75,19 @@ Show an specific MQTT credentials by id
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.MQTTCredentialsApi();
+let apiInstance = new MqttApiReference.MQTTCredentialsApi();
 let space = altair; // String | 
 let credentialsId = 01EDRMFZXHPEBGGHZBYVV1W0Y9; // String | 
 apiInstance.showMQTTcredentials(space, credentialsId).then((data) => {
@@ -100,7 +112,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -119,17 +131,23 @@ Update an existing MQTT credentials. If you send an empty body, a random passwor
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.MQTTCredentialsApi();
+let apiInstance = new MqttApiReference.MQTTCredentialsApi();
 let space = altair; // String | 
 let credentialsId = 01EDRMFZXHPEBGGHZBYVV1W0Y9; // String | 
 let opts = {
-  'updateMQTTCredentials': new SmartWorksSdk.UpdateMQTTCredentials() // UpdateMQTTCredentials | 
+  'updateMQTTCredentials': new MqttApiReference.UpdateMQTTCredentials() // UpdateMQTTCredentials | 
 };
 apiInstance.updateMQTTcredentials(space, credentialsId, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -154,7 +172,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

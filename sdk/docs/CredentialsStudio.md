@@ -1,4 +1,4 @@
-# SmartWorksSdk.CredentialsStudio
+# MqttApiReference.CredentialsStudio
 
 ## Properties
 

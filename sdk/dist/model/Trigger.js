@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _TriggerMqttConfig = _interopRequireDefault(require("./TriggerMqttConfig"));
+var _OneOfTriggerMqttConfigTriggerRabbitMQConfig = _interopRequireDefault(require("./OneOfTriggerMqttConfigTriggerRabbitMQConfig"));
 
 var _TriggerStatusEnum = _interopRequireDefault(require("./TriggerStatusEnum"));
 
@@ -19,7 +19,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
  * The Trigger model module.
@@ -73,7 +73,7 @@ var Trigger = /*#__PURE__*/function () {
         }
 
         if (data.hasOwnProperty('config')) {
-          obj['config'] = _TriggerMqttConfig["default"].constructFromObject(data['config']);
+          obj['config'] = _ApiClient["default"].convertToType(data['config'], _OneOfTriggerMqttConfigTriggerRabbitMQConfig["default"]);
         }
 
         if (data.hasOwnProperty('status')) {
@@ -112,7 +112,7 @@ Trigger.prototype['description'] = undefined;
 
 Trigger.prototype['type'] = undefined;
 /**
- * @member {module:model/TriggerMqttConfig} config
+ * @member {module:model/OneOfTriggerMqttConfigTriggerRabbitMQConfig} config
  */
 
 Trigger.prototype['config'] = undefined;

@@ -1,4 +1,4 @@
-# SmartWorksSdk.ErrorResponseError
+# MqttApiReference.ErrorResponseError
 
 ## Properties
 

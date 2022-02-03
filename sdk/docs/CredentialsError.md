@@ -1,4 +1,4 @@
-# SmartWorksSdk.CredentialsError
+# MqttApiReference.CredentialsError
 
 ## Properties
 

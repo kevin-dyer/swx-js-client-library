@@ -19,7 +19,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
 * Properties service.
@@ -76,9 +76,9 @@ var PropertiesApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _Properties["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/properties', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -141,9 +141,9 @@ var PropertiesApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _Property["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -170,14 +170,14 @@ var PropertiesApi = /*#__PURE__*/function () {
      * @param {String} space 
      * @param {String} collectionName 
      * @param {String} thingId 
-     * @param {module:model/Properties} properties Property values by property key
+     * @param {Object.<String, {String: Object}>} requestBody Property values by property key
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Properties} and HTTP response
      */
 
   }, {
     key: "updatePropertiesWithHttpInfo",
-    value: function updatePropertiesWithHttpInfo(space, collectionName, thingId, properties) {
-      var postBody = properties; // verify the required parameter 'space' is set
+    value: function updatePropertiesWithHttpInfo(space, collectionName, thingId, requestBody) {
+      var postBody = requestBody; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling updateProperties");
@@ -191,11 +191,11 @@ var PropertiesApi = /*#__PURE__*/function () {
 
       if (thingId === undefined || thingId === null) {
         throw new Error("Missing the required parameter 'thingId' when calling updateProperties");
-      } // verify the required parameter 'properties' is set
+      } // verify the required parameter 'requestBody' is set
 
 
-      if (properties === undefined || properties === null) {
-        throw new Error("Missing the required parameter 'properties' when calling updateProperties");
+      if (requestBody === undefined || requestBody === null) {
+        throw new Error("Missing the required parameter 'requestBody' when calling updateProperties");
       }
 
       var pathParams = {
@@ -206,9 +206,9 @@ var PropertiesApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _Properties["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/properties', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -218,14 +218,14 @@ var PropertiesApi = /*#__PURE__*/function () {
      * @param {String} space 
      * @param {String} collectionName 
      * @param {String} thingId 
-     * @param {module:model/Properties} properties Property values by property key
+     * @param {Object.<String, {String: Object}>} requestBody Property values by property key
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Properties}
      */
 
   }, {
     key: "updateProperties",
-    value: function updateProperties(space, collectionName, thingId, properties) {
-      return this.updatePropertiesWithHttpInfo(space, collectionName, thingId, properties).then(function (response_and_data) {
+    value: function updateProperties(space, collectionName, thingId, requestBody) {
+      return this.updatePropertiesWithHttpInfo(space, collectionName, thingId, requestBody).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -236,14 +236,14 @@ var PropertiesApi = /*#__PURE__*/function () {
      * @param {String} collectionName 
      * @param {String} thingId 
      * @param {String} property 
-     * @param {module:model/Property} property2 Update an existent thing by Id
+     * @param {Object.<String, {String: Object}>} requestBody Update an existent thing by Id
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Property} and HTTP response
      */
 
   }, {
     key: "updatePropertyWithHttpInfo",
-    value: function updatePropertyWithHttpInfo(space, collectionName, thingId, property, property2) {
-      var postBody = property2; // verify the required parameter 'space' is set
+    value: function updatePropertyWithHttpInfo(space, collectionName, thingId, property, requestBody) {
+      var postBody = requestBody; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling updateProperty");
@@ -262,11 +262,11 @@ var PropertiesApi = /*#__PURE__*/function () {
 
       if (property === undefined || property === null) {
         throw new Error("Missing the required parameter 'property' when calling updateProperty");
-      } // verify the required parameter 'property2' is set
+      } // verify the required parameter 'requestBody' is set
 
 
-      if (property2 === undefined || property2 === null) {
-        throw new Error("Missing the required parameter 'property2' when calling updateProperty");
+      if (requestBody === undefined || requestBody === null) {
+        throw new Error("Missing the required parameter 'requestBody' when calling updateProperty");
       }
 
       var pathParams = {
@@ -278,9 +278,9 @@ var PropertiesApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _Property["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/properties/{property}', 'PUT', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -291,14 +291,14 @@ var PropertiesApi = /*#__PURE__*/function () {
      * @param {String} collectionName 
      * @param {String} thingId 
      * @param {String} property 
-     * @param {module:model/Property} property2 Update an existent thing by Id
+     * @param {Object.<String, {String: Object}>} requestBody Update an existent thing by Id
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Property}
      */
 
   }, {
     key: "updateProperty",
-    value: function updateProperty(space, collectionName, thingId, property, property2) {
-      return this.updatePropertyWithHttpInfo(space, collectionName, thingId, property, property2).then(function (response_and_data) {
+    value: function updateProperty(space, collectionName, thingId, property, requestBody) {
+      return this.updatePropertyWithHttpInfo(space, collectionName, thingId, property, requestBody).then(function (response_and_data) {
         return response_and_data.data;
       });
     }

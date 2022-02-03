@@ -1,4 +1,4 @@
-# SmartWorksSdk.ThingCreateResponseLinks
+# MqttApiReference.ThingCreateResponseLinks
 
 ## Properties
 

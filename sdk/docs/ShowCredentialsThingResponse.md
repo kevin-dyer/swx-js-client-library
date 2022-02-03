@@ -1,4 +1,4 @@
-# SmartWorksSdk.ShowCredentialsThingResponse
+# MqttApiReference.ShowCredentialsThingResponse
 
 ## Properties
 

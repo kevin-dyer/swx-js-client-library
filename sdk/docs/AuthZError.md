@@ -1,4 +1,4 @@
-# SmartWorksSdk.AuthZError
+# MqttApiReference.AuthZError
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# SmartWorksSdk.ThingCreateResponseCredentials
+# MqttApiReference.ThingCreateResponseCredentials
 
 ## Properties
 

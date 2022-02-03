@@ -1,10 +1,10 @@
-# SmartWorksSdk.ThingStatusListResponse
+# MqttApiReference.ThingStatusListResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **data** | [**[ThingStatusResponse]**](ThingStatusResponse.md) |  | [optional] 
-**paging** | **Object** |  | [optional] 
+**paging** | [**CollectionListResponsePaging**](CollectionListResponsePaging.md) |  | [optional] 
 
 

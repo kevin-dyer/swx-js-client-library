@@ -13,13 +13,11 @@ var _ActionDeleteResponse = _interopRequireDefault(require("../model/ActionDelet
 
 var _ActionListResponse = _interopRequireDefault(require("../model/ActionListResponse"));
 
-var _ActionRequest = _interopRequireDefault(require("../model/ActionRequest"));
-
 var _ActionResponseElement = _interopRequireDefault(require("../model/ActionResponseElement1"));
 
-var _ActionUpdateRequest = _interopRequireDefault(require("../model/ActionUpdateRequest"));
-
 var _ActionUpdateResponse = _interopRequireDefault(require("../model/ActionUpdateResponse"));
+
+var _BaseError = _interopRequireDefault(require("../model/BaseError"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -27,7 +25,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
 * Actions service.
@@ -54,15 +52,15 @@ var ActionsApi = /*#__PURE__*/function () {
    * @param {String} collectionName 
    * @param {String} thingId 
    * @param {String} action 
-   * @param {module:model/ActionRequest} actionRequest Create a new action
+   * @param {Object.<String, {String: Object}>} requestBody Create a new action
    * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ActionResponseElement1} and HTTP response
    */
 
 
   _createClass(ActionsApi, [{
     key: "addActionWithHttpInfo",
-    value: function addActionWithHttpInfo(space, collectionName, thingId, action, actionRequest) {
-      var postBody = actionRequest; // verify the required parameter 'space' is set
+    value: function addActionWithHttpInfo(space, collectionName, thingId, action, requestBody) {
+      var postBody = requestBody; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling addAction");
@@ -81,11 +79,11 @@ var ActionsApi = /*#__PURE__*/function () {
 
       if (action === undefined || action === null) {
         throw new Error("Missing the required parameter 'action' when calling addAction");
-      } // verify the required parameter 'actionRequest' is set
+      } // verify the required parameter 'requestBody' is set
 
 
-      if (actionRequest === undefined || actionRequest === null) {
-        throw new Error("Missing the required parameter 'actionRequest' when calling addAction");
+      if (requestBody === undefined || requestBody === null) {
+        throw new Error("Missing the required parameter 'requestBody' when calling addAction");
       }
 
       var pathParams = {
@@ -97,9 +95,9 @@ var ActionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ActionResponseElement["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/actions/{action}', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -110,14 +108,14 @@ var ActionsApi = /*#__PURE__*/function () {
      * @param {String} collectionName 
      * @param {String} thingId 
      * @param {String} action 
-     * @param {module:model/ActionRequest} actionRequest Create a new action
+     * @param {Object.<String, {String: Object}>} requestBody Create a new action
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ActionResponseElement1}
      */
 
   }, {
     key: "addAction",
-    value: function addAction(space, collectionName, thingId, action, actionRequest) {
-      return this.addActionWithHttpInfo(space, collectionName, thingId, action, actionRequest).then(function (response_and_data) {
+    value: function addAction(space, collectionName, thingId, action, requestBody) {
+      return this.addActionWithHttpInfo(space, collectionName, thingId, action, requestBody).then(function (response_and_data) {
         return response_and_data.data;
       });
     }
@@ -171,9 +169,9 @@ var ActionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ActionDeleteResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/actions/{action}/{action-id}', 'DELETE', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -200,7 +198,7 @@ var ActionsApi = /*#__PURE__*/function () {
      * Lists all the queues for the different actions within a thing.
      * @param {String} space 
      * @param {String} collectionName 
-     * @param {Number} thingId 
+     * @param {String} thingId 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ActionListResponse} and HTTP response
      */
 
@@ -231,9 +229,9 @@ var ActionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ActionListResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/actions', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -242,7 +240,7 @@ var ActionsApi = /*#__PURE__*/function () {
      * Lists all the queues for the different actions within a thing.
      * @param {String} space 
      * @param {String} collectionName 
-     * @param {Number} thingId 
+     * @param {String} thingId 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ActionListResponse}
      */
 
@@ -296,9 +294,9 @@ var ActionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ActionDelayListResponse["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/actions/{action}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -369,9 +367,9 @@ var ActionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
-      var accepts = ['application/json'];
+      var accepts = ['application/json', '*/*'];
       var returnType = _ActionResponseElement["default"];
       return this.apiClient.callApi('/spaces/{space}/collections/{collection-name}/things/{thing-id}/actions/{action}/{action-id}', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null);
     }
@@ -401,14 +399,14 @@ var ActionsApi = /*#__PURE__*/function () {
      * @param {String} thingId 
      * @param {String} action 
      * @param {String} actionId 
-     * @param {module:model/ActionUpdateRequest} actionUpdateRequest Update an existent thing by Id
+     * @param {Object.<String, {String: Object}>} requestBody Update an existent thing by Id
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ActionUpdateResponse} and HTTP response
      */
 
   }, {
     key: "updateActionWithHttpInfo",
-    value: function updateActionWithHttpInfo(space, collectionName, thingId, action, actionId, actionUpdateRequest) {
-      var postBody = actionUpdateRequest; // verify the required parameter 'space' is set
+    value: function updateActionWithHttpInfo(space, collectionName, thingId, action, actionId, requestBody) {
+      var postBody = requestBody; // verify the required parameter 'space' is set
 
       if (space === undefined || space === null) {
         throw new Error("Missing the required parameter 'space' when calling updateAction");
@@ -432,11 +430,11 @@ var ActionsApi = /*#__PURE__*/function () {
 
       if (actionId === undefined || actionId === null) {
         throw new Error("Missing the required parameter 'actionId' when calling updateAction");
-      } // verify the required parameter 'actionUpdateRequest' is set
+      } // verify the required parameter 'requestBody' is set
 
 
-      if (actionUpdateRequest === undefined || actionUpdateRequest === null) {
-        throw new Error("Missing the required parameter 'actionUpdateRequest' when calling updateAction");
+      if (requestBody === undefined || requestBody === null) {
+        throw new Error("Missing the required parameter 'requestBody' when calling updateAction");
       }
 
       var pathParams = {
@@ -449,7 +447,7 @@ var ActionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['bearerAuth'];
+      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = _ActionUpdateResponse["default"];
@@ -463,14 +461,14 @@ var ActionsApi = /*#__PURE__*/function () {
      * @param {String} thingId 
      * @param {String} action 
      * @param {String} actionId 
-     * @param {module:model/ActionUpdateRequest} actionUpdateRequest Update an existent thing by Id
+     * @param {Object.<String, {String: Object}>} requestBody Update an existent thing by Id
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ActionUpdateResponse}
      */
 
   }, {
     key: "updateAction",
-    value: function updateAction(space, collectionName, thingId, action, actionId, actionUpdateRequest) {
-      return this.updateActionWithHttpInfo(space, collectionName, thingId, action, actionId, actionUpdateRequest).then(function (response_and_data) {
+    value: function updateAction(space, collectionName, thingId, action, actionId, requestBody) {
+      return this.updateActionWithHttpInfo(space, collectionName, thingId, action, actionId, requestBody).then(function (response_and_data) {
         return response_and_data.data;
       });
     }

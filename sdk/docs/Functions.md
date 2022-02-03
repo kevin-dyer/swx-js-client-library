@@ -1,4 +1,4 @@
-# SmartWorksSdk.Functions
+# MqttApiReference.Functions
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# SmartWorksSdk.CreateMQTTLabelCredentialsResponse
+# MqttApiReference.CreateMQTTLabelCredentialsResponse
 
 ## Properties
 

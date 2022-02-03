@@ -7,15 +7,9 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _ThingCreateResponseActions = _interopRequireDefault(require("./ThingCreateResponseActions"));
-
 var _ThingCreateResponseCredentials = _interopRequireDefault(require("./ThingCreateResponseCredentials"));
 
-var _ThingCreateResponseEvents = _interopRequireDefault(require("./ThingCreateResponseEvents"));
-
 var _ThingCreateResponseLinks = _interopRequireDefault(require("./ThingCreateResponseLinks"));
-
-var _ThingCreateResponseProperties = _interopRequireDefault(require("./ThingCreateResponseProperties"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -23,7 +17,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
  * The ThingCreateResponse model module.
@@ -92,24 +86,26 @@ var ThingCreateResponse = /*#__PURE__*/function () {
           obj['model'] = _ApiClient["default"].convertToType(data['model'], 'String');
         }
 
-        if (data.hasOwnProperty('version')) {
-          obj['version'] = _ApiClient["default"].convertToType(data['version'], 'String');
-        }
-
         if (data.hasOwnProperty('credentials')) {
           obj['credentials'] = _ThingCreateResponseCredentials["default"].constructFromObject(data['credentials']);
         }
 
         if (data.hasOwnProperty('properties')) {
-          obj['properties'] = _ThingCreateResponseProperties["default"].constructFromObject(data['properties']);
+          obj['properties'] = _ApiClient["default"].convertToType(data['properties'], {
+            'String': Object
+          });
         }
 
         if (data.hasOwnProperty('actions')) {
-          obj['actions'] = _ThingCreateResponseActions["default"].constructFromObject(data['actions']);
+          obj['actions'] = _ApiClient["default"].convertToType(data['actions'], {
+            'String': Object
+          });
         }
 
         if (data.hasOwnProperty('events')) {
-          obj['events'] = _ThingCreateResponseEvents["default"].constructFromObject(data['events']);
+          obj['events'] = _ApiClient["default"].convertToType(data['events'], {
+            'String': Object
+          });
         }
 
         if (data.hasOwnProperty('links')) {
@@ -118,6 +114,10 @@ var ThingCreateResponse = /*#__PURE__*/function () {
 
         if (data.hasOwnProperty('href')) {
           obj['href'] = _ApiClient["default"].convertToType(data['href'], 'String');
+        }
+
+        if (data.hasOwnProperty('version')) {
+          obj['version'] = _ApiClient["default"].convertToType(data['version'], 'String');
         }
       }
 
@@ -164,27 +164,22 @@ ThingCreateResponse.prototype['collection'] = undefined;
 
 ThingCreateResponse.prototype['model'] = undefined;
 /**
- * @member {String} version
- */
-
-ThingCreateResponse.prototype['version'] = undefined;
-/**
  * @member {module:model/ThingCreateResponseCredentials} credentials
  */
 
 ThingCreateResponse.prototype['credentials'] = undefined;
 /**
- * @member {module:model/ThingCreateResponseProperties} properties
+ * @member {Object.<String, Object>} properties
  */
 
 ThingCreateResponse.prototype['properties'] = undefined;
 /**
- * @member {module:model/ThingCreateResponseActions} actions
+ * @member {Object.<String, Object>} actions
  */
 
 ThingCreateResponse.prototype['actions'] = undefined;
 /**
- * @member {module:model/ThingCreateResponseEvents} events
+ * @member {Object.<String, Object>} events
  */
 
 ThingCreateResponse.prototype['events'] = undefined;
@@ -198,5 +193,10 @@ ThingCreateResponse.prototype['links'] = undefined;
  */
 
 ThingCreateResponse.prototype['href'] = undefined;
+/**
+ * @member {String} version
+ */
+
+ThingCreateResponse.prototype['version'] = undefined;
 var _default = ThingCreateResponse;
 exports["default"] = _default;

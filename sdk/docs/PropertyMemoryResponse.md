@@ -1,4 +1,4 @@
-# SmartWorksSdk.PropertyMemoryResponse
+# MqttApiReference.PropertyMemoryResponse
 
 ## Properties
 

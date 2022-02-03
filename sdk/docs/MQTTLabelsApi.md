@@ -1,4 +1,4 @@
-# SmartWorksSdk.MQTTLabelsApi
+# MqttApiReference.MQTTLabelsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -22,16 +22,22 @@ Create MQTT credentials for a specific label
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.MQTTLabelsApi();
+let apiInstance = new MqttApiReference.MQTTLabelsApi();
 let space = altair; // String | 
 let opts = {
-  'createMQTTLabelCredentials': new SmartWorksSdk.CreateMQTTLabelCredentials() // CreateMQTTLabelCredentials | 
+  'createMQTTLabelCredentials': new MqttApiReference.CreateMQTTLabelCredentials() // CreateMQTTLabelCredentials | 
 };
 apiInstance.createMQTTLabelCredentials(space, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -55,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -74,13 +80,19 @@ Delete MQTT capabilities for a label
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.MQTTLabelsApi();
+let apiInstance = new MqttApiReference.MQTTLabelsApi();
 let space = altair; // String | 
 let labelId = 01EDRHEF2Y4ZB7C0EGTAT8RQQS; // String | 
 apiInstance.deleteMQTTLabel(space, labelId).then(() => {
@@ -105,7 +117,7 @@ null (empty response body)
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -124,13 +136,19 @@ Show MQTT label details for a specific label
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.MQTTLabelsApi();
+let apiInstance = new MqttApiReference.MQTTLabelsApi();
 let space = altair; // String | 
 let labelId = 01EDRHEF2Y4ZB7C0EGTAT8RQQS; // String | 
 apiInstance.showMQTTLabelInfo(space, labelId).then((data) => {
@@ -155,7 +173,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -174,16 +192,22 @@ Update the MQTT Label credentials and / or state
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.MQTTLabelsApi();
+let apiInstance = new MqttApiReference.MQTTLabelsApi();
 let space = altair; // String | 
 let labelId = 01EDRHEF2Y4ZB7C0EGTAT8RQQS; // String | 
-let updateMQTTLabelCredentials = new SmartWorksSdk.UpdateMQTTLabelCredentials(); // UpdateMQTTLabelCredentials | This is the field that you can update
+let updateMQTTLabelCredentials = new MqttApiReference.UpdateMQTTLabelCredentials(); // UpdateMQTTLabelCredentials | This is the field that you can update
 apiInstance.updateMQTTLabel(space, labelId, updateMQTTLabelCredentials).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -207,7 +231,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

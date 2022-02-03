@@ -1,4 +1,4 @@
-# SmartWorksSdk.MQTTAccountEvents
+# MqttApiReference.MQTTAccountEvents
 
 ## Properties
 

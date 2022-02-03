@@ -1,4 +1,4 @@
-# SmartWorksSdk.Triggers
+# MqttApiReference.Triggers
 
 ## Properties
 

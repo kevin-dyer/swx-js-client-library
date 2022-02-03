@@ -1,4 +1,4 @@
-# SmartWorksSdk.ActionRequestDelayInput
+# MqttApiReference.ActionRequestDelayInput
 
 ## Properties
 

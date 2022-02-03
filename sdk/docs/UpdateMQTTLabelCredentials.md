@@ -1,4 +1,4 @@
-# SmartWorksSdk.UpdateMQTTLabelCredentials
+# MqttApiReference.UpdateMQTTLabelCredentials
 
 ## Properties
 

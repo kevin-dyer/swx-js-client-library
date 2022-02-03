@@ -1,4 +1,4 @@
-# SmartWorksSdk.ActionsApi
+# MqttApiReference.ActionsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## addAction
 
-> ActionResponseElement1 addAction(space, collectionName, thingId, action, actionRequest)
+> ActionResponseElement1 addAction(space, collectionName, thingId, action, requestBody)
 
 Request action
 
@@ -24,19 +24,25 @@ Request action and add it to the action queue from a thing
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ActionsApi();
+let apiInstance = new MqttApiReference.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let action = delay; // String | 
-let actionRequest = new SmartWorksSdk.ActionRequest(); // ActionRequest | Create a new action
-apiInstance.addAction(space, collectionName, thingId, action, actionRequest).then((data) => {
+let requestBody = {key: null}; // {String: Object} | Create a new action
+apiInstance.addAction(space, collectionName, thingId, action, requestBody).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -53,7 +59,7 @@ Name | Type | Description  | Notes
  **collectionName** | **String**|  | 
  **thingId** | **String**|  | 
  **action** | **String**|  | 
- **actionRequest** | [**ActionRequest**](ActionRequest.md)| Create a new action | 
+ **requestBody** | [**{String: Object}**](Object.md)| Create a new action | 
 
 ### Return type
 
@@ -61,12 +67,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## deleteAction
@@ -80,16 +86,22 @@ Deletes an existing action by Id
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ActionsApi();
+let apiInstance = new MqttApiReference.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let action = delay; // String | 
 let actionId = 01EDCAQE78A7CP6REXV5J8BAKR; // String | 
 apiInstance.deleteAction(space, collectionName, thingId, action, actionId).then((data) => {
@@ -117,12 +129,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## listActions
@@ -136,16 +148,22 @@ Lists all the queues for the different actions within a thing.
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ActionsApi();
+let apiInstance = new MqttApiReference.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 56; // Number | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 apiInstance.listActions(space, collectionName, thingId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -161,7 +179,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **space** | **String**|  | 
  **collectionName** | **String**|  | 
- **thingId** | **Number**|  | 
+ **thingId** | **String**|  | 
 
 ### Return type
 
@@ -169,12 +187,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## listActionsByName
@@ -188,16 +206,22 @@ Lists the current queue of a specific action from a Thing
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ActionsApi();
+let apiInstance = new MqttApiReference.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let action = delay; // String | 
 apiInstance.listActionsByName(space, collectionName, thingId, action).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -223,12 +247,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## showAction
@@ -242,16 +266,22 @@ Shows a requested action from the action queues of a thing.
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ActionsApi();
+let apiInstance = new MqttApiReference.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let action = delay; // String | 
 let actionId = 01EDCAQE78A7CP6REXV5J8BAKR; // String | 
 apiInstance.showAction(space, collectionName, thingId, action, actionId).then((data) => {
@@ -279,17 +309,17 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, */*
 
 
 ## updateAction
 
-> ActionUpdateResponse updateAction(space, collectionName, thingId, action, actionId, actionUpdateRequest)
+> ActionUpdateResponse updateAction(space, collectionName, thingId, action, actionId, requestBody)
 
 Update action inside a queue
 
@@ -298,20 +328,26 @@ Update the status of an existing action by Id inside of the action queue from a 
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.ActionsApi();
+let apiInstance = new MqttApiReference.ActionsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingId = 01edb9j75vymj8p7qppm19h8nx; // String | 
+let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
 let action = delay; // String | 
 let actionId = 01EDCAQE78A7CP6REXV5J8BAKR; // String | 
-let actionUpdateRequest = new SmartWorksSdk.ActionUpdateRequest(); // ActionUpdateRequest | Update an existent thing by Id
-apiInstance.updateAction(space, collectionName, thingId, action, actionId, actionUpdateRequest).then((data) => {
+let requestBody = {key: null}; // {String: Object} | Update an existent thing by Id
+apiInstance.updateAction(space, collectionName, thingId, action, actionId, requestBody).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -329,7 +365,7 @@ Name | Type | Description  | Notes
  **thingId** | **String**|  | 
  **action** | **String**|  | 
  **actionId** | **String**|  | 
- **actionUpdateRequest** | [**ActionUpdateRequest**](ActionUpdateRequest.md)| Update an existent thing by Id | 
+ **requestBody** | [**{String: Object}**](Object.md)| Update an existent thing by Id | 
 
 ### Return type
 
@@ -337,7 +373,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

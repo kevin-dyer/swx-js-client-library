@@ -1,4 +1,4 @@
-# SmartWorksSdk.MQTTLabel
+# MqttApiReference.MQTTLabel
 
 ## Properties
 

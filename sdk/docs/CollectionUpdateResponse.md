@@ -1,10 +1,11 @@
-# SmartWorksSdk.CollectionUpdateResponse
+# MqttApiReference.CollectionUpdateResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **String** |  | [optional] 
+**name** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
+**title** | **String** |  | [optional] 
 
 

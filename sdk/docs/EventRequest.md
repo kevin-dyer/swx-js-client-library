@@ -1,4 +1,4 @@
-# SmartWorksSdk.EventRequest
+# MqttApiReference.EventRequest
 
 ## Properties
 

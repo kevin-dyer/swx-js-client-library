@@ -1,4 +1,4 @@
-# SmartWorksSdk.MQTTUsernameApi
+# MqttApiReference.MQTTUsernameApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -19,17 +19,23 @@ Update the MQTT password for a specific mqtt-username.  If you send an empty bod
 ### Example
 
 ```javascript
-import SmartWorksSdk from 'smart_works_sdk';
-let defaultClient = SmartWorksSdk.ApiClient.instance;
-// Configure Bearer access token for authorization: bearerAuth
+import MqttApiReference from 'mqtt_api_reference';
+let defaultClient = MqttApiReference.ApiClient.instance;
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2Security
+let OAuth2Security = defaultClient.authentications['OAuth2Security'];
+OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
+// Configure Bearer (Opaque JWT) access token for authorization: bearerAuth
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new SmartWorksSdk.MQTTUsernameApi();
+let apiInstance = new MqttApiReference.MQTTUsernameApi();
 let space = altair; // String | 
 let mqttUsername = newUsername@altair; // String | 
 let opts = {
-  'updateMQTTPassword': new SmartWorksSdk.UpdateMQTTPassword() // UpdateMQTTPassword | This is the field that you can update
+  'updateMQTTPassword': new MqttApiReference.UpdateMQTTPassword() // UpdateMQTTPassword | This is the field that you can update
 };
 apiInstance.updateMQTTpassword(space, mqttUsername, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -54,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

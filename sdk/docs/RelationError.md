@@ -1,4 +1,4 @@
-# SmartWorksSdk.RelationError
+# MqttApiReference.RelationError
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# SmartWorksSdk.PropertyDiskResponse
+# MqttApiReference.PropertyDiskResponse
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# SmartWorksSdk.EventHighCPUListResponse
+# MqttApiReference.EventHighCPUListResponse
 
 ## Properties
 

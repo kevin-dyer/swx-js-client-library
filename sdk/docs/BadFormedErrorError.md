@@ -1,4 +1,4 @@
-# SmartWorksSdk.BadFormedErrorError
+# MqttApiReference.BadFormedErrorError
 
 ## Properties
 

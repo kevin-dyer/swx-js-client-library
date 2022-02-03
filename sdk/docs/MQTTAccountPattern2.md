@@ -1,4 +1,4 @@
-# SmartWorksSdk.MQTTAccountPattern2
+# MqttApiReference.MQTTAccountPattern2
 
 ## Properties
 

@@ -7,19 +7,13 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _ThingRequestActions = _interopRequireDefault(require("./ThingRequestActions"));
-
-var _ThingRequestEvents = _interopRequireDefault(require("./ThingRequestEvents"));
-
-var _ThingRequestProperties = _interopRequireDefault(require("./ThingRequestProperties"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /**
  * The ThingRequest model module.
@@ -69,15 +63,21 @@ var ThingRequest = /*#__PURE__*/function () {
         }
 
         if (data.hasOwnProperty('properties')) {
-          obj['properties'] = _ThingRequestProperties["default"].constructFromObject(data['properties']);
+          obj['properties'] = _ApiClient["default"].convertToType(data['properties'], {
+            'String': Object
+          });
         }
 
         if (data.hasOwnProperty('actions')) {
-          obj['actions'] = _ThingRequestActions["default"].constructFromObject(data['actions']);
+          obj['actions'] = _ApiClient["default"].convertToType(data['actions'], {
+            'String': Object
+          });
         }
 
         if (data.hasOwnProperty('events')) {
-          obj['events'] = _ThingRequestEvents["default"].constructFromObject(data['events']);
+          obj['events'] = _ApiClient["default"].convertToType(data['events'], {
+            'String': Object
+          });
         }
       }
 
@@ -99,17 +99,17 @@ ThingRequest.prototype['title'] = undefined;
 
 ThingRequest.prototype['description'] = undefined;
 /**
- * @member {module:model/ThingRequestProperties} properties
+ * @member {Object.<String, Object>} properties
  */
 
 ThingRequest.prototype['properties'] = undefined;
 /**
- * @member {module:model/ThingRequestActions} actions
+ * @member {Object.<String, Object>} actions
  */
 
 ThingRequest.prototype['actions'] = undefined;
 /**
- * @member {module:model/ThingRequestEvents} events
+ * @member {Object.<String, Object>} events
  */
 
 ThingRequest.prototype['events'] = undefined;

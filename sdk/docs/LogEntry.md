@@ -1,4 +1,4 @@
-# SmartWorksSdk.LogEntry
+# MqttApiReference.LogEntry
 
 ## Properties
 

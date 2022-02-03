@@ -1,4 +1,4 @@
-# SmartWorksSdk.CollectionResponse
+# MqttApiReference.CollectionResponse
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# SmartWorksSdk.ActionResponseElement1
+# MqttApiReference.ActionResponseElement1
 
 ## Properties
 

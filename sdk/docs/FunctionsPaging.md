@@ -1,4 +1,4 @@
-# SmartWorksSdk.FunctionsPaging
+# MqttApiReference.FunctionsPaging
 
 ## Properties
 
