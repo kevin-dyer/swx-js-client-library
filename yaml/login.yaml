@@ -1,0 +1,463 @@
+openapi: 3.0.3
+info:
+  title: OAuth API reference
+  version: '1.0.0'
+  description: OAuth OpenAPI endpoints - OpenAPI 3.0
+servers:
+  - url: https://api.swx.altairone.com
+    description: SmartWorks
+tags:
+  - name: OAuth
+    description: OAuth operations
+security:
+  - bearerAuth: []
+paths:
+
+  /oauth2/auth:
+    parameters:
+      - $ref: '#/components/parameters/client_id'
+      - $ref: '#/components/parameters/response_type'
+      - $ref: '#/components/parameters/response_mode'
+      - $ref: '#/components/parameters/redirect_uri'
+      - $ref: '#/components/parameters/state'
+      - $ref: '#/components/parameters/scope'
+      - $ref: '#/components/parameters/nonce'
+      - $ref: '#/components/parameters/code_challenge_method'
+      - $ref: '#/components/parameters/code_challenge'
+    get:
+      tags:
+        - OAuth
+      summary: OAuth 2.0 Authorize Endpoint
+      operationId: GetOauth2Auth
+      responses:
+        302:
+          description: "Found"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
+  /oauth2/token:
+    post:
+      tags:
+        - OAuth
+      summary: OAuth 2.0 Token Endpoint
+      description: |
+        The client makes a request to the token endpoint by sending the following parameters using the
+        `application/x-www-form-urlencoded` HTTP request entity-body.<br/>
+        To perform this operation, you must be authenticated by means of one of the following methods: `basic`, `oauth2`.
+      operationId: GetOauth2Token
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+            example:
+              grant_type: client_credentials
+              client_id: my-client-id
+              client_secret: my-client-secret
+              code: vGwDK4N168Z6UrHmypDE9STaBRC5Sq1vWaRwkEInt2o.fGeErUUhkflixRBGUU1hSFR91GHqrmG5eCagfnqAoD8
+              code_verifier: 92bGgipEveY72NCHxt6CzOv5pDJd3sOknhixr9Q5UjoiHl5p7iKhw7wVqOPkmC3QPoaAp88kbTfmBVmPN8srWFgrgfgrZacaoNz2pOd5AsjbDwknzigjrU28Rxy3FK49
+              refresh_token: ALRL46Rb2YLVarjk8J7ywBqSAypkPt-hPzl3Cue1WbY.6frbcFJKuhd1ixtjLR5AUv0BPGsKSfkS1HB1TLG22u4
+              redirect_uri: https://oauthdebugger.com/debug
+              scope: openid offline
+        required: true
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              example:
+                access_token: oym1Jz02c3KoC5HpVTDZArCuF8CS5FsIjDzcaZYqRY4.JcMHgPo-cIZei-2biVt3SsyHiiiYT17PqSDi_833N8I
+                expires_in: 604799
+                id_token: eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzo2NDYwNjA3Mi05MTY1LTRiZTYtYmQ3Yi04ZDMyMmU2ZWQ3ZjciLCJ0eXAiOiJKV1QifQ.eyJhdF9oYXNoIjoiR1lPRDJDaFFiMFBpc0pLWW5qbDR5QSIsImF1ZCI6WyJhbHRhaXI6OnN0dWRpbyJdLCJhdXRoX3RpbWUiOjE1OTI1NjE0ODcsImVtYWlsIjoiYWx0YWlyQHNtYXJ0d29ya3MuY29tIiwiZXhwIjoxNTkyNTY1MDg5LCJpYXQiOjE1OTI1NjE0ODksImlzcyI6Imh0dHBzOi8vYXBpLmRldi5hbHRhaXJzYy5jb20vIiwianRpIjoiMWZmOTQ2MWEtYmM4Mi00MjUzLWE3NzgtYmMwNmY0Y2Q0OTM4IiwibGFzdF9uYW1lIjoiU21hcnRXb3JrcyIsIm5hbWUiOiJBbHRhaXIiLCJub25jZSI6Ijlla211NXpkdTYiLCJyYXQiOjE1OTI1NjE0NzUsInNpZCI6IjI1ZGIzMzdhLTQxNjktNGJlNC05MWZmLTc2OWNmNWZkNmY0YyIsInN1YiI6ImFsdGFpciIsInVzZXJuYW1lIjoiYWx0YWlyIn0.lDt8jfAkCC9g9Bt5iSz2rgCgC9JNXj-yZ-rs9l-_67eVxnKHu_hkb3vmQmk-k6jwx5pRjQ4_lqPQe-3GMS3C5Fl6DgxHDtDlzMnRUGKKRjTfUJy80Y0__mquYEhDGP9oxsLy39vHLpJVFj6Sx81owoixTW5ce1iGTJ2D3XcNjLooyg9Axa_mrSWBsZJoD-jaZZ7TTliz-jn1QBQbX3V-KCE2qFvcgAAJ8ppu9vEBiCDd95xoNgpF_6EEdYV3oPJgurNfagP4GEFNXSA9BlHNXb8PgFR32I_h_4oz4j3Lq8UW-V1FuldpytXSeJ1Lbh63g5vmbSdDgyuZz-uGHCDXRpcEQqj3fIdaey3TErhFI_G-RbA3xL6uRkMtMxK22e5oyUSbnd8RDhfwZB4E3q7KlDhQnpuZLat-OQ81NTLtC1ggNJgfzm3wlCIEfAeUbOae1hS2vXYJFWyQ8dl-_Kik7QAOSFPYhl3ipr58w13wmf9C9TVdlfZ-FxvTrTbMqjOibMGO4qlnuoo8CXLWIuWThRQgKTnK5CHpuDKBuH_tnL059k7weZwa4Vgk7wlrHPLPZVmg-b287zGx2OGZiS6VlYfoiIhQ_mY4fB1o2QEc4lPsgpe6JlTSCQ47VoEUvFzK83iI5pOhEKGFOSsSkAOSBvWjnOHrc9CvwYIZ7IkJIHQ
+                scope: openid offline
+                token_type: bearer
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
+  /oauth2/revoke:
+    post:
+      tags:
+        - OAuth
+      summary: Revoke a token (Access or Refresh)
+      description: |
+        Revoking a token (both `access` and `refresh`) means that the tokens will be ***invalid***.<br/>
+        A revoked access token can no longer be used to make access requests, and a revoked refresh token can no longer
+        be used to refresh an access token.<br/>
+        Revoking a refresh token also invalidates the access token that was created with it.<br/><br/>
+        **A token may only be revoked by the client the token was generated for!!**: <br/> - This mean that you need put also in the
+        body the keys `client_id` y `client secret`.'
+      operationId: PostOauth2Revoke
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RevokeRequest'
+            example:
+              token: ALRL46Rb2YLVarjk8J7ywBqSAypkPt-hPzl3Cue1WbY.6frbcFJKuhd1ixtjLR5AUv0BPGsKSfkS1HB1TLG22u4
+              client_id: my-client
+              client_secret: my-strong-secret
+        required: true
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              example:
+                error: invalid_request
+                error_description: The request is missing a required parameter, includes an invalid
+                  parameter value, includes a parameter more than once, or is otherwise malformed
+                error_hint: Make sure that the various parameters are correct, be aware of case sensitivity
+                  and trim your parameters. Make sure that the client you are using has exactly whitelisted
+                  the redirect_uri you specified.
+                status_code: 400
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
+  /oauth2/sessions/logout:
+    parameters:
+      - $ref: '#/components/parameters/id_token_hint'
+      - $ref: '#/components/parameters/post_logout_redirect_uri'
+      - $ref: '#/components/parameters/state_optional'
+    get:
+      tags:
+        - OAuth
+      summary: Initialize & Complete User Logout
+      description: |
+        This endpoint initiates and completes user logout and initiates OpenID Connect Front-/Back-channel logout.<br/>
+        A logout request may be initiated by the OpenID Provider (OP - **you**) or by the Relying Party (RP - the OAuth2 Client):
+        - The OP-initiated flow does not need an `id_token_hint`, and it may neither define a state nor a `post_logout_redirect_uri`. (**You need a valid session cookie!!**)
+        - The RP-initiated flow needs an `id_token_hint` and may optionally define state and `post_logout_redirect_uri`.<br/>
+        Before the logout is completed, the user is redirected to the Logout UI to confirm the logout request.<br/>
+        There are several possible pathways for executing this flow, explained in the following diagram:<br/><br/>
+        <center><img width="60%" src="https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVEQ7XG4gICAgSVtHRVQgL29hdXRoMi9zZXNzaW9uL2xvZ291dF0tLT58aGFzIGlkX3Rva2VuX2hpbnQqfFJQSVtSUC1pbml0aWF0ZWQgbG9nb3V0XTtcbiAgICBJW0dFVCAvb2F1dGgyL3Nlc3Npb24vbG9nb3V0XS0tPnxkb2VzIG5vdCBoYXZlIGlkX3Rva2VuX2hpbnQqfE9QSVtPUC1pbml0aWF0ZWQgbG9nb3V0XVxuT1BJLS0-fGhhcyBzdGF0ZSp8RVtFcnJvcl1cbk9QSS0tPnxoYXMgcG9zdF9sb2dvdXRfdXJpKnxFW0Vycm9yXVxuT1BJLS0-fGhhcyB2YWxpZCBzZXNzaW9uIGNvb2tpZXxMVUlbTG9nb3V0IFVJIHdpdGggP2xvZ291dF9jaGFsbGVuZ2U9Li4uXVxuT1BJLS0-fGhhcyBubyB2YWxpZCBzZXNpb24gY29va2llfEVuZFtSZXR1cm4gdG8gcG9zdF9sb2dvdXRfdXJsKioqXVxuUlBJLS0-fGhhcyBhY3RpdmUgc2Vzc2lvbioqKip8TFVJXG5SUEktLT58bm8gYWN0aXZlIHNlc3Npb24qKioqfFJQSTJcbkxVSS0tPnx2ZXJpZnkgbG9nb3V0IHJlcXVlc3R8TFVJXG5MVUktLT58cmVkaXJlY3Qgd2l0aCBsb2dvdXRfdmVyaWZpZXIqfFJQSTJbIC9vYXV0aDIvc2Vzc2lvbnMvbG9nb3V0P2xvZ291dF92ZXJpZmllcj0uLi5dXG5SUEkyLS0-fGV4ZWN1dGUgZnJvbnQvYmFja2NoYW5uZWwgbG9nb3V0LCByZXZva2UgY29va2llfFJQSTJcblJQSTItLT58UmVkaXJlY3QgdG98RW5kIiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifX0"></center><br/>
+        **Legend**:
+        - **\***: This is a query parameter, for example <b>/oauth2/sessions/logout?id_token_hint=...</b>
+        - **\*\*** Here, an **"active session"** implies that there has been at least one login request completed with `remember: true` for that user.
+        If that's not the case, the system **"does not know"** what to do (because there has never been a session issued that was remembered - hence it's not possible to forget it).
+        - **\*\*\***: Here, the **"valid session cookies"** implies that the browser has a valid authentication cookie when calling `/oauth2/sessions/logout`.
+        - **\*\*\*\***: The `post_logout_redirect` defaults to the configuration value of `urls.post_logout_redirect`.
+        If it's an RP-initiated flow and a `post_logout_redirect_uri` was set and that URL is in the array of the OAuth2 Client's `urls.post_logout_redirect`, the browser will be redirected there instead.
+      operationId: GetOpenIdSessionsLogout
+      responses:
+        302:
+          description: "Found"
+        500:
+          description: "Internal Server Error"
+  /userinfo:
+    get:
+      tags:
+        - OAuth
+      summary: Get the Payload of the ID Token.
+      description: |
+        This endpoint returns the payload of the ID Token, including the idTokenExtra values, of the provided OAuth 2.0 Access Token.<br/>
+        **NOT all info of this example is really included, this endpoint is high customizable, this is need added in the backend!**
+      operationId: GetOpenIdUserInfo
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/jwt:
+              example: |
+                eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzo2NDYwNjA3Mi05MTY1LTRiZTYtYmQ3Yi04ZDMyMmU2ZWQ3ZjciLCJ0eXAiOiJKV1QifQ.
+                eyJhdWQiOltdLCJpc3MiOiJodHRwczovL2FwaS5kZXYuYWx0YWlyc2MuY29tLyIsInN1YiI6IiJ9.
+                aXExIaq6TYP8b6xvgVMMd0XP_4F_CvZZCnV7PCOzD6558whwRht8wgvWuTH4FXySaMHMyZtzdi-bwGDmKZMnLqhOQxo6HFYZY2iI7vcaeAE7n4k0roi_8T0sWEML1SVmilcIGkykyJ_4eQaQf2FmJcqvaIXzr9vst0qf0GLTs9q5RnvsrlQvDTUB7GBmMa4TBppRGLiM-Iw0xmRUg2AJwi_kJYSGOeSNbIPDelzMA_etZNvfGZzoPZxPi3SvwMMR6vULjIGTWzdQnVvZqxm3Jd6QfejUlxFCbTNiSfWD2qFEPpazXU4-5WVx9u-HYrlt3ZdFjzh-JB_M-j5veTrZsE2173pZf_sjxYqY17mUQhBiZ41js_4HtYkUtch8BemA2FhpYCboWvyt2YXTgfSbn_KN43WZkYgWY6tmqbXgV7lsnCdCHYW5c8JXw-PQzL_rJ0htAaLdC4lgp_afdp5Z5c6u0YHbYZMWd4tMUgp8HJr2Eiy9Mv9vVg4aRi6hZ-BL9Cx9mRIBvceCkte7cPqL_x-4kOmOO4IEzFhV2uH16jkoqMX6ZWQCGgsWNyF2DAgZHFF6ip5MIcEu2uQyM9hqIjQ79LSmN6cGudvc2xKFc3_mlNXXRy7stnyCEYufSvlGxPpxzZfb2vv7kqBhwu--hcVhX67rkUjGLFWHIaIYLm0
+        401:
+          description: "Unauthorized"
+          content:
+            application/json:
+              example:
+                error: request_unauthorized
+                error_description: The request could not be authorized
+                error_hint: Check that you provided valid credentials in the right format.
+                status_code: 401
+                error_debug: ": not_found"
+                request_id: ''
+        500:
+          description: "Internal Server Error"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Opaque JWT
+  parameters:
+    client_id:
+      in: query
+      name: client_id
+      schema:
+        type: string
+      description: |
+        Every client (**Website (MVC)**, **Website (SPA)**, **Mobile App**, **Client (Service)**...) is identified by a client ID. <br/>
+        Unlike a client secret, the client ID is a public value that does not have to be protected.
+      example: my-client-id
+      required: true
+    response_type:  
+      in: query
+      name: response_type
+      schema:
+        type: string
+      description: |
+        Expected response type:
+        - `code`
+        - `token`
+        - `id_token`
+        - ***hybrid*** (The follow keys are admited):
+          - `code` + `token`
+          - `code` + `token` + `id_token`
+          - `code` + `id_token`
+      allowEmptyValue: false
+      example: code
+      required: true
+    response_mode:  
+      in: query
+      name: response_mode
+      schema:
+        type: string
+      description: Expected response mode (`query`, `form_post`, `fragment`)
+      allowEmptyValue: false
+      required: true
+      example: form_post
+    redirect_uri:  
+      in: query
+      name: redirect_uri
+      schema:
+        type: string
+      description: It tells the issuer where to redirect the browser back to when the flow is done.
+      example: https://oauthdebugger.com/debug
+      required: true
+    state:  
+      in: query
+      name: state
+      schema:
+        type: string
+      description: The `state` is an value that is carried through the whole flow and returned to the client.<br/>
+        This is used to prevent [CSRF attacks](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29).
+      example: 44f8343d-6f33-4f1e-b247-e91c535e3296
+      required: true
+    scope:  
+      in: query
+      name: scope
+      schema:
+        type: string
+      description: |
+        Clients can request **additional information** or **'permissions'** via `scopes`.<br/>
+        Additionally, we have pre-defined OAuth 2.0 Scope values:
+        - `offline_access`: Include this scope if you wish to receive a refresh token.
+        - `offline`: alias for `offline_access`.
+        - `openid`: Include this scope if you wish to perform an OpenID Connect request.
+      example: openid offline
+      required: true
+    nonce:  
+      in: query
+      name: nonce
+      schema:
+        type: string
+      description: A **nonce** (or number used once) is a random value that is used to prevent [replay attacks](https://en.wikipedia.org/wiki/Replay_attack).
+      example: 4g7fvh6lhli
+      required: false
+    code_challenge_method:
+      in: query
+      name: code_challenge_method
+      schema:
+        type: string
+      description: For [**PKCE**](https://tools.ietf.org/html/rfc7636) is **required**!!, can be `plain` (raw [***code_verifier***](https://tools.ietf.org/html/rfc7636#page-8) **NOT** recommended) or `S256` (***BASE64URL-ENCODE(SHA256(ASCII(code_verifier)))***).
+      example: S256
+      required: true
+    code_challenge:  
+      in: query
+      name: code_challenge
+      schema:
+        type: string
+      description: |
+        For [**PKCE**](https://tools.ietf.org/html/rfc7636) is **required**!!, a challenge derived from the [***code_verifier***](https://tools.ietf.org/html/rfc7636#page-8) to be verified against later:
+              <br/>
+              - `code_verifier`: ***High-entropy cryptographic random STRING using the unreserved characters [A-Z] / [a-z] / [0-9] / "-" / "." / "_" / "~",
+                <br/>with a minimum length of 43 characters and a maximum length of 128 characters.***
+      example: E3gptgCg6douTv-FoV2tEbTulu0F9yCLURgDX-flOZM
+      required: true
+    id_token_hint:  
+      in: query
+      name: id_token_hint
+      schema:
+        type: string
+      description: |
+        When the user is redirected to the logout endpoint in a web site or similar, they will be prompted if
+        they really want to sign-out.<br/> This prompt can be bypassed by a client sending the original `id_token`
+        received from authentication.<br/> This is passed as a query string parameter called `id_token_hint`.
+      example: eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkazcifQ.ewogImlzcyI6ICJodHRw
+        Oi8vc2VydmVyLmV4YW1wbGUuY29tIiwKICJzdWIiOiAiMjQ4Mjg5NzYxMDAxIiw
+        KICJhdWQiOiAiczZCaGRSa3F0MyIsCiAibm9uY2UiOiAibi0wUzZfV3pBMk1qIi
+        wKICJleHAiOiAxMzExMjgxOTcwLAogImlhdCI6IDEzMTEyODA5NzAKfQ.ggW8hZ
+        1EuVLuxNuuIJKX_V8a_OMXzR0EHR9R6jgdqrOOF4daGU96Sr_P6qJp6IcmD3HP9
+        9Obi1PRs-cwh3LO-p146waJ8IhehcwL7F09JdijmBqkvPeB2T9CJNqeGpe-gccM
+        g4vfKjkM8FcGvnzZUN4_KSP0aAp1tOJ1zZwgjxqGByKHiOtX7TpdQyHE5lcMiKP
+        XfEIQILVq0pc_E2DzL7emopWoaoZTF_m0_N0YzFC6g6EJbOEoRoSK5hoDalrcvR
+        YLSrQAZZKflyuVCyixEoV9GfNQC3_osjzw2PAithfubEEBLuVVk4XUVrWOLrLl0
+        nx7RkKU8NXNHq-rvKMzqg
+      required: false
+    post_logout_redirect_uri:  
+      in: query
+      name: post_logout_redirect_uri
+      schema:
+        type: string
+      description: |
+        If a valid `id_token_hint` is passed, then the client may also send a `post_logout_redirect_uri` parameter.<br/>
+        This can be used to allow the user to redirect back to the client after sign-out.<br/>
+        The value must match one of the client’s pre-configured `post_logout_redirect_uri`.
+      allowEmptyValue: false
+      example: http://localhost:8080/index.html
+      required: false
+    state_optional:  
+      in: query
+      name: state
+      schema:
+        type: string
+      description: The `state` is an value that is carried through the whole flow and returned to the client.<br/>
+        This is used to prevent [CSRF attacks](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29).
+      example: 44f8343d-6f33-4f1e-b247-e91c535e3296
+      required: false
+  schemas:
+    TokenRequest:
+      description: "Token Body"
+      title: Token Request
+      type: object
+      required:
+        - grant_type
+        - client_id
+        - client_secret
+        - code
+        - code_verifier
+        - refresh_token
+        - redirect_uri
+        - scope
+      properties:
+        grant_type:
+          type: string
+          description: |
+            Grants Types according to Flows:
+            - For **Authorization Code** and **PKCE** is required `authorization_code`.<br/>
+            - For **Client Credentials** is required `client_credentials`.<br/>
+            - For **Refresh Grant** is required `refresh_token`.
+          enum:
+            - authorization_code
+            - client_credentials
+            - refresh_token
+        client_id:
+          type: string
+          description: |
+            Need for **Authorization Code**, **PKCE** and **Client Credentials**!!<br/>
+            Every client (**Website (MVC)**, **Website (SPA)**, **Mobile App**, **Client (Service)**...) is identified by a client ID.<br/>
+            Unlike a client secret, the client ID is a public value that does not have to be protected.
+        client_secret:
+          type: string
+          description: |
+            Need for **Client Credentials**!!<br/>
+            The `client_secret` is a secret known only to the application and the authorization server.
+            It must be sufficiently random to not be guessable.
+        code:
+          type: string
+          description: |
+            Need for **Authorization Code** and **PKCE**!!<br/>
+            It is the authorization code generated by the authorization server with **"Authorization Code"** & **"PKCE"** flows.<br/>
+            This code is relatively short-lived depending on the OAuth service config.
+        code_verifier:
+          type: string
+          description: |
+            Need for **Authorization Code** and **PKCE**!!<br/>
+            `code_verifier` = ***high-entropy cryptographic random STRING using the
+                                unreserved characters [A-Z] / [a-z] / [0-9] / "-" / "." / "_" / "~", with a minimum length
+                                of 43 characters and a maximum length of 128 characters.***
+        refresh_token:
+          type: string
+          description: |
+            Need for **Refresh Grant**!!<br/>
+            The presence of the refresh token means that the access token will expire and you’ll be able to get a new one
+            without the user’s interaction.<br/> To use the refresh token, make a POST request to the service’s token
+            endpoint with `grant_type=refresh_token`, and include the refresh token as well as the client credentials.
+        redirect_uri:
+          type: string
+          description: |
+            Need for **Authorization Code** and **PKCE**!!<br/>
+            Tells the authorization server where to send the user back to after they approve the request.
+            ***If the client does not have it enabled, an error is returned.***
+        scope:
+          type: string
+          description: |
+            Need for **Authorization Code**, **PKCE** and **Client Credentials**!!<br/>
+            Scope is a way to limit an app’s access to a user’s data. Rather than granting complete access to a user’s account,
+            it is often useful to give apps a way to request a more limited scope of what they are allowed to do on behalf of a user.<br/>
+            Additionally, we have pre-defined OAuth 2.0 Scope values:
+            - `offline_access`: Include this scope if you wish to receive a refresh token.
+            - `offline`: alias for `offline_access`.
+            - `openid`: Include this scope if you wish to perform an OpenID Connect request.
+      example:
+        grant_type: client_credentials
+        client_id: my-client-id
+        client_secret: my-client-secret
+        code: vGwDK4N168Z6UrHmypDE9STaBRC5Sq1vWaRwkEInt2o.fGeErUUhkflixRBGUU1hSFR91GHqrmG5eCagfnqAoD8
+        code_verifier: 92bGgipEveY72NCHxt6CzOv5pDJd3sOknhixr9Q5UjoiHl5p7iKhw7wVqOPkmC3QPoaAp88kbTfmBVmPN8srWFgrgfgrZacaoNz2pOd5AsjbDwknzigjrU28Rxy3FK49
+        refresh_token: ALRL46Rb2YLVarjk8J7ywBqSAypkPt-hPzl3Cue1WbY.6frbcFJKuhd1ixtjLR5AUv0BPGsKSfkS1HB1TLG22u4
+        redirect_uri: https://oauthdebugger.com/debug
+        scope: openid offline
+    TokenResponse:
+      description: "Token Response"
+      title: Token Response
+      type: object
+      required:
+        - access_token
+        - expires_in
+        - scope
+        - token_type
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+        id_token:
+          type: string
+        refresh_token:
+          type: string
+        scope:
+          type: string
+        token_type:
+          type: string
+      example:
+        access_token: oym1Jz02c3KoC5HpVTDZArCuF8CS5FsIjDzcaZYqRY4.JcMHgPo-cIZei-2biVt3SsyHiiiYT17PqSDi_833N8I
+        expires_in: 604799
+        id_token: eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzo2NDYwNjA3Mi05MTY1LTRiZTYtYmQ3Yi04ZDMyMmU2ZWQ3ZjciLCJ0eXAiOiJKV1QifQ.eyJhdF9oYXNoIjoiR1lPRDJDaFFiMFBpc0pLWW5qbDR5QSIsImF1ZCI6WyJhbHRhaXI6OnN0dWRpbyJdLCJhdXRoX3RpbWUiOjE1OTI1NjE0ODcsImVtYWlsIjoiYWx0YWlyQHNtYXJ0d29ya3MuY29tIiwiZXhwIjoxNTkyNTY1MDg5LCJpYXQiOjE1OTI1NjE0ODksImlzcyI6Imh0dHBzOi8vYXBpLmRldi5hbHRhaXJzYy5jb20vIiwianRpIjoiMWZmOTQ2MWEtYmM4Mi00MjUzLWE3NzgtYmMwNmY0Y2Q0OTM4IiwibGFzdF9uYW1lIjoiU21hcnRXb3JrcyIsIm5hbWUiOiJBbHRhaXIiLCJub25jZSI6Ijlla211NXpkdTYiLCJyYXQiOjE1OTI1NjE0NzUsInNpZCI6IjI1ZGIzMzdhLTQxNjktNGJlNC05MWZmLTc2OWNmNWZkNmY0YyIsInN1YiI6ImFsdGFpciIsInVzZXJuYW1lIjoiYWx0YWlyIn0.lDt8jfAkCC9g9Bt5iSz2rgCgC9JNXj-yZ-rs9l-_67eVxnKHu_hkb3vmQmk-k6jwx5pRjQ4_lqPQe-3GMS3C5Fl6DgxHDtDlzMnRUGKKRjTfUJy80Y0__mquYEhDGP9oxsLy39vHLpJVFj6Sx81owoixTW5ce1iGTJ2D3XcNjLooyg9Axa_mrSWBsZJoD-jaZZ7TTliz-jn1QBQbX3V-KCE2qFvcgAAJ8ppu9vEBiCDd95xoNgpF_6EEdYV3oPJgurNfagP4GEFNXSA9BlHNXb8PgFR32I_h_4oz4j3Lq8UW-V1FuldpytXSeJ1Lbh63g5vmbSdDgyuZz-uGHCDXRpcEQqj3fIdaey3TErhFI_G-RbA3xL6uRkMtMxK22e5oyUSbnd8RDhfwZB4E3q7KlDhQnpuZLat-OQ81NTLtC1ggNJgfzm3wlCIEfAeUbOae1hS2vXYJFWyQ8dl-_Kik7QAOSFPYhl3ipr58w13wmf9C9TVdlfZ-FxvTrTbMqjOibMGO4qlnuoo8CXLWIuWThRQgKTnK5CHpuDKBuH_tnL059k7weZwa4Vgk7wlrHPLPZVmg-b287zGx2OGZiS6VlYfoiIhQ_mY4fB1o2QEc4lPsgpe6JlTSCQ47VoEUvFzK83iI5pOhEKGFOSsSkAOSBvWjnOHrc9CvwYIZ7IkJIHQ
+        refresh_token: ALRL46Rb2YLVarjk8J7ywBqSAypkPt-hPzl3Cue1WbY.6frbcFJKuhd1ixtjLR5AUv0BPGsKSfkS1HB1TLG22u4
+        scope: openid offline
+        token_type: bearer
+    RevokeRequest:
+      description: "Revoke Body"
+      title: Revoke Request
+      type: object
+      required:
+        - token
+        - client_id
+        - client_secret
+      properties:
+        token:
+          type: string
+          description: |
+            Token to revoke and invalidate.
+        client_id:
+          type: string
+          description: |
+            Identifier of the client that generated the token to revoke.
+        client_secret:
+          type: string
+          description: |
+            Secret of the client that generated the token to revoke.
+      example:
+        token: ALRL46Rb2YLVarjk8J7ywBqSAypkPt-hPzl3Cue1WbY.6frbcFJKuhd1ixtjLR5AUv0BPGsKSfkS1HB1TLG22u4
+        client_id: my-client
+        client_secret: my-strong-secret
+
