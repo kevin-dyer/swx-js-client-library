@@ -1,4 +1,4 @@
-# MqttApiReference.CreateMQTTLabelCredentialsResponse
+# UsersApiReference.CreateMQTTLabelCredentialsResponse
 
 ## Properties
 

@@ -1,6 +1,6 @@
 /**
- * MQTT API reference
- * MQTT OpenAPI endpoints - OpenAPI 3.0
+ * Users API reference
+ * Users OpenAPI endpoints - OpenAPI 3.0
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -13,10 +13,9 @@
 
 
 import ApiClient from "../ApiClient";
-import AuthZError from '../model/AuthZError';
 import BadFormedError from '../model/BadFormedError';
-import BaseError from '../model/BaseError';
 import CredentialsError from '../model/CredentialsError';
+import ErrorResponse from '../model/ErrorResponse';
 import ListCredentialsResponse from '../model/ListCredentialsResponse';
 import ShowCredentialsThingResponse from '../model/ShowCredentialsThingResponse';
 import UpdateMQTTCredentials from '../model/UpdateMQTTCredentials';
@@ -65,7 +64,7 @@ export default class MQTTCredentialsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = ListCredentialsResponse;
@@ -119,7 +118,7 @@ export default class MQTTCredentialsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = ShowCredentialsThingResponse;
@@ -177,7 +176,7 @@ export default class MQTTCredentialsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
       let returnType = UpdateMQTTCredentialsResponse;

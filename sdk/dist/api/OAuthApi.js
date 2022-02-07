@@ -110,7 +110,7 @@ var OAuthApi = /*#__PURE__*/function () {
       };
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = [];
       var returnType = null;
@@ -209,7 +209,7 @@ var OAuthApi = /*#__PURE__*/function () {
         'redirect_uri': redirectUri,
         'scope': scope
       };
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/x-www-form-urlencoded'];
       var accepts = ['application/json'];
       var returnType = _TokenResponse["default"];
@@ -259,7 +259,7 @@ var OAuthApi = /*#__PURE__*/function () {
       };
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = [];
       var returnType = null;
@@ -296,7 +296,7 @@ var OAuthApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/jwt', 'application/json'];
       var returnType = null;
@@ -351,7 +351,7 @@ var OAuthApi = /*#__PURE__*/function () {
         'client_id': clientId,
         'client_secret': clientSecret
       };
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/x-www-form-urlencoded'];
       var accepts = ['application/json'];
       var returnType = null;

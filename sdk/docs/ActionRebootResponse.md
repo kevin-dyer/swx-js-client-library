@@ -1,4 +1,4 @@
-# MqttApiReference.ActionRebootResponse
+# UsersApiReference.ActionRebootResponse
 
 ## Properties
 

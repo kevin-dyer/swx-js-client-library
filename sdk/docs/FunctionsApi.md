@@ -1,4 +1,4 @@
-# MqttApiReference.FunctionsApi
+# UsersApiReference.FunctionsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -25,8 +25,17 @@ Create and deploy a function
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -37,7 +46,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 let _function = {"name":"motion-detected","description":"This function will be invoked when motion is detected.","template":"python3-http","env":{"MIN_DETECTION_EVENTS":"2","RESET_AFTER_SECONDS":"15"},"options":{"topics":"living-room/motion,floor1/bathroom/light","schedule":"*/5 * * * *"},"source":{"code":"ZGVmIGhhbmRsZShyZXEpOgogICAgcmV0dXJuIHsKICAgICAgICAic3RhdHVzQ29kZSI6IDIwMSwKICAgICAgICAiYm9keSI6IHJlcS5ib2R5LmRlY29kZSgidXRmLTgiKQogICAgfQo="}}; // Function | Body of a new function
 apiInstance.createFunction(space, _function).then((data) => {
@@ -62,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -79,8 +88,17 @@ Delete a function
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -91,7 +109,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 let functionName = "functionName_example"; // String | 
 apiInstance.deleteFunction(space, functionName).then(() => {
@@ -116,7 +134,7 @@ null (empty response body)
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -133,8 +151,17 @@ Get a function
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -145,7 +172,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 let functionName = "functionName_example"; // String | 
 apiInstance.getFunction(space, functionName).then((data) => {
@@ -170,7 +197,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -187,8 +214,17 @@ Get the last version of the function code
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -199,7 +235,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 let functionName = "functionName_example"; // String | 
 apiInstance.getFunctionCode(space, functionName).then((data) => {
@@ -224,7 +260,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -241,8 +277,17 @@ Get a list of the logs for a specific function
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -253,7 +298,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 let functionName = "functionName_example"; // String | 
 let opts = {
@@ -284,7 +329,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -301,8 +346,17 @@ Invoke a function
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -313,7 +367,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 let functionName = "functionName_example"; // String | 
 let opts = {
@@ -342,7 +396,7 @@ null (empty response body)
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -359,8 +413,17 @@ Invoke a function asynchronously
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -371,7 +434,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 let functionName = "functionName_example"; // String | 
 let xCallbackUrl = "xCallbackUrl_example"; // String | 
@@ -402,7 +465,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -419,8 +482,17 @@ List Functions
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -431,7 +503,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 apiInstance.listFunctions(space).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -454,7 +526,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -471,8 +543,17 @@ Update a function
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -483,7 +564,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.FunctionsApi();
+let apiInstance = new UsersApiReference.FunctionsApi();
 let space = "space_example"; // String | 
 let functionName = "functionName_example"; // String | 
 let _function = {"id":"01EPEF6NB562TTT0C3XQ8VTXVG","name":"motion-detected","description":"This function will be invoked when motion is detected.","template":"python3-http","env":{"MIN_DETECTION_EVENTS":"2","RESET_AFTER_SECONDS":"15"},"options":{"topics":"living-room/motion,floor1/bathroom/light","schedule":"*/5 * * * *"},"source":{"code":"ZGVmIGhhbmRsZShyZXEpOgogICAgcmV0dXJuIHsKICAgICAgICAic3RhdHVzQ29kZSI6IDIwMSwKICAgICAgICAiYm9keSI6IHJlcS5ib2R5LmRlY29kZSgidXRmLTgiKQogICAgfQo="}}; // Function | Body of the updated function
@@ -510,7 +591,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

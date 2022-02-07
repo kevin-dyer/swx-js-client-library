@@ -1,4 +1,4 @@
-# MqttApiReference.PropertyDiskResponse
+# UsersApiReference.PropertyDiskResponse
 
 ## Properties
 

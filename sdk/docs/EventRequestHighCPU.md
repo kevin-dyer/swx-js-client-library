@@ -1,4 +1,4 @@
-# MqttApiReference.EventRequestHighCPU
+# UsersApiReference.EventRequestHighCPU
 
 ## Properties
 

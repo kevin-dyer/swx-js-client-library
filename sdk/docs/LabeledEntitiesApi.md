@@ -1,4 +1,4 @@
-# MqttApiReference.LabeledEntitiesApi
+# UsersApiReference.LabeledEntitiesApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -19,8 +19,17 @@ Show entity_ids and their labels. At least one of the following parameters must 
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -31,7 +40,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabeledEntitiesApi();
+let apiInstance = new UsersApiReference.LabeledEntitiesApi();
 let space = altair; // String | 
 let entityId = ["01EDVJEMFD24360JT7434A6GS8","01EDVJEMFD24360JT7434A6GS8"]; // [String] | 
 let labelId = ["01EDVJEMFD24360JT7434A6GS8","01EDVJEMFD24360JT7434A6GS8"]; // [String] | 
@@ -66,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

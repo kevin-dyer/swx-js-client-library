@@ -1,4 +1,4 @@
-# MqttApiReference.ThingsApi
+# UsersApiReference.ThingsApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -24,8 +24,17 @@ Add a new thing description to the platform according to WoT specification
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -36,10 +45,10 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.ThingsApi();
+let apiInstance = new UsersApiReference.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
-let thingRequest = new MqttApiReference.ThingRequest(); // ThingRequest | Create a new thing description in the platform
+let thingRequest = new UsersApiReference.ThingRequest(); // ThingRequest | Create a new thing description in the platform
 apiInstance.addThing(space, collectionName, thingRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -63,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -82,8 +91,17 @@ Deletes all the existing information from a thing by Id. It deletes the thing de
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -94,7 +112,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.ThingsApi();
+let apiInstance = new UsersApiReference.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
@@ -121,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -140,8 +158,17 @@ List all thing descriptions in an array
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -152,7 +179,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.ThingsApi();
+let apiInstance = new UsersApiReference.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let opts = {
@@ -199,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -218,8 +245,17 @@ Reset the Client Secret for a specific thing
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -230,7 +266,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.ThingsApi();
+let apiInstance = new UsersApiReference.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
@@ -257,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -276,8 +312,17 @@ Show the thing description from a thing
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -288,7 +333,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.ThingsApi();
+let apiInstance = new UsersApiReference.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
@@ -315,7 +360,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -334,8 +379,17 @@ Update the thing description from a thing by Id. You need to include the whole t
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -346,11 +400,11 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.ThingsApi();
+let apiInstance = new UsersApiReference.ThingsApi();
 let space = altair; // String | 
 let collectionName = ElectronicBoards; // String | 
 let thingId = 01ed9jencjshpv374k15k1w2gr; // String | 
-let thingUpdateRequest = new MqttApiReference.ThingUpdateRequest(); // ThingUpdateRequest | Update an existent thing description by Id
+let thingUpdateRequest = new UsersApiReference.ThingUpdateRequest(); // ThingUpdateRequest | Update an existent thing description by Id
 apiInstance.updateThing(space, collectionName, thingId, thingUpdateRequest).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -375,7 +429,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

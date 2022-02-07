@@ -1,4 +1,4 @@
-# MqttApiReference.OAuthApi
+# UsersApiReference.OAuthApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -21,8 +21,17 @@ OAuth 2.0 Authorize Endpoint
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -33,7 +42,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.OAuthApi();
+let apiInstance = new UsersApiReference.OAuthApi();
 let clientId = my-client-id; // String | Every client (**Website (MVC)**, **Website (SPA)**, **Mobile App**, **Client (Service)**...) is identified by a client ID. <br/> Unlike a client secret, the client ID is a public value that does not have to be protected. 
 let responseType = code; // String | Expected response type: - `code` - `token` - `id_token` - ***hybrid*** (The follow keys are admited):   - `code` + `token`   - `code` + `token` + `id_token`   - `code` + `id_token` 
 let responseMode = form_post; // String | Expected response mode (`query`, `form_post`, `fragment`)
@@ -74,7 +83,7 @@ null (empty response body)
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -93,8 +102,17 @@ The client makes a request to the token endpoint by sending the following parame
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -105,7 +123,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.OAuthApi();
+let apiInstance = new UsersApiReference.OAuthApi();
 let grantType = "grantType_example"; // String | Grants Types according to Flows: - For **Authorization Code** and **PKCE** is required `authorization_code`.<br/> - For **Client Credentials** is required `client_credentials`.<br/> - For **Refresh Grant** is required `refresh_token`. 
 let clientId = "clientId_example"; // String | Need for **Authorization Code**, **PKCE** and **Client Credentials**!!<br/> Every client (**Website (MVC)**, **Website (SPA)**, **Mobile App**, **Client (Service)**...) is identified by a client ID.<br/> Unlike a client secret, the client ID is a public value that does not have to be protected. 
 let clientSecret = "clientSecret_example"; // String | Need for **Client Credentials**!!<br/> The `client_secret` is a secret known only to the application and the authorization server. It must be sufficiently random to not be guessable. 
@@ -142,7 +160,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -161,8 +179,17 @@ This endpoint initiates and completes user logout and initiates OpenID Connect F
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -173,7 +200,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.OAuthApi();
+let apiInstance = new UsersApiReference.OAuthApi();
 let opts = {
   'idTokenHint': eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkazcifQ.ewogImlzcyI6ICJodHRw Oi8vc2VydmVyLmV4YW1wbGUuY29tIiwKICJzdWIiOiAiMjQ4Mjg5NzYxMDAxIiw KICJhdWQiOiAiczZCaGRSa3F0MyIsCiAibm9uY2UiOiAibi0wUzZfV3pBMk1qIi wKICJleHAiOiAxMzExMjgxOTcwLAogImlhdCI6IDEzMTEyODA5NzAKfQ.ggW8hZ 1EuVLuxNuuIJKX_V8a_OMXzR0EHR9R6jgdqrOOF4daGU96Sr_P6qJp6IcmD3HP9 9Obi1PRs-cwh3LO-p146waJ8IhehcwL7F09JdijmBqkvPeB2T9CJNqeGpe-gccM g4vfKjkM8FcGvnzZUN4_KSP0aAp1tOJ1zZwgjxqGByKHiOtX7TpdQyHE5lcMiKP XfEIQILVq0pc_E2DzL7emopWoaoZTF_m0_N0YzFC6g6EJbOEoRoSK5hoDalrcvR YLSrQAZZKflyuVCyixEoV9GfNQC3_osjzw2PAithfubEEBLuVVk4XUVrWOLrLl0 nx7RkKU8NXNHq-rvKMzqg, // String | When the user is redirected to the logout endpoint in a web site or similar, they will be prompted if they really want to sign-out.<br/> This prompt can be bypassed by a client sending the original `id_token` received from authentication.<br/> This is passed as a query string parameter called `id_token_hint`. 
   'postLogoutRedirectUri': http://localhost:8080/index.html, // String | If a valid `id_token_hint` is passed, then the client may also send a `post_logout_redirect_uri` parameter.<br/> This can be used to allow the user to redirect back to the client after sign-out.<br/> The value must match one of the client’s pre-configured `post_logout_redirect_uri`. 
@@ -202,7 +229,7 @@ null (empty response body)
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -221,8 +248,17 @@ This endpoint returns the payload of the ID Token, including the idTokenExtra va
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -233,7 +269,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.OAuthApi();
+let apiInstance = new UsersApiReference.OAuthApi();
 apiInstance.getOpenIdUserInfo().then(() => {
   console.log('API called successfully.');
 }, (error) => {
@@ -252,7 +288,7 @@ null (empty response body)
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -271,8 +307,17 @@ Revoking a token (both &#x60;access&#x60; and &#x60;refresh&#x60;) means that th
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -283,7 +328,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.OAuthApi();
+let apiInstance = new UsersApiReference.OAuthApi();
 let token = "token_example"; // String | Token to revoke and invalidate. 
 let clientId = "clientId_example"; // String | Identifier of the client that generated the token to revoke. 
 let clientSecret = "clientSecret_example"; // String | Secret of the client that generated the token to revoke. 
@@ -310,7 +355,7 @@ null (empty response body)
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

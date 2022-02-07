@@ -1,4 +1,4 @@
-# MqttApiReference.PropertyCPU
+# UsersApiReference.PropertyCPU
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# MqttApiReference.EventHighCPUData
+# UsersApiReference.EventHighCPUData
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# MqttApiReference.BadFormedError
+# UsersApiReference.BadFormedError
 
 ## Properties
 

@@ -381,6 +381,36 @@ Object.defineProperty(exports, "InfoResponse", {
     return _InfoResponse["default"];
   }
 });
+Object.defineProperty(exports, "Invitation", {
+  enumerable: true,
+  get: function get() {
+    return _Invitation["default"];
+  }
+});
+Object.defineProperty(exports, "InvitationCreate", {
+  enumerable: true,
+  get: function get() {
+    return _InvitationCreate["default"];
+  }
+});
+Object.defineProperty(exports, "InvitationPatch", {
+  enumerable: true,
+  get: function get() {
+    return _InvitationPatch["default"];
+  }
+});
+Object.defineProperty(exports, "InvitationUpdate", {
+  enumerable: true,
+  get: function get() {
+    return _InvitationUpdate["default"];
+  }
+});
+Object.defineProperty(exports, "InvitationsApi", {
+  enumerable: true,
+  get: function get() {
+    return _InvitationsApi["default"];
+  }
+});
 Object.defineProperty(exports, "ItemsApi", {
   enumerable: true,
   get: function get() {
@@ -699,6 +729,12 @@ Object.defineProperty(exports, "SourceCode", {
     return _SourceCode["default"];
   }
 });
+Object.defineProperty(exports, "SpaceUserInfo", {
+  enumerable: true,
+  get: function get() {
+    return _SpaceUserInfo["default"];
+  }
+});
 Object.defineProperty(exports, "ThingCreateResponse", {
   enumerable: true,
   get: function get() {
@@ -873,6 +909,18 @@ Object.defineProperty(exports, "UpdateMQTTPassword", {
     return _UpdateMQTTPassword["default"];
   }
 });
+Object.defineProperty(exports, "User", {
+  enumerable: true,
+  get: function get() {
+    return _User["default"];
+  }
+});
+Object.defineProperty(exports, "UsersApi", {
+  enumerable: true,
+  get: function get() {
+    return _UsersApi["default"];
+  }
+});
 
 var _ApiClient = _interopRequireDefault(require("./ApiClient"));
 
@@ -992,6 +1040,14 @@ var _FunctionsPaging = _interopRequireDefault(require("./model/FunctionsPaging")
 
 var _InfoResponse = _interopRequireDefault(require("./model/InfoResponse"));
 
+var _Invitation = _interopRequireDefault(require("./model/Invitation"));
+
+var _InvitationCreate = _interopRequireDefault(require("./model/InvitationCreate"));
+
+var _InvitationPatch = _interopRequireDefault(require("./model/InvitationPatch"));
+
+var _InvitationUpdate = _interopRequireDefault(require("./model/InvitationUpdate"));
+
 var _LabelDeleteResponse = _interopRequireDefault(require("./model/LabelDeleteResponse"));
 
 var _LabelListElement = _interopRequireDefault(require("./model/LabelListElement1"));
@@ -1076,6 +1132,8 @@ var _ShowMQTTLabelResponse = _interopRequireDefault(require("./model/ShowMQTTLab
 
 var _SourceCode = _interopRequireDefault(require("./model/SourceCode"));
 
+var _SpaceUserInfo = _interopRequireDefault(require("./model/SpaceUserInfo"));
+
 var _ThingCreateResponse = _interopRequireDefault(require("./model/ThingCreateResponse"));
 
 var _ThingCreateResponseCredentials = _interopRequireDefault(require("./model/ThingCreateResponseCredentials"));
@@ -1130,6 +1188,8 @@ var _UpdateMQTTLabelCredentials = _interopRequireDefault(require("./model/Update
 
 var _UpdateMQTTPassword = _interopRequireDefault(require("./model/UpdateMQTTPassword"));
 
+var _User = _interopRequireDefault(require("./model/User"));
+
 var _ActionsApi = _interopRequireDefault(require("./api/ActionsApi"));
 
 var _CollectionsApi = _interopRequireDefault(require("./api/CollectionsApi"));
@@ -1137,6 +1197,8 @@ var _CollectionsApi = _interopRequireDefault(require("./api/CollectionsApi"));
 var _EventsApi = _interopRequireDefault(require("./api/EventsApi"));
 
 var _FunctionsApi = _interopRequireDefault(require("./api/FunctionsApi"));
+
+var _InvitationsApi = _interopRequireDefault(require("./api/InvitationsApi"));
 
 var _ItemsApi = _interopRequireDefault(require("./api/ItemsApi"));
 
@@ -1163,5 +1225,7 @@ var _PropertiesApi = _interopRequireDefault(require("./api/PropertiesApi"));
 var _ThingsApi = _interopRequireDefault(require("./api/ThingsApi"));
 
 var _TriggersApi = _interopRequireDefault(require("./api/TriggersApi"));
+
+var _UsersApi = _interopRequireDefault(require("./api/UsersApi"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }

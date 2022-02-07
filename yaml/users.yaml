@@ -1,0 +1,501 @@
+openapi: 3.0.3
+info:
+  title: Users API reference
+  version: 1.0.0
+  description: Users OpenAPI endpoints - OpenAPI 3.0
+servers:
+  - url: https://api.swx.altairone.com
+    description: SmartWorks
+security:
+  - OAuth2AuthorizationCode:
+      - offline
+      - user
+      - invitation
+  - OAuth2ClientCredentials:
+      - user
+      - invitation
+  - AccessToken: []
+tags:
+  - name: Users
+    description: Operations about Users
+  - name: Invitations
+    description: Operations about Invitations
+paths:
+  '/spaces/{space}/users':
+    get:
+      tags:
+        - Users
+      summary: List Users from a Space
+      operationId: ListUsersFromSpace
+      parameters:
+        - $ref: '#/components/parameters/space'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      deprecated: false
+  '/spaces/{space}/users/{user}':
+    get:
+      tags:
+        - Users
+      summary: Get a User from a Space
+      operationId: GetUserFromSpace
+      parameters:
+        - $ref: '#/components/parameters/space'
+        - $ref: '#/components/parameters/user'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/UserNotFound'
+      deprecated: false
+    delete:
+      tags:
+        - Users
+      summary: Delete a User from a Space
+      operationId: DeleteUserFromSpace
+      parameters:
+        - $ref: '#/components/parameters/space'
+        - $ref: '#/components/parameters/user'
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/UserNotFound'
+      deprecated: false
+  '/spaces/{space}/invitations':
+    get:
+      tags:
+        - Invitations
+      summary: List Invitations sent from a Space
+      operationId: ListSentInvitations
+      parameters:
+        - $ref: '#/components/parameters/space'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invitations'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      deprecated: false
+  '/spaces/{space}/invitations/{invitation_id}':
+    get:
+      tags:
+        - Invitations
+      summary: Get an Invitation sent from a Space
+      operationId: GetSentInvitation
+      parameters:
+        - $ref: '#/components/parameters/space'
+        - $ref: '#/components/parameters/invitation_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invitation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/InvitationNotFound'
+      deprecated: false
+    put:
+      tags:
+        - Invitations
+      summary: Update an Invitation
+      operationId: UpdateSentInvitation
+      parameters:
+        - $ref: '#/components/parameters/space'
+        - $ref: '#/components/parameters/invitation_id'
+      requestBody:
+        description: Body of a the updated Invitation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitationUpdate'
+            example:
+              to_email: snadella@microsoft.com
+              roles: 'role::root'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invitation'
+        '400':
+          $ref: '#/components/responses/InvitationEmailCannotBeUpdated'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/InvitationNotFound'
+        '413':
+          $ref: '#/components/responses/PayloadTooLarge'
+      deprecated: false
+    delete:
+      tags:
+        - Invitations
+      summary: Delete an Invitation sent from Space
+      operationId: DeleteSentInvitation
+      parameters:
+        - $ref: '#/components/parameters/space'
+        - $ref: '#/components/parameters/invitation_id'
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/InvitationNotFound'
+      deprecated: false
+
+components:
+  securitySchemes:
+    OAuth2AuthorizationCode:
+      type: oauth2
+      description: "Authenticate going to the login page."
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.swx.altairone.com/oauth2/auth
+          tokenUrl: https://api.swx.altairone.com/oauth2/token
+          refreshUrl: https://api.swx.altairone.com/oauth2/token
+          scopes:
+            offline: Offline scope
+            user: Users scope
+            invitation: Invitations scope
+    OAuth2ClientCredentials:
+      type: oauth2
+      description: "Authenticate using the credentials of an OAuth2 Client."
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.swx.altairone.com/oauth2/token
+          refreshUrl: https://api.swx.altairone.com/oauth2/token
+          scopes:
+            user: Users scope
+            invitation: Invitations scope
+    AccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: Opaque JWT
+      description: "Authenticate using an access token already granted."
+
+  parameters:
+    space:
+      in: path
+      name: space
+      required: true
+      schema:
+        type: string
+        example: altair
+    user:
+      in: path
+      name: user
+      description: User ID
+      required: true
+      schema:
+        type: string
+    invitation_id:
+      in: path
+      name: invitation_id
+      required: true
+      schema:
+        type: string
+        example: 01F5E15ZA00VCNYQ6Q4D7XMXBE
+
+  responses:
+    InvitationEmailCannotBeUpdated:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              status: 400
+              message: recipient email cannot be updated
+    InvitationPatchBadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            error1:
+              summary: Invitation already accepted/rejected
+              value:
+                error:
+                  status: 400
+                  message: invitation already accepted or rejected
+            error2:
+              summary: Invalid "status"
+              value:
+                error:
+                  status: 400
+                  message: status must be 'ACCEPTED' or 'REJECTED'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              status: 401
+              message: Unauthenticated
+    Forbidden:
+      description: "Forbidden"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              status: 403
+              message: Unauthorized
+    UserNotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              status: 404
+              message: User not found
+    InvitationNotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              status: 404
+              message: Invitation not found
+    InvitationConflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              status: 409
+              message: Invitation already exists
+    PayloadTooLarge:
+      description: "Payload Too Large"
+
+  schemas:
+    User:
+      title: User
+      type: object
+      properties:
+        id:
+          type: string
+          example: bgates
+        email:
+          type: string
+          example: bgates@microsoft.com
+        created_at:
+          type: string
+          example: '2020-08-11T15:29:51'
+        updated_at:
+          type: string
+          example: '2020-08-11T15:29:51'
+      example:
+        id: bgates
+        email: bgates@microsoft.com
+        created_at: '2020-08-11T15:29:51'
+        updated_at: '2020-08-11T15:29:51'
+
+    Users:
+      title: Users
+      type: array
+      description: Array of users. It doesn't include created_at and updated_at fields.
+      items:
+        $ref: '#/components/schemas/User'
+      example:
+        - id: bgates
+          email: bgates@microsoft.com
+          created_at: '2020-08-11T15:29:51'
+          updated_at: '2020-08-11T15:29:51'
+        - id: jbezos
+          email: jbezos@amazon.com
+          created_at: '2020-09-01T08:09:32'
+          updated_at: '2021-01-15T12:42:53'
+
+    InvitationCreate:
+      title: InvitationCreate
+      type: object
+      required:
+        - to_email
+        - roles
+      properties:
+        to_email:
+          type: string
+          example: snadella@microsoft.com
+        roles:
+          type: string
+          description: Comma-separated list of roles of the future user.
+          example: 'role::developer,role::designer'
+      example:
+        to_email: snadella@microsoft.com
+        roles: 'role::root'
+
+    InvitationUpdate:
+      title: InvitationUpdate
+      allOf:
+        - $ref: '#/components/schemas/InvitationCreate'
+
+    InvitationPatch:
+      title: InvitationPatch
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          example: ACCEPTED
+          enum:
+            - ACCEPTED
+            - REJECTED
+      example:
+        status: ACCEPTED
+
+    Invitation:
+      title: Invitation
+      type: object
+      properties:
+        id:
+          type: string
+          example: 01EHQ52H7W29V58595HF87HVBA
+        from:
+          example:
+            space: microsoft
+            user: bgates
+          title: Space-User info
+          type: object
+          properties:
+            space:
+              type: string
+              example: microsoft
+            user:
+              type: string
+              example: bgates
+        to_user:
+          type: string
+          nullable: true
+          description: User ID of the invited user. It will be null until the invitation is accepted or rejected.
+          example: snadella
+        to_email:
+          type: string
+          example: snadella@microsoft.com
+        roles:
+          type: string
+          description: Comma-separated list of roles of the future user.
+          example: 'role::developer,role::designer'
+        status:
+          type: string
+          example: ACCEPTED
+          enum:
+            - PENDING
+            - ACCEPTED
+            - REJECTED
+        created_at:
+          type: string
+          example: '2020-08-11T15:29:51'
+        updated_at:
+          type: string
+          example: '2020-08-11T15:47:38'
+      example:
+        id: 01EHQ52H7W29V58595HF87HVBA
+        from:
+          space: microsoft
+          user: bgates
+        to_email: snadella@microsoft.com
+        roles: 'role::root'
+        status: ACCEPTED
+        created_at: '2020-08-11T15:29:51'
+        updated_at: '2020-08-11T15:47:38'
+
+    Invitations:
+      title: Invitations
+      type: array
+      items:
+        $ref: '#/components/schemas/Invitation'
+      example:
+        - id: 01EHQ52H7W29V58595HF87HVBA
+          from:
+            space: microsoft
+            user: bgates
+          to_user: snadella
+          to_email: snadella@microsoft.com
+          roles: 'role::root'
+          status: ACCEPTED
+          created_at: '2020-08-11T15:29:51'
+          updated_at: '2020-08-11T15:47:38'
+        - id: 01EHQ561Q0VJ1ZATKCWKY3MF3S
+          from:
+            space: microsoft
+            user: bgates
+          to_user: sballmer
+          to_email: sballmer@microsoft.com
+          roles: 'role::guest'
+          status: REJECTED
+          created_at: '2020-08-11T15:29:51'
+          updated_at: '2020-08-11T17:32:57'
+        - id: 01EHQ56R0GV7TP2P1K6C1NFA4R
+          from:
+            space: microsoft
+            user: bgates
+          to_email: kscott@microsoft.com
+          roles: 'role::dev'
+          status: PENDING
+          created_at: '2020-08-11T15:07:25'
+          updated_at: '2020-08-11T15:07:25'
+
+    ErrorResponse:
+      title: Error Response
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              format: int64
+              example: 400
+            message:
+              type: string
+              example: invalid id

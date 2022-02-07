@@ -1,4 +1,4 @@
-# MqttApiReference.Functions
+# UsersApiReference.Functions
 
 ## Properties
 

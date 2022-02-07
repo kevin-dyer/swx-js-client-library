@@ -1,6 +1,6 @@
 /**
- * MQTT API reference
- * MQTT OpenAPI endpoints - OpenAPI 3.0
+ * Users API reference
+ * Users OpenAPI endpoints - OpenAPI 3.0
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -103,7 +103,7 @@ export default class OAuthApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = [];
       let returnType = null;
@@ -201,7 +201,7 @@ export default class OAuthApi {
         'scope': scope
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = ['application/x-www-form-urlencoded'];
       let accepts = ['application/json'];
       let returnType = TokenResponse;
@@ -258,7 +258,7 @@ export default class OAuthApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = [];
       let returnType = null;
@@ -303,7 +303,7 @@ export default class OAuthApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/jwt', 'application/json'];
       let returnType = null;
@@ -362,7 +362,7 @@ export default class OAuthApi {
         'client_secret': clientSecret
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = ['application/x-www-form-urlencoded'];
       let accepts = ['application/json'];
       let returnType = null;

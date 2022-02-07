@@ -1,4 +1,4 @@
-# MqttApiReference.LabelApi
+# UsersApiReference.LabelApi
 
 All URIs are relative to *https://api.swx.altairone.com*
 
@@ -26,8 +26,17 @@ Delete a Label assignation for an specific entity
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -38,7 +47,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabelApi();
+let apiInstance = new UsersApiReference.LabelApi();
 let space = altair; // String | 
 let labelId = 01EDVJEMFD24360JT7434A6GS8; // String | 
 let entityId = 01EDVJEMFD24360JT7434A6GS8; // String | Removes label assigned to this entity_id
@@ -65,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -84,8 +93,17 @@ Send a new label to the platform
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -96,9 +114,9 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabelApi();
+let apiInstance = new UsersApiReference.LabelApi();
 let space = altair; // String | 
-let createLabel = new MqttApiReference.CreateLabel(); // CreateLabel | 
+let createLabel = new UsersApiReference.CreateLabel(); // CreateLabel | 
 apiInstance.createLabel(space, createLabel).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -121,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -140,8 +158,17 @@ Assign an existing label to an existing entity by id
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -152,10 +179,10 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabelApi();
+let apiInstance = new UsersApiReference.LabelApi();
 let space = altair; // String | 
 let labelId = 01EDVJEMFD24360JT7434A6GS8; // String | 
-let createLabelRelation = new MqttApiReference.CreateLabelRelation(); // CreateLabelRelation | 
+let createLabelRelation = new UsersApiReference.CreateLabelRelation(); // CreateLabelRelation | 
 apiInstance.createLabelRelation(space, labelId, createLabelRelation).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -179,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -198,8 +225,17 @@ Deletes an existing label by id
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -210,7 +246,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabelApi();
+let apiInstance = new UsersApiReference.LabelApi();
 let space = altair; // String | 
 let labelId = 01EDVJEMFD24360JT7434A6GS8; // String | 
 apiInstance.deleteLabel(space, labelId).then((data) => {
@@ -235,7 +271,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -254,8 +290,17 @@ List of all the labels for an space
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -266,7 +311,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabelApi();
+let apiInstance = new UsersApiReference.LabelApi();
 let space = altair; // String | 
 let opts = {
   'mqtt': true, // Boolean | filter by labels with mqtt enabled
@@ -301,7 +346,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -320,8 +365,17 @@ Show an existing label by id
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -332,7 +386,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabelApi();
+let apiInstance = new UsersApiReference.LabelApi();
 let space = altair; // String | 
 let labelId = 01EDVJEMFD24360JT7434A6GS8; // String | 
 apiInstance.showLabel(space, labelId).then((data) => {
@@ -357,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -376,8 +430,17 @@ Show an existing label by name and entities associated to it
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -388,7 +451,7 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabelApi();
+let apiInstance = new UsersApiReference.LabelApi();
 let space = altair; // String | 
 let labelId = 01EDVJEMFD24360JT7434A6GS8; // String | 
 let opts = {
@@ -421,7 +484,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -440,8 +503,17 @@ Update an existing label
 ### Example
 
 ```javascript
-import MqttApiReference from 'mqtt_api_reference';
-let defaultClient = MqttApiReference.ApiClient.instance;
+import UsersApiReference from 'users_api_reference';
+let defaultClient = UsersApiReference.ApiClient.instance;
+// Configure Bearer (Opaque JWT) access token for authorization: AccessToken
+let AccessToken = defaultClient.authentications['AccessToken'];
+AccessToken.accessToken = "YOUR ACCESS TOKEN"
+// Configure OAuth2 access token for authorization: OAuth2AuthorizationCode
+let OAuth2AuthorizationCode = defaultClient.authentications['OAuth2AuthorizationCode'];
+OAuth2AuthorizationCode.accessToken = 'YOUR ACCESS TOKEN';
+// Configure OAuth2 access token for authorization: OAuth2ClientCredentials
+let OAuth2ClientCredentials = defaultClient.authentications['OAuth2ClientCredentials'];
+OAuth2ClientCredentials.accessToken = 'YOUR ACCESS TOKEN';
 // Configure OAuth2 access token for authorization: OAuth2Security
 let OAuth2Security = defaultClient.authentications['OAuth2Security'];
 OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
@@ -452,10 +524,10 @@ OAuth2Security.accessToken = 'YOUR ACCESS TOKEN';
 let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
-let apiInstance = new MqttApiReference.LabelApi();
+let apiInstance = new UsersApiReference.LabelApi();
 let space = altair; // String | 
 let labelId = 01EDVJEMFD24360JT7434A6GS8; // String | 
-let createLabel = new MqttApiReference.CreateLabel(); // CreateLabel | 
+let createLabel = new UsersApiReference.CreateLabel(); // CreateLabel | 
 apiInstance.updateLabel(space, labelId, createLabel).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -479,7 +551,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
+[AccessToken](../README.md#AccessToken), [OAuth2AuthorizationCode](../README.md#OAuth2AuthorizationCode), [OAuth2ClientCredentials](../README.md#OAuth2ClientCredentials), [OAuth2Security](../README.md#OAuth2Security), [OAuth2Security](../README.md#OAuth2Security), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

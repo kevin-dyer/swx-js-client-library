@@ -1,4 +1,4 @@
-# MqttApiReference.CredentialsStudio
+# UsersApiReference.CredentialsStudio
 
 ## Properties
 

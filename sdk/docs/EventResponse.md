@@ -1,4 +1,4 @@
-# MqttApiReference.EventResponse
+# UsersApiReference.EventResponse
 
 ## Properties
 

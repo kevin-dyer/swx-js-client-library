@@ -1,4 +1,4 @@
-# MqttApiReference.TriggerMqttConfig
+# UsersApiReference.TriggerMqttConfig
 
 ## Properties
 

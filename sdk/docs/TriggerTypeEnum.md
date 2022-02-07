@@ -1,4 +1,4 @@
-# MqttApiReference.TriggerTypeEnum
+# UsersApiReference.TriggerTypeEnum
 
 ## Enum
 

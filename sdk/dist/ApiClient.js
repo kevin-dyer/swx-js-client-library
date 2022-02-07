@@ -51,6 +51,16 @@ var ApiClient = /*#__PURE__*/function () {
      */
 
     this.authentications = (_this$authentications = {
+      'AccessToken': {
+        type: 'bearer'
+      },
+      // Opaque JWT
+      'OAuth2AuthorizationCode': {
+        type: 'oauth2'
+      },
+      'OAuth2ClientCredentials': {
+        type: 'oauth2'
+      },
       'OAuth2Security': {
         type: 'oauth2'
       }

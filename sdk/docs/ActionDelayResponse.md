@@ -1,4 +1,4 @@
-# MqttApiReference.ActionDelayResponse
+# UsersApiReference.ActionDelayResponse
 
 ## Properties
 

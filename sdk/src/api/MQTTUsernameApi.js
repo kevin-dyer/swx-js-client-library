@@ -1,6 +1,6 @@
 /**
- * MQTT API reference
- * MQTT OpenAPI endpoints - OpenAPI 3.0
+ * Users API reference
+ * Users OpenAPI endpoints - OpenAPI 3.0
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -13,9 +13,8 @@
 
 
 import ApiClient from "../ApiClient";
-import AuthZError from '../model/AuthZError';
 import BadFormedError from '../model/BadFormedError';
-import BaseError from '../model/BaseError';
+import ErrorResponse from '../model/ErrorResponse';
 import UpdateMQTTCredentialsResponse from '../model/UpdateMQTTCredentialsResponse';
 import UpdateMQTTPassword from '../model/UpdateMQTTPassword';
 
@@ -71,7 +70,7 @@ export default class MQTTUsernameApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
       let returnType = UpdateMQTTCredentialsResponse;

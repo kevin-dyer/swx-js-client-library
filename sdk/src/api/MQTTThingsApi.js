@@ -1,6 +1,6 @@
 /**
- * MQTT API reference
- * MQTT OpenAPI endpoints - OpenAPI 3.0
+ * Users API reference
+ * Users OpenAPI endpoints - OpenAPI 3.0
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -13,8 +13,7 @@
 
 
 import ApiClient from "../ApiClient";
-import AuthZError from '../model/AuthZError';
-import BaseError from '../model/BaseError';
+import ErrorResponse from '../model/ErrorResponse';
 import RelationError from '../model/RelationError';
 import ShowCredentialsThingResponse from '../model/ShowCredentialsThingResponse';
 
@@ -67,7 +66,7 @@ export default class MQTTThingsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = ShowCredentialsThingResponse;

@@ -1,4 +1,4 @@
-# MqttApiReference.FunctionStatusEnum
+# UsersApiReference.FunctionStatusEnum
 
 ## Enum
 

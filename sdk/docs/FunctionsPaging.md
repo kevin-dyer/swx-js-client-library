@@ -1,4 +1,4 @@
-# MqttApiReference.FunctionsPaging
+# UsersApiReference.FunctionsPaging
 
 ## Properties
 

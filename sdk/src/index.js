@@ -1,6 +1,6 @@
 /**
- * MQTT API reference
- * MQTT OpenAPI endpoints - OpenAPI 3.0
+ * Users API reference
+ * Users OpenAPI endpoints - OpenAPI 3.0
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -71,6 +71,10 @@ import FunctionStatusEnum from './model/FunctionStatusEnum';
 import Functions from './model/Functions';
 import FunctionsPaging from './model/FunctionsPaging';
 import InfoResponse from './model/InfoResponse';
+import Invitation from './model/Invitation';
+import InvitationCreate from './model/InvitationCreate';
+import InvitationPatch from './model/InvitationPatch';
+import InvitationUpdate from './model/InvitationUpdate';
 import LabelDeleteResponse from './model/LabelDeleteResponse';
 import LabelListElement1 from './model/LabelListElement1';
 import LabelListElementRelations from './model/LabelListElementRelations';
@@ -113,6 +117,7 @@ import Secret from './model/Secret';
 import ShowCredentialsThingResponse from './model/ShowCredentialsThingResponse';
 import ShowMQTTLabelResponse from './model/ShowMQTTLabelResponse';
 import SourceCode from './model/SourceCode';
+import SpaceUserInfo from './model/SpaceUserInfo';
 import ThingCreateResponse from './model/ThingCreateResponse';
 import ThingCreateResponseCredentials from './model/ThingCreateResponseCredentials';
 import ThingCreateResponseCredentialsHttp from './model/ThingCreateResponseCredentialsHttp';
@@ -140,10 +145,12 @@ import UpdateMQTTCredentials from './model/UpdateMQTTCredentials';
 import UpdateMQTTCredentialsResponse from './model/UpdateMQTTCredentialsResponse';
 import UpdateMQTTLabelCredentials from './model/UpdateMQTTLabelCredentials';
 import UpdateMQTTPassword from './model/UpdateMQTTPassword';
+import User from './model/User';
 import ActionsApi from './api/ActionsApi';
 import CollectionsApi from './api/CollectionsApi';
 import EventsApi from './api/EventsApi';
 import FunctionsApi from './api/FunctionsApi';
+import InvitationsApi from './api/InvitationsApi';
 import ItemsApi from './api/ItemsApi';
 import LabelApi from './api/LabelApi';
 import LabeledEntitiesApi from './api/LabeledEntitiesApi';
@@ -157,17 +164,18 @@ import OAuthApi from './api/OAuthApi';
 import PropertiesApi from './api/PropertiesApi';
 import ThingsApi from './api/ThingsApi';
 import TriggersApi from './api/TriggersApi';
+import UsersApi from './api/UsersApi';
 
 
 /**
-* MQTT_OpenAPI_endpoints___OpenAPI_3_0.<br>
+* Users_OpenAPI_endpoints___OpenAPI_3_0.<br>
 * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
 * <p>
 * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:
 * <pre>
-* var MqttApiReference = require('index'); // See note below*.
-* var xxxSvc = new MqttApiReference.XxxApi(); // Allocate the API class we're going to use.
-* var yyyModel = new MqttApiReference.Yyy(); // Construct a model instance.
+* var UsersApiReference = require('index'); // See note below*.
+* var xxxSvc = new UsersApiReference.XxxApi(); // Allocate the API class we're going to use.
+* var yyyModel = new UsersApiReference.Yyy(); // Construct a model instance.
 * yyyModel.someProperty = 'someValue';
 * ...
 * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
@@ -179,8 +187,8 @@ import TriggersApi from './api/TriggersApi';
 * <p>
 * A non-AMD browser application (discouraged) might do something like this:
 * <pre>
-* var xxxSvc = new MqttApiReference.XxxApi(); // Allocate the API class we're going to use.
-* var yyy = new MqttApiReference.Yyy(); // Construct a model instance.
+* var xxxSvc = new UsersApiReference.XxxApi(); // Allocate the API class we're going to use.
+* var yyy = new UsersApiReference.Yyy(); // Construct a model instance.
 * yyyModel.someProperty = 'someValue';
 * ...
 * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
@@ -546,6 +554,30 @@ export {
     InfoResponse,
 
     /**
+     * The Invitation model constructor.
+     * @property {module:model/Invitation}
+     */
+    Invitation,
+
+    /**
+     * The InvitationCreate model constructor.
+     * @property {module:model/InvitationCreate}
+     */
+    InvitationCreate,
+
+    /**
+     * The InvitationPatch model constructor.
+     * @property {module:model/InvitationPatch}
+     */
+    InvitationPatch,
+
+    /**
+     * The InvitationUpdate model constructor.
+     * @property {module:model/InvitationUpdate}
+     */
+    InvitationUpdate,
+
+    /**
      * The LabelDeleteResponse model constructor.
      * @property {module:model/LabelDeleteResponse}
      */
@@ -798,6 +830,12 @@ export {
     SourceCode,
 
     /**
+     * The SpaceUserInfo model constructor.
+     * @property {module:model/SpaceUserInfo}
+     */
+    SpaceUserInfo,
+
+    /**
      * The ThingCreateResponse model constructor.
      * @property {module:model/ThingCreateResponse}
      */
@@ -960,6 +998,12 @@ export {
     UpdateMQTTPassword,
 
     /**
+     * The User model constructor.
+     * @property {module:model/User}
+     */
+    User,
+
+    /**
     * The ActionsApi service constructor.
     * @property {module:api/ActionsApi}
     */
@@ -982,6 +1026,12 @@ export {
     * @property {module:api/FunctionsApi}
     */
     FunctionsApi,
+
+    /**
+    * The InvitationsApi service constructor.
+    * @property {module:api/InvitationsApi}
+    */
+    InvitationsApi,
 
     /**
     * The ItemsApi service constructor.
@@ -1059,5 +1109,11 @@ export {
     * The TriggersApi service constructor.
     * @property {module:api/TriggersApi}
     */
-    TriggersApi
+    TriggersApi,
+
+    /**
+    * The UsersApi service constructor.
+    * @property {module:api/UsersApi}
+    */
+    UsersApi
 };

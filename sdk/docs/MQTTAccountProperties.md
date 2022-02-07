@@ -1,4 +1,4 @@
-# MqttApiReference.MQTTAccountProperties
+# UsersApiReference.MQTTAccountProperties
 
 ## Properties
 

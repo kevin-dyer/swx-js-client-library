@@ -1,4 +1,4 @@
-# MqttApiReference.TriggerStatusEnum
+# UsersApiReference.TriggerStatusEnum
 
 ## Enum
 

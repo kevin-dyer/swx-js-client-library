@@ -1,4 +1,4 @@
-# MqttApiReference.ActionDeleteResponse
+# UsersApiReference.ActionDeleteResponse
 
 ## Properties
 

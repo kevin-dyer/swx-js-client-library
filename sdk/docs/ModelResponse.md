@@ -1,4 +1,4 @@
-# MqttApiReference.ModelResponse
+# UsersApiReference.ModelResponse
 
 ## Properties
 

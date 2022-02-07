@@ -1,4 +1,4 @@
-# MqttApiReference.MQTTLabel
+# UsersApiReference.MQTTLabel
 
 ## Properties
 

@@ -1,6 +1,6 @@
 /**
- * MQTT API reference
- * MQTT OpenAPI endpoints - OpenAPI 3.0
+ * Users API reference
+ * Users OpenAPI endpoints - OpenAPI 3.0
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -19,6 +19,7 @@ import CollectionRequest from '../model/CollectionRequest';
 import CollectionResponse from '../model/CollectionResponse';
 import CollectionUpdateRequest from '../model/CollectionUpdateRequest';
 import CollectionUpdateResponse from '../model/CollectionUpdateResponse';
+import ErrorResponse from '../model/ErrorResponse';
 
 /**
 * Collections service.
@@ -67,7 +68,7 @@ export default class CollectionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json', '*/*'];
       let returnType = CollectionResponse;
@@ -120,7 +121,7 @@ export default class CollectionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json', '*/*'];
       let returnType = null;
@@ -167,7 +168,7 @@ export default class CollectionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json', '*/*'];
       let returnType = CollectionListResponse;
@@ -219,7 +220,7 @@ export default class CollectionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json', '*/*'];
       let returnType = CollectionResponse;
@@ -277,7 +278,7 @@ export default class CollectionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
       let returnType = CollectionUpdateResponse;

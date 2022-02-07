@@ -1,4 +1,4 @@
-# MqttApiReference.ThingDeleteResponseErrorClusterBackend
+# UsersApiReference.ThingDeleteResponseErrorClusterBackend
 
 ## Properties
 

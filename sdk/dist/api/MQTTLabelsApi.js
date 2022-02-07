@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _AuthZError = _interopRequireDefault(require("../model/AuthZError"));
-
 var _BadFormedError = _interopRequireDefault(require("../model/BadFormedError"));
 
 var _BaseError = _interopRequireDefault(require("../model/BaseError"));
@@ -18,6 +16,8 @@ var _CreateMQTTLabelCredentials = _interopRequireDefault(require("../model/Creat
 var _CreateMQTTLabelCredentialsResponse = _interopRequireDefault(require("../model/CreateMQTTLabelCredentialsResponse"));
 
 var _CredentialsError = _interopRequireDefault(require("../model/CredentialsError"));
+
+var _ErrorResponse = _interopRequireDefault(require("../model/ErrorResponse"));
 
 var _ShowMQTTLabelResponse = _interopRequireDefault(require("../model/ShowMQTTLabelResponse"));
 
@@ -75,7 +75,7 @@ var MQTTLabelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = _CreateMQTTLabelCredentialsResponse["default"];
@@ -126,7 +126,7 @@ var MQTTLabelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json'];
       var returnType = null;
@@ -176,7 +176,7 @@ var MQTTLabelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json'];
       var returnType = _ShowMQTTLabelResponse["default"];
@@ -232,7 +232,7 @@ var MQTTLabelsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = _CreateMQTTLabelCredentialsResponse["default"];

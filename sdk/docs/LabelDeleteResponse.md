@@ -1,4 +1,4 @@
-# MqttApiReference.LabelDeleteResponse
+# UsersApiReference.LabelDeleteResponse
 
 ## Properties
 

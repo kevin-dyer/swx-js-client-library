@@ -1,4 +1,4 @@
-# MqttApiReference.AuthZErrorError
+# UsersApiReference.AuthZErrorError
 
 ## Properties
 

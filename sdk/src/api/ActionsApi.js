@@ -1,6 +1,6 @@
 /**
- * MQTT API reference
- * MQTT OpenAPI endpoints - OpenAPI 3.0
+ * Users API reference
+ * Users OpenAPI endpoints - OpenAPI 3.0
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -19,6 +19,7 @@ import ActionListResponse from '../model/ActionListResponse';
 import ActionResponseElement1 from '../model/ActionResponseElement1';
 import ActionUpdateResponse from '../model/ActionUpdateResponse';
 import BaseError from '../model/BaseError';
+import ErrorResponse from '../model/ErrorResponse';
 
 /**
 * Actions service.
@@ -86,7 +87,7 @@ export default class ActionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json', '*/*'];
       let returnType = ActionResponseElement1;
@@ -162,7 +163,7 @@ export default class ActionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json', '*/*'];
       let returnType = ActionDeleteResponse;
@@ -226,7 +227,7 @@ export default class ActionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json', '*/*'];
       let returnType = ActionListResponse;
@@ -294,7 +295,7 @@ export default class ActionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json', '*/*'];
       let returnType = ActionDelayListResponse;
@@ -369,7 +370,7 @@ export default class ActionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = [];
       let accepts = ['application/json', '*/*'];
       let returnType = ActionResponseElement1;
@@ -450,7 +451,7 @@ export default class ActionsApi {
       let formParams = {
       };
 
-      let authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      let authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
       let returnType = ActionUpdateResponse;

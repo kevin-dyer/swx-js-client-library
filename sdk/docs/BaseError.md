@@ -1,4 +1,4 @@
-# MqttApiReference.BaseError
+# UsersApiReference.BaseError
 
 ## Properties
 

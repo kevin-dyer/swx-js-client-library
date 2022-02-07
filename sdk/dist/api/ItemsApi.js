@@ -85,7 +85,7 @@ var ItemsApi = /*#__PURE__*/function () {
       };
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json', '*/*'];
       var returnType = _ThingStatusListResponse["default"];
@@ -148,7 +148,7 @@ var ItemsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json', '*/*'];
       var returnType = _ThingStatusResponse["default"];

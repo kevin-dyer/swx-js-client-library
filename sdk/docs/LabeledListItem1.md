@@ -1,4 +1,4 @@
-# MqttApiReference.LabeledListItem1
+# UsersApiReference.LabeledListItem1
 
 ## Properties
 

@@ -19,6 +19,8 @@ var _CollectionUpdateRequest = _interopRequireDefault(require("../model/Collecti
 
 var _CollectionUpdateResponse = _interopRequireDefault(require("../model/CollectionUpdateResponse"));
 
+var _ErrorResponse = _interopRequireDefault(require("../model/ErrorResponse"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -73,7 +75,7 @@ var CollectionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json', '*/*'];
       var returnType = _CollectionResponse["default"];
@@ -121,7 +123,7 @@ var CollectionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json', '*/*'];
       var returnType = null;
@@ -162,7 +164,7 @@ var CollectionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json', '*/*'];
       var returnType = _CollectionListResponse["default"];
@@ -209,7 +211,7 @@ var CollectionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json', '*/*'];
       var returnType = _CollectionResponse["default"];
@@ -263,7 +265,7 @@ var CollectionsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = _CollectionUpdateResponse["default"];

@@ -1,6 +1,6 @@
 /**
- * MQTT API reference
- * MQTT OpenAPI endpoints - OpenAPI 3.0
+ * Users API reference
+ * Users OpenAPI endpoints - OpenAPI 3.0
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -41,6 +41,9 @@ class ApiClient {
          * @type {Array.<String>}
          */
         this.authentications = {
+            'AccessToken': {type: 'bearer'}, // Opaque JWT
+            'OAuth2AuthorizationCode': {type: 'oauth2'},
+            'OAuth2ClientCredentials': {type: 'oauth2'},
             'OAuth2Security': {type: 'oauth2'},
             'OAuth2Security': {type: 'oauth2'},
             'bearerAuth': {type: 'bearer'} // Opaque JWT

@@ -7,11 +7,9 @@ exports["default"] = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _AuthZError = _interopRequireDefault(require("../model/AuthZError"));
-
 var _BadFormedError = _interopRequireDefault(require("../model/BadFormedError"));
 
-var _BaseError = _interopRequireDefault(require("../model/BaseError"));
+var _ErrorResponse = _interopRequireDefault(require("../model/ErrorResponse"));
 
 var _UpdateMQTTCredentialsResponse = _interopRequireDefault(require("../model/UpdateMQTTCredentialsResponse"));
 
@@ -76,7 +74,7 @@ var MQTTUsernameApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
       var returnType = _UpdateMQTTCredentialsResponse["default"];

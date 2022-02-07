@@ -1,4 +1,4 @@
-# MqttApiReference.ThingListResponse
+# UsersApiReference.ThingListResponse
 
 ## Properties
 

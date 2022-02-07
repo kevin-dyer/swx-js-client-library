@@ -64,6 +64,11 @@ docs/Functions.md
 docs/FunctionsApi.md
 docs/FunctionsPaging.md
 docs/InfoResponse.md
+docs/Invitation.md
+docs/InvitationCreate.md
+docs/InvitationPatch.md
+docs/InvitationUpdate.md
+docs/InvitationsApi.md
 docs/ItemsApi.md
 docs/LabelApi.md
 docs/LabelDeleteResponse.md
@@ -117,6 +122,7 @@ docs/Secret.md
 docs/ShowCredentialsThingResponse.md
 docs/ShowMQTTLabelResponse.md
 docs/SourceCode.md
+docs/SpaceUserInfo.md
 docs/ThingCreateResponse.md
 docs/ThingCreateResponseCredentials.md
 docs/ThingCreateResponseCredentialsHttp.md
@@ -146,6 +152,8 @@ docs/UpdateMQTTCredentials.md
 docs/UpdateMQTTCredentialsResponse.md
 docs/UpdateMQTTLabelCredentials.md
 docs/UpdateMQTTPassword.md
+docs/User.md
+docs/UsersApi.md
 git_push.sh
 mocha.opts
 package.json
@@ -154,6 +162,7 @@ src/api/ActionsApi.js
 src/api/CollectionsApi.js
 src/api/EventsApi.js
 src/api/FunctionsApi.js
+src/api/InvitationsApi.js
 src/api/ItemsApi.js
 src/api/LabelApi.js
 src/api/LabeledEntitiesApi.js
@@ -167,6 +176,7 @@ src/api/OAuthApi.js
 src/api/PropertiesApi.js
 src/api/ThingsApi.js
 src/api/TriggersApi.js
+src/api/UsersApi.js
 src/index.js
 src/model/ActionDelay.js
 src/model/ActionDelayInput.js
@@ -226,6 +236,10 @@ src/model/FunctionStatusEnum.js
 src/model/Functions.js
 src/model/FunctionsPaging.js
 src/model/InfoResponse.js
+src/model/Invitation.js
+src/model/InvitationCreate.js
+src/model/InvitationPatch.js
+src/model/InvitationUpdate.js
 src/model/LabelDeleteResponse.js
 src/model/LabelListElement1.js
 src/model/LabelListElementRelations.js
@@ -268,6 +282,7 @@ src/model/Secret.js
 src/model/ShowCredentialsThingResponse.js
 src/model/ShowMQTTLabelResponse.js
 src/model/SourceCode.js
+src/model/SpaceUserInfo.js
 src/model/ThingCreateResponse.js
 src/model/ThingCreateResponseCredentials.js
 src/model/ThingCreateResponseCredentialsHttp.js
@@ -295,3 +310,12 @@ src/model/UpdateMQTTCredentials.js
 src/model/UpdateMQTTCredentialsResponse.js
 src/model/UpdateMQTTLabelCredentials.js
 src/model/UpdateMQTTPassword.js
+src/model/User.js
+test/api/InvitationsApi.spec.js
+test/api/UsersApi.spec.js
+test/model/Invitation.spec.js
+test/model/InvitationCreate.spec.js
+test/model/InvitationPatch.spec.js
+test/model/InvitationUpdate.spec.js
+test/model/SpaceUserInfo.spec.js
+test/model/User.spec.js

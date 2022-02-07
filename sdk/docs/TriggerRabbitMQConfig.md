@@ -1,4 +1,4 @@
-# MqttApiReference.TriggerRabbitMQConfig
+# UsersApiReference.TriggerRabbitMQConfig
 
 ## Properties
 

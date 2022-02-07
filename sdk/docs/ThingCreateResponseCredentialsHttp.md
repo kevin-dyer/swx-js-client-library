@@ -1,4 +1,4 @@
-# MqttApiReference.ThingCreateResponseCredentialsHttp
+# UsersApiReference.ThingCreateResponseCredentialsHttp
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# MqttApiReference.CreateLabelResponse
+# UsersApiReference.CreateLabelResponse
 
 ## Properties
 

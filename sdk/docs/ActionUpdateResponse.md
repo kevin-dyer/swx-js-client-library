@@ -1,4 +1,4 @@
-# MqttApiReference.ActionUpdateResponse
+# UsersApiReference.ActionUpdateResponse
 
 ## Properties
 

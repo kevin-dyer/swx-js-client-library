@@ -1,4 +1,4 @@
-# MqttApiReference.LogEntry
+# UsersApiReference.LogEntry
 
 ## Properties
 

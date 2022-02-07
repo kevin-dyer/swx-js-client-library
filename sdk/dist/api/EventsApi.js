@@ -9,6 +9,8 @@ var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
 var _BaseError = _interopRequireDefault(require("../model/BaseError"));
 
+var _ErrorResponse = _interopRequireDefault(require("../model/ErrorResponse"));
+
 var _EventHighCPUListResponse = _interopRequireDefault(require("../model/EventHighCPUListResponse"));
 
 var _EventResponse = _interopRequireDefault(require("../model/EventResponse"));
@@ -89,7 +91,7 @@ var EventsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json', '*/*'];
       var returnType = _EventResponse["default"];
@@ -149,7 +151,7 @@ var EventsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json', '*/*'];
       var returnType = _EventHighCPUListResponse["default"];
@@ -214,7 +216,7 @@ var EventsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json'];
       var returnType = _EventHighCPUListResponse["default"];
@@ -287,7 +289,7 @@ var EventsApi = /*#__PURE__*/function () {
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
-      var authNames = ['OAuth2Security', 'OAuth2Security', 'bearerAuth'];
+      var authNames = ['AccessToken', 'OAuth2AuthorizationCode', 'OAuth2ClientCredentials', 'OAuth2Security', 'OAuth2Security', 'bearerAuth'];
       var contentTypes = [];
       var accepts = ['application/json'];
       var returnType = _EventResponse["default"];

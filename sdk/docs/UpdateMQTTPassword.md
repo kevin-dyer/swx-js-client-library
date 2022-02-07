@@ -1,4 +1,4 @@
-# MqttApiReference.UpdateMQTTPassword
+# UsersApiReference.UpdateMQTTPassword
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# MqttApiReference.CredentialsThing
+# UsersApiReference.CredentialsThing
 
 ## Properties
 

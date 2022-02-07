@@ -1,4 +1,4 @@
-# MqttApiReference.UpdateMQTTLabelCredentials
+# UsersApiReference.UpdateMQTTLabelCredentials
 
 ## Properties
 

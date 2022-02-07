@@ -1,4 +1,4 @@
-# MqttApiReference.EventHighCPUListResponse
+# UsersApiReference.EventHighCPUListResponse
 
 ## Properties
 

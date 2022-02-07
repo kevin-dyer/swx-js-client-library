@@ -1,4 +1,4 @@
-# MqttApiReference.ThingCreateResponseLinks
+# UsersApiReference.ThingCreateResponseLinks
 
 ## Properties
 

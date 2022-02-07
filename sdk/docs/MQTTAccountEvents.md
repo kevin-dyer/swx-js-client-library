@@ -1,4 +1,4 @@
-# MqttApiReference.MQTTAccountEvents
+# UsersApiReference.MQTTAccountEvents
 
 ## Properties
 
